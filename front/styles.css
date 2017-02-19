@@ -7,6 +7,7 @@
 .parent {
     overflow: hidden;
     position: relative;
+  	min-width: 800px;
     width: 100%;
     color:red;
     background-color:pink;
