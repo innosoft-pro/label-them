@@ -2,7 +2,8 @@
   box-sizing: border-box;
 }
 .parent > div {
-  padding:20px;
+  padding:8px;
+
 }
 .parent {
     overflow: hidden;
@@ -35,7 +36,7 @@
     color:yellow;
     top: 0;
     right: 0;
-    width: 100px;
+    width: 250px;
 }
 
 .child-right-bottom {
@@ -45,5 +46,5 @@
     color:yellow;
     top: 50%;
     right: 0;
-    width: 100px;
+    width: 250px;
 }
