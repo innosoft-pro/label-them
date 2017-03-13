@@ -1,15 +1,15 @@
 var methodsArray = [save, selectLabel, panTool];
 
 function save() {
-    alert('Impement save');
+    alert("Impement save");
 }
 
 function panTool() {
-    alert('Implement pan tool');
+    alert("Implement pan tool");
 }
 
 function selectLabel() {
-    alert('Implement select label');
+    alert("Implement select label");
 }
 
 exports.Task = extend(TolokaHandlebarsTask, function (options) {
