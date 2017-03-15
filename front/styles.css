@@ -12,6 +12,10 @@
     border: 0;
 }
 
+.history-icon-td {
+    width: 48px;
+}
+
 .history-text-td {
     vertical-align: middle;
     text-align: left;
