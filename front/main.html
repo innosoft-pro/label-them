@@ -1,13 +1,15 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <title>HTML5 Demo</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
+    <title>LabelThem - a web image labelling application</title>
+
     <link rel="stylesheet" href="styles.css"/>
-    <!--[if IE]>
-        <script src="//html5shiv.googlecode.com/svn/trunk
-/html5.js"></script>
-        <![endif]-->
+
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
@@ -16,68 +18,134 @@
 
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-<div class="parent">
-    <div class="child-left">
+<!--<div class="parent">-->
+<div class="jumbotron">
+    <div class="container-fluid">
+        <div class="row">
 
-        <button class="btn btn-default save"><img src="img/save_button.png" width="23"/></button>
-        <button class="btn btn-default panTool"><img src="img/pan_tool_button.png" width="23"/></button>
-        <button class="btn btn-default selectLabel"><img src="img/select_label_button.png" width="23"/></button>
-        <button class="btn btn-default"><img src="img/edit_button.png" width="23"/></button>
-        <button class="btn btn-default"><img src="img/zoom_in_button.png" width="23"/></button>
-        <button class="btn btn-default"><img src="img/zoom_out_button.png" width="23"/></button>
-        <button class="btn btn-default"><img src="img/brightness_high_button.png" width="23"/></button>
-        <button class="btn btn-default"><img src="img/brightness_low_button.png" width="23"/></button>
+            <div class="col-md-8">
+                <div class="sidebar">
+                            <div class="btn-group-vertical" role="group" aria-label="...">
+                                <button class="btn btn-default save"><img src="img/save_button.png" width="48"/>
+                                </button>
+                                <button class="btn btn-default panTool"><img src="img/pan_tool_button.png" width="48"/>
+                                </button>
+                                <button class="btn btn-default selectLabel"><img src="img/select_label_button.png"
+                                                                                 width="48"/>
+                                </button>
+                                <button class="btn btn-default"><img src="img/edit_button.png" width="48"/></button>
+                                <button class="btn btn-default"><img src="img/zoom_in_button.png" width="48"/></button>
+                                <button class="btn btn-default"><img src="img/zoom_out_button.png" width="48"/></button>
+                                <button class="btn btn-default"><img src="img/brightness_high_button.png" width="48"/>
+                                </button>
+                                <button class="btn btn-default"><img src="img/brightness_low_button.png" width="48"/>
+                                </button>
 
-    </div>
+                            </div>
+                </div>
 
-    <div class="child-center">
-        main canvas
-    </div>
+                        <div class="image-to-be-labeled">
+                            <!--<div class="child-center">-->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    main canvas
+                                </div>
+                            </div>
+                        </div>
+            </div>
+            <!--</div>-->
 
-    <div class="child-right-top">
-        Label Parameters
+            <!--<div class="child-right-top">-->
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Label Parameters</h3>
+                            </div>
+                            <div class="panel-body">
 
-        <div class="container">
-            <h2>Vehicle Type</h2>
+                                <div class="container">
+                                    <h2>Vehicle Type</h2>
 
-            <button class="btn btn-default dropdown-toggle" type="button" id="menu1" data-toggle="dropdown">Vehicle Type
-                <span class="caret"></span></button>
+                                    <button class="btn btn-default dropdown-toggle" type="button"
+                                            id="dropdownMenu-Classes"
+                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        Vehicle Type
+                                        <span class="caret"></span>
+                                    </button>
 
-            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">car</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">minitruck</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck 5-12</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck 12-20</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">huge truck (>20)</a></li>
-                <li role="presentation" class="divider"></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bus</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bike</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">unknown vehicle</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">person</a></li>
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">other</a></li>
-            </ul>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-Classes">
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">car</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">minitruck</a>
+                                        </li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck 5-12</a>
+                                        </li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck
+                                            12-20</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">huge truck
+                                            (>20)</a></li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bus</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bike</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">unknown
+                                            vehicle</a></li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">person</a>
+                                        </li>
+                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">other</a></li>
+                                        <li class="disabled"><a role="menuitem" tabindex="-1" href="#">disabled dropdown
+                                            element</a></li>
+                                    </ul>
+                                </div>
+                                <div class="container">
+
+                                    <form>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">is occluded</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">parameter 2</label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label><input type="checkbox" value="">parameter 3</label>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--</div>-->
+
+                <!--<div class="child-right-bottom">-->
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">History</h3>
+                            </div>
+                            <div class="panel-body">
+                                history content
+                            </div>
+                            <div class="panel-footer">History panel footer</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="container">
-
-            <form>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">is occluded</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">parameter 2</label>
-                </div>
-                <div class="checkbox">
-                    <label><input type="checkbox" value="">parameter 3</label>
-                </div>
-            </form>
-        </div>
     </div>
-
-    <div class="child-right-bottom">
-        history
-    </div>
+    <!--</div>-->
+    <!--</div>-->
 </div>
 </body>
 </html>

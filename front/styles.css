@@ -1,50 +1,9 @@
-* {
-  box-sizing: border-box;
-}
-.parent > div {
-  padding:8px;
-
-}
-.parent {
-    overflow: hidden;
-    position: relative;
-  	min-width: 800px;
-    width: 100%;
-    color:red;
-    background-color:pink;
-    min-height:500px;
+.sidebar{
+    float: left;
+    width: 72px;
 }
 
-.child-left {
-   width: 64px;
-}
-
-.child-center {
-    background:yellow;
-    height: 100%;
-    position: absolute;
-    color:blue;
-    top: 0;
-    right: 100px;
-    left: 64px;
-}
-
-.child-right-top {
-    background:green;
-    height: 50%;
-    position: absolute;
-    color:yellow;
-    top: 0;
-    right: 0;
-    width: 250px;
-}
-
-.child-right-bottom {
-    background:blue;
-    height: 50%;
-    position: absolute;
-    color:yellow;
-    top: 50%;
-    right: 0;
-    width: 250px;
+.image-to-be-labeled{
+    padding-left: 16px;
+    margin-left: 72px;
 }
