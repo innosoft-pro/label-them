@@ -37,9 +37,9 @@
                             <div class="btn-group-vertical" role="group" aria-label="...">
                                 <button class="btn btn-default save"><img src="img/save_button.png" width="48"/>
                                 </button>
-                                <button class="btn btn-default panTool"><img src="img/pan_tool_button.png" width="48"/>
+                                <button class="btn btn-default panTool"><img src="img/hand_tool_button.png" width="48"/>
                                 </button>
-                                <button class="btn btn-default selectLabel"><img src="img/select_label_button.png"
+                                <button class="btn btn-default selectLabel"><img src="img/polygon_tool_button.png"
                                                                                  width="48"/>
                                 </button>
                                 <button class="btn btn-default"><img src="img/edit_button.png" width="48"/></button>
@@ -73,9 +73,7 @@
                                 <h3 class="panel-title">Label Parameters</h3>
                             </div>
                             <div class="panel-body">
-
-                                <div class="container">
-                                    <h2>Vehicle Type</h2>
+                                    <h4>Vehicle Type</h4>
 
                                     <button class="btn btn-default dropdown-toggle" type="button"
                                             id="dropdownMenu-Classes"
@@ -84,29 +82,20 @@
                                         <span class="caret"></span>
                                     </button>
 
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu-Classes">
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">car</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">minitruck</a>
-                                        </li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck 5-12</a>
-                                        </li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">truck
-                                            12-20</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">huge truck
-                                            (>20)</a></li>
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bus</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">bike</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">unknown
-                                            vehicle</a></li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">person</a>
-                                        </li>
-                                        <li role="presentation"><a role="menuitem" tabindex="-1" href="#">other</a></li>
-                                        <li class="disabled"><a role="menuitem" tabindex="-1" href="#">disabled dropdown
-                                            element</a></li>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu-Classes">
+                                        <li><a role="menuitem" tabindex="-1" href="#">car</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">minitruck</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">truck 5-12</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">truck 12-20</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">huge truck (>20)</a></li>
+                                        <li class="divider"></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">bus</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">bike</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">unknown vehicle</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">person</a></li>
+                                        <li><a role="menuitem" tabindex="-1" href="#">other</a></li>
+                                        <li class="disabled"><a role="menuitem" tabindex="-1" href="#">disabled dropdown element</a></li>
                                     </ul>
-                                </div>
-                                <div class="container">
 
                                     <form>
                                         <div class="checkbox">
@@ -119,7 +108,6 @@
                                             <label><input type="checkbox" value="">parameter 3</label>
                                         </div>
                                     </form>
-                                </div>
 
                             </div>
                         </div>
@@ -134,10 +122,55 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">History</h3>
                             </div>
-                            <div class="panel-body">
-                                history content
+                            <!-- Table -->
+                            <table class="table history-table">
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default panTool">
+                                            <img src="img/polygon_tool_button.png" width="24"/>
+                                        </button>
+                                    </td>
+                                    <td class="history-text-td">
+                                        Polygon
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default panTool">
+                                            <img src="img/polygon_tool_button.png" width="24"/>
+                                        </button>
+                                    </td>
+                                    <td class="history-text-td">
+                                        Polygon
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default panTool">
+                                            <img src="img/polygon_tool_button.png" width="24"/>
+                                        </button>
+                                    </td>
+                                    <td class="history-text-td">
+                                        Polygon
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <button class="btn btn-default panTool">
+                                            <img src="img/polygon_tool_button.png" width="24"/>
+                                        </button>
+                                    </td>
+                                    <td class="history-text-td">
+                                        Polygon
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="panel-footer">
+                                <div class="btn-group" role="group" aria-label="...">
+                                    <button class="btn btn-default"><img src="img/arrows_undo_icon.png" width="32"/></button>
+                                    <button class="btn btn-default"><img src="img/arrows_redo_icon.png" width="32"/></button>
+                                </div>
                             </div>
-                            <div class="panel-footer">History panel footer</div>
                         </div>
                     </div>
                 </div>

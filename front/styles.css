@@ -7,3 +7,13 @@
     padding-left: 16px;
     margin-left: 72px;
 }
+
+.history-table {
+    border: 0;
+}
+
+.history-text-td {
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 16px;
+}
