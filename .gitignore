@@ -1,4 +1,4 @@
 #linux system files
 .directory
 # IntelliJ Idea & WebStorm
-.idea/**
+.idea/
