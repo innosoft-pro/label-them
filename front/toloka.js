@@ -12,14 +12,14 @@ function selectLabel() {
     alert("Implement select label");
 }
 
+// Uncomment before the deployment in Yandex.Toloka
+/*
 exports.Task = extend(TolokaHandlebarsTask, function (options) {
     TolokaHandlebarsTask.call(this, options);
 }, {
 
-    /**
-     *  Add listener to each button based on its class on start
-     *  appropriate class for each button should be added in html
-     */
+    // Add listener to each button based on its class on start
+    // appropriate class for each button should be added in html
     onRender: function () {
         methodsArray.forEach(method => {
             this.getDOMElement()
@@ -33,6 +33,7 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
 
     }
 });
+*/
 
 function extend(ParentClass, constructorFunction, prototypeHash) {
     constructorFunction = constructorFunction || function () {
