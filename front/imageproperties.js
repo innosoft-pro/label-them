@@ -5,7 +5,7 @@ function loadJSON(callback) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'classesandparameters.json', true);
+    xobj.open('GET', 'https://rawgit.com/innosoft-pro/label-them/LT-65/front/classesandparameters.json', true);
     xobj.onreadystatechange = function() {
         if (xobj.readyState == 4 && xobj.status == "200") {
 
