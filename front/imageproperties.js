@@ -5,7 +5,7 @@ function loadJSON(callback) {
 
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'https://rawgit.com/innosoft-pro/label-them/LT-65/front/classesandparameters.json', true);
+    xobj.open('GET', 'https://rawgit.com/innosoft-pro/label-them/cba69e66ec07f5611ec3b9297997ce8a6c6d8a26/front/classesandparameters.json', true);
     xobj.onreadystatechange = function() {
         if (xobj.readyState == 4 && xobj.status == "200") {
 
@@ -22,7 +22,7 @@ function loadJSON(callback) {
 loadJSON(function(response) {
     jsonresponse = JSON.parse(response);
 
-    alert(jsonresponse[0].name);
+    alert(jsonresponse[0].result);
 
 });
 
