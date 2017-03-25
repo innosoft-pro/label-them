@@ -1,6 +1,7 @@
 .sidebar {
     float: left;
     width: 72px;
+    margin-left: -14px;
 }
 
 .image-to-be-labeled {
@@ -20,4 +21,14 @@
     vertical-align: middle;
     text-align: left;
     margin-left: 16px;
+}
+
+.panel-body {
+    width: 1280px;
+    height: 720px;
+}
+
+.hd-resolution {
+    width: 1280px;
+    height: 720px;
 }
