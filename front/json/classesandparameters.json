@@ -1,30 +1,34 @@
 {
-  "result": true,
-  "count": 1,
-  "rows": [
-    [
-      "data00",
-      "data01",
-      "data02",
-      "data03"
-    ],
-    [
-      "data10",
-      "data11",
-      "data12",
-      "data13"
-    ],
-    [
-      "data20",
-      "data21",
-      "data22",
-      "data23"
-    ],
-    [
-      "data30",
-      "data31",
-      "data32",
-      "data33"
-    ]
+  "classes":
+  [
+    "class00",
+    "class01",
+    "class02",
+    "class0N"
+  ],
+
+  "parameters":
+  [
+    {
+      "type": "checkbox",
+      "name": "is occluded"
+    },
+
+    {
+      "type": "input-group",
+      "name": "phone number",
+      "placeholder": "+7"
+    },
+
+    {
+      "type": "dropdown-menu",
+      "name": "menu1",
+      "menuitems":
+      [
+        "item1name",
+        "item2name",
+        "itemNname"
+      ]
+    }
   ]
 }
