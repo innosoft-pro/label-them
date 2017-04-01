@@ -23,7 +23,7 @@
     {
       "type": "dropdown-menu",
       "name": "menu1",
-      "menuitems":
+      "menu-items":
       [
         "item1name",
         "item2name",
