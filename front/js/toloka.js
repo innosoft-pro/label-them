@@ -67,6 +67,8 @@ function loadJSON(callback) {
     xobj.send(null);
 }
 
+// Generate HTML code for classes and parameters described in json/classesandparameters.json
+// Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom) {
     // Call to function with anonymous callback
     loadJSON(function (response) {
