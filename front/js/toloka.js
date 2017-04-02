@@ -106,6 +106,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
 
         if (jsonresponse.parameters !== null) {
             var dropdownMenusCount = 0;
+            var inputGroupsCount = 0;
             parameters.push('<form>');
             jsonresponse.parameters.forEach(function (obj) {
                 if (obj.type === "checkbox") {
@@ -115,16 +116,24 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("</label>");
                     parameters.push("</div>");
                 } else if (obj.type === "input-group") {
+                    inputGroupsCount++;
                     parameters.push("<div class=\"input-group\">");
-                    parameters.push("<span class=\"input-group-addon\" id=\"basic-addon1\">");
+                    parameters.push("<span class=\"input-group-addon\" id=\"basic-addon");
+                    parameters.push(inputGroupsCount);
+                    parameters.push("\">");
                     parameters.push(obj.placeholder);
                     parameters.push("</span>");
                     parameters.push("<input type=\"text\" class=\"form-control\" placeholder=\"");
                     parameters.push(obj.name);
-                    parameters.push("\" aria-describedby=\"basic-addon1\">");
+                    parameters.push("\" aria-describedby=\"basic-addon");
+                    parameters.push(inputGroupsCount);
+                    parameters.push("\">");
                     parameters.push("</div>");
                 } else if (obj.type === "dropdown-menu") {
                     dropdownMenusCount++;
+                    parameters.push('<h4>');
+                    parameters.push(obj.name);
+                    parameters.push('</h4>');
                     parameters.push("<div class=\"dropdown\">");
                     parameters.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
                     parameters.push("id=\"dropdownMenu-parameters");
