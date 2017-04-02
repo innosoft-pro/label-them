@@ -1,5 +1,3 @@
-var methodsArray = [save, selectLabel, panTool];
-
 function save() {
     alert("Impement save");
 }
@@ -11,6 +9,8 @@ function panTool() {
 function selectLabel() {
     alert("Implement select label");
 }
+
+var methodsArray = [save, selectLabel, panTool];
 
 function render(dom) {
     methodsArray.forEach((method) => {
