@@ -1,5 +1,5 @@
 {
-  "general-classes-name": "Objects",
+  "generalClassesName": "Objects",
 
   "classes":
   [
@@ -25,7 +25,7 @@
     {
       "type": "dropdown-menu",
       "name": "menu1",
-      "menu-items":
+      "menuItems":
       [
         "item1name",
         "item2name",
