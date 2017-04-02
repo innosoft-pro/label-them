@@ -14,7 +14,6 @@ var methodsArray = [save, selectLabel, panTool];
 
 function render(dom) {
     methodsArray.forEach((method) => {
-        console.log(method.name)
     dom
         .getElementsByClassName(method.name)[0]
         .addEventListener('click', method);
