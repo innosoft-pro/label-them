@@ -1,4 +1,4 @@
-var methodsArray = [save, selectLabel, panTool, getJSON];
+var methodsArray = [save, selectLabel, panTool, generateHTMLCodeForClassesAndParameters];
 
 function save() {
     alert("Impement save");
@@ -55,7 +55,7 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
 function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open('GET', 'https://rawgit.com/innosoft-pro/label-them/4ecbd548ae1315469a73118e8c807c451ee95a56/front/classesandparameters.json', true);
+    xobj.open('GET', 'https://rawgit.com/innosoft-pro/label-them/LT-116/front/json/classesandparameters.json', true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState == 4 && xobj.status == "200") {
 
@@ -67,11 +67,45 @@ function loadJSON(callback) {
     xobj.send(null);
 }
 
-function getJSON() {
+function generateHTMLCodeForClassesAndParameters() {
     // Call to function with anonymous callback
     loadJSON(function (response) {
         jsonresponse = JSON.parse(response);
 
-        alert(jsonresponse.result);
+        var html = [];
+
+        var generalClassesNameTemplate = [];
+        var classes = [];
+
+        generalClassesNameTemplate.push('<h4>');
+        generalClassesNameTemplate.push(jsonresponse.generalClassesName);
+        generalClassesNameTemplate.push('</h4>');
+        generalClassesNameTemplate = generalClassesNameTemplate.join("");
+
+        classes.push("<div class=\"dropdown\">");
+        classes.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
+        classes.push("id=\"dropdownMenu-Classes\" ");
+        classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
+        classes.push(jsonresponse.generalClassesName);
+        classes.push("<span class=\"caret\"></span>");
+        classes.push("</button>");
+        classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\">");
+
+        jsonresponse.classes.forEach(function (obj) {
+            classes.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
+            classes.push(obj);
+            classes.push("</a></li>");
+        });
+
+        classes.push("</ul>");
+        classes.push("</div>");
+        classes = classes.join("");
+
+        html.push(generalClassesNameTemplate);
+        html.push(classes);
+
+        html = html.join("");
+
+        alert(html);
     });
 }
