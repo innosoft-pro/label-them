@@ -19,7 +19,7 @@
     {
       "type": "input-group",
       "name": "phone number",
-      "placeholder": "+7"
+      "addon": "+7"
     },
 
     {
