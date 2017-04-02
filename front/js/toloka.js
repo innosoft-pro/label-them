@@ -72,7 +72,7 @@ function loadJSON(callback) {
 function generateHTMLCodeForClassesAndParameters(dom) {
     // Call to function with anonymous callback
     loadJSON(function (response) {
-        jsonresponse = JSON.parse(response);
+        var jsonresponse = JSON.parse(response);
 
         var html = [];
 
