@@ -57,7 +57,7 @@ function loadJSON(callback) {
     xobj.overrideMimeType("application/json");
     xobj.open("GET", "https://rawgit.com/innosoft-pro/label-them/LT-116/front/json/classesandparameters.json", true);
     xobj.onreadystatechange = function () {
-        if (xobj.readyState == 4 && xobj.status == "200") {
+        if (xobj.readyState === 4 && xobj.status == "200") {
 
             // .open will NOT return a value but simply returns undefined in async mode so use a callback
             callback(xobj.responseText);
