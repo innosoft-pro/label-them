@@ -31,6 +31,7 @@
     <script>
         $(function () {
             render(document);
+            generateHTMLCodeForClassesAndParameters(document);
         });
     </script>
 </head>
@@ -52,7 +53,7 @@
                         <button class="btn btn-default selectLabel">
                             <img src="img/polygon_tool_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default generateHTMLCodeForClassesAndParameters">
+                        <button class="btn btn-default">
                             <img src="img/edit_button.png" width="48"/>
                         </button>
                         <button class="btn btn-default">
@@ -88,7 +89,7 @@
                             <div class="panel-heading">
                                 <h3 class="panel-title">Label Parameters</h3>
                             </div>
-                            <div class="panel-body">
+                            <div class="panel-body" id="classes-and-parameters">
                                 <h4>Vehicle Type</h4>
 
                                 <div class="dropdown">

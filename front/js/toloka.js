@@ -1,4 +1,4 @@
-var methodsArray = [save, selectLabel, panTool, generateHTMLCodeForClassesAndParameters];
+var methodsArray = [save, selectLabel, panTool];
 
 function save() {
     alert("Impement save");
@@ -67,7 +67,7 @@ function loadJSON(callback) {
     xobj.send(null);
 }
 
-function generateHTMLCodeForClassesAndParameters() {
+function generateHTMLCodeForClassesAndParameters(dom) {
     // Call to function with anonymous callback
     loadJSON(function (response) {
         jsonresponse = JSON.parse(response);
@@ -106,6 +106,6 @@ function generateHTMLCodeForClassesAndParameters() {
 
         html = html.join("");
 
-        alert(html);
+        dom.getElementById('classes-and-parameters').innerHTML += html;
     });
 }
