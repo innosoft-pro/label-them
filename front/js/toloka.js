@@ -79,6 +79,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
 
         generalClassesNameTemplate.push('<h4>');
         generalClassesNameTemplate.push(jsonresponse.generalClassesName);
+        generalClassesNameTemplate.push(' Type');
         generalClassesNameTemplate.push('</h4>');
         generalClassesNameTemplate = generalClassesNameTemplate.join("");
 
@@ -87,6 +88,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         classes.push("id=\"dropdownMenu-Classes\" ");
         classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
         classes.push(jsonresponse.generalClassesName);
+        classes.push(' Type');
         classes.push("<span class=\"caret\"></span>");
         classes.push("</button>");
         classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\">");
