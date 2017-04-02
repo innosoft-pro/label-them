@@ -13,7 +13,7 @@ function selectLabel() {
 }
 
 function render(dom) {
-    methodsArray.forEach(method => {
+    methodsArray.forEach((method) => {
         console.log(method.name)
     dom
         .getElementsByClassName(method.name)[0]
