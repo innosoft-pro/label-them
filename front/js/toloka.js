@@ -80,10 +80,10 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         var classes = [];
         var parameters = [];
 
-        generalClassesNameTemplate.push('<h4>');
+        generalClassesNameTemplate.push("<h4>");
         generalClassesNameTemplate.push(jsonresponse.generalClassesName);
-        generalClassesNameTemplate.push(' Type');
-        generalClassesNameTemplate.push('</h4>');
+        generalClassesNameTemplate.push(" Type");
+        generalClassesNameTemplate.push("</h4>");
         generalClassesNameTemplate = generalClassesNameTemplate.join("");
 
         classes.push("<div class=\"dropdown\">");
@@ -91,7 +91,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         classes.push("id=\"dropdownMenu-Classes\" ");
         classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
         classes.push(jsonresponse.generalClassesName);
-        classes.push(' Type');
+        classes.push(" Type");
         classes.push("<span class=\"caret\"></span>");
         classes.push("</button>");
         classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\">");
@@ -109,7 +109,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         if (jsonresponse.parameters !== null) {
             var dropdownMenusCount = 0;
             var inputGroupsCount = 0;
-            parameters.push('<form>');
+            parameters.push("<form>");
             jsonresponse.parameters.forEach(function (obj) {
                 if (obj.type === "checkbox") {
                     parameters.push("<div class=\"checkbox\">");
@@ -123,7 +123,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("<span class=\"input-group-addon\" id=\"basic-addon");
                     parameters.push(inputGroupsCount);
                     parameters.push("\">");
-                    parameters.push(obj.placeholder);
+                    parameters.push(obj.addon);
                     parameters.push("</span>");
                     parameters.push("<input type=\"text\" class=\"form-control\" placeholder=\"");
                     parameters.push(obj.name);
@@ -133,9 +133,9 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("</div>");
                 } else if (obj.type === "dropdown-menu") {
                     dropdownMenusCount++;
-                    parameters.push('<h4>');
+                    parameters.push("<h4>");
                     parameters.push(obj.name);
-                    parameters.push('</h4>');
+                    parameters.push("</h4>");
                     parameters.push("<div class=\"dropdown\">");
                     parameters.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
                     parameters.push("id=\"dropdownMenu-parameters");
@@ -159,7 +159,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("</div>");
                 }
             });
-            parameters.push('</form>');
+            parameters.push("</form>");
             parameters = parameters.join("");
         }
 
