@@ -169,6 +169,6 @@ function generateHTMLCodeForClassesAndParameters(dom) {
 
         html = html.join("");
 
-        dom.getElementById('classes-and-parameters').innerHTML += html;
+        dom.getElementById("classes-and-parameters").innerHTML += html;
     });
 }
