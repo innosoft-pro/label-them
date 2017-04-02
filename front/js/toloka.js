@@ -16,7 +16,7 @@ function render(dom) {
     methodsArray.forEach((method) => {
     dom
         .getElementsByClassName(method.name)[0]
-        .addEventListener('click', method);
+        .addEventListener("click", method);
 })
     ;
 }
