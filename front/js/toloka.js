@@ -76,6 +76,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
 
         var generalClassesNameTemplate = [];
         var classes = [];
+        var parameters = [];
 
         generalClassesNameTemplate.push('<h4>');
         generalClassesNameTemplate.push(jsonresponse.generalClassesName);
@@ -103,8 +104,57 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         classes.push("</div>");
         classes = classes.join("");
 
+        if (jsonresponse.parameters !== null) {
+            var dropdownMenusCount = 0;
+            parameters.push('<form>');
+            jsonresponse.parameters.forEach(function (obj) {
+                if (obj.type === "checkbox") {
+                    parameters.push("<div class=\"checkbox\">");
+                    parameters.push("<label><input type=\"checkbox\" value=\"\">");
+                    parameters.push(obj.name);
+                    parameters.push("</label>");
+                    parameters.push("</div>");
+                } else if (obj.type === "input-group") {
+                    parameters.push("<div class=\"input-group\">");
+                    parameters.push("<span class=\"input-group-addon\" id=\"basic-addon1\">");
+                    parameters.push(obj.placeholder);
+                    parameters.push("</span>");
+                    parameters.push("<input type=\"text\" class=\"form-control\" placeholder=\"");
+                    parameters.push(obj.name);
+                    parameters.push("\" aria-describedby=\"basic-addon1\">");
+                    parameters.push("</div>");
+                } else if (obj.type === "dropdown-menu") {
+                    dropdownMenusCount++;
+                    parameters.push("<div class=\"dropdown\">");
+                    parameters.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
+                    parameters.push("id=\"dropdownMenu-parameters");
+                    parameters.push(dropdownMenusCount);
+                    parameters.push("\" ");
+                    parameters.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
+                    parameters.push(obj.name);
+                    parameters.push("<span class=\"caret\"></span>");
+                    parameters.push("</button>");
+                    parameters.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-parameters");
+                    parameters.push(dropdownMenusCount);
+                    parameters.push("\">");
+
+                    obj.menuItems.forEach(function (obj2) {
+                        parameters.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
+                        parameters.push(obj2);
+                        parameters.push("</a></li>");
+                    });
+
+                    parameters.push("</ul>");
+                    parameters.push("</div>");
+                }
+            });
+            parameters.push('</form>');
+            parameters = parameters.join("");
+        }
+
         html.push(generalClassesNameTemplate);
         html.push(classes);
+        html.push(parameters);
 
         html = html.join("");
 
