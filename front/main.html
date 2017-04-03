@@ -8,21 +8,24 @@
 
     <title>LabelThem - a web image labelling application</title>
 
-    <link rel="stylesheet" href="css/styles.css"/>
+    <link rel="stylesheet" href="styles.css"/>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Connect Toloka JS  -->
-    <script src="js/toloka.js"></script>
+    <script src="https://rawgit.com/innosoft-pro/label-them/develop/front/toloka.js"></script>
 
     <script src="js/canvas.js"></script>
+
+    <script src="js/snap/snap.svg-min.js"></script>
+    <script src="js/svg_func.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -35,6 +38,7 @@
             render(document);
             generateHTMLCodeForClassesAndParameters(document);
         });
+        initSVG();
     </script>
 </head>
 <body>
@@ -75,9 +79,12 @@
                 </div>
 
                 <div class="image-to-be-labeled">
-                    <div class="panel panel-default">
+                    <div class="panel panel-default"  style="padding-bottom: 30px;">
                         <div id="canvas-parent" class="panel-body" style="overflow:scroll; height:800px; padding:0px">
                             <canvas id="main-canvas" style="border:1px solid #000000;">
+
+                                <svg id="svg_img" class="hd-resolution" onclick="svgImgOnClick(event)"
+                                     style="position: absolute;"></svg>
                         </div>
                     </div>
                 </div>
