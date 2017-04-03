@@ -1,5 +1,8 @@
+var urlToJSONWithClassesAndParameters =
+    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classesandparameters.json";
+
 function save() {
-    alert("Impement save");
+    alert("Implement save");
 }
 
 function panTool() {
@@ -50,7 +53,7 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
 function loadJSON(callback) {
     var xobj = new XMLHttpRequest();
     xobj.overrideMimeType("application/json");
-    xobj.open("GET", "https://rawgit.com/innosoft-pro/label-them/LT-116/front/json/classesandparameters.json", true);
+    xobj.open("GET", urlToJSONWithClassesAndParameters, true);
     xobj.onreadystatechange = function () {
         if (xobj.readyState === 4 && xobj.status == "200") {
 
