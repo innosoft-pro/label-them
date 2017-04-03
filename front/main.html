@@ -22,6 +22,8 @@
     <!-- Connect Toloka JS  -->
     <script src="js/toloka.js"></script>
 
+    <script src="js/canvas.js"></script>
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -74,8 +76,8 @@
 
                 <div class="image-to-be-labeled">
                     <div class="panel panel-default">
-                        <div class="panel-body">
-                            main canvas
+                        <div id="canvas-parent" class="panel-body" style="overflow:scroll; height:800px; padding:0px">
+                            <canvas id="main-canvas" style="border:1px solid #000000;">
                         </div>
                     </div>
                 </div>

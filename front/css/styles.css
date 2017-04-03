@@ -21,3 +21,13 @@
     text-align: left;
     margin-left: 16px;
 }
+
+canvas {
+	background: gray;
+	/*width: 600px;
+	height: 800px;*/
+
+	display: block;
+	margin: 0 auto;
+    width: 100%
+}
