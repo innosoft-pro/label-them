@@ -9,7 +9,7 @@ img.src = "http://cdn.wallpapersafari.com/46/69/ECXFrK.jpg";
 var aspectRatio = img.width / img.height;
 
 function drawImg(img) {
-    var canvas = document.getElementById('main-canvas');
+    var canvas = document.getElementById("main-canvas");
     var ctx = canvas.getContext("2d");
 
     var targetWidth = canvas.height * aspectRatio;
@@ -30,10 +30,6 @@ function resize() {
 
     // 28 is the width of two 14px paddings from each side of the canvas, specified in bootstrap
     parent.style.minHeight = (parent.clientWidth + 28) / aspectRatio + "px";
-    console.log(parent.clientWidth);
-    console.log(aspectRatio);
-    console.log(parent.style.height.toString());
-    console.log(parent.clientWidth / aspectRatio);
 
     var height = parent.clientHeight;
     var width = parent.clientWidth;
