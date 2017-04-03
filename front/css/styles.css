@@ -31,3 +31,18 @@ canvas {
 	margin: 0 auto;
     width: 100%
 }
+
+#main-canvas {
+    border:1px solid #000000;
+    position: absolute;
+}
+
+#canvas-parent {
+    overflow:scroll;
+    min-height: 550px;
+    padding:0;
+}
+
+#svg_img {
+    position: absolute;
+}
