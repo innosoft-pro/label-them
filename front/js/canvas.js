@@ -5,20 +5,18 @@ function init() {
 
 // loading remote image
 var img = new Image();
-img.src = "http://placekitten.com/1296/968";
+img.src = "http://cdn.wallpapersafari.com/46/69/ECXFrK.jpg";
+var aspectRatio = img.width / img.height;
 
 function drawImg(img) {
-    var canvas = document.getElementById("main-canvas");
+    var canvas = document.getElementById('main-canvas');
     var ctx = canvas.getContext("2d");
 
-    var aspectRatio = img.width / img.height;
-
-
-    var targetHeight = canvas.width / aspectRatio;
-    var targetX = (canvas.height - targetHeight) / 2;
+    var targetWidth = canvas.height * aspectRatio;
+    var targetX = (canvas.width - targetWidth) / 2;
 
     ctx.drawImage(img, 0, 0, img.width, img.height,     // source rectangle
-        targetX, 0, canvas.height, targetHeight); // destination rectangle
+        targetX, 0, targetWidth, canvas.height); // destination rectangle
 }
 
 // handles resizing of the canvas
@@ -29,6 +27,13 @@ function resize() {
     // make canvas fit parent div
     var parent = document.getElementById("canvas-parent");
     var svg = document.getElementById("svg_img");
+
+    parent.style.minHeight = parent.width / aspectRatio + "px";
+    console.log(parent.clientWidth);
+    console.log(aspectRatio);
+    console.log(parent.style.height.toString());
+    console.log(parent.clientWidth / aspectRatio);
+
     var height = parent.clientHeight;
     var width = parent.clientWidth;
 
