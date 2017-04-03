@@ -28,7 +28,8 @@ function resize() {
     var parent = document.getElementById("canvas-parent");
     var svg = document.getElementById("svg_img");
 
-    parent.style.minHeight = parent.width / aspectRatio + "px";
+    // 28 is the width of two 14px paddings from each side of the canvas, specified in bootstrap
+    parent.style.minHeight = (parent.clientWidth + 28) / aspectRatio + "px";
     console.log(parent.clientWidth);
     console.log(aspectRatio);
     console.log(parent.style.height.toString());
