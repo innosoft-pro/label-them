@@ -8,19 +8,19 @@
 
     <title>LabelThem - a web image labelling application</title>
 
-    <link rel="stylesheet" href="styles.css"/>
+    <link rel="stylesheet" href="css/styles.css"/>
 
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/jquery-3.2.0.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
 
     <!-- Connect Toloka JS  -->
-    <script src="https://rawgit.com/innosoft-pro/label-them/develop/front/toloka.js"></script>
+    <script src="js/toloka.js"></script>
 
     <script src="js/canvas.js"></script>
 
@@ -38,7 +38,6 @@
             render(document);
             generateHTMLCodeForClassesAndParameters(document);
         });
-        initSVG();
     </script>
 </head>
 <body>
@@ -56,7 +55,7 @@
                         <button class="btn btn-default panTool">
                             <img src="img/hand_tool_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default selectLabel">
+                        <button class="btn btn-default">
                             <img src="img/polygon_tool_button.png" width="48"/>
                         </button>
                         <button class="btn btn-default">
@@ -79,12 +78,12 @@
                 </div>
 
                 <div class="image-to-be-labeled">
-                    <div class="panel panel-default"  style="padding-bottom: 30px;">
-                        <div id="canvas-parent" class="panel-body" style="overflow:scroll; height:800px; padding:0px">
-                            <canvas id="main-canvas" style="border:1px solid #000000;">
-
-                                <svg id="svg_img" class="hd-resolution" onclick="svgImgOnClick(event)"
-                                     style="position: absolute;"></svg>
+                    <div class="panel panel-default" style="padding-bottom: 30px;">
+                        <div id="canvas-parent" class="panel-body"
+                             style="overflow:scroll; min-height: 550px; padding:0">
+                            <canvas id="main-canvas" style="border:1px solid #000000; position: absolute;">
+                            </canvas>
+                            <svg id="svg_img" onclick="svgImgOnClick(event)" style="position: absolute;"></svg>
                         </div>
                     </div>
                 </div>
@@ -171,5 +170,8 @@
         </div>
     </div>
 </div>
+<script>
+    initSVG();
+</script>
 </body>
 </html>

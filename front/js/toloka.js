@@ -6,15 +6,11 @@ function panTool() {
     alert("Implement pan tool");
 }
 
-function selectLabel() {
-    alert("Implement select label");
-}
-
-var methodsArray = [save, selectLabel, panTool];
+var methodsArray = [save, panTool];
 
 function render(dom) {
     methodsArray.forEach((method) => {
-    dom
+        dom
         .getElementsByClassName(method.name)[0]
         .addEventListener("click", method);
 })

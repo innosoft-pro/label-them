@@ -5,12 +5,16 @@ var lineWidth = 5;
 
 function initSVG() {
     svgImg = Snap("#svg_img")
+
+    console.log("initSvg method is called!");
 }
 
 function svgImgOnClick(event) {
     var point = getPoint(event);
     pointsList.push(point);
     draw();
+
+    console.log("svgImgOnClick method is called!");
 }
 
 
@@ -20,6 +24,7 @@ function draw() {
     } else {
         drawPolygon();
     }
+    console.log("draw method is called!");
 }
 
 function drawDot(point) {
