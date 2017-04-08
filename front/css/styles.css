@@ -1,0 +1,47 @@
+.sidebar {
+    float: left;
+    width: 72px;
+}
+
+.image-to-be-labeled {
+    padding-left: 16px;
+    margin-left: 72px;
+}
+
+.history-table {
+    border: 0;
+}
+
+.history-icon-td {
+    width: 48px;
+}
+
+.history-text-td {
+    vertical-align: middle;
+    text-align: left;
+    margin-left: 16px;
+}
+
+canvas {
+	background: gray;
+	/*width: 600px;
+	height: 800px;*/
+
+	display: block;
+	margin: 0 auto;
+    width: 100%
+}
+
+#main-canvas {
+    position: absolute;
+}
+
+#canvas-parent {
+    overflow:scroll;
+    min-height: 550px;
+    padding:0;
+}
+
+#svg_img {
+    position: absolute;
+}
