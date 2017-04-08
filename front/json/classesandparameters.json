@@ -33,7 +33,7 @@
 
     {
       "type": "select",
-      "name": "select option of another kind",
+      "name": "select an option of another kind",
       "options":
       [
         "option B-1 name",
