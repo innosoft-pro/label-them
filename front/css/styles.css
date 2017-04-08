@@ -32,6 +32,11 @@ canvas {
     width: 100%
 }
 
+/* Additional margin to add some space between input groups and drop down menus */
+.dropdown-menu-parameters {
+    margin-top: 14px;
+}
+
 #main-canvas {
     position: absolute;
 }

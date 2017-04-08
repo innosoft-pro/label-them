@@ -29,6 +29,17 @@
         "option 2 name",
         "option N name"
       ]
+    },
+
+    {
+      "type": "select",
+      "name": "select option of another kind",
+      "options":
+      [
+        "option B-1 name",
+        "option B-2 name",
+        "option B-N name"
+      ]
     }
   ]
 }
