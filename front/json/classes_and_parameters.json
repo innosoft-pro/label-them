@@ -11,6 +11,7 @@
       "type": "checkbox",
       "name": "is occluded"
     },
+
     {
       "type": "input-group",
       "name": "phone number",
