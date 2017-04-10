@@ -104,6 +104,14 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         if (jsonresponse.parameters !== null) {
             var dropdownMenusCount = 0;
             var inputGroupsCount = 0;
+
+            //To separate objects classes from parameters
+            parameters.push("</br>");
+
+            parameters.push("<h4>");
+            parameters.push("Objects Parameters");
+            parameters.push("</h4>");
+
             parameters.push("<form>");
             jsonresponse.parameters.forEach(function (obj) {
                 if (obj.type === "boolean") {
