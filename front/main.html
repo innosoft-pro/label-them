@@ -25,6 +25,10 @@
     <script src="js/canvas.js"></script>
 
     <script src="js/snap/snap.svg-min.js"></script>
+
+    <!-- SVG tools and libs-->
+    <script src="js/draw.js"></script>
+    <script src="js/coordinates.js"></script>
     <script src="js/svg_func.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -78,6 +82,9 @@
                 </div>
 
                 <div class="image-to-be-labeled">
+                    <div id="message_space" style="display: none;" class="alert alert-success">
+                        <strong>Polygon is closed!</strong> Please characterize it in the right menu.
+                    </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="canvas-parent">
@@ -172,7 +179,7 @@
     </div>
 </div>
 <script>
-    initSVG();
+    initSvg();
 </script>
 </body>
 </html>

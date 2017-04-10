@@ -1,5 +1,5 @@
 var urlToJSONWithClassesAndParameters =
-    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classesandparameters.json";
+    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classes_and_parameters.json";
 
 function save() {
     alert("Implement save");
@@ -12,12 +12,12 @@ function panTool() {
 var methodsArray = [save, panTool];
 
 function render(dom) {
-    methodsArray.forEach((method) => {
+    methodsArray.forEach(method)
+    {
         dom
-        .getElementsByClassName(method.name)[0]
-        .addEventListener("click", method);
-})
-    ;
+            .getElementsByClassName(method.name)[0]
+            .addEventListener("click", method);
+    }
 }
 
 // Uncomment before the deployment in Yandex.Toloka
@@ -65,7 +65,7 @@ function loadJSON(callback) {
     xobj.send(null);
 }
 
-// Generate HTML code for classes and parameters described in json/classesandparameters.json
+// Generate HTML code for classes and parameters described in json/classes_and_parameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom) {
     // Call to function with anonymous callback
