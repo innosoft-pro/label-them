@@ -1,0 +1,26 @@
+{
+  "name": "label-them",
+  "homepage": "https://github.com/innosoft-pro/label-them",
+  "authors": [
+    "aykbadalyan <ayk.badalyan@gmail.com>"
+  ],
+  "description": "Image-labelling web-application",
+  "main": "main.html",
+  "keywords": [
+    "label"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "Snap.svg": "snap.svg#^0.5.1",
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.2.1"
+  }
+}
