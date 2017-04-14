@@ -2,3 +2,4 @@
 .directory
 # IntelliJ Idea & WebStorm
 .idea/
+bower_components/

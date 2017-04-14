@@ -1,35 +1,44 @@
 {
-  "generalClassesName": "Objects",
-
   "classes":
   [
-    "class00",
-    "class01",
-    "class02",
-    "class0N"
+    "class 0",
+    "class 1",
+    "class 2",
+    "class N"
   ],
 
   "parameters":
   [
     {
-      "type": "checkbox",
+      "type": "boolean",
       "name": "is occluded"
     },
 
     {
-      "type": "input-group",
+      "type": "string",
       "name": "phone number",
-      "addon": "+7"
+      "prefix": "+7"
     },
 
     {
-      "type": "dropdown-menu",
-      "name": "menu1",
-      "menuItems":
+      "type": "select",
+      "name": "select an option",
+      "options":
       [
-        "item1name",
-        "item2name",
-        "itemNname"
+        "option 1 name",
+        "option 2 name",
+        "option N name"
+      ]
+    },
+
+    {
+      "type": "select",
+      "name": "select an option of another kind",
+      "options":
+      [
+        "option B-1 name",
+        "option B-2 name",
+        "option B-N name"
       ]
     }
   ]

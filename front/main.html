@@ -11,13 +11,13 @@
     <link rel="stylesheet" href="css/styles.css"/>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-    <script src="js/jquery-3.2.0.min.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 
     <!-- Connect Toloka JS  -->
     <script src="js/toloka.js"></script>
@@ -26,7 +26,11 @@
     <script src="js/UIHandler.js"></script>
     <script src="js/canvas.js"></script>
 
-    <script src="js/snap/snap.svg-min.js"></script>
+    <script src="../bower_components/Snap.svg/dist/snap.svg-min.js"></script>
+
+    <!-- SVG tools and libs-->
+    <script src="js/draw.js"></script>
+    <script src="js/coordinates.js"></script>
     <script src="js/svg_func.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -41,6 +45,9 @@
             generateHTMLCodeForClassesAndParameters(document);
         });
     </script>
+
+    <!-- Nav menu-->
+    <script src="js/nav_menu.js"></script>
 </head>
 <body>
 <!--<div class="parent">-->
@@ -51,41 +58,44 @@
             <div class="col-md-9">
                 <div class="sidebar">
                     <div class="btn-group-vertical" role="group" aria-label="...">
-                        <button class="btn btn-default save">
+                        <button id="btn_save" class="btn btn-default save">
                             <img src="img/save_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default panTool">
+                        <button id="btn_hand" class="btn btn-default panTool">
                             <img src="img/hand_tool_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_polygon" class="btn btn-default">
                             <img src="img/polygon_tool_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_edit" class="btn btn-default">
                             <img src="img/edit_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_zoom_in" class="btn btn-default">
                             <img src="img/zoom_in_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_zoom_out" class="btn btn-default">
                             <img src="img/zoom_out_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_brightness_high" class="btn btn-default">
                             <img src="img/brightness_high_button.png" width="48"/>
                         </button>
-                        <button class="btn btn-default">
+                        <button id="btn_brightness_low" class="btn btn-default">
                             <img src="img/brightness_low_button.png" width="48"/>
                         </button>
-
                     </div>
                 </div>
 
                 <div class="image-to-be-labeled">
+                    <div id="message_space" style="display: none;" class="alert alert-success">
+                        <strong>Polygon is closed!</strong> Please characterize it in the right menu.
+                    </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="canvas-parent">
                                 <canvas id="main-canvas">
                                 </canvas>
-                                <svg id="svg_img" onclick="svgImgOnClick(event)"></svg>
+                                <!--onclick="svgImgOnClick(event)"-->
+                                <svg id="svg_img"></svg>
                             </div>
                         </div>
                     </div>
@@ -174,7 +184,8 @@
     </div>
 </div>
 <script>
-    initSVG();
+    initSvg();
+    initNavMenu();
 </script>
 </body>
 </html>
