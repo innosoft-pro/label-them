@@ -32,6 +32,8 @@ function drawDot(point) {
         });
 }
 
+var dc;
+
 function drawPolygon() {
     svgImg.clear();
     var polygonClosed = isPolygonClosed(pointsList[pointsList.length - 1]);
@@ -48,6 +50,9 @@ function drawPolygon() {
     });
 
     if (polygonClosed) {
+        dc = new DataCollector();
+        dc.setPoints(pointsList.slice(0, pointsList.length - 1));
+        //dc.setParams(pointsList.slice(0, pointsList.length - 1));
         pointsList = [];
     }
 }
