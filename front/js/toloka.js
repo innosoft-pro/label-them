@@ -1,5 +1,5 @@
 var urlToJSONWithClassesAndParameters =
-    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classes_and_parameters.json";
+    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classesandparameters.json";
 
 function save() {
     alert("Implement save");
@@ -12,12 +12,12 @@ function panTool() {
 var methodsArray = [save, panTool];
 
 function render(dom) {
-    methodsArray.forEach(method)
-    {
+    methodsArray.forEach((method) => {
         dom
-            .getElementsByClassName(method.name)[0]
-            .addEventListener("click", method);
-    }
+        .getElementsByClassName(method.name)[0]
+        .addEventListener("click", method);
+})
+    ;
 }
 
 // Uncomment before the deployment in Yandex.Toloka
@@ -65,7 +65,7 @@ function loadJSON(callback) {
     xobj.send(null);
 }
 
-// Generate HTML code for classes and parameters described in json/classes_and_parameters.json
+// Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom) {
     // Call to function with anonymous callback
@@ -74,22 +74,18 @@ function generateHTMLCodeForClassesAndParameters(dom) {
 
         var html = [];
 
-        var generalClassesNameTemplate = [];
         var classes = [];
         var parameters = [];
 
-        generalClassesNameTemplate.push("<h4>");
-        generalClassesNameTemplate.push(jsonresponse.generalClassesName);
-        generalClassesNameTemplate.push(" Type");
-        generalClassesNameTemplate.push("</h4>");
-        generalClassesNameTemplate = generalClassesNameTemplate.join("");
+        classes.push("<h4>");
+        classes.push("Objects Classes");
+        classes.push("</h4>");
 
         classes.push("<div class=\"dropdown\">");
         classes.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
         classes.push("id=\"dropdownMenu-Classes\" ");
         classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
-        classes.push(jsonresponse.generalClassesName);
-        classes.push(" Type");
+        classes.push("Objects Classes");
         classes.push("<span class=\"caret\"></span>");
         classes.push("</button>");
         classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\">");
@@ -107,21 +103,29 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         if (jsonresponse.parameters !== null) {
             var dropdownMenusCount = 0;
             var inputGroupsCount = 0;
+
+            //To separate objects classes from parameters
+            parameters.push("</br>");
+
+            parameters.push("<h4>");
+            parameters.push("Objects Parameters");
+            parameters.push("</h4>");
+
             parameters.push("<form>");
             jsonresponse.parameters.forEach(function (obj) {
-                if (obj.type === "checkbox") {
+                if (obj.type === "boolean") {
                     parameters.push("<div class=\"checkbox\">");
                     parameters.push("<label><input type=\"checkbox\" value=\"\">");
                     parameters.push(obj.name);
                     parameters.push("</label>");
                     parameters.push("</div>");
-                } else if (obj.type === "input-group") {
+                } else if (obj.type === "string") {
                     inputGroupsCount++;
                     parameters.push("<div class=\"input-group\">");
                     parameters.push("<span class=\"input-group-addon\" id=\"basic-addon");
                     parameters.push(inputGroupsCount);
                     parameters.push("\">");
-                    parameters.push(obj.addon);
+                    parameters.push(obj.prefix);
                     parameters.push("</span>");
                     parameters.push("<input type=\"text\" class=\"form-control\" placeholder=\"");
                     parameters.push(obj.name);
@@ -129,13 +133,16 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push(inputGroupsCount);
                     parameters.push("\">");
                     parameters.push("</div>");
-                } else if (obj.type === "dropdown-menu") {
+                } else if (obj.type === "select") {
                     dropdownMenusCount++;
-                    parameters.push("<h4>");
-                    parameters.push(obj.name);
-                    parameters.push("</h4>");
                     parameters.push("<div class=\"dropdown\">");
-                    parameters.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
+                    parameters.push("<button class=\"btn btn-default dropdown-toggle");
+                    // Additional margin to add some space between input groups and drop down menus
+                    // Otherwise they stick to one another
+                    if (inputGroupsCount > 0 && dropdownMenusCount === 1 || dropdownMenusCount > 1) {
+                        parameters.push(" dropdown-menu-parameters");
+                    }
+                    parameters.push("\" type=\"button\" ");
                     parameters.push("id=\"dropdownMenu-parameters");
                     parameters.push(dropdownMenusCount);
                     parameters.push("\" ");
@@ -147,7 +154,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push(dropdownMenusCount);
                     parameters.push("\">");
 
-                    obj.menuItems.forEach(function (obj2) {
+                    obj.options.forEach(function (obj2) {
                         parameters.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
                         parameters.push(obj2);
                         parameters.push("</a></li>");
@@ -161,7 +168,6 @@ function generateHTMLCodeForClassesAndParameters(dom) {
             parameters = parameters.join("");
         }
 
-        html.push(generalClassesNameTemplate);
         html.push(classes);
         html.push(parameters);
 

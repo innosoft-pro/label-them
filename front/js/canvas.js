@@ -5,7 +5,7 @@ function init() {
 
 // loading remote image
 var img = new Image();
-img.src = "http://cdn.wallpapersafari.com/46/69/ECXFrK.jpg";
+img.src = "https://actingmylife.files.wordpress.com/2015/06/img_1730.jpg";
 var aspectRatio = img.width / img.height;
 
 function drawImg(img) {
