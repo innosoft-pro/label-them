@@ -9,6 +9,14 @@ function OnPolygonClosed(data){
     dc.setPoints(data.slice(0, pointsList.length - 1));
 }
 
+function OnBoolParamUpdate(checkbox){
+    dc.setParams({"field":checkbox.checked}); //TODO change the field to actual parameter name
+}
+
 function OnObjectClassUpdate(value){
-    dc.setParams("type:{value}");
+    dc.setParams({"class":value});
+}
+
+function OnParamStringUpdate(value){
+    dc.setParams({"field":value});
 }

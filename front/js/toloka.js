@@ -25,13 +25,11 @@ function render(dom) {
  exports.Task = extend(TolokaHandlebarsTask, function (options) {
  TolokaHandlebarsTask.call(this, options);
  }, {
-
  // Add listener to each button based on its class on start
  // appropriate class for each button should be added in html
  onRender: function() { render(this.getDOMElement()); },
  onDestroy: function () {
  //
-
  }
  });
  */
@@ -91,7 +89,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
 
         jsonresponse.classes.forEach(function (obj) {
-            classes.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
+            classes.push("<li><a role=\"menuitem\" onclick=\"OnObjectClassUpdate(this.textContent)\" tabindex=\"-1\" href=\"#\">");
             classes.push(obj);
             classes.push("</a></li>");
         });
@@ -115,7 +113,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
             jsonresponse.parameters.forEach(function (obj) {
                 if (obj.type === "boolean") {
                     parameters.push("<div class=\"checkbox\">");
-                    parameters.push("<label><input type=\"checkbox\" value=\"\">");
+                    parameters.push("<label><input type=\"checkbox\" value=\"\" onchange=\"OnBoolParamUpdate(this)\">");
                     parameters.push(obj.name);
                     parameters.push("</label>");
                     parameters.push("</div>");
@@ -127,7 +125,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("\">");
                     parameters.push(obj.prefix);
                     parameters.push("</span>");
-                    parameters.push("<input type=\"text\" class=\"form-control\" placeholder=\"");
+                    parameters.push("<input type=\"text\" onchange=\"OnParamStringUpdate(this.value)\" class=\"form-control\" placeholder=\"");
                     parameters.push(obj.name);
                     parameters.push("\" aria-describedby=\"basic-addon");
                     parameters.push(inputGroupsCount);
@@ -155,7 +153,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
                     parameters.push("\">");
 
                     obj.options.forEach(function (obj2) {
-                        parameters.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
+                        parameters.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\" onclick=\"OnObjectClassUpdate(this.textContent)\">");
                         parameters.push(obj2);
                         parameters.push("</a></li>");
                     });

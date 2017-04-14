@@ -17,7 +17,7 @@ DataCollector.prototype.setPoints = function (data){
  * @param data params from "Label Parameters"
  */
 DataCollector.prototype.setParams = function(data){
-    this.jsonParams = data;
+    this.jsonParams.push(data);
     this.getJSON();
 }
 
