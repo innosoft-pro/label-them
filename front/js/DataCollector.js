@@ -9,25 +9,7 @@ function DataCollector(){
 
 DataCollector.prototype.setPoints = function (data){
     this.jsonPoints = data;
-}
-
-/**
- * Supposed to be called when last phase of labeling is finished
- * @param data params from "Label Parameters"
- */
-DataCollector.prototype.setParams = function(data){
-    this.jsonParams = data;
-    this.show();
-}
-
-DataCollector.prototype.show = function (){
-    var json = Object.assign({}, this);
-    console.log(json);
-}
-
-
-DataCollector.prototype.setPoints = function (data){
-    this.jsonPoints = data;
+    this.getJSON();
 }
 
 /**

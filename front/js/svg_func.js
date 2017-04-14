@@ -48,8 +48,7 @@ function drawPolygon() {
     });
 
     if (polygonClosed) {
-        var dc = new DataCollector();
-        dc.setPoints(pointsList.slice(0, pointsList.length - 1));
+        OnPolygonClosed(pointsList);
         pointsList = [];
     }
 }

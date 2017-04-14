@@ -92,7 +92,7 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         classes.push(" Type");
         classes.push("<span class=\"caret\"></span>");
         classes.push("</button>");
-        classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\">");
+        classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
 
         jsonresponse.classes.forEach(function (obj) {
             classes.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
