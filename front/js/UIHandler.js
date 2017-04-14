@@ -18,5 +18,5 @@ function OnObjectClassUpdate(value){
 }
 
 function OnParamStringUpdate(value){
-    dc.setParams({"field":value});
+    dc.setParams({"stringfield":value});
 }
