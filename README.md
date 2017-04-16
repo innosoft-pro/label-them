@@ -6,4 +6,20 @@
 LabelThem is an online markup tool aimed at building image datasets for computer vision research, and integrated with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/).
 
 #### Important Notice
-At the moment LabelThem works only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in [Chromium Browser](http://www.chromium.org/Home).
+At the moment LabelThem works  only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in [Chromium Browser](http://www.chromium.org/Home).
+
+!!! Concatenated and minified 'build' file generation (through 'Grunt' process builder):
+
+In case of modifying the 'front-end':
+
+Type the following commands in terminal:
+
+// If you don’t already have Node.js installed on your system, go do that first.
+
+1) npm update // goes through the package.json file and installs all the pre-defined dependencies (plugins)
+
+2) grunt // builds the project's minified and concatenated file
+
+In case of working only on the 'back-end' (i.e. python),
+there is an 'app.min.js' folder available on the version control,
+so you don't have to do anything related to the building process.
