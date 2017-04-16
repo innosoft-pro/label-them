@@ -1,0 +1,25 @@
+{
+  "name": "label-them",
+  "jspath": "label-them/front/js/draw",
+  "version": "1.0.0",
+  "description": "[![Code Climate](https://codeclimate.com/github/innosoft-pro/label-them/badges/gpa.svg)](https://codeclimate.com/github/innosoft-pro/label-them)\r [![Codacy Badge](https://api.codacy.com/project/badge/Grade/735a6f0a94844ce686d680a0d4474789)](https://www.codacy.com/app/LabelThem/label-them?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=innosoft-pro/label-them&amp;utm_campaign=Badge_Grade)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/innosoft-pro/label-them.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/innosoft-pro/label-them/issues"
+  },
+  "homepage": "https://github.com/innosoft-pro/label-them#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-concat": "^1.0.1",
+    "grunt-contrib-uglify": "^2.3.0"
+  }
+}
