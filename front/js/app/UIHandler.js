@@ -13,17 +13,14 @@ function OnPolygonClosed(data){
 
 function OnBoolParamUpdate(checkbox){
     de.setParams({"field":checkbox.checked}); //TODO change the field to actual parameter name
-    OnSave(); //TODO remove when OnSave() is called after an appropriate event
 }
 
 function OnObjectClassUpdate(value){
     de.setParams({"class":value});
-    OnSave(); //TODO remove when OnSave() is called after an appropriate event
 }
 
 function OnParamStringUpdate(value){
     de.setParams({"stringfield":value});
-    OnSave(); //TODO remove when OnSave() is called after an appropriate event
 }
 
 function OnSave(){

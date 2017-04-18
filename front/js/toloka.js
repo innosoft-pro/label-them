@@ -1,5 +1,5 @@
 function save() {
-    alert("Implement save");
+    OnSave();
 }
 
 function panTool() {
