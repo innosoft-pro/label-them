@@ -5,24 +5,24 @@
 var de;
 var dc = new DataCollector();
 
-function OnPolygonClosed(data){
+function OnPolygonClosed(data) {
     de = new DataEntity();
     dc.addEntity(de);
     de.setPoints(data.slice(0, pointsList.length - 1));
 }
 
-function OnBoolParamUpdate(checkbox){
-    de.setParams({"field":checkbox.checked}); //TODO change the field to actual parameter name
+function OnBoolParamUpdate(checkbox) {
+    de.setParams({"field": checkbox.checked}); //TODO change the field to actual parameter name
 }
 
-function OnObjectClassUpdate(value){
-    de.setParams({"class":value});
+function OnObjectClassUpdate(value) {
+    de.setParams({"class": value});
 }
 
-function OnParamStringUpdate(value){
-    de.setParams({"stringfield":value});
+function OnParamStringUpdate(value) {
+    de.setParams({"stringfield": value});
 }
 
-function OnSave(){
+function OnSave() {
     dc.getJSON();
 }
