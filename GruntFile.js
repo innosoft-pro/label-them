@@ -12,7 +12,9 @@ module.exports = function (grunt) {
 
         concat: {
             js: {
-                src: 'front/js/app/*.js',
+                src: ['front/js/app/*.js', 'bower_components/jquery/dist/jquery.min.js',
+                    'bower_components/bootstrap/dist/js/bootstrap.min.js',
+                    'bower_components/Snap.svg/dist/snap.svg-min.js'],
                 dest: 'build/app.js'
             }  ,
             css: {
