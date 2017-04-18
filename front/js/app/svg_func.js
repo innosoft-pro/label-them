@@ -65,8 +65,8 @@ function drawDot(point) {
 }
 
 function showMessage() {
-    $("#message_space").slideDown(1000);
+    $("#message_space").text("Please, characterize the selected object in the right menu.");
     setTimeout(function () {
-        $("#message_space").slideUp(1000);
+        $("#message_space").text("Please, markup the image displayed below using the tools from the block on the left.");
     }, 3000);
 }
