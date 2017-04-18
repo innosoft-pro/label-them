@@ -1,22 +1,31 @@
 /**
- * Created by Mtrs on 14.04.2017.
+ * Created by Alexey Merzlikin on 14.04.2017.
  */
 
-var dc; 
+var de;
+var dc = new DataCollector();
 
 function OnPolygonClosed(data){
-    dc = new DataCollector();
-    dc.setPoints(data.slice(0, pointsList.length - 1));
+    de = new DataEntity();
+    dc.addEntity(de);
+    de.setPoints(data.slice(0, pointsList.length - 1));
 }
 
 function OnBoolParamUpdate(checkbox){
-    dc.setParams({"field":checkbox.checked}); //TODO change the field to actual parameter name
+    de.setParams({"field":checkbox.checked}); //TODO change the field to actual parameter name
+    OnSave(); //TODO remove when OnSave() is called after an appropriate event
 }
 
 function OnObjectClassUpdate(value){
-    dc.setParams({"class":value});
+    de.setParams({"class":value});
+    OnSave(); //TODO remove when OnSave() is called after an appropriate event
 }
 
 function OnParamStringUpdate(value){
-    dc.setParams({"stringfield":value});
+    de.setParams({"stringfield":value});
+    OnSave(); //TODO remove when OnSave() is called after an appropriate event
+}
+
+function OnSave(){
+    dc.getJSON();
 }
