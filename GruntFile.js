@@ -14,6 +14,10 @@ module.exports = function (grunt) {
             js: {
                 src: 'front/js/app/*.js',
                 dest: 'build/app.js'
+            }  ,
+            css: {
+                src: ['./bower_components/bootstrap/dist/css/bootstrap.min.css', 'front/css/styles.css'],
+                dest: 'build/css/concat.css'
             }
         },
         // Uglify
@@ -25,9 +29,22 @@ module.exports = function (grunt) {
                 src: 'build/app.js',
                 dest: 'build/app.min.js',
             }
+        },
+        cssmin : {
+            options: {
+                keepSpecialComments: 0
+            },
+            minify : {
+                expand : true,
+                cwd : 'build/css',
+                src : ['*.css', '!*.min.css'],
+                dest : 'build/css',
+                ext : '.min.css'
+            }
         }
     });
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.registerTask('default', ['concat', 'uglify']);
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.registerTask('default', ['concat', 'uglify', 'cssmin']);
 };

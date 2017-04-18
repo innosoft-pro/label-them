@@ -19,9 +19,11 @@ In case of modifying the 'front-end' type the following commands in terminal:
 *NOTE*: If you don’t already have [NodeJS](https://nodejs.org/en/) and [Grunt](https://gruntjs.com/getting-started) 
 installed on your system, install them first.
 
-1) `npm update` // goes through the package.json file and installs all the pre-defined dependencies (plugins)
+1) `npm install grunt-contrib-cssmin --save-dev` // installs css minification plugin
 
-2) `grunt` // builds the project's minified and concatenated file
+2) `npm update` // goes through the package.json file and installs all the pre-defined dependencies (plugins)
+
+3) `grunt` // builds the project's minified and concatenated file
 
 In case of working only on the 'back-end' (i.e. python),
 there is an 'app.min.js' folder available on the version control,
