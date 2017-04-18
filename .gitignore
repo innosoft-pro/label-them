@@ -2,4 +2,12 @@
 .directory
 # IntelliJ Idea & WebStorm
 .idea/
+
+#bower downloaded components
 bower_components/
+
+#Istanbul coverage results
+coverage/
+
+#NodeJS modules
+node_modules/

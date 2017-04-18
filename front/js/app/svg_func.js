@@ -66,8 +66,8 @@ function drawDot(point) {
 }
 
 function showMessage() {
-    $("#message_space").slideDown("slow", 1000);
+    $("#message_space").slideDown(1000);
     setTimeout(function () {
-        $("#message_space").slideUp("slow", 1000);
+        $("#message_space").slideUp(1000);
     }, 3000);
 }
