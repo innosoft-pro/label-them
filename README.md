@@ -14,15 +14,13 @@ At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](
 
 #### Concatenated and minified 'build' file generation (through 'Grunt' process builder):
 
-In case of modifying the 'front-end':
+In case of modifying the 'front-end' type the following commands in terminal:
 
-Type the following commands in terminal:
+*NOTE*: If you don’t already have [NodeJS](https://nodejs.org/en/) installed on your system, install it first.
 
-// If you don’t already have Node.js installed on your system, go do that first.
+1) `npm update` // goes through the package.json file and installs all the pre-defined dependencies (plugins)
 
-1) npm update // goes through the package.json file and installs all the pre-defined dependencies (plugins)
-
-2) grunt // builds the project's minified and concatenated file
+2) `grunt` // builds the project's minified and concatenated file
 
 In case of working only on the 'back-end' (i.e. python),
 there is an 'app.min.js' folder available on the version control,
