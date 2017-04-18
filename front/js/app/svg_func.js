@@ -44,7 +44,7 @@ function drawPolygon() {
     if (polygonClosed) {
         OnPolygonClosed(pointsList);
         pointsList = [];
-        showMessage();
+        showPolygonSelectedMessage();
     }
 }
 
@@ -65,9 +65,12 @@ function drawDot(point) {
     }
 }
 
-function showMessage() {
-    $("#message_space").slideDown(1000);
+function showPolygonSelectedMessage() {
+    showMessage("Please, characterize the selected object in the right menu.",
+        MessageTypeEnum.WARNING);
     setTimeout(function () {
-        $("#message_space").slideUp(1000);
-    }, 3000);
+        showMessage(
+            "Please, markup the image displayed below using the tools from the block on the left.",
+            MessageTypeEnum.INFO);
+    }, 5000);
 }

@@ -23,12 +23,12 @@
 }
 
 canvas {
-	background: gray;
-	/*width: 600px;
-	height: 800px;*/
+    background: gray;
+    /*width: 600px;
+    height: 800px;*/
 
-	display: block;
-	margin: 0 auto;
+    display: block;
+    margin: 0 auto;
     width: 100%
 }
 
@@ -42,9 +42,9 @@ canvas {
 }
 
 #canvas-parent {
-    overflow:scroll;
+    overflow: scroll;
     min-height: 550px;
-    padding:0;
+    padding: 0;
 }
 
 #svg_img {

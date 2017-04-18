@@ -132,3 +132,38 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         dom.getElementById("classes-and-parameters").innerHTML += html;
     });
 }
+
+// Message type which correspond to the ones used in bootstrap
+var MessageTypeEnum = Object.freeze({SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4});
+
+/**
+ * showMessage function displays specified message in message_space block
+ * @input message - text of the message to be displayed
+ * @input messageType - type of the message to be displayed (can be one of {SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4})
+ *                      INFO type is used by default
+ */
+function showMessage(message, messageType) {
+    if ((typeof message === "string" || message instanceof String) && document.getElementById("message_space")) {
+
+        // Specify the type of the alert message
+        switch (messageType) {
+            case MessageTypeEnum.SUCCESS:
+                document.getElementById("message_space").className = "alert alert-success";
+                break;
+            case MessageTypeEnum.INFO:
+                document.getElementById("message_space").className = "alert alert-info";
+                break;
+            case MessageTypeEnum.WARNING:
+                document.getElementById("message_space").className = "alert alert-warning";
+                break;
+            case MessageTypeEnum.DANGER:
+                document.getElementById("message_space").className = "alert alert-danger";
+                break;
+            default:
+                //messageSpaceBlocksClassName = "alert alert-info";
+                break;
+        }
+
+        $("#message_space").text(message);
+    }
+}
