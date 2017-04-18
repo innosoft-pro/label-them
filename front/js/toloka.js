@@ -1,22 +1,3 @@
-function save() {
-    OnSave();
-}
-
-function panTool() {
-    alert("Implement pan tool");
-}
-
-var methodsArray = [save, panTool];
-
-function render(dom) {
-    methodsArray.forEach((method) => {
-        dom
-            .getElementsByClassName(method.name)[0]
-            .addEventListener("click", method);
-    })
-    ;
-}
-
 // Uncomment before the deployment in Yandex.Toloka
 /*
  exports.Task = extend(TolokaHandlebarsTask, function (options) {

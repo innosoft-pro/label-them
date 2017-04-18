@@ -35,17 +35,18 @@ function getElements() {
     btnBrightnessLow = document.getElementById('btn_brightness_low');
 }
 
-function btnSaveFunc(btnIsSelected) {
-
-}
-
-function btnHandFunc(btnIsSelected) {
-
-}
-
 function clearOnClick(element) {
     element.onclick = '';
 }
+
+function btnSaveFunc(btnIsSelected) {
+    OnSave();
+}
+
+function btnHandFunc(btnIsSelected) {
+    alert("Implement hand tool");
+}
+
 function btnPolygonFunc(btnIsSelected) {
     if (btnIsSelected) {
         svgImg.node.onclick = function () {
