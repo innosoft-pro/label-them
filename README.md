@@ -16,7 +16,8 @@ At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](
 
 In case of modifying the 'front-end' type the following commands in terminal:
 
-*NOTE*: If you don’t already have [NodeJS](https://nodejs.org/en/) installed on your system, install it first.
+*NOTE*: If you don’t already have [NodeJS](https://nodejs.org/en/) and [Grunt](https://gruntjs.com/getting-started) 
+installed on your system, install them first.
 
 1) `npm update` // goes through the package.json file and installs all the pre-defined dependencies (plugins)
 

@@ -8,3 +8,6 @@ bower_components/
 
 #Istanbul coverage results
 coverage/
+
+#NodeJS modules
+node_modules/
