@@ -44,7 +44,7 @@ function drawPolygon() {
     if (polygonClosed) {
         OnPolygonClosed(pointsList);
         pointsList = [];
-        //showMessage(); //FIXME exceptions with showMessage()
+        showMessage();
     }
 }
 
