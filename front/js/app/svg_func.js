@@ -42,6 +42,7 @@ function drawPolygon() {
     });
 
     if (polygonClosed) {
+        OnPolygonClosed(pointsList);
         pointsList = [];
         showMessage();
     }
