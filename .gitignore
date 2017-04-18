@@ -11,3 +11,6 @@ coverage/
 
 #NodeJS modules
 node_modules/
+
+#Minified versions of js and css files, used in main.html
+/build
