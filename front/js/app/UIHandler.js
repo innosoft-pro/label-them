@@ -12,7 +12,7 @@ function OnPolygonClosed(data) {
 }
 
 function OnBoolParamUpdate(name, isChecked) {
-    de.setParams({"parameterName": name, "parameterValue": isChecked}); //TODO change the field to actual parameter name
+    de.setParams({"parameterName": name, "parameterValue": isChecked});
 }
 
 function OnObjectClassUpdate(value) {
