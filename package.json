@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/innosoft-pro/label-them#readme",
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0",
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^2.1.0",
