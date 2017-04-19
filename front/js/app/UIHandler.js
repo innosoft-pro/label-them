@@ -11,16 +11,20 @@ function OnPolygonClosed(data) {
     de.setPoints(data.slice(0, pointsList.length - 1));
 }
 
-function OnBoolParamUpdate(checkbox) {
-    de.setParams({"field": checkbox.checked}); //TODO change the field to actual parameter name
+function OnBoolParamUpdate(name, isChecked) {
+    de.setParams({"parameterName": name, "parameterValue": isChecked}); //TODO change the field to actual parameter name
 }
 
 function OnObjectClassUpdate(value) {
     de.setParams({"class": value});
 }
 
-function OnParamStringUpdate(value) {
-    de.setParams({"stringfield": value});
+function OnSelectParamUpdate(name, value) {
+    de.setParams({"parameterName": name, "parameterValue": value});
+}
+
+function OnStringParamUpdate(name, value) {
+    de.setParams({"parameterName": name, "parameterValue": value});
 }
 
 function OnSave() {

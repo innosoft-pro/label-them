@@ -12,7 +12,7 @@ DataCollector.prototype.addEntity = function (entity) {
 
 function DataEntity() {
     this.jsonPoints = [];
-    this.jsonParams = {};
+    this.jsonParams = [];
 }
 
 DataEntity.prototype.setPoints = function (data) {
@@ -20,7 +20,7 @@ DataEntity.prototype.setPoints = function (data) {
 };
 
 DataEntity.prototype.setParams = function (data) {
-    this.jsonParams = Object.assign(this.jsonParams, data);
+    this.jsonParams.push(data);
 };
 
 DataCollector.prototype.getJSON = function () {
