@@ -13,7 +13,7 @@ function OnPolygonClosed(data) {
 
 function OnBoolParamUpdate(name, isChecked) {
     var key = name.toString();
-    de.setParams({[name]:isChecked});
+    de.setParams({[name]: isChecked});
 }
 
 function OnObjectClassUpdate(value) {
@@ -21,11 +21,11 @@ function OnObjectClassUpdate(value) {
 }
 
 function OnSelectParamUpdate(name, value) {
-    de.setParams({[name] : value});
+    de.setParams({[name]: value});
 }
 
 function OnStringParamUpdate(name, value) {
-    de.setParams({[name] : value});
+    de.setParams({[name]: value});
 }
 
 function OnSave() {
