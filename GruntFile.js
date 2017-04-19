@@ -4,6 +4,7 @@
 
 module.exports = function (grunt) {
 
+    require("load-grunt-tasks")(grunt);
 
     // Project configuration.
     grunt.initConfig({
@@ -23,16 +24,6 @@ module.exports = function (grunt) {
                 dest: "build/css/concat.css"
             }
         },
-        // Uglify
-        uglify: {
-            options: {
-                banner: "/*! <%= pkg.name %> <%= grunt.template.today(\"yyyy-mm-dd\") %> */\n"
-            },
-            build: {
-                src: "build/app.js",
-                dest: "build/app.min.js"
-            }
-        },
         cssmin: {
             options: {
                 keepSpecialComments: 0
@@ -44,10 +35,19 @@ module.exports = function (grunt) {
                 dest: "build/css",
                 ext: ".min.css"
             }
+        },
+        babel: {
+            options: {
+                sourceMap: true
+            },
+            dist: {
+                files: {
+                    "dist/app.js": "build/app.js"
+                }
+            }
         }
     });
-    grunt.loadNpmTasks("grunt-contrib-uglify");
     grunt.loadNpmTasks("grunt-contrib-concat");
     grunt.loadNpmTasks("grunt-contrib-cssmin");
-    grunt.registerTask("default", ["concat", "uglify", "cssmin"]);
+    grunt.registerTask("default", ["concat", "cssmin", "babel"]);
 };

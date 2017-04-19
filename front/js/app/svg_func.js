@@ -6,8 +6,8 @@ var circleRadius = 5;
 var strokeWidth = 5;
 
 function initSvg(ms) {
-    messageSpace = document.getElementById('message_space');
-    svgImg = Snap("#svg_img");
+    messageSpace = document.getElementById("message_space");
+    svgImg = Snap(document.getElementById("svg_img"));
     initCoordinates(svgImg);
 }
 
