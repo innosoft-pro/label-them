@@ -1,12 +1,26 @@
-function init() {
-    resize();
+function initCanvas() {
+
+    img.onload = function () {
+       aspectRatio = img.width / img.height;
+       resize();
+       window.addEventListener("resize", resize, false);
+    }
+
+    // node = document.getElementById('img_url');
+    var url = document.getElementById("img_url").innerText;
+    alert(url);
+    img.src = url;//"https://actingmylife.files.wordpress.com/2015/06/img_1730.jpg";
+
 
 }
 
 // loading remote image
 var img = new Image();
-img.src = "https://actingmylife.files.wordpress.com/2015/06/img_1730.jpg";
+
+// WARNING! GOVNOKOD AHEAD!!!
 var aspectRatio = img.width / img.height;
+
+
 
 function drawImg(img) {
     var canvas = document.getElementById("main-canvas");
@@ -45,5 +59,11 @@ function resize() {
     drawImg(img);
 }
 
-window.addEventListener("load", init, false);
-window.addEventListener("resize", resize, false);
+function CanvasReadyFn( jQuery ) {
+    initCanvas();
+}
+
+$( document ).ready(CanvasReadyFn);
+
+// window.addEventListener("load", init, false);
+// window.addEventListener("resize", resize, false);
