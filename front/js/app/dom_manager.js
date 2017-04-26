@@ -1,32 +1,12 @@
-/**
- * Created by alnedorezov on 4/18/17.
- */
-var urlToJSONWithClassesAndParameters =
-    "https://rawgit.com/innosoft-pro/label-them/develop/front/json/classesandparameters.json";
-
-
-// request data from JSON file
-function loadJSON(callback) {
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open("GET", urlToJSONWithClassesAndParameters, true);
-    xobj.onreadystatechange = function () {
-        if (xobj.readyState === 4 && xobj.status == "200") {
-
-            // .open will NOT return a value but simply returns undefined in async mode so use a callback
-            callback(xobj.responseText);
-
-        }
-    };
-    xobj.send(null);
-}
 
 // Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
-function generateHTMLCodeForClassesAndParameters(dom) {
-    // Call to function with anonymous callback
-    loadJSON(function (response) {
-        var jsonresponse = JSON.parse(response);
+function generateHTMLCodeForClassesAndParameters(dom, phrase) {
+
+        // alert(phrase);
+        var jsonresponse = JSON.parse(phrase);
+
+
 
         var html = [];
 
@@ -135,7 +115,6 @@ function generateHTMLCodeForClassesAndParameters(dom) {
         html = html.join("");
 
         dom.getElementById("classes-and-parameters").innerHTML += html;
-    });
 }
 
 // Message type which correspond to the ones used in bootstrap
@@ -172,3 +151,35 @@ function showMessage(message, messageType) {
         $("#message_space").text(message);
     }
 }
+
+function escapeRegExp(str) {
+    return str.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
+}
+
+function replaceAll(str, find, replace) {
+  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+}
+
+
+function initDOM() {
+  var json_params = document.getElementById("json_params").innerText;
+  // Toloka strips all strings of double quotes for reasons unknown so in order
+  // to get JSON.parse to work we need to replace all occurence of \ with "
+  // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
+  // but until then this does the job
+
+  json_params = replaceAll(json_params, '\\', '"');
+  generateHTMLCodeForClassesAndParameters(document, json_params);
+}
+
+function DOMReadyFn( jQuery ) {
+    initDOM();
+}
+
+$( document ).ready(DOMReadyFn);
+
+// document.onload = initDOM;
+// debugger;
+// document.addEventListener("onload", initDOM, false);
+
+//

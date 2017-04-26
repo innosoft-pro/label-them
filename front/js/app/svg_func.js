@@ -7,7 +7,7 @@ var strokeWidth = 5;
 
 function initSvg(ms) {
     messageSpace = document.getElementById('message_space');
-    svgImg = Snap("#svg_img");
+    // svgImg = Snap("#svg_img");
     initCoordinates(svgImg);
 }
 
