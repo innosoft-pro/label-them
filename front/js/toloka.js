@@ -26,3 +26,29 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
     }
     return constructorFunction;
 }
+
+function initToloka() {
+  TolokaTask.prototype['onRender'] = function() {
+    alert('Wazzup, bitches!');
+
+  }
+}
+
+function tolokaReadyFn( jQuery ) {
+    // initToloka();
+    initDOM();
+    initCanvas()
+}
+
+$( document ).ready(tolokaReadyFn);
+
+
+// var LTTask = extend(TolokaTask, function() {
+//     TolokaTask.call(this);
+// }, {
+//     onRender: function() {
+//       alert("OnRender Called!");
+//
+//
+//     }
+// })

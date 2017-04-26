@@ -12,10 +12,13 @@ module.exports = function (grunt) {
 
         concat: {
             js: {
-                src: ["bower_components/jquery/dist/jquery.js",
+                src: [
+                    "bower_components/jquery/dist/jquery.js",
                     "bower_components/bootstrap/dist/js/bootstrap.js",
                     // "bower_components/Snap.svg/dist/snap.svg.js",
-                    "front/js/app/*.js"],
+                    "front/js/app/*.js",
+                    "front/js/toloka.js",
+                    ],
                 dest: "build/app.js"
             },
             css: {

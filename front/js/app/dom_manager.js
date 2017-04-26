@@ -172,11 +172,11 @@ function initDOM() {
   generateHTMLCodeForClassesAndParameters(document, json_params);
 }
 
-function DOMReadyFn( jQuery ) {
-    initDOM();
-}
-
-$( document ).ready(DOMReadyFn);
+// function DOMReadyFn( jQuery ) {
+//     // initDOM();
+// }
+//
+// $( document ).ready(DOMReadyFn);
 
 // document.onload = initDOM;
 // debugger;

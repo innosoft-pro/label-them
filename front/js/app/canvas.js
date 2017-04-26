@@ -59,11 +59,11 @@ function resize() {
     drawImg(img);
 }
 
-function CanvasReadyFn( jQuery ) {
-    initCanvas();
-}
-
-$( document ).ready(CanvasReadyFn);
+// function CanvasReadyFn( jQuery ) {
+//     // initCanvas();
+// }
+//
+// $( document ).ready(CanvasReadyFn);
 
 // window.addEventListener("load", init, false);
 // window.addEventListener("resize", resize, false);
