@@ -25,7 +25,9 @@ DataEntity.prototype.setParams = function (data) {
 
 DataCollector.prototype.getJSON = function () {
     var json = JSON.stringify(this);
-    console.log(json);
+    window.thisTask.setSolutionOutputValue("result_json", resultJson);
+    console.log(window.thisTask.validate(window.thisTask.getSolution()) + " valid");
+    console.log(window.thisTask.getSolution());
     return json;
 };
 

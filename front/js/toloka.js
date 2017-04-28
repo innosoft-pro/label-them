@@ -29,13 +29,17 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
 
 function initToloka() {
   TolokaTask.prototype['onRender'] = function() {
-    alert('Wazzup, bitches!');
-
+      alert("OnRender Called!");
+      console.log(this);
+      this.getDOMElement()
+          .getElementsByClassName("btnsave")[0]
+          .addEventListener('click', OnSave);
+      window.thisTask = this;
   }
 }
 
 function tolokaReadyFn( jQuery ) {
-    // initToloka();
+    initToloka();
     initDOM();
     initCanvas()
 }
