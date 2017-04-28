@@ -49,11 +49,11 @@ function btnHandFunc(btnIsSelected) {
 
 function btnPolygonFunc(btnIsSelected) {
     if (btnIsSelected) {
-        svgImg.node.onclick = function () {
+        svgImg.onclick = function () {
             svgImgOnClick(event);
         };
     } else {
-        clearOnClick(svgImg.node.onclick);
+        clearOnClick(svgImg.onclick);
     }
 }
 

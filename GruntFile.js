@@ -14,7 +14,6 @@ module.exports = function (grunt) {
             js: {
                 src: ["bower_components/jquery/dist/jquery.js",
                     "bower_components/bootstrap/dist/js/bootstrap.js",
-                    "bower_components/Snap.svg/dist/snap.svg.js",
                     "front/js/app/*.js"],
                 dest: "build/app.js"
             },
