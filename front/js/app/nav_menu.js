@@ -25,14 +25,14 @@ function setElementsOnClick() {
 }
 
 function getElements() {
-    btnSave = document.getElementById('btn_save');
-    btnHand = document.getElementById('btn_hand');
-    btnPolygon = document.getElementById('btn_polygon');
-    btnEdit = document.getElementById('btn_edit');
-    btnZoomIn = document.getElementById('btn_zoom_in');
-    btnZoomOut = document.getElementById('btn_zoom_out');
-    btnBrightnessHigh = document.getElementById('btn_brightness_high');
-    btnBrightnessLow = document.getElementById('btn_brightness_low');
+    btnSave = document.getElementsByClassName('btnsave')[0];
+    btnHand = document.getElementsByClassName('btn-hand')[0];
+    btnPolygon = document.getElementsByClassName('btn-polygon')[0];
+    btnEdit = document.getElementsByClassName('btn-edit')[0];
+    btnZoomIn = document.getElementsByClassName('btn-zoom-in')[0];
+    btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
+    btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
+    btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
 }
 
 function clearOnClick(element) {

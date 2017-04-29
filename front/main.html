@@ -47,34 +47,34 @@
                 <div class="sidebar">
                     <div class="btn-group-vertical" role="group" aria-label="...">
                         <button id="btn_save" class="btn btn-default btnsave">
-                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/save_button.png" width="48"/>
+                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/save_button.png" width="48"/>
                         </button>
-                        <button id="btn_hand" class="btn btn-default hidden">
-                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/hand_tool_button.png" width="48"/>
+                        <button id="btn_hand" class="btn btn-default hidden btn-hand">
+                            <img src="img/hand_tool_button.png" width="48"/>
                         </button>
-                        <button id="btn_polygon" class="btn btn-default btn-">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="48"/>
+                        <button id="btn_polygon" class="btn btn-default btn-polygon">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="48"/>
                         </button>
-                        <button id="btn_edit" class="btn btn-default hidden">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/edit_button.png" width="48"/>
+                        <button id="btn_edit" class="btn btn-default hidden btn-edit">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/edit_button.png" width="48"/>
                         </button>
-                        <button id="btn_zoom_in" class="btn btn-default hidden">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_in_button.png" width="48"/>
+                        <button id="btn_zoom_in" class="btn btn-default hidden btn-zoom-in">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_in_button.png" width="48"/>
                         </button>
-                        <button id="btn_zoom_out" class="btn btn-default hidden">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_out_button.png" width="48"/>
+                        <button id="btn_zoom_out" class="btn btn-default hidden btn-zoom-out">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_out_button.png" width="48"/>
                         </button>
-                        <button id="btn_brightness_high" class="btn btn-default hidden">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_high_button.png" width="48"/>
+                        <button id="btn_brightness_high" class="btn btn-default hidden btn-brightness-high">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_high_button.png" width="48"/>
                         </button>
-                        <button id="btn_brightness_low" class="btn btn-default hidden">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/https://rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_low_button.png" width="48"/>
+                        <button id="btn_brightness_low" class="btn btn-default hidden btn-brightness-low">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_low_button.png" width="48"/>
                         </button>
                     </div>
                 </div>
 
                 <div class="image-to-be-labeled">
-                    <div id="message_space" class="alert alert-info">
+                    <div id="message_space" class="alert alert-info message-space">
                         Please, markup the image displayed below using appropriate tools from the block on the left.
                     </div>
                     <div class="panel panel-default">
@@ -85,7 +85,7 @@
                                 <canvas id="main-canvas">
                                 </canvas>
                                 <!--onclick="svgImgOnClick(event)"-->
-                                <svg id="svg_img"></svg>
+                                <svg id="svg_img" class="svg-img"></svg>
 
                             </div>
                         </div>
