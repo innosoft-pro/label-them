@@ -34,6 +34,10 @@ function initToloka() {
       this.getDOMElement()
           .getElementsByClassName("btnsave")[0]
           .addEventListener('click', OnSave);
+
+      this.getDOMElement()
+          .getElementsByClassName("btn-polygon")[0]
+          .addEventListener('click', svgImgOnClick(event));
       window.thisTask = this;
   }
 }

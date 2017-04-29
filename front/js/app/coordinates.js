@@ -6,12 +6,12 @@ function initCoordinates(svg) {
 
 function getX(event) {
     event = event || window.event;
-    return event.pageX - svgImg.node.getBoundingClientRect().left;
+    return event.pageX - svgImg.getBoundingClientRect().left;
 }
 
 function getY(event) {
     event = event || window.event;
-    return event.pageY - svgImg.node.getBoundingClientRect().top;
+    return event.pageY - svgImg.getBoundingClientRect().top;
 }
 
 function getPoint(event) {
