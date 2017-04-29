@@ -8,7 +8,6 @@ function initCanvas() {
 
     // node = document.getElementById('img_url');
     var url = document.getElementById("img_url").innerText;
-    alert(url);
     img.src = url;//"https://actingmylife.files.wordpress.com/2015/06/img_1730.jpg";
 
 

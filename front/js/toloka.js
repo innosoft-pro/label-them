@@ -43,7 +43,9 @@ function initToloka() {
 function tolokaReadyFn( jQuery ) {
     initToloka();
     initDOM();
-    initCanvas()
+    initCanvas();
+    initSvg();
+    initNavMenu();
 }
 
 $( document ).ready(tolokaReadyFn);
