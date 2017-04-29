@@ -29,7 +29,6 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
 
 function initToloka() {
   TolokaTask.prototype['onRender'] = function() {
-      alert("OnRender Called!");
       console.log(this);
       this.getDOMElement()
           .getElementsByClassName("btnsave")[0]
