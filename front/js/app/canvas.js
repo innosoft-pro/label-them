@@ -101,7 +101,8 @@ function drawImgSupportingOneToOneMapping(img) {
     var canvas = document.getElementById("main-canvas");
     var ctx = canvas.getContext("2d");
 
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, img.height,     // source rectangle
+        0, 0, canvas.width, canvas.height); // destination rectangle
 }
 
 // function CanvasReadyFn( jQuery ) {
