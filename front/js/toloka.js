@@ -23,7 +23,11 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
             initCanvas();
             initSvg();
             initNavMenu();
+
+
         });
+
+        window.thisTask = this;
 
     },
     onDestroy: function() {
