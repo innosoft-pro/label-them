@@ -3,118 +3,140 @@
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
-        // alert(phrase);
-        var jsonresponse = JSON.parse(phrase);
+    // alert(phrase);
+    var jsonresponse = JSON.parse(phrase);
 
 
 
-        var html = [];
+    var html = [];
 
-        var classes = [];
-        var parameters = [];
+    var classes = [];
+    var parameters = [];
 
-        classes.push("<h4>");
-        classes.push("Objects Classes");
-        classes.push("</h4>");
+    classes.push("<h4>");
+    classes.push("Objects Classes");
+    classes.push("</h4>");
 
-        classes.push("<div class=\"dropdown\">");
-        classes.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
-        classes.push("id=\"dropdownMenu-Classes\" ");
-        classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
-        classes.push("Objects Classes");
-        classes.push("<span class=\"caret\"></span>");
-        classes.push("</button>");
-        classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
+    classes.push("<div class=\"dropdown\">");
+    classes.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
+    classes.push("id=\"dropdownMenu-Classes\" ");
+    classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
+    classes.push("Objects Classes");
+    classes.push("<span class=\"caret\"></span>");
+    classes.push("</button>");
+    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
 
-        jsonresponse.classes.forEach(function (obj) {
-            classes.push("<li><a role=\"menuitem\" onclick=\"OnObjectClassUpdate(this.textContent)\" tabindex=\"-1\" href=\"#\">");
-            classes.push(obj);
-            classes.push("</a></li>");
+    jsonresponse.classes.forEach(function (obj) {
+        classes.push("<li><a class=\"class-param\" role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
+        classes.push(obj);
+        classes.push("</a></li>");
+    });
+
+    classes.push("</ul>");
+    classes.push("</div>");
+    classes = classes.join("");
+
+    if (jsonresponse.parameters !== null) {
+        var dropdownMenusCount = 0;
+        var inputGroupsCount = 0;
+
+        //To separate objects classes from parameters
+        parameters.push("</br>");
+
+        parameters.push("<h4>");
+        parameters.push("Objects Parameters");
+        parameters.push("</h4>");
+
+        parameters.push("<form>");
+        jsonresponse.parameters.forEach(function (obj) {
+            if (obj.type === "boolean") {
+                parameters.push("<div class=\"checkbox\">");
+                parameters.push("<label><input class=\"bool-param\" type=\"checkbox\" value=\"\" name=\"");
+                parameters.push(obj.name);
+                parameters.push("\">");
+                parameters.push(obj.name);
+                parameters.push("</label>");
+                parameters.push("</div>");
+            } else if (obj.type === "string") {
+                inputGroupsCount++;
+                parameters.push("<div class=\"input-group\">");
+                parameters.push("<span class=\"input-group-addon\" id=\"basic-addon");
+                parameters.push(inputGroupsCount);
+                parameters.push("\">");
+                parameters.push(obj.prefix);
+                parameters.push("</span>");
+                parameters.push("<input type=\"text\" class=\"form-control string-param\" placeholder=\"");
+                parameters.push(obj.name);
+                parameters.push("\" aria-describedby=\"basic-addon");
+                parameters.push(inputGroupsCount);
+                parameters.push("\">");
+                parameters.push("</div>");
+            } else if (obj.type === "select") {
+                dropdownMenusCount++;
+                parameters.push("<div class=\"dropdown\">");
+                parameters.push("<select class=\"select-param\" name=\"");
+                parameters.push(obj.name);
+                parameters.push("\">");
+                // Additional margin to add some space between input groups and drop down menus
+                // Otherwise they stick to one another
+                parameters.push("<option disabled selected hidden>");
+                parameters.push(obj.name);
+                parameters.push("</option>");
+                obj.options.forEach(function (obj2) {
+                    parameters.push("<option ");
+                    parameters.push("value=\"");
+                    parameters.push(obj2);
+                    //parameters.push("\" onclick=\"OnSelectParamUpdate(this.name, this.textContent)\">");
+                    parameters.push("\">");
+                    parameters.push(obj2);
+                    parameters.push("</option>");
+                });
+                parameters.push("</select>")
+                parameters.push("</div>");
+            }
         });
+        parameters.push("</form>");
+        parameters = parameters.join("");
+    }
 
-        classes.push("</ul>");
-        classes.push("</div>");
-        classes = classes.join("");
+    html.push(classes);
+    html.push(parameters);
 
-        if (jsonresponse.parameters !== null) {
-            var dropdownMenusCount = 0;
-            var inputGroupsCount = 0;
+    html = html.join("");
 
-            //To separate objects classes from parameters
-            parameters.push("</br>");
+    dom.getElementById("classes-and-parameters").innerHTML += html;
 
-            parameters.push("<h4>");
-            parameters.push("Objects Parameters");
-            parameters.push("</h4>");
+    var classParams =
+        document.getElementsByClassName("class-param");
+    Array.prototype.forEach.call(classParams, param => {
+        param.addEventListener("click", function(){
+            OnObjectClassUpdate(param.textContent);
+        }, false)
+    });
 
-            parameters.push("<form>");
-            jsonresponse.parameters.forEach(function (obj) {
-                if (obj.type === "boolean") {
-                    parameters.push("<div class=\"checkbox\">");
-                    parameters.push("<label><input type=\"checkbox\" value=\"\" name=\"");
-                    parameters.push(obj.name);
-                    parameters.push("\" onchange=\"OnBoolParamUpdate(this.name, this.checked)\">");
-                    parameters.push(obj.name);
-                    parameters.push("</label>");
-                    parameters.push("</div>");
-                } else if (obj.type === "string") {
-                    inputGroupsCount++;
-                    parameters.push("<div class=\"input-group\">");
-                    parameters.push("<span class=\"input-group-addon\" id=\"basic-addon");
-                    parameters.push(inputGroupsCount);
-                    parameters.push("\">");
-                    parameters.push(obj.prefix);
-                    parameters.push("</span>");
-                    parameters.push("<input type=\"text\" onchange=\"OnStringParamUpdate(this.placeholder, this.value)\" class=\"form-control\" placeholder=\"");
-                    parameters.push(obj.name);
-                    parameters.push("\" aria-describedby=\"basic-addon");
-                    parameters.push(inputGroupsCount);
-                    parameters.push("\">");
-                    parameters.push("</div>");
-                } else if (obj.type === "select") {
-                    dropdownMenusCount++;
-                    parameters.push("<div class=\"dropdown\">");
-                    parameters.push("<button class=\"btn btn-default dropdown-toggle");
-                    // Additional margin to add some space between input groups and drop down menus
-                    // Otherwise they stick to one another
-                    if (inputGroupsCount > 0 && dropdownMenusCount === 1 || dropdownMenusCount > 1) {
-                        parameters.push(" dropdown-menu-parameters");
-                    }
-                    parameters.push("\" type=\"button\" ");
-                    parameters.push("id=\"dropdownMenu-parameters");
-                    parameters.push(dropdownMenusCount);
-                    parameters.push("\" ");
-                    parameters.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
-                    parameters.push(obj.name);
-                    parameters.push("<span class=\"caret\"></span>");
-                    parameters.push("</button>");
-                    parameters.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-parameters");
-                    parameters.push(dropdownMenusCount);
-                    parameters.push("\">");
+    var boolParams =
+        document.getElementsByClassName("bool-param");
+    Array.prototype.forEach.call(boolParams, param => {
+        param.addEventListener("click", function(){
+            OnBoolParamUpdate(param.name, param.checked);
+        }, false)
+    });
 
-                    obj.options.forEach(function (obj2) {
-                        parameters.push("<li><a role=\"menuitem\" tabindex=\"-1\" href=\"#\" ");
-                        parameters.push("name=\"");
-                        parameters.push(obj.name);
-                        parameters.push("\" onclick=\"OnSelectParamUpdate(this.name, this.textContent)\">");
-                        parameters.push(obj2);
-                        parameters.push("</a></li>");
-                    });
+    var stringParams = document.getElementsByClassName("string-param");
+    Array.prototype.forEach.call(stringParams, param => {
+        param.addEventListener("change", function() {
+            OnStringParamUpdate(param.placeholder, param.value);
+        }, false)
+    });
 
-                    parameters.push("</ul>");
-                    parameters.push("</div>");
-                }
-            });
-            parameters.push("</form>");
-            parameters = parameters.join("");
-        }
+    var selectParams = document
+        .getElementsByClassName("select-param");
+    Array.prototype.forEach.call(selectParams, param => {
+        param.addEventListener("change", function(){
+            OnSelectParamUpdate(param.name, param.value);
+        }, false)
+    });
 
-        html.push(classes);
-        html.push(parameters);
-
-        html = html.join("");
-
-        dom.getElementById("classes-and-parameters").innerHTML += html;
 }
 
 // Message type which correspond to the ones used in bootstrap
