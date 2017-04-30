@@ -2,8 +2,8 @@ function initCanvas() {
 
     img.onload = function () {
        aspectRatio = img.width / img.height;
-       resize();
-       window.addEventListener("resize", resize, false);
+       resizeSupportingOneToOneMapping();
+       window.addEventListener("resize", resizeSupportingOneToOneMapping, false);
     }
 
     // node = document.getElementById('img_url');
@@ -56,6 +56,52 @@ function resize() {
     svg.style.height = height;
 
     drawImg(img);
+}
+
+// handles resizing of the canvas for 1 to 1 mapping between image height and canvas height
+function resizeSupportingOneToOneMapping() {
+    var canvas = document.getElementById("main-canvas");
+    var ctx = canvas.getContext("2d");
+
+    // make canvas fit parent div
+    var parent = document.getElementById("canvas-parent");
+    var svg = document.getElementById("svg_img");
+
+    // 28 is the width of two 14px paddings from each side of the canvas, specified in bootstrap
+    parent.style.minHeight = (img.height + 28) + "px";
+
+    var height = parent.clientHeight;
+    var width = parent.clientWidth;
+
+    if(width > img.width) {
+        width = img.width;
+    }
+
+    // modify both canvas style and canvas dimension
+    canvas.style.height = height + "px";
+    canvas.style.width = width + "px";
+    canvas.width = width;
+    canvas.height = height;
+    svg.style.width = width;
+    svg.style.height = height;
+
+    if(canvas.width < img.width) {
+            showMessage(
+                "Image cannot fit the screen in width. " +
+                "Only left part of the image that fits the screen is displayed! " +
+                "Please, markup the visible part of the image displayed below using the " +
+                "tools from the block on the left or skip this image.",
+                MessageTypeEnum.DANGER);
+    }
+
+    drawImgSupportingOneToOneMapping(img);
+}
+
+function drawImgSupportingOneToOneMapping(img) {
+    var canvas = document.getElementById("main-canvas");
+    var ctx = canvas.getContext("2d");
+
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 }
 
 // function CanvasReadyFn( jQuery ) {
