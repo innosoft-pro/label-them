@@ -1,14 +1,13 @@
 function initCanvas() {
 
     img.onload = function () {
-       aspectRatio = img.width / img.height;
+        aspectRatio = img.width / img.height;
         resize();
-       window.addEventListener("resize", resize, false);
-    }
+        window.addEventListener("resize", resize, false);
+    };
 
-    // node = document.getElementById('img_url');
     var url = document.getElementById("img_url").innerText;
-    img.src = url;//"https://actingmylife.files.wordpress.com/2015/06/img_1730.jpg";
+    img.src = url;
 
 
 }
@@ -18,7 +17,6 @@ var img = new Image();
 
 // WARNING! GOVNOKOD AHEAD!!!
 var aspectRatio = img.width / img.height;
-
 
 
 function drawImg(img) {
@@ -46,7 +44,7 @@ function resize() {
 
     // resizing canvas if image width is smaller than the width of the block for the image
     // to avoid redundant markup over empty space in the block
-    if(width > img.width) {
+    if (width > img.width) {
         width = img.width;
     }
 
@@ -59,7 +57,7 @@ function resize() {
     svg.style.height = height;
 
     // Notify the user that not the full image will be shown
-    if(canvas.width < img.width) {
+    if (canvas.width < img.width) {
         showMessage(
             "Image cannot fit the screen in width. " +
             "Only left part of the image that fits the screen is displayed! " +
@@ -70,12 +68,3 @@ function resize() {
 
     drawImg(img);
 }
-
-// function CanvasReadyFn( jQuery ) {
-//     // initCanvas();
-// }
-//
-// $( document ).ready(CanvasReadyFn);
-
-// window.addEventListener("load", init, false);
-// window.addEventListener("resize", resize, false);
