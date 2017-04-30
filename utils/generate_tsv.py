@@ -27,9 +27,8 @@ with open('tasks.tsv', 'w') as csvfile, open(params_path, 'r') as json_params:
     fieldnames = ['INPUT:image_rel', 'INPUT:json_params', 'GOLDEN:result']
     writer = csv.DictWriter(csvfile, delimiter='\t',fieldnames=fieldnames)
 
+    writer.writeheader()
+
     # Go through each file in a directory
     for filename in os.listdir(data_path):
-        print(filename)
-
-        writer.writeheader()
         writer.writerow({fieldnames[0]: '/{}/{}'.format(uid, filename), fieldnames[1]: json_str_proc, fieldnames[2]: 'true'})
