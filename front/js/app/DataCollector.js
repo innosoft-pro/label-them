@@ -25,8 +25,10 @@ DataEntity.prototype.setParams = function (data) {
 
 DataCollector.prototype.getJSON = function () {
     var json = JSON.stringify(this);
-    window.thisTask.setSolutionOutputValue("result_json", json);
-    // alert(window.thisTask.validate(window.thisTask.getSolution()) + " valid");
     // alert(window.thisTask.getSolution());
+    window.thisTask.setSolutionOutputValue("result", json);
+    // alert(window.thisTask.getSolution());
+    // alert(window.thisTask.validate(window.thisTask.getSolution()) + " valid");
+
     return json;
 };
