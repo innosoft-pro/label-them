@@ -73,7 +73,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                 parameters.push("</div>");
             } else if (obj.type === "select") {
                 dropdownMenusCount++;
-                parameters.push("<div class=\"dropdown\">");
+                parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
                 parameters.push("<select class=\"select-param\" name=\"");
                 parameters.push(obj.name);
                 parameters.push("\">");
