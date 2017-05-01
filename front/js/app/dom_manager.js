@@ -105,28 +105,33 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
     var classParams = document.getElementsByClassName("class-param");
-    Array.prototype.forEach.call((classParams, param) => {
+    Array.prototype.forEach.call(classParams, param => {
         param.addEventListener("click", function () {
-            onObjectClassUpdate(param.textContent);
-        }, false)});
+            OnObjectClassUpdate(param.textContent);
+        }, false);
+    });
 
     var boolParams = document.getElementsByClassName("bool-param");
-    Array.prototype.forEach.call((boolParams, param) => {
+    Array.prototype.forEach.call(boolParams, param => {
         param.addEventListener("click", function () {
-            onBoolParamUpdate(param.name, param.checked);
-        }, false)});
+            OnBoolParamUpdate(param.name, param.checked);
+        }, false);
+    });
 
     var stringParams = document.getElementsByClassName("string-param");
-    Array.prototype.forEach.call((stringParams, param) => {
+    Array.prototype.forEach.call(stringParams, param => {
         param.addEventListener("change", function () {
-            onStringParamUpdate(param.placeholder, param.value);
-        }, false)});
+            OnStringParamUpdate(param.placeholder, param.value);
+        }, false);
+    });
 
     var selectParams = document.getElementsByClassName("select-param");
-    Array.prototype.forEach.call((selectParams, param) => {
+    Array.prototype.forEach.call(selectParams, param => {
         param.addEventListener("change", function () {
-            onSelectParamUpdate(param.name, param.value);
-        }, false)});
+            OnSelectParamUpdate(param.name, param.value);
+        }, false);
+    });
+
 
 }
 
