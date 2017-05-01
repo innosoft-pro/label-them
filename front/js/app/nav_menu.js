@@ -40,7 +40,7 @@ function clearOnClick(element) {
 }
 
 function btnSaveFunc(btnIsSelected) {
-    OnSave();
+    onSave();
 }
 
 function btnHandFunc(btnIsSelected) {

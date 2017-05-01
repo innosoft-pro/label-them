@@ -22,7 +22,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     classes.push("Objects Classes");
     classes.push("<span class=\"caret\"></span>");
     classes.push("</button>");
-    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
+    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"onObjectClassUpdate(this.value)\">");
 
     jsonresponse.classes.forEach(function (obj) {
         classes.push("<li><a class=\"class-param\" role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
@@ -84,7 +84,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                     parameters.push("<option ");
                     parameters.push("value=\"");
                     parameters.push(obj2);
-                    //parameters.push("\" onclick=\"OnSelectParamUpdate(this.name, this.textContent)\">");
+                    //parameters.push("\" onclick=\"onSelectParamUpdate(this.name, this.textContent)\">");
                     parameters.push("\">");
                     parameters.push(obj2);
                     parameters.push("</option>");
@@ -104,40 +104,29 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
-    var classParams =
-        document.getElementsByClassName("class-param");
-    Array.prototype.forEach.call(classParams, param => {
+    var classParams = document.getElementsByClassName("class-param");
+    Array.prototype.forEach.call((classParams, param) => {
         param.addEventListener("click", function () {
-        OnObjectClassUpdate(param.textContent);
-    }, false)
-})
-    ;
+            onObjectClassUpdate(param.textContent);
+        }, false)});
 
-    var boolParams =
-        document.getElementsByClassName("bool-param");
-    Array.prototype.forEach.call(boolParams, param => {
+    var boolParams = document.getElementsByClassName("bool-param");
+    Array.prototype.forEach.call((boolParams, param) => {
         param.addEventListener("click", function () {
-        OnBoolParamUpdate(param.name, param.checked);
-    }, false)
-})
-    ;
+            onBoolParamUpdate(param.name, param.checked);
+        }, false)});
 
     var stringParams = document.getElementsByClassName("string-param");
-    Array.prototype.forEach.call(stringParams, param => {
+    Array.prototype.forEach.call((stringParams, param) => {
         param.addEventListener("change", function () {
-        OnStringParamUpdate(param.placeholder, param.value);
-    }, false)
-})
-    ;
+            onStringParamUpdate(param.placeholder, param.value);
+        }, false)});
 
-    var selectParams = document
-        .getElementsByClassName("select-param");
-    Array.prototype.forEach.call(selectParams, param => {
+    var selectParams = document.getElementsByClassName("select-param");
+    Array.prototype.forEach.call((selectParams, param) => {
         param.addEventListener("change", function () {
-        OnSelectParamUpdate(param.name, param.value);
-    }, false)
-})
-    ;
+            onSelectParamUpdate(param.name, param.value);
+        }, false)});
 
 }
 
