@@ -56,14 +56,17 @@ function resize() {
     svg.style.width = width;
     svg.style.height = height;
 
-    // Notify the user that not the full image will be shown
-    if (canvas.width < img.width) {
+    if (canvas.width < img.width) { // Notify the user that not the full image will be shown
         showMessage(
             "Image cannot fit the screen in width. " +
             "Only left part of the image that fits the screen is displayed! " +
             "Please, markup the visible part of the image displayed below using the " +
             "tools from the block on the left or skip this image.",
             MessageTypeEnum.DANGER);
+    } else { // Display the instructions for the user
+        showMessage(
+            "Please, markup the image displayed below using the tools from the block on the left.",
+            MessageTypeEnum.INFO);
     }
 
     drawImg(img);
