@@ -107,28 +107,28 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     var classParams = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParams, param => {
         param.addEventListener("click", function () {
-            OnObjectClassUpdate(param.textContent);
+            onObjectClassUpdate(param.textContent);
         }, false);
     });
 
     var boolParams = document.getElementsByClassName("bool-param");
     Array.prototype.forEach.call(boolParams, param => {
         param.addEventListener("click", function () {
-            OnBoolParamUpdate(param.name, param.checked);
+            onBoolParamUpdate(param.name, param.checked);
         }, false);
     });
 
     var stringParams = document.getElementsByClassName("string-param");
     Array.prototype.forEach.call(stringParams, param => {
         param.addEventListener("change", function () {
-            OnStringParamUpdate(param.placeholder, param.value);
+            onStringParamUpdate(param.placeholder, param.value);
         }, false);
     });
 
     var selectParams = document.getElementsByClassName("select-param");
     Array.prototype.forEach.call(selectParams, param => {
         param.addEventListener("change", function () {
-            OnSelectParamUpdate(param.name, param.value);
+            onSelectParamUpdate(param.name, param.value);
         }, false);
     });
 
