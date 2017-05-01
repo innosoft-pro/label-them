@@ -17,7 +17,8 @@ You may need to use `sudo` (for OSX, *nix, BSD etc) or run your command shell as
 At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in 
 [Chromium Browser](http://www.chromium.org/Home) and [Chrome](https://www.google.ru/chrome) web browsers.
 
-If an image cannot fit the screen in width. Only left part of the image that fits the screen will be displayed!
+If an image cannot fit the screen in width. Only left part of the image that fits the screen will be displayed 
+and available for markup!
 
 #### Building systemGenerating source files for Yandex.Toloka
 
