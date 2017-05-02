@@ -20,7 +20,7 @@ At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](
 If an image cannot fit the screen in width. Only left part of the image that fits the screen will be displayed 
 and available for markup!
 
-#### Building systemGenerating source files for Yandex.Toloka
+#### Building system / Generating source files for Yandex.Toloka
 
 In order to test the system on the local machine, or to generate source files needed to run the system on 
 Yandex Toloka crowdsourcing platform you need to open a directory, which contains *LabelThem* system source code 
