@@ -9,6 +9,7 @@ function initSvg(ms) {
     messageSpace = document.getElementsByClassName('message-space')[0];
     svgImg = document.getElementsByClassName('svg-img')[0];
     initCoordinates(svgImg);
+    pointsList = [];
 }
 
 function svgImgOnClick(event) {
@@ -42,7 +43,7 @@ function drawPolygon() {
     });
 
     if (polygonClosed) {
-        OnPolygonClosed(pointsList);
+        onPolygonClosed(pointsList);
         pointsList = [];
         showPolygonSelectedMessage();
     }

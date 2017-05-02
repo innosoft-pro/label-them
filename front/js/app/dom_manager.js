@@ -1,11 +1,9 @@
-
 // Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     // alert(phrase);
     var jsonresponse = JSON.parse(phrase);
-
 
 
     var html = [];
@@ -24,7 +22,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     classes.push("Objects Classes");
     classes.push("<span class=\"caret\"></span>");
     classes.push("</button>");
-    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"OnObjectClassUpdate(this.value)\">");
+    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"onObjectClassUpdate(this.value)\">");
 
     jsonresponse.classes.forEach(function (obj) {
         classes.push("<li><a class=\"class-param\" role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
@@ -73,7 +71,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                 parameters.push("</div>");
             } else if (obj.type === "select") {
                 dropdownMenusCount++;
-                parameters.push("<div class=\"dropdown\">");
+                parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
                 parameters.push("<select class=\"select-param\" name=\"");
                 parameters.push(obj.name);
                 parameters.push("\">");
@@ -86,12 +84,12 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                     parameters.push("<option ");
                     parameters.push("value=\"");
                     parameters.push(obj2);
-                    //parameters.push("\" onclick=\"OnSelectParamUpdate(this.name, this.textContent)\">");
+                    //parameters.push("\" onclick=\"onSelectParamUpdate(this.name, this.textContent)\">");
                     parameters.push("\">");
                     parameters.push(obj2);
                     parameters.push("</option>");
                 });
-                parameters.push("</select>")
+                parameters.push("</select>");
                 parameters.push("</div>");
             }
         });
@@ -106,36 +104,34 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
-    var classParams =
-        document.getElementsByClassName("class-param");
+    var classParams = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParams, param => {
-        param.addEventListener("click", function(){
-            OnObjectClassUpdate(param.textContent);
-        }, false)
+        param.addEventListener("click", function () {
+            onObjectClassUpdate(param.textContent);
+        }, false);
     });
 
-    var boolParams =
-        document.getElementsByClassName("bool-param");
+    var boolParams = document.getElementsByClassName("bool-param");
     Array.prototype.forEach.call(boolParams, param => {
-        param.addEventListener("click", function(){
-            OnBoolParamUpdate(param.name, param.checked);
-        }, false)
+        param.addEventListener("click", function () {
+            onBoolParamUpdate(param.name, param.checked);
+        }, false);
     });
 
     var stringParams = document.getElementsByClassName("string-param");
     Array.prototype.forEach.call(stringParams, param => {
-        param.addEventListener("change", function() {
-            OnStringParamUpdate(param.placeholder, param.value);
-        }, false)
+        param.addEventListener("change", function () {
+            onStringParamUpdate(param.placeholder, param.value);
+        }, false);
     });
 
-    var selectParams = document
-        .getElementsByClassName("select-param");
+    var selectParams = document.getElementsByClassName("select-param");
     Array.prototype.forEach.call(selectParams, param => {
-        param.addEventListener("change", function(){
-            OnSelectParamUpdate(param.name, param.value);
-        }, false)
+        param.addEventListener("change", function () {
+            onSelectParamUpdate(param.name, param.value);
+        }, false);
     });
+
 
 }
 
@@ -179,29 +175,17 @@ function escapeRegExp(str) {
 }
 
 function replaceAll(str, find, replace) {
-  return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
 
 function initDOM() {
-  var json_params = document.getElementById("json_params").innerText;
-  // Toloka strips all strings of double quotes for reasons unknown so in order
-  // to get JSON.parse to work we need to replace all occurence of \ with "
-  // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
-  // but until then this does the job
+    var json_params = document.getElementById("json_params").innerText;
+    // Toloka strips all strings of double quotes for reasons unknown so in order
+    // to get JSON.parse to work we need to replace all occurence of \ with "
+    // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
+    // but until then this does the job
 
-  json_params = replaceAll(json_params, '\\', '"');
-  generateHTMLCodeForClassesAndParameters(document, json_params);
+    json_params = replaceAll(json_params, '\\', '"');
+    generateHTMLCodeForClassesAndParameters(document, json_params);
 }
-
-// function DOMReadyFn( jQuery ) {
-//     // initDOM();
-// }
-//
-// $( document ).ready(DOMReadyFn);
-
-// document.onload = initDOM;
-// debugger;
-// document.addEventListener("onload", initDOM, false);
-
-//
