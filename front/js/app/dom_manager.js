@@ -103,6 +103,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
+    /*global onObjectClassUpdate*/
+    /*eslint no-undef: "error"*/
     var classParams = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParams, param => {
         param.addEventListener("change", function () {
@@ -110,6 +112,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
         }, false);
     });
 
+    /*global onBoolParamUpdate*/
+    /*eslint no-undef: "error"*/
     var boolParams = document.getElementsByClassName("bool-param");
     Array.prototype.forEach.call(boolParams, param => {
         param.addEventListener("click", function () {
@@ -117,6 +121,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
         }, false);
     });
 
+    /*global onStringParamUpdate*/
+    /*eslint no-undef: "error"*/
     var stringParams = document.getElementsByClassName("string-param");
     Array.prototype.forEach.call(stringParams, param => {
         param.addEventListener("change", function () {
@@ -124,6 +130,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
         }, false);
     });
 
+    /*global onSelectParamUpdate*/
+    /*eslint no-undef: "error"*/
     var selectParams = document.getElementsByClassName("select-param");
     Array.prototype.forEach.call(selectParams, param => {
         param.addEventListener("change", function () {
