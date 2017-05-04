@@ -40,6 +40,8 @@ function clearOnClick(element) {
 }
 
 function btnSaveFunc(btnIsSelected) {
+    /*global onSave*/
+    /*eslint no-undef: "error"*/
     onSave();
 }
 

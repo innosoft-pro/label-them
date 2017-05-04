@@ -43,6 +43,8 @@ function drawPolygon() {
     });
 
     if (polygonClosed) {
+        /*global onPolygonClosed*/
+        /*eslint no-undef: "error"*/
         onPolygonClosed(pointsList);
         pointsList = [];
         showPolygonSelectedMessage();
