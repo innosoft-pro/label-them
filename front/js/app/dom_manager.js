@@ -14,24 +14,24 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     classes.push("<h4>");
     classes.push("Objects Classes");
     classes.push("</h4>");
-
-    classes.push("<div class=\"dropdown\">");
-    classes.push("<button class=\"btn btn-default dropdown-toggle\" type=\"button\" ");
-    classes.push("id=\"dropdownMenu-Classes\" ");
-    classes.push("data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"true\">");
-    classes.push("Objects Classes");
-    classes.push("<span class=\"caret\"></span>");
-    classes.push("</button>");
-    classes.push("<ul class=\"dropdown-menu\" aria-labelledby=\"dropdownMenu-Classes\" onchange=\"onObjectClassUpdate(this.value)\">");
-
+    parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
+    parameters.push("<select class=\"class-param\" name=\"");
+    parameters.push("\">");
+    // Additional margin to add some space between input groups and drop down menus
+    // Otherwise they stick to one another
+    parameters.push("<option disabled selected hidden>");
+    parameters.push("Select Class");
+    parameters.push("</option>");
     jsonresponse.classes.forEach(function (obj) {
-        classes.push("<li><a class=\"class-param\" role=\"menuitem\" tabindex=\"-1\" href=\"#\">");
-        classes.push(obj);
-        classes.push("</a></li>");
+        parameters.push("<option ");
+        parameters.push("value=\"");
+        parameters.push(obj);
+        parameters.push("\">");
+        parameters.push(obj);
+        parameters.push("</option>");
     });
-
-    classes.push("</ul>");
-    classes.push("</div>");
+    parameters.push("</select>");
+    parameters.push("</div>");
     classes = classes.join("");
 
     if (jsonresponse.parameters !== null) {
@@ -84,7 +84,6 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                     parameters.push("<option ");
                     parameters.push("value=\"");
                     parameters.push(obj2);
-                    //parameters.push("\" onclick=\"onSelectParamUpdate(this.name, this.textContent)\">");
                     parameters.push("\">");
                     parameters.push(obj2);
                     parameters.push("</option>");
@@ -106,8 +105,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     var classParams = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParams, param => {
-        param.addEventListener("click", function () {
-            onObjectClassUpdate(param.textContent);
+        param.addEventListener("change", function () {
+            onObjectClassUpdate(param.value);
         }, false);
     });
 
