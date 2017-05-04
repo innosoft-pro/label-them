@@ -3,11 +3,17 @@
  */
 
 var de;
+/*global DataCollector*/
+/*eslint no-undef: "error"*/
 var dc = new DataCollector();
 
 function onPolygonClosed(data) {
+    /*global DataEntity*/
+    /*eslint no-undef: "error"*/
     de = new DataEntity();
     dc.addEntity(de);
+    /*global setPoints*/
+    /*eslint no-undef: "error"*/
     de.setPoints(data.slice(0, pointsList.length - 1));
 }
 
