@@ -11,24 +11,20 @@ DataCollector.prototype.addEntity = function (entity) {
 };
 
 function DataEntity() {
-    this.jsonPoints = [];
-    this.jsonParams = {};
+    this.points = [];
+    this.parameters = {};
 }
 
 DataEntity.prototype.setPoints = function (data) {
-    this.jsonPoints = data;
+    this.points = data;
 };
 
 DataEntity.prototype.setParams = function (data) {
-    this.jsonParams = Object.assign(this.jsonParams, data);
+    this.parameters = Object.assign(this.parameters, data);
 };
 
 DataCollector.prototype.getJSON = function () {
     var json = JSON.stringify(this);
-    // alert(window.thisTask.getSolution());
     window.thisTask.setSolutionOutputValue("result", json);
-    // alert(window.thisTask.getSolution());
-    // alert(window.thisTask.validate(window.thisTask.getSolution()) + " valid");
-
     return json;
 };
