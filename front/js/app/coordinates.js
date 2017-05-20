@@ -18,7 +18,6 @@ function getPoint(event) {
     var point = {
         x: getX(event),
         y: getY(event),
-        isFirst: false
     };
     return point;
 }

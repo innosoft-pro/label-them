@@ -24,7 +24,6 @@ function draw() {
         /*eslint no-undef: "error"*/
         resetDOM();
         var firstPoint = pointsList[0];
-        firstPoint.isFirst = true;
         drawDot(firstPoint);
     } else {
         drawPolygon();
@@ -64,7 +63,7 @@ function isPolygonClosed(point) {
 }
 
 function drawDot(point) {
-    if (point.isFirst) {
+    if (pointsList.indexOf(point) === 0) {
         drawCircle(point, circleRadius, "#bada55", "#000000", strokeWidth);
     } else {
         drawCircle(point, circleRadius, "#bada55", "#ffffff", strokeWidth);
