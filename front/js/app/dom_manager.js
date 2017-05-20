@@ -148,7 +148,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 /*
 Reset all values of class selector and parameters to default values
  */
-function resetClassesAndParametersValues(document, json_params) {
+function resetClassesAndParametersValues(document) {
     var classParameters = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParameters, parameter => {
         parameter.value = "Select Class";
@@ -166,7 +166,7 @@ function resetClassesAndParametersValues(document, json_params) {
 
     var selectParameters = document.getElementsByClassName("select-param");
     for (var i = 0; i < selectParameters.length; i++) {
-        selectParameters[i].value = selectDefaultParameters[i];
+        selectParameters.item(i).value = selectDefaultParameters[i];
     }
 }
 
@@ -232,5 +232,5 @@ function resetDOM() {
     // but until then this does the job
 
     json_params = replaceAll(json_params, '\\', '"');
-    resetClassesAndParametersValues(document, json_params);
+    resetClassesAndParametersValues(document);
 }
