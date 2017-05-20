@@ -1,3 +1,5 @@
+var selectDefaultParameters = [];
+
 // Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
 function generateHTMLCodeForClassesAndParameters(dom, phrase) {
@@ -79,6 +81,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                 // Otherwise they stick to one another
                 parameters.push("<option disabled selected hidden>");
                 parameters.push(obj.name);
+                selectDefaultParameters.push(obj.name);
                 parameters.push("</option>");
                 obj.options.forEach(function (obj2) {
                     parameters.push("<option ");
@@ -142,6 +145,31 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
 }
 
+/*
+Reset all values of class selector and parameters to default values
+ */
+function resetClassesAndParametersValues(document, json_params) {
+    var classParameters = document.getElementsByClassName("class-param");
+    Array.prototype.forEach.call(classParameters, parameter => {
+        parameter.value = "Select Class";
+    });
+
+    var boolParameters = document.getElementsByClassName("bool-param");
+    Array.prototype.forEach.call(boolParameters, parameter => {
+        parameter.checked = false;
+    });
+
+    var stringParameters = document.getElementsByClassName("string-param");
+    Array.prototype.forEach.call(stringParameters, parameter => {
+        parameter.value = "";
+    });
+
+    var selectParameters = document.getElementsByClassName("select-param");
+    for (var i = 0; i < selectParameters.length; i++) {
+        selectParameters[i].value = selectDefaultParameters[i];
+    }
+}
+
 // Message type which correspond to the ones used in bootstrap
 var MessageTypeEnum = Object.freeze({SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4});
 
@@ -185,7 +213,6 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
-
 function initDOM() {
     var json_params = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
@@ -195,4 +222,15 @@ function initDOM() {
 
     json_params = replaceAll(json_params, '\\', '"');
     generateHTMLCodeForClassesAndParameters(document, json_params);
+}
+
+function resetDOM() {
+    var json_params = document.getElementById("json_params").innerText;
+    // Toloka strips all strings of double quotes for reasons unknown so in order
+    // to get JSON.parse to work we need to replace all occurence of \ with "
+    // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
+    // but until then this does the job
+
+    json_params = replaceAll(json_params, '\\', '"');
+    resetClassesAndParametersValues(document, json_params);
 }

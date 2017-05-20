@@ -20,6 +20,7 @@ function svgImgOnClick(event) {
 
 function draw() {
     if (pointsList.length === 1) {
+        resetDOM();
         var firstPoint = pointsList[0];
         firstPoint.isFirst = true;
         drawDot(firstPoint);
