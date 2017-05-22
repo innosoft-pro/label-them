@@ -11,12 +11,12 @@
     <!-- Latest compiled and minified CSS -->
     <!-- <link rel="stylesheet" href="../build/css/concat.css"> -->
 
-   <!-- Connect Toloka JS  -->
+    <!-- Connect Toloka JS  -->
     <!-- <script src="js/toloka.js"></script> -->
 
-   <!-- SVG, Canvas, and DOM Manager tools and libs, as well as bootstrap and jQuery-->
+    <!-- SVG, Canvas, and DOM Manager tools and libs, as well as bootstrap and jQuery-->
     <!-- <script src="../build/app.js"></script> -->
-   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -34,7 +34,6 @@
         //
         // });
     </script>
-
     <!-- Nav menu-->
 </head>
 <body>
@@ -47,28 +46,36 @@
                 <div class="sidebar">
                     <div class="btn-group-vertical" role="group" aria-label="...">
                         <button id="btn_save" class="btn btn-default btnsave">
-                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/save_button.png" width="48"/>
+                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/save_button.png"
+                                 width="48"/>
                         </button>
                         <button id="btn_hand" class="btn btn-default hidden btn-hand">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/hand_tool_button.png" width="48"/>
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/hand_tool_button.png"
+                                 width="48"/>
                         </button>
                         <button id="btn_polygon" class="btn btn-default btn-polygon">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="48"/>
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png"
+                                 width="48"/>
                         </button>
                         <button id="btn_edit" class="btn btn-default hidden btn-edit">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/edit_button.png" width="48"/>
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/edit_button.png"
+                                 width="48"/>
                         </button>
                         <button id="btn_zoom_in" class="btn btn-default hidden btn-zoom-in">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_in_button.png" width="48"/>
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_in_button.png"
+                                 width="48"/>
                         </button>
                         <button id="btn_zoom_out" class="btn btn-default hidden btn-zoom-out">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_out_button.png" width="48"/>
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_out_button.png"
+                                 width="48"/>
                         </button>
-                        <button id="btn_brightness_high" class="btn btn-default hidden btn-brightness-high">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_high_button.png" width="48"/>
+                        <button id="btn_brightness_high" class="btn btn-default btn-brightness-high">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_high_button.png"
+                                 width="48"/>
                         </button>
-                        <button id="btn_brightness_low" class="btn btn-default hidden btn-brightness-low">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_low_button.png" width="48"/>
+                        <button id="btn_brightness_low" class="btn btn-default btn-brightness-low">
+                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/brightness_low_button.png"
+                                 width="48"/>
                         </button>
                     </div>
                 </div>
@@ -80,8 +87,8 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="canvas-parent">
-                              <div id="img_url" hidden>{{proxy image_rel}}</div>
-                              <div id="json_params" hidden>{{json_params}}</div>
+                                <div id="img_url" hidden>{{ proxy image_rel}}</div>
+                                <div id="json_params" hidden>{{ json_params }}</div>
                                 <canvas id="main-canvas">
                                 </canvas>
                                 <!--onclick="svgImgOnClick(event)"-->
@@ -121,7 +128,8 @@
                                 <tr>
                                     <td class="history-icon-td">
                                         <button class="btn btn-default panTool">
-                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="24"/>
+                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png"
+                                                 width="24"/>
                                         </button>
                                     </td>
                                     <td class="history-text-td">
@@ -131,7 +139,8 @@
                                 <tr>
                                     <td class="history-icon-td">
                                         <button class="btn btn-default panTool">
-                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="24"/>
+                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png"
+                                                 width="24"/>
                                         </button>
                                     </td>
                                     <td class="history-text-td">
@@ -141,7 +150,8 @@
                                 <tr>
                                     <td class="history-icon-td">
                                         <button class="btn btn-default panTool">
-                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="24"/>
+                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png"
+                                                 width="24"/>
                                         </button>
                                     </td>
                                     <td class="history-text-td">
@@ -151,7 +161,8 @@
                                 <tr>
                                     <td class="history-icon-td">
                                         <button class="btn btn-default panTool">
-                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png" width="24"/>
+                                            <img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/polygon_tool_button.png"
+                                                 width="24"/>
                                         </button>
                                     </td>
                                     <td class="history-text-td">
@@ -161,9 +172,13 @@
                             </table>
                             <div class="panel-footer">
                                 <div class="btn-group" role="group" aria-label="...">
-                                    <button class="btn btn-default"><img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/arrows_undo_icon.png" width="32"/>
+                                    <button class="btn btn-default"><img
+                                            src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/arrows_undo_icon.png"
+                                            width="32"/>
                                     </button>
-                                    <button class="btn btn-default"><img src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/arrows_redo_icon.png" width="32"/>
+                                    <button class="btn btn-default"><img
+                                            src="https://rawgit.com/innosoft-pro/label-them/develop/front/img/arrows_redo_icon.png"
+                                            width="32"/>
                                     </button>
                                 </div>
                             </div>
@@ -176,8 +191,9 @@
     </div>
 </div>
 <script>
-    // initSvg();
-    // initNavMenu();
+    //initCanvas();
+    //initSvg();
+    //initNavMenu();
 </script>
 </body>
 </html>

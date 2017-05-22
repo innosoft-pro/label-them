@@ -11,6 +11,7 @@ var btnBrightnessLow;
 function initNavMenu() {
     getElements();
     setElementsOnClick();
+    initBrightness();
 }
 
 function setElementsOnClick() {
@@ -72,11 +73,11 @@ function btnZoomOutFunc(btnIsSelected) {
 }
 
 function btnBrightnessHighFunc(btnIsSelected) {
-
+    plusBrightness();
 }
 
 function btnBrightnessLowFunc(btnIsSelected) {
-
+    minusBrightness();
 }
 
 function setOnClick(btn) {

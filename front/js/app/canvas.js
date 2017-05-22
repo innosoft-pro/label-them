@@ -8,8 +8,6 @@ function initCanvas() {
 
     var url = document.getElementById("img_url").innerText;
     img.src = url;
-
-
 }
 
 // loading remote image
