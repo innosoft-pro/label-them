@@ -12,6 +12,8 @@ function initNavMenu() {
     getElements();
     setElementsOnClick();
     initBrightness();
+    setIsButtonSelected(btnPolygon, isButtonSelected(btnPolygon));
+    btnPolygonFunc(true);
 }
 
 function setElementsOnClick() {
@@ -53,6 +55,7 @@ function btnHandFunc(btnIsSelected) {
 function btnPolygonFunc(btnIsSelected) {
     if (btnIsSelected) {
         svgImg.onclick = function () {
+            if (!isButtonSelected(btnPolygon)) return;
             svgImgOnClick(event);
         };
     } else {
@@ -83,7 +86,7 @@ function btnBrightnessLowFunc(btnIsSelected) {
 function setOnClick(btn) {
     btn.onclick = function () {
         var btnIsSelected = false;
-        if (isButtonSelected(btn)) {
+        if (setIsButtonSelected(btn, isButtonSelected(btn))) {
             btnIsSelected = true;
         }
 
@@ -118,10 +121,16 @@ function setOnClick(btn) {
 
 function isButtonSelected(btn) {
     if (btn.style.background === 'rgb(27, 109, 133)') {
-        btn.style.background = '#ffffff';
+        return true;
+    } else {
         return false;
+    }
+}
+
+function setIsButtonSelected(btn, isEnabled) {
+    if (isEnabled) {
+        btn.style.background = '#ffffff';
     } else {
         btn.style.background = '#1b6d85';
-        return true;
     }
 }
