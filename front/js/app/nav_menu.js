@@ -7,6 +7,13 @@ var btnZoomOut;
 var btnBrightnessHigh;
 var btnBrightnessLow;
 
+function setIsButtonSelected(btn, isEnabled) {
+    if (isEnabled) {
+        btn.style.background = '#ffffff';
+    } else {
+        btn.style.background = '#1b6d85';
+    }
+}
 
 function initNavMenu() {
     getElements();
@@ -124,13 +131,5 @@ function isButtonSelected(btn) {
         return true;
     } else {
         return false;
-    }
-}
-
-function setIsButtonSelected(btn, isEnabled) {
-    if (isEnabled) {
-        btn.style.background = '#ffffff';
-    } else {
-        btn.style.background = '#1b6d85';
     }
 }
