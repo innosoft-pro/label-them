@@ -15,11 +15,18 @@ module.exports = function (grunt) {
                 src: [
                     "bower_components/jquery/dist/jquery.js",
                     "bower_components/bootstrap/dist/js/bootstrap.js",
-                    // "bower_components/Snap.svg/dist/snap.svg.js",
                     "front/js/app/*.js",
                     "front/js/toloka.js",
                     ],
                 dest: "build/app.js"
+            },
+            js_local: {
+                src: [
+                    "bower_components/jquery/dist/jquery.js",
+                    "bower_components/bootstrap/dist/js/bootstrap.js",
+                    "front/js/app/*.js",
+                ],
+                dest: "build/app-local.js"
             },
             css: {
                 src: ["./bower_components/bootstrap/dist/css/bootstrap.min.css", "front/css/styles.css"],
