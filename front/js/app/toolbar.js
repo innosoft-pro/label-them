@@ -1,26 +1,24 @@
-var btnSave;
-var btnHand;
-var btnPolygon;
-var btnEdit;
-var btnZoomIn;
-var btnZoomOut;
-var btnBrightnessHigh;
-var btnBrightnessLow;
+let btnSave;
+let btnHand;
+let btnPolygon;
+let btnEdit;
+let btnZoomIn;
+let btnZoomOut;
+let btnBrightnessHigh;
+let btnBrightnessLow;
+let activeTool;
 
-function setIsButtonSelected(btn, isEnabled) {
+function isButtonSelected(btn) {
+    return btn.style.background === 'rgb(27, 109, 133)';
+}
+
+function setIsButtonSelected(btn) {
+    let isEnabled = isButtonSelected(btn);
     if (isEnabled) {
         btn.style.background = '#ffffff';
     } else {
         btn.style.background = '#1b6d85';
     }
-}
-
-function initNavMenu() {
-    getElements();
-    setElementsOnClick();
-    initBrightness();
-    setIsButtonSelected(btnPolygon, isButtonSelected(btnPolygon));
-    btnPolygonFunc(true);
 }
 
 function setElementsOnClick() {
@@ -32,6 +30,20 @@ function setElementsOnClick() {
     setOnClick(btnZoomOut);
     setOnClick(btnBrightnessHigh);
     setOnClick(btnBrightnessLow);
+}
+
+function initNavMenu() {
+    getElements();
+    setElementsOnClick();
+    initBrightness();
+    setIsButtonSelected(btnPolygon);
+    initSave();
+    initHand();
+    initPolygon();
+    initBrightnessIncrease();
+    initBrightnessDecrease();
+    activeTool = Tool.polygon();
+    activeTool.onClick(true);
 }
 
 function getElements() {
@@ -49,27 +61,6 @@ function clearOnClick(element) {
     element.onclick = '';
 }
 
-function btnSaveFunc(btnIsSelected) {
-    /*global onSave*/
-    /*eslint no-undef: "error"*/
-    onSave();
-}
-
-function btnHandFunc(btnIsSelected) {
-    alert("Implement hand tool");
-}
-
-function btnPolygonFunc(btnIsSelected) {
-    if (btnIsSelected) {
-        svgImg.onclick = function () {
-            if (!isButtonSelected(btnPolygon)) return;
-            svgImgOnClick(event);
-        };
-    } else {
-        clearOnClick(svgImg.onclick);
-    }
-}
-
 function btnEditFunc(btnIsSelected) {
 
 }
@@ -82,54 +73,40 @@ function btnZoomOutFunc(btnIsSelected) {
 
 }
 
-function btnBrightnessHighFunc(btnIsSelected) {
-    plusBrightness();
-}
-
-function btnBrightnessLowFunc(btnIsSelected) {
-    minusBrightness();
-}
-
 function setOnClick(btn) {
     btn.onclick = function () {
-        var btnIsSelected = false;
-        if (setIsButtonSelected(btn, isButtonSelected(btn))) {
-            btnIsSelected = true;
+        let isButtonPressed = false;
+        if (setIsButtonSelected(btn)) {
+            isButtonPressed = true;
         }
 
         switch (btn.id) {
             case 'btn_save':
-                btnSaveFunc(btnIsSelected);
+                activeTool = Tool.save();
                 break;
             case 'btn_hand':
-                btnHandFunc(btnIsSelected);
+                activeTool = Tool.hand();
                 break;
             case 'btn_polygon':
-                btnPolygonFunc(btnIsSelected);
+                activeTool = Tool.polygon();
                 break;
             case 'btn_edit':
-                btnEditFunc(btnIsSelected);
+                btnEditFunc(isButtonPressed);
                 break;
             case 'btn_zoom_in':
-                btnZoomInFunc(btnIsSelected);
+                btnZoomInFunc(isButtonPressed);
                 break;
             case 'btn_zoom_out':
-                btnZoomOutFunc(btnIsSelected);
+                btnZoomOutFunc(isButtonPressed);
                 break;
             case 'btn_brightness_high':
-                btnBrightnessHighFunc(btnIsSelected);
+                activeTool = Tool.brightnessIncrease();
                 break;
             case 'btn_brightness_low':
-                btnBrightnessLowFunc(btnIsSelected);
+                activeTool = Tool.brightnessDecrease();
                 break;
         }
-    }
-}
 
-function isButtonSelected(btn) {
-    if (btn.style.background === 'rgb(27, 109, 133)') {
-        return true;
-    } else {
-        return false;
+        activeTool.onClick(isButtonPressed);
     }
 }

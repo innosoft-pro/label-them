@@ -16,6 +16,7 @@ module.exports = function (grunt) {
                     "bower_components/jquery/dist/jquery.js",
                     "bower_components/bootstrap/dist/js/bootstrap.js",
                     "front/js/app/*.js",
+                    "front/js/app/tools/*.js",
                     "front/js/toloka.js",
                     ],
                 dest: "build/app.js"
@@ -24,6 +25,7 @@ module.exports = function (grunt) {
                 src: [
                     "bower_components/jquery/dist/jquery.js",
                     "bower_components/bootstrap/dist/js/bootstrap.js",
+                    "front/js/app/tools/*.js",
                     "front/js/app/*.js",
                 ],
                 dest: "build/app-local.js"

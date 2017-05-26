@@ -146,7 +146,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 }
 
 /*
-Reset all values of class selector and parameters to default values
+ Reset all values of class selector and parameters to default values
  */
 function resetClassesAndParametersValues(document) {
     var classParameters = document.getElementsByClassName("class-param");
