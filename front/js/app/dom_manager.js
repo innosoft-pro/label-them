@@ -17,7 +17,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     classes.push("Objects Classes");
     classes.push("</h4>");
     parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
-    parameters.push("<select class=\"class-param\" name=\"");
+    parameters.push("<select class=\"class-param form-control\" name=\"");
     parameters.push("\">");
     // Additional margin to add some space between input groups and drop down menus
     // Otherwise they stick to one another
@@ -74,7 +74,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
             } else if (obj.type === "select") {
                 dropdownMenusCount++;
                 parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
-                parameters.push("<select class=\"select-param\" name=\"");
+                parameters.push("<select class=\"select-param form-control\" name=\"");
                 parameters.push(obj.name);
                 parameters.push("\">");
                 // Additional margin to add some space between input groups and drop down menus
