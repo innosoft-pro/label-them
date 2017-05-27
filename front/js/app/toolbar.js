@@ -73,10 +73,8 @@ function clearOnClick(element) {
 
 function setOnClick(btn) {
     btn.onclick = function () {
-        let isButtonPressed = false;
-        if (setIsButtonSelected(btn)) {
-            isButtonPressed = true;
-        }
+        setIsButtonSelected(btn);
+        let isButtonPressed = isButtonSelected(btn);
 
         switch (btn.id) {
             case 'btn_save':
