@@ -41,8 +41,6 @@ function getElements() {
     btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
     btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
     btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
-
-    // svgImg.addEventListener('click', onSVGClick, true);
 }
 
 function initNavMenu() {
@@ -58,16 +56,6 @@ function initNavMenu() {
     activeTool = Tool.polygon();
     activeTool.onClick(true);
 }
-
-/*
- function onSVGClick() {
- if (activeTool !== null && activeTool.toString() === Tool.polygon().toString()) {
- svgImgOnClick(event);
- } else if (activeTool !== null && activeTool.toString() === Tool.hand().toString()) {
- svgImgOnClickSelect(event);
- }
- }
- */
 
 function setOnClick(btn) {
     btn.onclick = function () {
