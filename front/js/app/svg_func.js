@@ -5,6 +5,11 @@ var lineWidth = 2;
 var circleRadius = 5;
 var strokeWidth = 5;
 
+var polygons = [];
+
+var currenPolygon = null;
+var selectedPolygon = null;
+
 function initSvg(ms) {
     messageSpace = document.getElementsByClassName('message-space')[0];
     svgImg = document.getElementsByClassName('svg-img')[0];
@@ -12,11 +17,60 @@ function initSvg(ms) {
     pointsList = [];
 }
 
+
+
 function svgImgOnClick(event) {
     var point = getPoint(event);
-    pointsList.push(point);
-    draw();
+
+    if (currenPolygon != null) {
+        if (currenPolygon.shouldClose(point.x, point.y)) {
+            closePolygon(currenPolygon);
+        } else {
+            currenPolygon.addPoint(point.x, point.y);
+        }
+    } else {
+        currenPolygon = new Polygon(point.x, point.y);
+        svgImg.append(currenPolygon.node);
+        console.log(currenPolygon.node);
+    }
 }
+
+function svgImgOnClickSelect(event) {
+    if (selectedPolygon != null) {
+        selectedPolygon.setSelected(false);
+        selectedPolygon = null;
+    }
+}
+
+function closePolygon() {
+    currenPolygon.close();
+    currenPolygon.onPolygonClick = onPolygonClick;
+    polygons.push(currenPolygon);
+
+    if (selectedPolygon != null) {
+        selectedPolygon.setSelected(false);
+    }
+
+    selectedPolygon = currenPolygon;
+    selectedPolygon.setSelected(true);
+
+    currenPolygon = null;
+}
+
+function onPolygonClick(polygon) {
+
+    if (selectedPolygon != null) {
+        selectedPolygon.setSelected(false);
+    }
+
+
+    polygon.setSelected(true);
+    selectedPolygon = polygon;
+    // Bring it to top
+    svgImg.append(selectedPolygon.node);
+}
+
+
 
 function draw() {
     if (pointsList.length === 1) {

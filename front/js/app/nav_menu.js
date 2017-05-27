@@ -7,6 +7,8 @@ var btnZoomOut;
 var btnBrightnessHigh;
 var btnBrightnessLow;
 
+var polygonSelected = true;
+
 function setIsButtonSelected(btn, isEnabled) {
     if (isEnabled) {
         btn.style.background = '#ffffff';
@@ -43,6 +45,16 @@ function getElements() {
     btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
     btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
     btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
+
+    svgImg.addEventListener('click', onSVGClick, true);
+}
+
+function onSVGClick() {
+    if (polygonSelected) {
+        svgImgOnClick(event);
+    } else {
+        svgImgOnClickSelect(event);
+    }
 }
 
 function clearOnClick(element) {
@@ -56,18 +68,39 @@ function btnSaveFunc(btnIsSelected) {
 }
 
 function btnHandFunc(btnIsSelected) {
-    alert("Implement hand tool");
+
+  polygonSelected = false;
+
+  // svgImg.onclick = function () {
+  //     console.log('hand func');
+  //     svgImgOnClickSelect(event);
+  // };
+
+
+  // if (btnIsSelected) {
+  //     console.log('hand func');
+  //
+  // } else {
+  //     clearOnClick(svgImg.onclick);
+  // }
 }
 
 function btnPolygonFunc(btnIsSelected) {
-    if (btnIsSelected) {
-        svgImg.onclick = function () {
-            if (!isButtonSelected(btnPolygon)) return;
-            svgImgOnClick(event);
-        };
-    } else {
-        clearOnClick(svgImg.onclick);
-    }
+
+    polygonSelected = true;
+
+    // svgImg.onclick = function () {
+    //     if (!isButtonSelected(btnPolygon)) return;
+    //     svgImgOnClick(event);
+    // };
+
+
+
+    // if (btnIsSelected) {
+    //
+    // } else {
+    //     clearOnClick(svgImg.onclick);
+    // }
 }
 
 function btnEditFunc(btnIsSelected) {
