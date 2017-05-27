@@ -12,7 +12,7 @@ function isButtonSelected(btn) {
     return btn.style.background === 'rgb(27, 109, 133)';
 }
 
-function setIsButtonSelected(btn) {
+function changeButtonsSelectionState(btn) {
     let isEnabled = isButtonSelected(btn);
     if (isEnabled) {
         btn.style.background = '#ffffff';
@@ -42,14 +42,14 @@ function getElements() {
     btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
     btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
 
-    svgImg.addEventListener('click', onSVGClick, true);
+    // svgImg.addEventListener('click', onSVGClick, true);
 }
 
 function initNavMenu() {
     getElements();
     setElementsOnClick();
     initBrightness();
-    setIsButtonSelected(btnPolygon); // polygon tool is selected by default
+    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
     initSave();
     initHand();
     initPolygon();
@@ -59,6 +59,7 @@ function initNavMenu() {
     activeTool.onClick(true);
 }
 
+/*
 function onSVGClick() {
     if (activeTool !== null && activeTool.toString() === Tool.polygon().toString()) {
         svgImgOnClick(event);
@@ -66,33 +67,23 @@ function onSVGClick() {
         svgImgOnClickSelect(event);
     }
 }
-
-function clearOnClick(element) {
-    element.onclick = '';
-}
+*/
 
 function setOnClick(btn) {
     btn.onclick = function () {
-        setIsButtonSelected(btn);
+        changeButtonsSelectionState(btn);
         let isButtonPressed = isButtonSelected(btn);
+        let previouslyActivatedTool = activeTool;
 
         switch (btn.id) {
             case 'btn_save':
                 activeTool = Tool.save();
                 break;
             case 'btn_hand':
-                if(isButtonPressed === true) {
-                    activeTool = Tool.hand();
-                } else {
-                    activeTool = null;
-                }
+                activeTool = Tool.hand();
                 break;
             case 'btn_polygon':
-                if(isButtonPressed === true) {
-                    activeTool = Tool.polygon();
-                } else {
-                    activeTool = null;
-                }
+                activeTool = Tool.polygon();
                 break;
             case 'btn_brightness_high':
                 activeTool = Tool.brightnessIncrease();
@@ -102,8 +93,23 @@ function setOnClick(btn) {
                 break;
         }
 
-        if(activeTool !== null) {
+        if(!activeTool.isProlonged) {
             activeTool.onClick(isButtonPressed);
+            activeTool = previouslyActivatedTool;
+            changeButtonsSelectionState(btn);
+        } else {
+            // If another tool is selected, emulate disabling of previously activated tool
+            if (previouslyActivatedTool !== null && previouslyActivatedTool.buttonId !== activeTool.buttonId) {
+                previouslyActivatedTool.onClick(false);
+                let buttonOfPreviouslyActivatedTool = document.getElementById(previouslyActivatedTool.buttonId);
+                changeButtonsSelectionState(buttonOfPreviouslyActivatedTool);
+            }
+
+            activeTool.onClick(isButtonPressed);
+
+            if (isButtonPressed === false) {
+                activeTool = null;
+            }
         }
     }
 }

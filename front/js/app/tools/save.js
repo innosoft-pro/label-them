@@ -13,7 +13,9 @@ function initSave() {
 
                  }
                  */
-            }
+            },
+            isProlonged: false,
+            buttonId: "btn_save"
         });
     };
 }

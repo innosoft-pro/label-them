@@ -11,7 +11,9 @@ function initBrightnessDecrease() {
 
                  }
                  */
-            }
+            },
+            isProlonged: false,
+            buttonId: "btn_brightness_low"
         });
     };
 }
