@@ -6,7 +6,6 @@ let btnZoomIn;
 let btnZoomOut;
 let btnBrightnessHigh;
 let btnBrightnessLow;
-let buttons = [];
 let activeTool;
 
 function isButtonSelected(btn) {
@@ -23,20 +22,25 @@ function setIsButtonSelected(btn) {
 }
 
 function setElementsOnClick() {
-    for(let i=0; i<buttons.size; i++) {
-        setOnClick(buttons[i]);
-    }
+    setOnClick(btnSave);
+    setOnClick(btnHand);
+    setOnClick(btnPolygon);
+    setOnClick(btnEdit);
+    setOnClick(btnZoomIn);
+    setOnClick(btnZoomOut);
+    setOnClick(btnBrightnessHigh);
+    setOnClick(btnBrightnessLow);
 }
 
 function getElements() {
-    buttons.push(document.getElementsByClassName('btnsave')[0]);
-    buttons.push(document.getElementsByClassName('btn-hand')[0]);
-    buttons.push(document.getElementsByClassName('btn-polygon')[0]);
-    buttons.push(document.getElementsByClassName('btn-edit')[0]);
-    buttons.push(document.getElementsByClassName('btn-zoom-in')[0]);
-    buttons.push(document.getElementsByClassName('btn-zoom-out')[0]);
-    buttons.push(document.getElementsByClassName('btn-brightness-high')[0]);
-    buttons.push(document.getElementsByClassName('btn-brightness-low')[0]);
+    btnSave = document.getElementsByClassName('btn-save')[0];
+    btnHand = document.getElementsByClassName('btn-hand')[0];
+    btnPolygon = document.getElementsByClassName('btn-polygon')[0];
+    btnEdit = document.getElementsByClassName('btn-edit')[0];
+    btnZoomIn = document.getElementsByClassName('btn-zoom-in')[0];
+    btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
+    btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
+    btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
 
     svgImg.addEventListener('click', onSVGClick, true);
 }
@@ -45,7 +49,7 @@ function initNavMenu() {
     getElements();
     setElementsOnClick();
     initBrightness();
-    setIsButtonSelected(buttons[2]); // polygon tool is selected by default
+    setIsButtonSelected(btnPolygon); // polygon tool is selected by default
     initSave();
     initHand();
     initPolygon();
@@ -56,9 +60,9 @@ function initNavMenu() {
 }
 
 function onSVGClick() {
-    if (activeTool.toString()===Tool.polygon().toString()) {
+    if (activeTool !== null && activeTool.toString() === Tool.polygon().toString()) {
         svgImgOnClick(event);
-    } else if (activeTool.toString()===Tool.hand().toString()) {
+    } else if (activeTool !== null && activeTool.toString() === Tool.hand().toString()) {
         svgImgOnClickSelect(event);
     }
 }
@@ -79,10 +83,18 @@ function setOnClick(btn) {
                 activeTool = Tool.save();
                 break;
             case 'btn_hand':
-                activeTool = Tool.hand();
+                if(isButtonPressed === true) {
+                    activeTool = Tool.hand();
+                } else {
+                    activeTool = null;
+                }
                 break;
             case 'btn_polygon':
-                activeTool = Tool.polygon();
+                if(isButtonPressed === true) {
+                    activeTool = Tool.polygon();
+                } else {
+                    activeTool = null;
+                }
                 break;
             case 'btn_brightness_high':
                 activeTool = Tool.brightnessIncrease();
@@ -92,6 +104,8 @@ function setOnClick(btn) {
                 break;
         }
 
-        activeTool.onClick(isButtonPressed);
+        if(activeTool !== null) {
+            activeTool.onClick(isButtonPressed);
+        }
     }
 }
