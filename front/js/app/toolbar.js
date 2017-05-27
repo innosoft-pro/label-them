@@ -6,6 +6,7 @@ let btnZoomIn;
 let btnZoomOut;
 let btnBrightnessHigh;
 let btnBrightnessLow;
+let buttons = [];
 let activeTool;
 
 function isButtonSelected(btn) {
@@ -22,21 +23,29 @@ function setIsButtonSelected(btn) {
 }
 
 function setElementsOnClick() {
-    setOnClick(btnSave);
-    setOnClick(btnHand);
-    setOnClick(btnPolygon);
-    setOnClick(btnEdit);
-    setOnClick(btnZoomIn);
-    setOnClick(btnZoomOut);
-    setOnClick(btnBrightnessHigh);
-    setOnClick(btnBrightnessLow);
+    for(let i=0; i<buttons.size; i++) {
+        setOnClick(buttons[i]);
+    }
+}
+
+function getElements() {
+    buttons.push(document.getElementsByClassName('btnsave')[0]);
+    buttons.push(document.getElementsByClassName('btn-hand')[0]);
+    buttons.push(document.getElementsByClassName('btn-polygon')[0]);
+    buttons.push(document.getElementsByClassName('btn-edit')[0]);
+    buttons.push(document.getElementsByClassName('btn-zoom-in')[0]);
+    buttons.push(document.getElementsByClassName('btn-zoom-out')[0]);
+    buttons.push(document.getElementsByClassName('btn-brightness-high')[0]);
+    buttons.push(document.getElementsByClassName('btn-brightness-low')[0]);
+
+    svgImg.addEventListener('click', onSVGClick, true);
 }
 
 function initNavMenu() {
     getElements();
     setElementsOnClick();
     initBrightness();
-    setIsButtonSelected(btnPolygon);
+    setIsButtonSelected(buttons[2]); // polygon tool is selected by default
     initSave();
     initHand();
     initPolygon();
@@ -46,31 +55,16 @@ function initNavMenu() {
     activeTool.onClick(true);
 }
 
-function getElements() {
-    btnSave = document.getElementsByClassName('btnsave')[0];
-    btnHand = document.getElementsByClassName('btn-hand')[0];
-    btnPolygon = document.getElementsByClassName('btn-polygon')[0];
-    btnEdit = document.getElementsByClassName('btn-edit')[0];
-    btnZoomIn = document.getElementsByClassName('btn-zoom-in')[0];
-    btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
-    btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
-    btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
+function onSVGClick() {
+    if (activeTool.toString()===Tool.polygon().toString()) {
+        svgImgOnClick(event);
+    } else if (activeTool.toString()===Tool.hand().toString()) {
+        svgImgOnClickSelect(event);
+    }
 }
 
 function clearOnClick(element) {
     element.onclick = '';
-}
-
-function btnEditFunc(btnIsSelected) {
-
-}
-
-function btnZoomInFunc(btnIsSelected) {
-
-}
-
-function btnZoomOutFunc(btnIsSelected) {
-
 }
 
 function setOnClick(btn) {
@@ -89,15 +83,6 @@ function setOnClick(btn) {
                 break;
             case 'btn_polygon':
                 activeTool = Tool.polygon();
-                break;
-            case 'btn_edit':
-                btnEditFunc(isButtonPressed);
-                break;
-            case 'btn_zoom_in':
-                btnZoomInFunc(isButtonPressed);
-                break;
-            case 'btn_zoom_out':
-                btnZoomOutFunc(isButtonPressed);
                 break;
             case 'btn_brightness_high':
                 activeTool = Tool.brightnessIncrease();

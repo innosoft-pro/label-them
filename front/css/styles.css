@@ -50,3 +50,57 @@ canvas {
 #svg_img {
     position: absolute;
 }
+
+
+/*SVG*/
+circle {
+  stroke-width: 5;
+}
+
+circle.first {
+  stroke: #666600;
+  fill:   #cccc00;
+
+}
+
+circle.first:hover {
+  stroke: #aaaa00;
+}
+
+circle.other {
+  stroke: #006600;
+  fill:   #00cc00;
+}
+
+circle.normal {
+  stroke: #666666;
+  fill:   #000000;
+}
+
+circle.selected {
+  stroke: #aaaaaa;
+  fill:   #000000;
+}
+
+circle.selected:hover {
+  stroke: #ffffff;
+}
+
+path {
+  fill: none;
+  stroke: black;
+}
+
+polygon.normal {
+  fill: #000000;
+  fill-opacity: 0.8;
+}
+
+polygon.normal:hover {
+  fill-opacity: 0.4;
+}
+
+polygon.selected {
+  fill: #003300;
+  fill-opacity: 0.3;
+}
