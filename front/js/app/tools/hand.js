@@ -8,16 +8,10 @@ function initHand() {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
                     if (isButtonPressed) {
                         console.log("hand enabled");
-                        svgImg.onclick = function () {
-                            /*global svgImgOnClickSelect*/
-                            /*eslint no-undef: "error"*/
-                            svgImgOnClickSelect(event);
-                        };
+                        svgImg.addEventListener("click", handleClicksOnSvgWithHandTool, true);
                     } else {
                         console.log("hand disabled");
-                        /*global clearOnClick*/
-                        /*eslint no-undef: "error"*/
-                        svgImg.onclick = "";
+                        svgImg.removeEventListener("click", handleClicksOnSvgWithHandTool, true);
                     }
                 }
             },
@@ -25,4 +19,8 @@ function initHand() {
             buttonId: "btn_hand"
         });
     };
+
+    function handleClicksOnSvgWithHandTool() {
+        svgImgOnClickSelect(event);
+    }
 }

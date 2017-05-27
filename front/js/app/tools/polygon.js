@@ -8,16 +8,10 @@ function initPolygon() {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
                     if (isButtonPressed) {
                         console.log("polygon enabled");
-                        svgImg.onclick = function () {
-                            /*global svgImgOnClick*/
-                            /*eslint no-undef: "error"*/
-                            svgImgOnClick(event);
-                        };
+                        svgImg.addEventListener("click", handleClicksOnSvgWithPolygonTool, true);
                     } else {
                         console.log("polygon disabled");
-                        /*global clearOnClick*/
-                        /*eslint no-undef: "error"*/
-                        svgImg.onclick = "";
+                        svgImg.removeEventListener("click", handleClicksOnSvgWithPolygonTool, true);
                     }
                 }
             },
@@ -25,4 +19,8 @@ function initPolygon() {
             buttonId: "btn_polygon"
         });
     };
+
+    function handleClicksOnSvgWithPolygonTool() {
+        svgImgOnClick(event);
+    }
 }
