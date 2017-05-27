@@ -7,12 +7,14 @@ function initHand() {
             onClick: function (isButtonPressed) {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
                     if (isButtonPressed) {
+                        console.log("hand enabled");
                         svgImg.onclick = function () {
                             /*global svgImgOnClickSelect*/
                             /*eslint no-undef: "error"*/
                             svgImgOnClickSelect(event);
                         };
                     } else {
+                        console.log("hand disabled");
                         /*global clearOnClick*/
                         /*eslint no-undef: "error"*/
                         svgImg.onclick = "";
