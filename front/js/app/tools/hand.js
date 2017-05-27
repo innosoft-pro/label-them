@@ -15,7 +15,7 @@ function initHand() {
                     } else {
                         /*global clearOnClick*/
                         /*eslint no-undef: "error"*/
-                        svgImg.onclick="";
+                        svgImg.onclick = "";
                     }
                 }
             },

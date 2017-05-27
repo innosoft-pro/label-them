@@ -60,14 +60,14 @@ function initNavMenu() {
 }
 
 /*
-function onSVGClick() {
-    if (activeTool !== null && activeTool.toString() === Tool.polygon().toString()) {
-        svgImgOnClick(event);
-    } else if (activeTool !== null && activeTool.toString() === Tool.hand().toString()) {
-        svgImgOnClickSelect(event);
-    }
-}
-*/
+ function onSVGClick() {
+ if (activeTool !== null && activeTool.toString() === Tool.polygon().toString()) {
+ svgImgOnClick(event);
+ } else if (activeTool !== null && activeTool.toString() === Tool.hand().toString()) {
+ svgImgOnClickSelect(event);
+ }
+ }
+ */
 
 function setOnClick(btn) {
     btn.onclick = function () {
@@ -93,7 +93,7 @@ function setOnClick(btn) {
                 break;
         }
 
-        if(!activeTool.isProlonged) {
+        if (!activeTool.isProlonged) {
             activeTool.onClick(isButtonPressed);
             activeTool = previouslyActivatedTool;
             changeButtonsSelectionState(btn);
