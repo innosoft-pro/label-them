@@ -25,6 +25,9 @@ function svgImgOnClick(event) {
         currentPolygon = new Polygon(point.x, point.y);
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
+
+        // resetting classes and parameters values
+        resetDOM();
     }
 }
 
