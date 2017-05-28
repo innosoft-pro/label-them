@@ -33,26 +33,26 @@ function setElementsOnClick() {
 }
 
 function getElements() {
-    btnSave = document.getElementsByClassName('btn-save')[0];
-    btnHand = document.getElementsByClassName('btn-hand')[0];
-    btnPolygon = document.getElementsByClassName('btn-polygon')[0];
-    btnEdit = document.getElementsByClassName('btn-edit')[0];
-    btnZoomIn = document.getElementsByClassName('btn-zoom-in')[0];
-    btnZoomOut = document.getElementsByClassName('btn-zoom-out')[0];
-    btnBrightnessHigh = document.getElementsByClassName('btn-brightness-high')[0];
-    btnBrightnessLow = document.getElementsByClassName('btn-brightness-low')[0];
+    btnSave = document.getElementById(Tool.save().buttonId);
+    btnHand = document.getElementById(Tool.hand().buttonId);
+    btnPolygon = document.getElementById(Tool.polygon().buttonId);
+    btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
+    btnZoomIn = document.getElementById("btn_zoom_in");     // TODO: Modify when zoom_in tool implemented
+    btnZoomOut = document.getElementById("btn_zoom_in");    // TODO: Modify when zoom_out tool implemented
+    btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
+    btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
 }
 
 function initNavMenu() {
-    getElements();
-    setElementsOnClick();
-    initBrightness();
-    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
     initSave();
     initHand();
     initPolygon();
     initBrightnessIncrease();
     initBrightnessDecrease();
+    getElements();
+    setElementsOnClick();
+    initBrightness();
+    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
     activeTool = Tool.polygon();
     activeTool.onClick(true);
 }
