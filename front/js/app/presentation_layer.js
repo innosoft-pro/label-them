@@ -1,13 +1,13 @@
 function Patch() {
 
-    var pointList = [];
+    let pointList = [];
     this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
     this.state = 'normal';
 
     function build(arg) {
-        var res = [];
-        for (var i = 0, l = arg.length; i < l; i++) {
+        let res = [];
+        for (let i = 0, l = arg.length; i < l; i++) {
             res.push(arg[i].join(','));
         }
         return res.join(' ');
@@ -47,7 +47,7 @@ function Patch() {
 
 
     this.points = function () {
-        for (var i = 0, l = arguments.length; i < l; i += 2) {
+        for (let i = 0, l = arguments.length; i < l; i += 2) {
             pointList.push([arguments[i], arguments[i + 1]]);
         }
         this.attribute('points', build(pointList));
@@ -85,7 +85,7 @@ function Path() {
     this.closePath = false;
 
     this.invalidate = function () {
-        var d = this.build(this.points);
+        let d = this.build(this.points);
 
         console.log(d);
 
@@ -99,9 +99,9 @@ function Path() {
 
     this.build = function (points) {
 
-        var res = [];
+        let res = [];
 
-        for (var i = 1, l = points.length; i < l; i++) {
+        for (let i = 1, l = points.length; i < l; i++) {
             res.push(points[i].join(' '));
         }
 
@@ -132,7 +132,7 @@ function Polygon(startX, startY) {
     this.path = new Path();
     this.node.append(this.path.node);
 
-    var handle = new Handle(startX, startY, 'first');
+    let handle = new Handle(startX, startY, 'first');
     this.handles.push(handle);
 
     this.node.append(handle.node);
@@ -149,7 +149,7 @@ function Polygon(startX, startY) {
     this.addPoint = function (x, y) {
         this.pointsList.push([x, y]);
 
-        var handle = new Handle(x, y, 'other');
+        let handle = new Handle(x, y, 'other');
         this.handles.push(handle);
 
         this.node.append(handle.node);
@@ -158,10 +158,10 @@ function Polygon(startX, startY) {
     };
 
     this.shouldClose = function (x, y) {
-        var x0 = this.pointsList[0][0];
-        var y0 = this.pointsList[0][1];
+        let x0 = this.pointsList[0][0];
+        let y0 = this.pointsList[0][1];
 
-        var dist = Math.sqrt((x0 - x) * (x0 - x) + (y0 - y) * (y0 - y));
+        let dist = Math.sqrt((x0 - x) * (x0 - x) + (y0 - y) * (y0 - y));
 
         return dist < 8;
     };
@@ -178,7 +178,7 @@ function Polygon(startX, startY) {
 
         this.path.invalidate();
 
-        for (var i in this.handles) {
+        for (let i in this.handles) {
             this.handles[i].type = 'normal';
             this.handles[i].invalidate();
         }
@@ -186,8 +186,7 @@ function Polygon(startX, startY) {
 
     this.setSelected = function (selected) {
 
-        var type = 'normal';
-
+        let type = 'normal';
 
         if (selected) {
             type = 'selected';
@@ -196,7 +195,7 @@ function Polygon(startX, startY) {
         this.patch.state = type;
         this.patch.invalidate();
 
-        for (var i in this.handles) {
+        for (let i in this.handles) {
             this.handles[i].type = type;
             this.handles[i].invalidate();
         }
