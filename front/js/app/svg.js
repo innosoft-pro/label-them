@@ -1,7 +1,7 @@
-let svgImg;
-let pointsList = [];
+var svgImg;
+var pointsList = [];
 
-let polygons = [];
+var polygons = [];
 
 let currentPolygon = null;
 let selectedPolygon = null;
