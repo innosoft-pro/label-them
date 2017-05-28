@@ -120,7 +120,7 @@ function Polygon(startX, startY) {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
-    this.lines = [];
+    this.lines = []; // FIXME: Needs to be removed?
 
     this.node = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
