@@ -1,58 +1,60 @@
-function Patch () {
+function Patch() {
 
     var pointList = [];
-    this.node = document.createElementNS('http://www.w3.org/2000/svg','polygon');
+    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
     this.state = 'normal';
 
-    function build (arg) {
+    function build(arg) {
         var res = [];
-        for (var i=0,l=arg.length;i<l;i++) {
+        for (var i = 0, l = arg.length; i < l; i++) {
             res.push(arg[i].join(','));
         }
         return res.join(' ');
     }
-    this.attribute = function (key,val) {
-        if (val === undefined) return node.getAttribute(key);
-        this.node.setAttribute(key,val);
-    }
 
-    this.getPoint = function (i) {return pointList[i]}
+    this.attribute = function (key, val) {
+        if (val === undefined) return node.getAttribute(key);
+        this.node.setAttribute(key, val);
+    };
+
+    this.getPoint = function (i) {
+        return pointList[i]
+    };
 
     this.addPoint = function (x, y) {
-        pointList.push([x, y])
-        this.attribute('points',build(pointList));
-    }
+        pointList.push([x, y]);
+        this.attribute('points', build(pointList));
+    };
 
     this.setPoints = function (points) {
-        this.attribute('points',build(points));
-    }
+        this.attribute('points', build(points));
+    };
 
-    this.setPoint = function (i,x,y) {
-        pointList[i] = [x,y];
-        this.attribute('points',build(pointList));
+    this.setPoint = function (i, x, y) {
+        pointList[i] = [x, y];
+        this.attribute('points', build(pointList));
         // this.invalidate.apply(this);
-    }
+    };
 
     this.onclick = function () {
         console.log('default onclick patch');
-    }
+    };
 
     this.invalidate = function () {
         this.node.setAttribute('class', this.state);
-    }
-
+    };
 
 
     this.points = function () {
-        for (var i=0,l=arguments.length;i<l;i+=2) {
-            pointList.push([arguments[i],arguments[i+1]]);
+        for (var i = 0, l = arguments.length; i < l; i += 2) {
+            pointList.push([arguments[i], arguments[i + 1]]);
         }
-        this.attribute('points',build(pointList));
-    }
+        this.attribute('points', build(pointList));
+    };
 
     // initialize 'points':
-    this.points.apply(this,arguments);
+    this.points.apply(this, arguments);
 }
 
 function Handle(x, y, type) {
@@ -65,12 +67,12 @@ function Handle(x, y, type) {
 
     this.type = type;
 
-    this.invalidate = function() {
+    this.invalidate = function () {
         this.node.setAttribute('cx', this.x);
         this.node.setAttribute('cy', this.y);
         this.node.setAttribute('r', this.radius);
         this.node.setAttribute('class', this.type);
-    }
+    };
 
     this.invalidate.apply(this);
 }
@@ -82,31 +84,31 @@ function Path() {
 
     this.closePath = false;
 
-    this.invalidate = function() {
-        var  d = this.build(this.points);
+    this.invalidate = function () {
+        var d = this.build(this.points);
 
         console.log(d);
 
         this.node.setAttribute('d', d);
-    }
+    };
 
     this.setPoints = function (points) {
         this.points = points;
         this.invalidate.apply(this);
-    }
+    };
 
     this.build = function (points) {
 
         var res = [];
 
-        for (var i = 1,l = points.length; i < l; i++) {
+        for (var i = 1, l = points.length; i < l; i++) {
             res.push(points[i].join(' '));
         }
 
         if (this.closePath) {
             return 'M ' + points[0].join(' ') + ' L ' + res.join(' L ') + ' Z';
         } else {
-          return 'M ' + points[0].join(' ') + ' L ' + res.join(' L ');
+            return 'M ' + points[0].join(' ') + ' L ' + res.join(' L ');
         }
 
 
@@ -114,13 +116,13 @@ function Path() {
 
 }
 
-function Polygon (startX, startY) {
+function Polygon(startX, startY) {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
     this.lines = [];
 
-    this.node = document.createElementNS('http://www.w3.org/2000/svg','g');
+    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
     this.patch = new Patch();
     this.node.append(this.patch.node);
@@ -137,12 +139,12 @@ function Polygon (startX, startY) {
 
     this.onPolygonClick = function (polygon) {
         console.log('default onclick polygon');
-    }
+    };
 
-    this.attribute = function (key,val) {
+    this.attribute = function (key, val) {
         if (val === undefined) return node.getAttribute(key);
-        this.node.setAttribute(key,val);
-    }
+        this.node.setAttribute(key, val);
+    };
 
     this.addPoint = function (x, y) {
         this.pointsList.push([x, y]);
@@ -153,20 +155,20 @@ function Polygon (startX, startY) {
         this.node.append(handle.node);
 
         this.path.setPoints(this.pointsList);
-    }
+    };
 
     this.shouldClose = function (x, y) {
         var x0 = this.pointsList[0][0];
         var y0 = this.pointsList[0][1];
 
-        var dist = Math.sqrt((x0 - x)*(x0 - x) + (y0 - y)*(y0 - y));
+        var dist = Math.sqrt((x0 - x) * (x0 - x) + (y0 - y) * (y0 - y));
 
         return dist < 8;
-    }
+    };
 
     this.onclick = function () {
         this.onPolygonClick(this);
-    }
+    };
 
     this.close = function () {
         this.patch.setPoints(this.pointsList);
@@ -177,10 +179,10 @@ function Polygon (startX, startY) {
         this.path.invalidate();
 
         for (var i in this.handles) {
-          this.handles[i].type = 'normal';
-          this.handles[i].invalidate();
+            this.handles[i].type = 'normal';
+            this.handles[i].invalidate();
         }
-    }
+    };
 
     this.setSelected = function (selected) {
 
@@ -188,22 +190,20 @@ function Polygon (startX, startY) {
 
 
         if (selected) {
-              type = 'selected';
+            type = 'selected';
         }
 
         this.patch.state = type;
         this.patch.invalidate();
 
         for (var i in this.handles) {
-          this.handles[i].type = type;
-          this.handles[i].invalidate();
+            this.handles[i].type = type;
+            this.handles[i].invalidate();
         }
 
         console.log(type);
 
-    }
-
-
+    };
 
 
     // Setup event listeners
