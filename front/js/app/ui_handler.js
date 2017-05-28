@@ -18,7 +18,6 @@ function onPolygonClosed(data) {
 }
 
 function onBoolParamUpdate(name, isChecked) {
-    var key = name.toString();
     de.setParams({[name]: isChecked});
 }
 
