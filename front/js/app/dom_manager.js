@@ -5,13 +5,12 @@ var selectDefaultParameters = [];
 function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     // alert(phrase);
-    var jsonresponse = JSON.parse(phrase);
+    let jsonResponse = JSON.parse(phrase);
 
+    let html = [];
 
-    var html = [];
-
-    var classes = [];
-    var parameters = [];
+    let classes = [];
+    let parameters = [];
 
     classes.push("<h4>");
     classes.push("Objects Classes");
@@ -24,7 +23,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     parameters.push("<option disabled selected hidden>");
     parameters.push("Select Class");
     parameters.push("</option>");
-    jsonresponse.classes.forEach(function (obj) {
+    jsonResponse.classes.forEach(function (obj) {
         parameters.push("<option ");
         parameters.push("value=\"");
         parameters.push(obj);
@@ -36,9 +35,9 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     parameters.push("</div>");
     classes = classes.join("");
 
-    if (jsonresponse.parameters !== null) {
-        var dropdownMenusCount = 0;
-        var inputGroupsCount = 0;
+    if (jsonResponse.parameters !== null) {
+        let dropdownMenusCount = 0;
+        let inputGroupsCount = 0;
 
         //To separate objects classes from parameters
         parameters.push("</br>");
@@ -48,7 +47,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
         parameters.push("</h4>");
 
         parameters.push("<form>");
-        jsonresponse.parameters.forEach(function (obj) {
+        jsonResponse.parameters.forEach(function (obj) {
             if (obj.type === "boolean") {
                 parameters.push("<div class=\"checkbox\">");
                 parameters.push("<label><input class=\"bool-param\" type=\"checkbox\" value=\"\" name=\"");
@@ -108,7 +107,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     /*global onObjectClassUpdate*/
     /*eslint no-undef: "error"*/
-    var classParams = document.getElementsByClassName("class-param");
+    let classParams = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParams, param => {
         param.addEventListener("change", function () {
             onObjectClassUpdate(param.value);
@@ -117,7 +116,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     /*global onBoolParamUpdate*/
     /*eslint no-undef: "error"*/
-    var boolParams = document.getElementsByClassName("bool-param");
+    let boolParams = document.getElementsByClassName("bool-param");
     Array.prototype.forEach.call(boolParams, param => {
         param.addEventListener("click", function () {
             onBoolParamUpdate(param.name, param.checked);
@@ -126,7 +125,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     /*global onStringParamUpdate*/
     /*eslint no-undef: "error"*/
-    var stringParams = document.getElementsByClassName("string-param");
+    let stringParams = document.getElementsByClassName("string-param");
     Array.prototype.forEach.call(stringParams, param => {
         param.addEventListener("change", function () {
             onStringParamUpdate(param.placeholder, param.value);
@@ -135,7 +134,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     /*global onSelectParamUpdate*/
     /*eslint no-undef: "error"*/
-    var selectParams = document.getElementsByClassName("select-param");
+    let selectParams = document.getElementsByClassName("select-param");
     Array.prototype.forEach.call(selectParams, param => {
         param.addEventListener("change", function () {
             onSelectParamUpdate(param.name, param.value);
@@ -149,23 +148,23 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
  Reset all values of class selector and parameters to default values
  */
 function resetClassesAndParametersValues(document) {
-    var classParameters = document.getElementsByClassName("class-param");
+    let classParameters = document.getElementsByClassName("class-param");
     Array.prototype.forEach.call(classParameters, parameter => {
         parameter.value = "Select Class";
     });
 
-    var boolParameters = document.getElementsByClassName("bool-param");
+    let boolParameters = document.getElementsByClassName("bool-param");
     Array.prototype.forEach.call(boolParameters, parameter => {
         parameter.checked = false;
     });
 
-    var stringParameters = document.getElementsByClassName("string-param");
+    let stringParameters = document.getElementsByClassName("string-param");
     Array.prototype.forEach.call(stringParameters, parameter => {
         parameter.value = "";
     });
 
-    var selectParameters = document.getElementsByClassName("select-param");
-    for (var i = 0; i < selectParameters.length; i++) {
+    let selectParameters = document.getElementsByClassName("select-param");
+    for (let i = 0; i < selectParameters.length; i++) {
         selectParameters.item(i).value = selectDefaultParameters[i];
     }
 }
@@ -214,7 +213,7 @@ function replaceAll(str, find, replace) {
 }
 
 function initDOM() {
-    var json_params = document.getElementById("json_params").innerText;
+    let json_params = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
     // to get JSON.parse to work we need to replace all occurence of \ with "
     // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
@@ -225,7 +224,7 @@ function initDOM() {
 }
 
 function resetDOM() {
-    var json_params = document.getElementById("json_params").innerText;
+    let json_params = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
     // to get JSON.parse to work we need to replace all occurence of \ with "
     // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
