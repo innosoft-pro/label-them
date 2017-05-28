@@ -1,64 +1,59 @@
-var messageSpace;
-var svgImg;
-var pointsList = [];
-var lineWidth = 2;
-var circleRadius = 5;
-var strokeWidth = 5;
+let svgImg;
+let pointsList = [];
 
-var polygons = [];
+let polygons = [];
 
-var currenPolygon = null;
-var selectedPolygon = null;
+let currentPolygon = null;
+let selectedPolygon = null;
 
 function initSvg(ms) {
-    messageSpace = document.getElementsByClassName('message-space')[0];
     svgImg = document.getElementsByClassName('svg-img')[0];
     initCoordinates(svgImg);
     pointsList = [];
 }
 
 function svgImgOnClick(event) {
-    var point = getPoint(event);
+    let point = getPoint(event);
 
-    if (currenPolygon != null) {
-        if (currenPolygon.shouldClose(point.x, point.y)) {
-            closePolygon(currenPolygon);
+    if (currentPolygon !== null) {
+        if (currentPolygon.shouldClose(point.x, point.y)) {
+            closePolygon(currentPolygon);
         } else {
-            currenPolygon.addPoint(point.x, point.y);
+            currentPolygon.addPoint(point.x, point.y);
         }
     } else {
-        currenPolygon = new Polygon(point.x, point.y);
-        svgImg.append(currenPolygon.node);
-        console.log(currenPolygon.node);
+        currentPolygon = new Polygon(point.x, point.y);
+        svgImg.append(currentPolygon.node);
+        console.log(currentPolygon.node);
     }
 }
 
 function svgImgOnClickSelect(event) {
-    if (selectedPolygon != null) {
+    if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
         selectedPolygon = null;
     }
 }
 
 function closePolygon() {
-    currenPolygon.close();
-    currenPolygon.onPolygonClick = onPolygonClick;
-    polygons.push(currenPolygon);
+    currentPolygon.close();
+    currentPolygon.onPolygonClick = onPolygonClick;
+    polygons.push(currentPolygon);
 
-    if (selectedPolygon != null) {
+    if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
     }
 
-    selectedPolygon = currenPolygon;
+    selectedPolygon = currentPolygon;
     selectedPolygon.setSelected(true);
     showPolygonSelectedMessage();
 
-    currenPolygon = null;
+    currentPolygon = null;
 }
 
 function onPolygonClick(polygon) {
 
-    if (selectedPolygon != null) {
+    if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
     }
 
