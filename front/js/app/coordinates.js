@@ -1,6 +1,6 @@
-var svgImg;
-
 function initCoordinates(svg) {
+    /*global onSave*/
+    /*eslint no-undef: "error"*/
     svgImg = svg;
 }
 
@@ -15,9 +15,8 @@ function getY(event) {
 }
 
 function getPoint(event) {
-    var point = {
+    return {
         x: getX(event),
         y: getY(event),
     };
-    return point;
 }
