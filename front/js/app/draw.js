@@ -1,44 +1,3 @@
-function drawLine(point1, point2, fillColor, strokeColor, strokeWidth) {
-    var line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-    line.setAttribute('x1', point1.x);
-    line.setAttribute('y1', point1.y);
-    line.setAttribute('x2', point2.x);
-    line.setAttribute('y2', point2.y);
-    line.setAttribute('fill', fillColor);
-    line.setAttribute('stroke', strokeColor);
-    line.setAttribute('stroke-width', strokeWidth);
-    svgImg.append(line);
-}
-
-function drawCircle(point, radius, fillColor, strokeColor, strokeWidth) {
-    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-    circle.setAttribute('cx', point.x);
-    circle.setAttribute('cy', point.y);
-    circle.setAttribute('r', radius);
-    circle.setAttribute('fill', fillColor) ;
-    circle.setAttribute('stroke', strokeColor);
-    circle.setAttribute('stroke-width', strokeWidth);
-    svgImg.append(circle);
-
-    // var polygon = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-
-    // polygon.setAttribute("points", "100,0 50,0 100,100")
-    //
-    // svgImg.append(polygon);
-
-    var polygon = new Polygon(100,0 ,50,0, 100,100);
-    console.log(polygon);
-    svgImg.append(polygon.parentNode);
-}
-
-function drawPolygon (pointsX, pointsY, fillColor, strokeColor, strokeWidth) {
-
-}
-
-function clear() {
-
-}
-
 function Patch () {
 
     var pointList = [];
@@ -107,12 +66,6 @@ function Handle(x, y, type) {
     this.type = type;
 
     this.invalidate = function() {
-
-        // var cls = first ? 'first' : 'other';
-        // cls = closed ? 'closed' : cls;
-
-
-
         this.node.setAttribute('cx', this.x);
         this.node.setAttribute('cy', this.y);
         this.node.setAttribute('r', this.radius);
