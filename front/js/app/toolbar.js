@@ -64,19 +64,19 @@ function setOnClick(btn) {
         let previouslyActivatedTool = activeTool;
 
         switch (btn.id) {
-            case 'btn_save':
+            case Tool.save().buttonId:
                 activeTool = Tool.save();
                 break;
-            case 'btn_hand':
+            case Tool.hand().buttonId:
                 activeTool = Tool.hand();
                 break;
-            case 'btn_polygon':
+            case Tool.polygon().buttonId:
                 activeTool = Tool.polygon();
                 break;
-            case 'btn_brightness_high':
+            case Tool.brightnessIncrease().buttonId:
                 activeTool = Tool.brightnessIncrease();
                 break;
-            case 'btn_brightness_low':
+            case Tool.brightnessDecrease().buttonId:
                 activeTool = Tool.brightnessDecrease();
                 break;
         }
