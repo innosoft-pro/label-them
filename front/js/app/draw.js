@@ -144,7 +144,7 @@ function Path() {
 
     this.build = function (points) {
 
-        res = [];
+        var res = [];
 
         for (var i = 1,l = points.length; i < l; i++) {
             res.push(points[i].join(' '));
