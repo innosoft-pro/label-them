@@ -40,6 +40,9 @@ function closePolygon() {
     currentPolygon.onPolygonClick = onPolygonClick;
     polygons.push(currentPolygon);
 
+    // Assigning polygons points to the dataEntity (saving polygons points)
+    onPolygonClosed(currentPolygon.pointsList);
+
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
     }
