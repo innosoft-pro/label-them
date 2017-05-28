@@ -1,6 +1,6 @@
 function Patch() {
-
     let pointList = [];
+
     this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
 
     this.state = 'normal';
@@ -142,7 +142,7 @@ function Polygon(startX, startY) {
     };
 
     this.attribute = function (key, val) {
-        if (val === undefined) return node.getAttribute(key);
+        if (val === undefined) return node.getAttribute(key); // FIXME: Does this node need to be changed to this.node?
         this.node.setAttribute(key, val);
     };
 
