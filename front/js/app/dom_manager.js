@@ -17,6 +17,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     classes.push("</h4>");
     parameters.push("<div class=\"dropdown dropdown-menu-parameters\">");
     parameters.push("<select class=\"class-param form-control\" name=\"");
+    parameters.push("class");
     parameters.push("\">");
     // Additional margin to add some space between input groups and drop down menus
     // Otherwise they stick to one another
@@ -65,6 +66,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
                 parameters.push(obj.prefix);
                 parameters.push("</span>");
                 parameters.push("<input type=\"text\" class=\"form-control string-param\" placeholder=\"");
+                parameters.push(obj.name);
+                parameters.push("\" name=\"");
                 parameters.push(obj.name);
                 parameters.push("\" aria-describedby=\"basic-addon");
                 parameters.push(inputGroupsCount);
@@ -169,6 +172,51 @@ function resetClassesAndParametersValues(document) {
     }
 }
 
+function setClassesAndParametersValues(dataEntity) {
+
+    resetDOM();
+
+
+
+    for (var key in dataEntity.parameters) {
+      if (dataEntity.parameters.hasOwnProperty(key)) {
+        console.log(key + " -> " + dataEntity.parameters[key]);
+        let el = document.getElementsByName(key)[0];
+        console.log(el);
+
+
+        if (el.type === "checkbox") {
+          el.checked = dataEntity.parameters[key];
+        } else {
+          el.value = dataEntity.parameters[key];
+        }
+
+
+      }
+    }
+
+
+    // let classParameters = document.getElementsByClassName("class-param");
+    // Array.prototype.forEach.call(classParameters, parameter => {
+    //     parameter.value = "Select Class";
+    // });
+    //
+    // let boolParameters = document.getElementsByClassName("bool-param");
+    // Array.prototype.forEach.call(boolParameters, parameter => {
+    //     parameter.checked = false;
+    // });
+    //
+    // let stringParameters = document.getElementsByClassName("string-param");
+    // Array.prototype.forEach.call(stringParameters, parameter => {
+    //     parameter.value = "";
+    // });
+    //
+    // let selectParameters = document.getElementsByClassName("select-param");
+    // for (let i = 0; i < selectParameters.length; i++) {
+    //     selectParameters.item(i).value = selectDefaultParameters[i];
+    // }
+}
+
 // Message type which correspond to the ones used in bootstrap
 var MessageTypeEnum = Object.freeze({SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4});
 
@@ -224,12 +272,5 @@ function initDOM() {
 }
 
 function resetDOM() {
-    let json_params = document.getElementById("json_params").innerText;
-    // Toloka strips all strings of double quotes for reasons unknown so in order
-    // to get JSON.parse to work we need to replace all occurence of \ with "
-    // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
-    // but until then this does the job
-
-    json_params = replaceAll(json_params, '\\', '"');
     resetClassesAndParametersValues(document);
 }
