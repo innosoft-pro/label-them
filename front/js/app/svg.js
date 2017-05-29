@@ -1,5 +1,4 @@
 var svgImg;
-var pointsList = [];
 
 var polygons = {};
 
@@ -11,7 +10,6 @@ let polygonId = 0;
 function initSvg(ms) {
     svgImg = document.getElementsByClassName('svg-img')[0];
     initCoordinates(svgImg);
-    pointsList = [];
 }
 
 function svgImgOnClick(event) {
@@ -88,4 +86,11 @@ function showPolygonSelectedMessage() {
             "Please, markup the image displayed below using the tools from the block on the left.",
             MessageTypeEnum.INFO);
     }, 5000);
+}
+
+function resetSVGPolygonData() {
+    polygons = {};
+    currentPolygon = null;
+    selectedPolygon = null;
+    polygonId = 0;
 }

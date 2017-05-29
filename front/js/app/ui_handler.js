@@ -2,7 +2,6 @@
  * Created by Alexey Merzlikin on 14.04.2017.
  */
 
-// var de;
 /*global DataCollector*/
 /*eslint no-undef: "error"*/
 var dc = new DataCollector();
@@ -38,4 +37,8 @@ function onStringParamUpdate(name, value) {
 
 function onSave() {
     dc.getJSON();
+}
+
+function resetDataCollector() {
+    dc = new DataCollector();
 }
