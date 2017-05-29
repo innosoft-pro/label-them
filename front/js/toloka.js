@@ -23,7 +23,7 @@ function extend(ParentClass, constructorFunction, prototypeHash) {
     if (ParentClass) {
         constructorFunction.prototype = Object.create(ParentClass.prototype);
     }
-    for (var i in prototypeHash) {
+    for (let i in prototypeHash) {
         constructorFunction.prototype[i] = prototypeHash[i];
     }
     return constructorFunction;
