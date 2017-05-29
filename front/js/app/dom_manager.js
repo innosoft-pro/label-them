@@ -176,25 +176,22 @@ function setClassesAndParametersValues(dataEntity) {
 
     resetDOM();
 
+    for (let key in dataEntity.parameters) {
+        if (dataEntity.parameters.hasOwnProperty(key)) {
+            // console.log(key + " -> " + dataEntity.parameters[key]);
+            let el = document.getElementsByName(key)[0];
+            // console.log(el);
 
 
-    for (var key in dataEntity.parameters) {
-      if (dataEntity.parameters.hasOwnProperty(key)) {
-        // console.log(key + " -> " + dataEntity.parameters[key]);
-        let el = document.getElementsByName(key)[0];
-        // console.log(el);
+            if (el.type === "checkbox") {
+                el.checked = dataEntity.parameters[key];
+            } else {
+                el.value = dataEntity.parameters[key];
+            }
 
 
-        if (el.type === "checkbox") {
-          el.checked = dataEntity.parameters[key];
-        } else {
-          el.value = dataEntity.parameters[key];
         }
-
-
-      }
     }
-
 
     // let classParameters = document.getElementsByClassName("class-param");
     // Array.prototype.forEach.call(classParameters, parameter => {
