@@ -1,7 +1,7 @@
 var svgImg;
 var pointsList = [];
 
-var polygons = [];
+var polygons = {};
 
 let currentPolygon = null;
 let selectedPolygon = null;
@@ -25,7 +25,6 @@ function svgImgOnClick(event) {
         }
     } else {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
-        polygonId = polygonId + 1;
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
 
@@ -44,7 +43,8 @@ function svgImgOnClickSelect(event) {
 function closePolygon() {
     currentPolygon.close();
     currentPolygon.onPolygonClick = onPolygonClick;
-    polygons.push(currentPolygon);
+    polygons[polygonId] = currentPolygon;
+    polygonId = polygonId + 1;
 
     // Assigning polygons points to the dataEntity (saving polygons points)
     onPolygonClosed(currentPolygon);

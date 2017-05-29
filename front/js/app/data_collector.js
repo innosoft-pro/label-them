@@ -31,7 +31,21 @@ DataEntity.prototype.setParams = function (data) {
 };
 
 DataCollector.prototype.getJSON = function () {
-    let json = JSON.stringify(this);
+    let dataEntities = [];
+    for (let i = 0; i < polygonId; i++) {
+        dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
+    }
+    let json = JSON.stringify(dataEntities);
     window.thisTask.setSolutionOutputValue("result", json);
     return json;
 };
+
+class DataEntityToBeExported {
+    constructor(entity) {
+        this.points = polygons[entity.polygonId].pointsList;
+        this.parameters = entity.parameters;
+    }
+    toString() {
+        return JSON.stringify(this);
+    }
+}
