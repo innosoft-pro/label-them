@@ -116,7 +116,7 @@ function Path() {
 
 }
 
-function Polygon(startX, startY) {
+function Polygon(startX, startY, polygonId) {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
@@ -136,6 +136,8 @@ function Polygon(startX, startY) {
     this.handles.push(handle);
 
     this.node.append(handle.node);
+
+    this.polygonId = polygonId;
 
     this.onPolygonClick = function (polygon) {
         console.log('default onclick polygon');

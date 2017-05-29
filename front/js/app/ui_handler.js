@@ -2,7 +2,7 @@
  * Created by Alexey Merzlikin on 14.04.2017.
  */
 
-var de;
+// var de;
 /*global DataCollector*/
 /*eslint no-undef: "error"*/
 var dc = new DataCollector();
@@ -10,27 +10,29 @@ var dc = new DataCollector();
 function onPolygonClosed(data) {
     /*global DataEntity*/
     /*eslint no-undef: "error"*/
-    de = new DataEntity();
-    dc.addEntity(de);
-    /*global setPoints*/
-    /*eslint no-undef: "error"*/
-    de.setPoints(data.slice(0, pointsList.length - 1));
+    de = new DataEntity(data.polygonId);
+    dc.addEntity(de, data.polygonId);
+}
+
+function onPolygonSelected(data) {
+    dc.selectEntity(data.polygonId);
+    console.log(dc.getActiveEntity());
 }
 
 function onBoolParamUpdate(name, isChecked) {
-    de.setParams({[name]: isChecked});
+    dc.getActiveEntity().setParams({[name]: isChecked});
 }
 
 function onObjectClassUpdate(value) {
-    de.setParams({"class": value});
+    dc.getActiveEntity().setParams({"class": value});
 }
 
 function onSelectParamUpdate(name, value) {
-    de.setParams({[name]: value});
+    dc.getActiveEntity().setParams({[name]: value});
 }
 
 function onStringParamUpdate(name, value) {
-    de.setParams({[name]: value});
+    dc.getActiveEntity().setParams({[name]: value});
 }
 
 function onSave() {

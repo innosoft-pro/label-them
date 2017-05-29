@@ -3,21 +3,28 @@
  */
 
 function DataCollector() {
-    this.dataEntities = [];
+    this.dataEntities = {};
+
+    this.activeEntity = null;
 }
 
-DataCollector.prototype.addEntity = function (entity) {
-    this.dataEntities.push(entity);
+DataCollector.prototype.addEntity = function (entity, id) {
+    this.dataEntities[id] = entity;
 };
 
-function DataEntity() {
-    this.points = [];
+DataCollector.prototype.selectEntity = function (id) {
+    this.activeEntity = this.dataEntities[id];
+};
+
+DataCollector.prototype.getActiveEntity = function () {
+    return this.activeEntity;
+};
+
+
+function DataEntity(polygonId) {
+    this.polygonId = polygonId;
     this.parameters = {};
 }
-
-DataEntity.prototype.setPoints = function (data) {
-    this.points = data;
-};
 
 DataEntity.prototype.setParams = function (data) {
     this.parameters = Object.assign(this.parameters, data);

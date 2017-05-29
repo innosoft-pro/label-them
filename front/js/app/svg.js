@@ -6,6 +6,8 @@ var polygons = [];
 let currentPolygon = null;
 let selectedPolygon = null;
 
+let polygonId = 0;
+
 function initSvg(ms) {
     svgImg = document.getElementsByClassName('svg-img')[0];
     initCoordinates(svgImg);
@@ -22,7 +24,8 @@ function svgImgOnClick(event) {
             currentPolygon.addPoint(point.x, point.y);
         }
     } else {
-        currentPolygon = new Polygon(point.x, point.y);
+        currentPolygon = new Polygon(point.x, point.y, polygonId);
+        polygonId = polygonId + 1;
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
 
@@ -44,7 +47,7 @@ function closePolygon() {
     polygons.push(currentPolygon);
 
     // Assigning polygons points to the dataEntity (saving polygons points)
-    onPolygonClosed(currentPolygon.pointsList);
+    onPolygonClosed(currentPolygon);
 
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
@@ -53,6 +56,7 @@ function closePolygon() {
     selectedPolygon = currentPolygon;
     selectedPolygon.setSelected(true);
     showPolygonSelectedMessage();
+    onPolygonSelected(selectedPolygon);
 
     currentPolygon = null;
 }
@@ -65,7 +69,12 @@ function onPolygonClick(polygon) {
 
 
     polygon.setSelected(true);
+
+
     selectedPolygon = polygon;
+
+    onPolygonSelected(selectedPolygon);
+
     showPolygonSelectedMessage();
     // Bring it to top
     svgImg.append(selectedPolygon.node);
