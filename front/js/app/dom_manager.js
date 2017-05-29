@@ -180,9 +180,9 @@ function setClassesAndParametersValues(dataEntity) {
 
     for (var key in dataEntity.parameters) {
       if (dataEntity.parameters.hasOwnProperty(key)) {
-        console.log(key + " -> " + dataEntity.parameters[key]);
+        // console.log(key + " -> " + dataEntity.parameters[key]);
         let el = document.getElementsByName(key)[0];
-        console.log(el);
+        // console.log(el);
 
 
         if (el.type === "checkbox") {
