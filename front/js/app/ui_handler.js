@@ -10,7 +10,7 @@ var dc = new DataCollector();
 function onPolygonClosed(data) {
     /*global DataEntity*/
     /*eslint no-undef: "error"*/
-    de = new DataEntity(data.polygonId);
+    let de = new DataEntity(data.polygonId);
     dc.addEntity(de, data.polygonId);
 }
 
