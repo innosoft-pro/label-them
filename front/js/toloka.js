@@ -4,9 +4,8 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
     onRender: function () {
         $(document).ready(function () {
             initDOM();
-            initCanvas();
-            initSvg();
-            initNavMenu();
+            initPresentationLayer();
+            initToolbar();
         });
 
         window.thisTask = this;

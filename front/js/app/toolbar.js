@@ -43,7 +43,7 @@ function getElements() {
     btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
 }
 
-function initNavMenu() {
+function initToolbar() {
     initSave();
     initHand();
     initPolygon();
