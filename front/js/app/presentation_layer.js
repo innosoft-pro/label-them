@@ -6,7 +6,7 @@ let img = new Image();
 
 function initPresentationLayer() {
     img.onload = function () {
-        resize(img);
+        resize();
         window.addEventListener("resize", resize, false);
     };
 
@@ -17,10 +17,9 @@ function initPresentationLayer() {
 
 /*
  * handles resizing of the canvas and of the svg layer for 1 to 1 mapping between image height and canvas & svg height
- * accepts Image() as input
  * sends a notification to the user if not the full image will be shown
  **/
-function resize(img) {
+function resize() {
     let notificationString = resizeCanvas(img);
     resizeSvg(img);
 
