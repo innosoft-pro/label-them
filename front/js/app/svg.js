@@ -8,7 +8,7 @@ let selectedPolygon = null;
 let polygonId = 0;
 
 function initSvg() {
-    svgImg = document.getElementsByClassName('svg-img')[0];
+    svgImg = document.getElementById("svg-img");
     initCoordinates(svgImg);
 }
 
