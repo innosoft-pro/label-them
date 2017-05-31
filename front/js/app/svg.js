@@ -8,7 +8,7 @@ let selectedPolygon = null;
 let polygonId = 0;
 
 function initSvg() {
-    svgImg = document.getElementById("svg-img");
+    svgImg = document.getElementById("svg_img");
     initCoordinates(svgImg);
 }
 
@@ -17,7 +17,7 @@ function svgImgOnClick(event) {
 
     if (currentPolygon !== null) {
         if (currentPolygon.shouldClose(point.x, point.y)) {
-            closePolygon(currentPolygon);
+            closePolygon();
         } else {
             currentPolygon.addPoint(point.x, point.y);
         }
@@ -105,7 +105,7 @@ function resizeSvg(img) {
 
     let svg = document.getElementById("svg_img");
 
-    // 28 is the width of two 14px paddings from each side of the canvas, specified in bootstrap
+    // 28 is the width of two 14px paddings from each side of the svg layer, specified in bootstrap
     parent.style.minHeight = (img.height + 28) + "px";
 
     let height = parent.clientHeight;
