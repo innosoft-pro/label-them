@@ -120,7 +120,6 @@ function Polygon(startX, startY, polygonId) {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
-    this.lines = []; // FIXME: Needs to be removed?
 
     this.node = document.createElementNS('http://www.w3.org/2000/svg', 'g');
 
@@ -144,7 +143,7 @@ function Polygon(startX, startY, polygonId) {
     };
 
     this.attribute = function (key, val) {
-        if (val === undefined) return node.getAttribute(key); // FIXME: Does this node need to be changed to this.node?
+        if (val === undefined) return this.node.getAttribute(key); // FIXME: Does this node need to be changed to this.node?
         this.node.setAttribute(key, val);
     };
 
@@ -206,8 +205,6 @@ function Polygon(startX, startY, polygonId) {
 
     };
 
-
     // Setup event listeners
-    // this.patch.node.onclick = this.onclick;
     this.patch.node.addEventListener('click', this.onclick.bind(this), true);
 }
