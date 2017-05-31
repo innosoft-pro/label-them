@@ -6,20 +6,19 @@ function initCanvas() {
         window.addEventListener("resize", resize, false);
     };
 
-    var url = document.getElementById("img_url").innerText;
-    img.src = url;
+    img.src = document.getElementById("img_url").innerText;
 }
 
 // loading remote image
-var img = new Image();
+let img = new Image();
 
 // WARNING! GOVNOKOD AHEAD!!!
-var aspectRatio = img.width / img.height;
+let aspectRatio = img.width / img.height;
 
 
 function drawImg(img) {
-    var canvas = document.getElementById("main-canvas");
-    var ctx = canvas.getContext("2d");
+    let canvas = document.getElementById("main-canvas");
+    let ctx = canvas.getContext("2d");
 
     ctx.drawImage(img, 0, 0, canvas.width, img.height,     // source rectangle
         0, 0, canvas.width, canvas.height); // destination rectangle
@@ -27,18 +26,17 @@ function drawImg(img) {
 
 // handles resizing of the canvas for 1 to 1 mapping between image height and canvas height
 function resize() {
-    var canvas = document.getElementById("main-canvas");
-    var ctx = canvas.getContext("2d");
+    let canvas = document.getElementById("main-canvas");
 
     // make canvas fit parent div
-    var parent = document.getElementById("canvas-parent");
-    var svg = document.getElementById("svg_img");
+    let parent = document.getElementById("canvas-parent");
+    let svg = document.getElementById("svg_img");
 
     // 28 is the width of two 14px paddings from each side of the canvas, specified in bootstrap
     parent.style.minHeight = (img.height + 28) + "px";
 
-    var height = parent.clientHeight;
-    var width = parent.clientWidth;
+    let height = parent.clientHeight;
+    let width = parent.clientWidth;
 
     // resizing canvas if image width is smaller than the width of the block for the image
     // to avoid redundant markup over empty space in the block
