@@ -6,21 +6,21 @@
 *LabelThem* is an online markup tool aimed at building image datasets for computer vision research, and integrated with 
 [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/).
 
-#### System Prerequisites
+## System Prerequisites
 
 In order to get started, you'll need to install [NodeJS runtime](https://nodejs.org/en/),
 [Bower package manager](https://bower.io/#install-bower)
 and [Grunt's command line interface (CLI)](https://gruntjs.com/getting-started) globally.
 You may need to use `sudo` (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this.
 
-#### Important Notice
+## Important Notice
 At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in 
 [Chromium Browser](http://www.chromium.org/Home) and [Chrome](https://www.google.ru/chrome) web browsers.
 
 If an image cannot fit the screen in width. Only left part of the image that fits the screen will be displayed 
 and available for markup!
 
-#### Building the system / Generating source files for Yandex.Toloka
+## Building the system / Generating source files for Yandex.Toloka
 
 In order to test the system on the local machine, or to generate source files needed to run the system on 
 Yandex Toloka crowdsourcing platform you need to open a directory, which contains *LabelThem* system source code 
