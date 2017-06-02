@@ -8,7 +8,7 @@ import json
 def json_valid(json_string):
   try:
     json_object = json.loads(json_string)
-  except ValueError, e:
+  except ValueError:
     return False
   return True
 
