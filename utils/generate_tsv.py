@@ -30,7 +30,7 @@ with open('tasks.tsv', 'w') as csvfile, open(params_path, 'r') as json_params:
     json_string = ''.join(json_params.readlines())
 
     if json_valid(json_string):
-        json_str_proc = (''.join([l.strip() for l in json_params.readlines()])).replace('"', '\\')
+        json_str_proc = (''.join([l.strip() for l in json_string])).replace('"', '\\')
 
         fieldnames = ['INPUT:image_rel', 'INPUT:json_params', 'GOLDEN:result']
         writer = csv.DictWriter(csvfile, delimiter='\t',fieldnames=fieldnames)
