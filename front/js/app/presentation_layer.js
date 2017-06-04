@@ -5,12 +5,12 @@
 let img = new Image();
 
 function initPresentationLayer() {
+    img.src = document.getElementById("img_url").innerText;
     img.onload = function () {
         resize();
+        initZoom();
         window.addEventListener("resize", resize, false);
     };
-
-    img.src = document.getElementById("img_url").innerText;
 
     initSvg();
 }

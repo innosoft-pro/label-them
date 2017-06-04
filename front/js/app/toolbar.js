@@ -37,10 +37,10 @@ function getElements() {
     btnHand = document.getElementById(Tool.hand().buttonId);
     btnPolygon = document.getElementById(Tool.polygon().buttonId);
     btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
-    btnZoomIn = document.getElementById("btn_zoom_in");     // TODO: Modify when zoom_in tool implemented
-    btnZoomOut = document.getElementById("btn_zoom_in");    // TODO: Modify when zoom_out tool implemented
     btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
     btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
+    btnZoomIn = document.getElementById(Tool.zoomIn().buttonId);
+    btnZoomOut = document.getElementById(Tool.zoomOut().buttonId);
 }
 
 function initToolbar() {
@@ -49,6 +49,8 @@ function initToolbar() {
     initPolygon();
     initBrightnessIncrease();
     initBrightnessDecrease();
+    initZoomIn();
+    initZoomOut();
     getElements();
     setElementsOnClick();
     initBrightness();
@@ -78,6 +80,12 @@ function setOnClick(btn) {
                 break;
             case Tool.brightnessDecrease().buttonId:
                 activeTool = Tool.brightnessDecrease();
+                break;
+            case Tool.zoomIn().buttonId:
+                activeTool = Tool.zoomIn();
+                break;
+            case Tool.zoomOut().buttonId:
+                activeTool = Tool.zoomOut();
                 break;
         }
 

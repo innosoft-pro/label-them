@@ -30,8 +30,6 @@ function resizeCanvas(img) {
     }
 
     // modify both canvas style and canvas dimension
-    canvas.style.height = height + "px";
-    canvas.style.width = width + "px";
     canvas.width = width;
     canvas.height = height;
 

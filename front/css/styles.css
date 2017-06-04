@@ -22,33 +22,25 @@
     margin-left: 16px;
 }
 
-canvas {
-    /*background: gray;*/
-    /*width: 600px;
-    height: 800px;*/
-
-    display: flex;
-    margin: 0 auto;
-    width: 100%
-}
-
 /* Additional margin to add some space between input groups and drop down menus */
 .dropdown-menu-parameters {
     margin-top: 14px;
 }
 
 #main-canvas {
-    position: absolute;
+    display: flex;
+    margin: 0 auto;
+    float: left;
 }
 
 #canvas-parent {
     overflow: scroll;
-    min-height: 550px;
+    height: 550px;
     padding: 0;
 }
 
 #svg_img {
-    position: absolute;
+
 }
 
 

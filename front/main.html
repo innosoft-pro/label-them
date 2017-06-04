@@ -61,11 +61,11 @@
                             <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/edit_button.png"
                                  width="48"/>
                         </button>
-                        <button id="btn_zoom_in" class="btn btn-default hidden btn-zoom-in">
+                        <button id="btn_zoom_in" class="btn btn-default btn-zoom-in">
                             <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_in_button.png"
                                  width="48"/>
                         </button>
-                        <button id="btn_zoom_out" class="btn btn-default hidden btn-zoom-out">
+                        <button id="btn_zoom_out" class="btn btn-default btn-zoom-out">
                             <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop/front/img/zoom_out_button.png"
                                  width="48"/>
                         </button>
@@ -86,14 +86,15 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                            <div id="canvas-parent">
-                                <div id="img_url" hidden>{{ proxy image_rel}}</div>
-                                <div id="json_params" hidden>{{ json_params }}</div>
-                                <canvas id="main-canvas">
-                                </canvas>
-                                <!--onclick="svgImgOnClick(event)"-->
-                                <svg id="svg_img" class="svg-img"></svg>
+                            <div>
 
+                                <div id="canvas-parent">
+                                    <div id="img_url" hidden>{{ proxy image_rel}}</div>
+                                    <div id="json_params" hidden>{{ json_params }}</div>
+                                    <canvas id="main-canvas">
+                                    </canvas>
+                                </div>
+                                <svg id="svg_img" class="svg-img"></svg>
                             </div>
                         </div>
                     </div>
@@ -191,9 +192,8 @@
     </div>
 </div>
 <script>
-    //initCanvas();
-    //initSvg();
-    //initNavMenu();
+    // initPresentationLayer();
+    // initToolbar();
 </script>
 </body>
 </html>
