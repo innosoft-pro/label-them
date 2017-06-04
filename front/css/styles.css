@@ -35,7 +35,7 @@
 
 #canvas-parent {
     overflow: scroll;
-    height: 550px;
+    min-height: 550px;
     padding: 0;
 }
 
