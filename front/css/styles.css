@@ -35,7 +35,7 @@
 
 #canvas-parent {
     overflow: scroll;
-    min-height: 550px;
+    height: 550px;
     padding: 0;
 }
 
@@ -46,53 +46,53 @@
 
 /*SVG*/
 circle {
-  stroke-width: 5;
+    stroke-width: 5;
 }
 
 circle.first {
-  stroke: #666600;
-  fill:   #cccc00;
+    stroke: #666600;
+    fill:   #cccc00;
 
 }
 
 circle.first:hover {
-  stroke: #aaaa00;
+    stroke: #aaaa00;
 }
 
 circle.other {
-  stroke: #006600;
-  fill:   #00cc00;
+    stroke: #006600;
+    fill:   #00cc00;
 }
 
 circle.normal {
-  stroke: #666666;
-  fill:   #000000;
+    stroke: #666666;
+    fill:   #000000;
 }
 
 circle.selected {
-  stroke: #aaaaaa;
-  fill:   #000000;
+    stroke: #aaaaaa;
+    fill:   #000000;
 }
 
 circle.selected:hover {
-  stroke: #ffffff;
+    stroke: #ffffff;
 }
 
 path {
-  fill: none;
-  stroke: black;
+    fill: none;
+    stroke: black;
 }
 
 polygon.normal {
-  fill: #000000;
-  fill-opacity: 0.8;
+    fill: #000000;
+    fill-opacity: 0.8;
 }
 
 polygon.normal:hover {
-  fill-opacity: 0.4;
+    fill-opacity: 0.4;
 }
 
 polygon.selected {
-  fill: #003300;
-  fill-opacity: 0.3;
+    fill: #003300;
+    fill-opacity: 0.3;
 }
