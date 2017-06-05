@@ -9,6 +9,8 @@ let polygonId = 0;
 
 function initSvg() {
     svgImg = document.getElementById("svg_img");
+    /*global initCoordinates*/
+    /*eslint no-undef: "error"*/
     initCoordinates(svgImg);
 }
 
@@ -79,6 +81,8 @@ function onPolygonClick(polygon) {
 }
 
 function showPolygonSelectedMessage() {
+    /*global MessageTypeEnum*/
+    /*eslint no-undef: "error"*/
     showMessage("Please, characterize the selected object in the right menu.",
         MessageTypeEnum.WARNING);
     setTimeout(function () {

@@ -12,6 +12,8 @@ function initPresentationLayer() {
 
     img.src = document.getElementById("img_url").innerText;
 
+    /*global initSvg*/
+    /*eslint no-undef: "error"*/
     initSvg();
 }
 
