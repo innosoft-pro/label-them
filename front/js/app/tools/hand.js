@@ -2,6 +2,10 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initHand() {
+    function handleClicksOnSvgWithHandTool() {
+        svgImgOnClickSelect(event);
+    }
+
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.hand = function () {
@@ -23,8 +27,4 @@ function initHand() {
             buttonId: "btn_hand"
         });
     };
-
-    function handleClicksOnSvgWithHandTool() {
-        svgImgOnClickSelect(event);
-    }
 }

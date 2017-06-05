@@ -2,6 +2,10 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initPolygon() {
+    function handleClicksOnSvgWithPolygonTool() {
+        svgImgOnClick(event);
+    }
+
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.polygon = function () {
@@ -23,8 +27,4 @@ function initPolygon() {
             buttonId: "btn_polygon"
         });
     };
-
-    function handleClicksOnSvgWithPolygonTool() {
-        svgImgOnClick(event);
-    }
 }
