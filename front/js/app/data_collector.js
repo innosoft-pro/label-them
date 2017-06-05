@@ -32,6 +32,8 @@ DataEntity.prototype.setParams = function (data) {
 
 DataCollector.prototype.getJSON = function () {
     let dataEntities = [];
+    /*global polygonId*/
+    /*eslint no-undef: "error"*/
     for (let i = 0; i < polygonId; i++) {
         dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
     }
