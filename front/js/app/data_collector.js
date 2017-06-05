@@ -8,6 +8,16 @@ function DataCollector() {
     this.activeEntity = null;
 }
 
+class DataEntityToBeExported {
+    constructor(entity) {
+        this.points = polygons[entity.polygonId].pointsList;
+        this.parameters = entity.parameters;
+    }
+    toString() {
+        return JSON.stringify(this);
+    }
+}
+
 DataCollector.prototype.addEntity = function (entity, id) {
     this.dataEntities[id] = entity;
 };
@@ -41,13 +51,3 @@ DataCollector.prototype.getJSON = function () {
     window.thisTask.setSolutionOutputValue("result", json);
     return json;
 };
-
-class DataEntityToBeExported {
-    constructor(entity) {
-        this.points = polygons[entity.polygonId].pointsList;
-        this.parameters = entity.parameters;
-    }
-    toString() {
-        return JSON.stringify(this);
-    }
-}
