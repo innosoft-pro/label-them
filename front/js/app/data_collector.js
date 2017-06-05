@@ -34,6 +34,8 @@ DataCollector.prototype.getActiveEntity = function () {
 
 
 function DataEntity(polygonId) {
+    /*global polygonId*/
+    /*eslint no-undef: "error"*/
     this.polygonId = polygonId;
     this.parameters = {};
 }
