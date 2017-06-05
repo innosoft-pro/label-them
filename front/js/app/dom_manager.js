@@ -259,7 +259,7 @@ function escapeRegExp(str) {
 }
 
 function replaceAll(str, find, replace) {
-    return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
+    return str.replace(new RegExp(escapeRegExp(find), "g"), replace);
 }
 
 function initDOM() {
@@ -269,7 +269,7 @@ function initDOM() {
     // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
     // but until then this does the job
 
-    jsonParams = replaceAll(jsonParams, '\\', '"');
+    jsonParams = replaceAll(jsonParams, "\\", "\"\"");
     generateHTMLCodeForClassesAndParameters(document, jsonParams);
 }
 
