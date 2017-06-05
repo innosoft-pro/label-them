@@ -2,6 +2,8 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initHand() {
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.hand = function () {
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {

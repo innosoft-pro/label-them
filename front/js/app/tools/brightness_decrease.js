@@ -2,6 +2,8 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initBrightnessDecrease() {
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.brightnessDecrease = function () {
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {

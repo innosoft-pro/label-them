@@ -2,6 +2,8 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initPolygon() {
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.polygon = function () {
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
