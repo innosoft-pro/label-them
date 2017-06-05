@@ -10,6 +10,8 @@ function DataCollector() {
 
 class DataEntityToBeExported {
     constructor(entity) {
+        /*global polygonId*/
+        /*eslint no-undef: "error"*/
         this.points = polygons[entity.polygonId].pointsList;
         this.parameters = entity.parameters;
     }
