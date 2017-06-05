@@ -217,6 +217,22 @@ function setClassesAndParametersValues(dataEntity) {
 // Message type which correspond to the ones used in bootstrap
 var MessageTypeEnum = Object.freeze({SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4});
 
+// Specifies the type of the alert message
+function specifyAlertMessageType(messageType) {
+    switch (messageType) {
+        case MessageTypeEnum.SUCCESS:
+            return "alert alert-success";
+        case MessageTypeEnum.INFO:
+            return "alert alert-info";
+        case MessageTypeEnum.WARNING:
+            return "alert alert-warning";
+        case MessageTypeEnum.DANGER:
+            return "alert alert-danger";
+        default:
+            return "alert alert-info";
+    }
+}
+
 /**
  * showMessage function displays specified message in message_space block
  * @input message - text of the message to be displayed
@@ -230,27 +246,6 @@ function showMessage(message, messageType) {
         document.getElementById("message_space").className = specifyAlertMessageType(messageType);
 
         $("#message_space").text(message);
-    }
-}
-
-// Specifies the type of the alert message
-function specifyAlertMessageType(messageType) {
-    switch (messageType) {
-        case MessageTypeEnum.SUCCESS:
-            return "alert alert-success";
-            break;
-        case MessageTypeEnum.INFO:
-            return "alert alert-info";
-            break;
-        case MessageTypeEnum.WARNING:
-            return "alert alert-warning";
-            break;
-        case MessageTypeEnum.DANGER:
-            return "alert alert-danger";
-            break;
-        default:
-            return "alert alert-info";
-            break;
     }
 }
 
