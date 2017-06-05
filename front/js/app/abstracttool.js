@@ -2,7 +2,7 @@
  * Created by alnedorezov on 5/26/17.
  */
 let Tool = {
-    onClick: function (isButtonPressed) {
+    onClick(isButtonPressed) {
     }
 };
 
