@@ -258,14 +258,14 @@ function replaceAll(str, find, replace) {
 }
 
 function initDOM() {
-    let json_params = document.getElementById("json_params").innerText;
+    let jsonParams = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
     // to get JSON.parse to work we need to replace all occurence of \ with "
     // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
     // but until then this does the job
 
-    json_params = replaceAll(json_params, '\\', '"');
-    generateHTMLCodeForClassesAndParameters(document, json_params);
+    jsonParams = replaceAll(jsonParams, '\\', '"');
+    generateHTMLCodeForClassesAndParameters(document, jsonParams);
 }
 
 function resetDOM() {
