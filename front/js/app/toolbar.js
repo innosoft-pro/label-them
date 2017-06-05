@@ -63,7 +63,7 @@ function setOnClick(btn) {
                 activeTool = null;
             }
         }
-    }
+    };
 }
 
 function setElementsOnClick() {
