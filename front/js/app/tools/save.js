@@ -4,7 +4,7 @@
 function initSave() {
     Tool.save = function () {
         return fromPrototype(Tool, {
-            onClick: function (isButtonPressed) {
+            onClick(isButtonPressed) {
                 /*global onSave*/
                 /*eslint no-undef: "error"*/
                 onSave();

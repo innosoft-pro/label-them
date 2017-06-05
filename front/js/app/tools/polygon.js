@@ -4,7 +4,7 @@
 function initPolygon() {
     Tool.polygon = function () {
         return fromPrototype(Tool, {
-            onClick: function (isButtonPressed) {
+            onClick(isButtonPressed) {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
                     if (isButtonPressed) {
                         console.log("polygon enabled");

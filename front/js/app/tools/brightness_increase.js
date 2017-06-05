@@ -4,7 +4,7 @@
 function initBrightnessIncrease() {
     Tool.brightnessIncrease = function () {
         return fromPrototype(Tool, {
-            onClick: function (isButtonPressed) {
+            onClick(isButtonPressed) {
                 plusBrightness();
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
