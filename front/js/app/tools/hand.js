@@ -5,6 +5,8 @@ function initHand() {
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.hand = function () {
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {

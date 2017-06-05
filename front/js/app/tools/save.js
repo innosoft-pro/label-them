@@ -5,6 +5,8 @@ function initSave() {
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.save = function () {
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
                 /*global onSave*/

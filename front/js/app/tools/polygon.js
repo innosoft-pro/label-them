@@ -5,6 +5,8 @@ function initPolygon() {
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.polygon = function () {
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
