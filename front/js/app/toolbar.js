@@ -89,13 +89,25 @@ function getElements() {
 }
 
 function initToolbar() {
+    /*global initSave*/
+    /*eslint no-undef: "error"*/
     initSave();
+    /*global initHand*/
+    /*eslint no-undef: "error"*/
     initHand();
+    /*global initPolygon*/
+    /*eslint no-undef: "error"*/
     initPolygon();
+    /*global initBrightnessIncrease*/
+    /*eslint no-undef: "error"*/
     initBrightnessIncrease();
+    /*global initBrightnessDecrease*/
+    /*eslint no-undef: "error"*/
     initBrightnessDecrease();
     getElements();
     setElementsOnClick();
+    /*global initBrightness*/
+    /*eslint no-undef: "error"*/
     initBrightness();
     changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
     activeTool = Tool.polygon();
