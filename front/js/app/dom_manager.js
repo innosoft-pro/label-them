@@ -227,25 +227,30 @@ function showMessage(message, messageType) {
     if ((typeof message === "string" || message instanceof String) && document.getElementById("message_space")) {
 
         // Specify the type of the alert message
-        switch (messageType) {
-            case MessageTypeEnum.SUCCESS:
-                document.getElementById("message_space").className = "alert alert-success";
-                break;
-            case MessageTypeEnum.INFO:
-                document.getElementById("message_space").className = "alert alert-info";
-                break;
-            case MessageTypeEnum.WARNING:
-                document.getElementById("message_space").className = "alert alert-warning";
-                break;
-            case MessageTypeEnum.DANGER:
-                document.getElementById("message_space").className = "alert alert-danger";
-                break;
-            default:
-                //messageSpaceBlocksClassName = "alert alert-info";
-                break;
-        }
+        document.getElementById("message_space").className = specifyAlertMessageType(messageType);
 
         $("#message_space").text(message);
+    }
+}
+
+// Specifies the type of the alert message
+function specifyAlertMessageType(messageType) {
+    switch (messageType) {
+        case MessageTypeEnum.SUCCESS:
+            return "alert alert-success";
+            break;
+        case MessageTypeEnum.INFO:
+            return "alert alert-info";
+            break;
+        case MessageTypeEnum.WARNING:
+            return "alert alert-warning";
+            break;
+        case MessageTypeEnum.DANGER:
+            return "alert alert-danger";
+            break;
+        default:
+            return "alert alert-info";
+            break;
     }
 }
 
