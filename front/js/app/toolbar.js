@@ -21,42 +21,6 @@ function changeButtonsSelectionState(btn) {
     }
 }
 
-function setElementsOnClick() {
-    setOnClick(btnSave);
-    setOnClick(btnHand);
-    setOnClick(btnPolygon);
-    setOnClick(btnEdit);
-    setOnClick(btnZoomIn);
-    setOnClick(btnZoomOut);
-    setOnClick(btnBrightnessHigh);
-    setOnClick(btnBrightnessLow);
-}
-
-function getElements() {
-    btnSave = document.getElementById(Tool.save().buttonId);
-    btnHand = document.getElementById(Tool.hand().buttonId);
-    btnPolygon = document.getElementById(Tool.polygon().buttonId);
-    btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
-    btnZoomIn = document.getElementById("btn_zoom_in");     // TODO: Modify when zoom_in tool implemented
-    btnZoomOut = document.getElementById("btn_zoom_in");    // TODO: Modify when zoom_out tool implemented
-    btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
-    btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
-}
-
-function initToolbar() {
-    initSave();
-    initHand();
-    initPolygon();
-    initBrightnessIncrease();
-    initBrightnessDecrease();
-    getElements();
-    setElementsOnClick();
-    initBrightness();
-    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
-    activeTool = Tool.polygon();
-    activeTool.onClick(true);
-}
-
 function setOnClick(btn) {
     btn.onclick = function () {
         changeButtonsSelectionState(btn);
@@ -100,4 +64,40 @@ function setOnClick(btn) {
             }
         }
     }
+}
+
+function setElementsOnClick() {
+    setOnClick(btnSave);
+    setOnClick(btnHand);
+    setOnClick(btnPolygon);
+    setOnClick(btnEdit);
+    setOnClick(btnZoomIn);
+    setOnClick(btnZoomOut);
+    setOnClick(btnBrightnessHigh);
+    setOnClick(btnBrightnessLow);
+}
+
+function getElements() {
+    btnSave = document.getElementById(Tool.save().buttonId);
+    btnHand = document.getElementById(Tool.hand().buttonId);
+    btnPolygon = document.getElementById(Tool.polygon().buttonId);
+    btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
+    btnZoomIn = document.getElementById("btn_zoom_in");     // TODO: Modify when zoom_in tool implemented
+    btnZoomOut = document.getElementById("btn_zoom_in");    // TODO: Modify when zoom_out tool implemented
+    btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
+    btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
+}
+
+function initToolbar() {
+    initSave();
+    initHand();
+    initPolygon();
+    initBrightnessIncrease();
+    initBrightnessDecrease();
+    getElements();
+    setElementsOnClick();
+    initBrightness();
+    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+    activeTool = Tool.polygon();
+    activeTool.onClick(true);
 }
