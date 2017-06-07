@@ -2,25 +2,19 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initPolygon() {
-
-    this.ctrlPressed = false;
-
     function handleClicksOnSvgWithPolygonTool() {
         svgImgOnClick(event);
     }
 
     function handleKeydown(event) {
-        if ((event.ctrlKey || event.metaKey) && event.keyCode == 90) {
-
+        if ((event.ctrlKey || event.metaKey) && event.keyCode === 90) {
             if (event.shiftKey) {
                 redoLastPoint();
             } else {
                 undoLastPoint();
             }
             console.log(event);
-
         }
-
     }
 
     /*global Tool*/
