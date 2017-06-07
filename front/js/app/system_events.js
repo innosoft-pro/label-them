@@ -6,6 +6,10 @@
 /*eslint no-undef: "error"*/
 var dc = new DataCollector();
 
+function onSave() {
+    dc.getJSON();
+}
+
 function onPolygonClosed(data) {
     /*global DataEntity*/
     /*eslint no-undef: "error"*/
@@ -48,10 +52,6 @@ function onStringParamUpdate(name, value) {
     dc.getActiveEntity().setParams({[name]: value});
 
     onSave();
-}
-
-function onSave() {
-    dc.getJSON();
 }
 
 function resetDataCollector() {
