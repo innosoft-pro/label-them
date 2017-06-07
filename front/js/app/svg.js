@@ -7,6 +7,8 @@ let selectedPolygon = null;
 
 let polygonId = 0;
 
+var redoPoints = [];
+
 function initSvg() {
     svgImg = document.getElementById("svg_img");
     /*global initCoordinates*/
@@ -17,6 +19,10 @@ function initSvg() {
 function svgImgOnClick(event) {
     let point = getPoint(event);
 
+    if (redoPoints.length > 0) {
+        redoPoints = [];
+    }
+
     if (currentPolygon !== null) {
         if (currentPolygon.shouldClose(point.x, point.y)) {
             closePolygon();
@@ -25,6 +31,9 @@ function svgImgOnClick(event) {
         }
     } else {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
+
+
+
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
 
@@ -38,6 +47,37 @@ function svgImgOnClickSelect(event) {
         selectedPolygon.setSelected(false);
         selectedPolygon = null;
     }
+}
+
+function undoLastPoint() {
+    if (currentPolygon == null) {
+      return;
+    }
+
+    let lastPointIdx = currentPolygon.pointsList.length - 1;
+
+    if (lastPointIdx <= 0) {
+        svgImg.removeChild(currentPolygon.node);
+        currentPolygon = null;
+    } else {
+        let point = currentPolygon.removePoint(lastPointIdx);
+        redoPoints.push(point);
+        console.log(point);
+    }
+}
+
+function redoLastPoint() {
+    if (currentPolygon == null || redoPoints.length < 1) {
+      return;
+    }
+
+    let point = redoPoints.pop();
+
+    console.log(point);
+
+    currentPolygon.addPoint(point[0], point[1]);
+
+
 }
 
 function closePolygon() {

@@ -97,6 +97,13 @@ function Path() {
         this.invalidate.apply(this);
     };
 
+    this.clear = function() {
+        this.points = [];
+        this.closePath = false;
+
+        this.node.setAttribute("d", "M");
+    }
+
     this.build = function (points) {
 
         let res = [];
@@ -157,6 +164,23 @@ function Polygon(startX, startY, polygonId) {
 
         this.path.setPoints(this.pointsList);
     };
+
+    this.removePoint = function (ind) {
+        let point = (this.pointsList.splice(ind, 1))[0];
+
+        let handle = this.handles[ind];
+        this.node.removeChild(handle.node);
+
+        this.handles.splice(ind, 1);
+
+        if (this.pointsList.length > 1) {
+            this.path.setPoints(this.pointsList);
+        } else {
+            this.path.clear();
+        }
+
+        return point;
+    }
 
     this.shouldClose = function (x, y) {
         let x0 = this.pointsList[0][0];
