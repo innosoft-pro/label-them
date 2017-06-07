@@ -55,7 +55,9 @@ DataCollector.prototype.getJSON = function () {
     /*global polygonId*/
     /*eslint no-undef: "error"*/
     for (let i = 0; i < polygonId; i++) {
-        dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
+        if (this.dataEntities.hasOwnProperty(i)) { // check if data entity with id=i wasn't deleted (exists)
+            dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
+        }
     }
     let json = JSON.stringify(dataEntities);
     window.thisTask.setSolutionOutputValue("result", json);
