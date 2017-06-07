@@ -97,12 +97,12 @@ function Path() {
         this.invalidate.apply(this);
     };
 
-    this.clear = function() {
+    this.clear = function () {
         this.points = [];
         this.closePath = false;
 
         this.node.setAttribute("d", "M");
-    }
+    };
 
     this.build = function (points) {
 
@@ -180,7 +180,7 @@ function Polygon(startX, startY, polygonId) {
         }
 
         return point;
-    }
+    };
 
     this.shouldClose = function (x, y) {
         let x0 = this.pointsList[0][0];
