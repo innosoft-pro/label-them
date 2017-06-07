@@ -7,7 +7,7 @@ let selectedPolygon = null;
 
 let polygonId = 0;
 
-var redoPoints = [];
+let redoPoints = [];
 
 function initSvg() {
     svgImg = document.getElementById("svg_img");
@@ -65,7 +65,7 @@ function svgImgOnClickSelect(event) {
 }
 
 function undoLastPoint() {
-    if (currentPolygon == null) {
+    if (currentPolygon === null) {
       return;
     }
 
@@ -82,7 +82,7 @@ function undoLastPoint() {
 }
 
 function redoLastPoint() {
-    if (currentPolygon == null || redoPoints.length < 1) {
+    if (currentPolygon === null || redoPoints.length < 1) {
       return;
     }
 
@@ -91,8 +91,6 @@ function redoLastPoint() {
     console.log(point);
 
     currentPolygon.addPoint(point[0], point[1]);
-
-
 }
 
 function closePolygon() {
