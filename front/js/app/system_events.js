@@ -11,6 +11,8 @@ function onPolygonClosed(data) {
     /*eslint no-undef: "error"*/
     let de = new DataEntity(data.polygonId);
     dc.addEntity(de, data.polygonId);
+
+    onSave();
 }
 
 function onPolygonSelected(data) {
@@ -20,22 +22,32 @@ function onPolygonSelected(data) {
 
 function onPolygonDeleted(data) {
     dc.deleteEntity(data.polygonId);
+
+    onSave();
 }
 
 function onBoolParamUpdate(name, isChecked) {
     dc.getActiveEntity().setParams({[name]: isChecked});
+
+    onSave();
 }
 
 function onObjectClassUpdate(value) {
     dc.getActiveEntity().setParams({"class": value});
+
+    onSave();
 }
 
 function onSelectParamUpdate(name, value) {
     dc.getActiveEntity().setParams({[name]: value});
+
+    onSave();
 }
 
 function onStringParamUpdate(name, value) {
     dc.getActiveEntity().setParams({[name]: value});
+
+    onSave();
 }
 
 function onSave() {
