@@ -33,6 +33,23 @@ function svgImgOnClick(event) {
     }
 }
 
+function svgImgDeleteSelectedPolygon() {
+    if (selectedPolygon != null) {
+        if (selectedPolygon.polygonId in polygons) {
+            delete polygons[selectedPolygon.polygonId];
+            onPolygonDeleted(selectedPolygon);
+
+            var parentNode = selectedPolygon.node.parentNode;
+            // parentNode.removeChild()
+            svgImg.removeChild(selectedPolygon.node);
+
+            selectedPolygon = null;
+        }
+
+
+    }
+}
+
 function svgImgOnClickSelect(event) {
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);

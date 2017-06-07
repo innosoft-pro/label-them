@@ -28,6 +28,12 @@ DataCollector.prototype.selectEntity = function (id) {
     this.activeEntity = this.dataEntities[id];
 };
 
+DataCollector.prototype.deleteEntity = function (id) {
+    if (id in this.dataEntities) {
+        delete this.dataEntities[id];
+    }
+};
+
 DataCollector.prototype.getActiveEntity = function () {
     return this.activeEntity;
 };

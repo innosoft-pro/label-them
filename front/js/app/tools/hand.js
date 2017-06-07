@@ -6,6 +6,13 @@ function initHand() {
         svgImgOnClickSelect(event);
     }
 
+
+    function handleKeyUp(event) {
+        if (event.keyCode == 8 || event.keyCode == 46) {
+            svgImgDeleteSelectedPolygon();
+        }
+    }
+
     /*global Tool*/
     /*eslint no-undef: "error"*/
     Tool.hand = function () {
@@ -17,9 +24,11 @@ function initHand() {
                     if (isButtonPressed) {
                         console.log("hand enabled");
                         svgImg.addEventListener("click", handleClicksOnSvgWithHandTool, true);
+                        window.addEventListener("keyup", handleKeyUp, true);
                     } else {
                         console.log("hand disabled");
                         svgImg.removeEventListener("click", handleClicksOnSvgWithHandTool, true);
+                        window.removeEventListener("keyup", handleKeyUp, true);
                     }
                 }
             },

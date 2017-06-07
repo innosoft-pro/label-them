@@ -15,8 +15,11 @@ function onPolygonClosed(data) {
 
 function onPolygonSelected(data) {
     dc.selectEntity(data.polygonId);
-
     setClassesAndParametersValues(dc.getActiveEntity())
+}
+
+function onPolygonDeleted(data) {
+    dc.deleteEntity(data.polygonId);
 }
 
 function onBoolParamUpdate(name, isChecked) {
