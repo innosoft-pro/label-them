@@ -16,7 +16,15 @@ function initSvg() {
     initCoordinates(svgImg);
 }
 
+function svgImgCancelPolygon() {
+    if (currentPolygon != null) {
+        svgImg.removeChild(currentPolygon.node);
+        currentPolygon = null;
+    }
+}
+
 function svgImgOnClick(event) {
+  
     let point = getPoint(event);
 
     if (redoPoints.length > 0) {

@@ -13,8 +13,13 @@ function initPolygon() {
             } else {
                 undoLastPoint();
             }
-            console.log(event);
         }
+    }
+
+    function handleContextMenu(event) {
+        // console.log(event);
+        event.returnValue = false;
+        svgImgCancelPolygon();
     }
 
     /*global Tool*/
@@ -28,10 +33,13 @@ function initPolygon() {
                     if (isButtonPressed) {
                         console.log("polygon enabled");
                         svgImg.addEventListener("click", handleClicksOnSvgWithPolygonTool, true);
+                        svgImg.addEventListener("contextmenu", handleContextMenu, true);
                         window.addEventListener("keydown", handleKeydown, true);
+
                     } else {
                         console.log("polygon disabled");
                         svgImg.removeEventListener("click", handleClicksOnSvgWithPolygonTool, true);
+                        svgImg.removeEventListener("contextmenu", handleContextMenu, true);
                         window.removeEventListener("keydown", handleKeydown, true);
                     }
                 }
