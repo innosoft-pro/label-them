@@ -101,7 +101,7 @@ function Path() {
         this.points = [];
         this.closePath = false;
 
-        this.node.setAttribute("d", "M");
+        this.node.setAttribute("d", "");
     };
 
     this.build = function (points) {
