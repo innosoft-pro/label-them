@@ -19,7 +19,9 @@ function plusBrightness() {
 }
 
 function minusBrightness() {
-    if (defaultBrightness <= minBrightness) return;
+    if (defaultBrightness <= minBrightness) {
+        return;
+    }
     defaultBrightness -= step;
     updateBrightness();
 }

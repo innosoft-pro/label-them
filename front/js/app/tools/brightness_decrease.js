@@ -2,9 +2,13 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initBrightnessDecrease() {
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.brightnessDecrease = function () {
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
-            onClick: function (isButtonPressed) {
+            onClick(isButtonPressed) {
                 minusBrightness();
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {

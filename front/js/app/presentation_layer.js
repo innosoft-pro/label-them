@@ -20,7 +20,11 @@ function initPresentationLayer() {
  * sends a notification to the user if not the full image will be shown
  **/
 function resize() {
+    /*global resizeCanvas*/
+    /*eslint no-undef: "error"*/
     let notificationString = resizeCanvas(img);
+    /*global resizeSvg*/
+    /*eslint no-undef: "error"*/
     resizeSvg(img);
 
     if (notificationString === "Not the full image will be shown") { // Notify the user that not the full image will be shown

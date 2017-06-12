@@ -217,6 +217,22 @@ function setClassesAndParametersValues(dataEntity) {
 // Message type which correspond to the ones used in bootstrap
 var MessageTypeEnum = Object.freeze({SUCCESS: 1, INFO: 2, WARNING: 3, DANGER: 4});
 
+// Specifying the type of the alert message
+function specifyAlertMessageType(messageType) {
+    switch (messageType) {
+        case MessageTypeEnum.SUCCESS:
+            return "alert alert-success";
+        case MessageTypeEnum.INFO:
+            return "alert alert-info";
+        case MessageTypeEnum.WARNING:
+            return "alert alert-warning";
+        case MessageTypeEnum.DANGER:
+            return "alert alert-danger";
+        default:
+            return "alert alert-info";
+    }
+}
+
 /**
  * showMessage function displays specified message in message_space block
  * @input message - text of the message to be displayed
@@ -227,23 +243,7 @@ function showMessage(message, messageType) {
     if ((typeof message === "string" || message instanceof String) && document.getElementById("message_space")) {
 
         // Specify the type of the alert message
-        switch (messageType) {
-            case MessageTypeEnum.SUCCESS:
-                document.getElementById("message_space").className = "alert alert-success";
-                break;
-            case MessageTypeEnum.INFO:
-                document.getElementById("message_space").className = "alert alert-info";
-                break;
-            case MessageTypeEnum.WARNING:
-                document.getElementById("message_space").className = "alert alert-warning";
-                break;
-            case MessageTypeEnum.DANGER:
-                document.getElementById("message_space").className = "alert alert-danger";
-                break;
-            default:
-                //messageSpaceBlocksClassName = "alert alert-info";
-                break;
-        }
+        document.getElementById("message_space").className = specifyAlertMessageType(messageType);
 
         $("#message_space").text(message);
     }
@@ -258,14 +258,14 @@ function replaceAll(str, find, replace) {
 }
 
 function initDOM() {
-    let json_params = document.getElementById("json_params").innerText;
+    let jsonParams = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
     // to get JSON.parse to work we need to replace all occurence of \ with "
     // otherwise JSON.parse will fail. Need to clarify this with Y.T. manager,
     // but until then this does the job
 
-    json_params = replaceAll(json_params, '\\', '"');
-    generateHTMLCodeForClassesAndParameters(document, json_params);
+    jsonParams = replaceAll(jsonParams, '\\', '"');
+    generateHTMLCodeForClassesAndParameters(document, jsonParams);
 }
 
 function resetDOM() {

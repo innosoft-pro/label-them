@@ -1,16 +1,16 @@
 function Patch() {
     let pointList = [];
 
-    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
 
-    this.state = 'normal';
+    this.state = "normal";
 
     function build(arg) {
         let res = [];
         for (let i = 0, l = arg.length; i < l; i++) {
-            res.push(arg[i].join(','));
+            res.push(arg[i].join(","));
         }
-        return res.join(' ');
+        return res.join(" ");
     }
 
     this.attribute = function (key, val) {
@@ -24,25 +24,25 @@ function Patch() {
 
     this.addPoint = function (x, y) {
         pointList.push([x, y]);
-        this.attribute('points', build(pointList));
+        this.attribute("points", build(pointList));
     };
 
     this.setPoints = function (points) {
-        this.attribute('points', build(points));
+        this.attribute("points", build(points));
     };
 
     this.setPoint = function (i, x, y) {
         pointList[i] = [x, y];
-        this.attribute('points', build(pointList));
+        this.attribute("points", build(pointList));
         // this.invalidate.apply(this);
     };
 
     this.onclick = function () {
-        console.log('default onclick patch');
+        console.log("default onclick patch");
     };
 
     this.invalidate = function () {
-        this.node.setAttribute('class', this.state);
+        this.node.setAttribute("class", this.state);
     };
 
 
@@ -50,15 +50,15 @@ function Patch() {
         for (let i = 0, l = arguments.length; i < l; i += 2) {
             pointList.push([arguments[i], arguments[i + 1]]);
         }
-        this.attribute('points', build(pointList));
+        this.attribute("points", build(pointList));
     };
 
-    // initialize 'points':
+    // initialize "points":
     this.points.apply(this, arguments);
 }
 
 function Handle(x, y, type) {
-    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "circle");
 
     this.radius = 5;
 
@@ -68,17 +68,17 @@ function Handle(x, y, type) {
     this.type = type;
 
     this.invalidate = function () {
-        this.node.setAttribute('cx', this.x);
-        this.node.setAttribute('cy', this.y);
-        this.node.setAttribute('r', this.radius);
-        this.node.setAttribute('class', this.type);
+        this.node.setAttribute("cx", this.x);
+        this.node.setAttribute("cy", this.y);
+        this.node.setAttribute("r", this.radius);
+        this.node.setAttribute("class", this.type);
     };
 
     this.invalidate.apply(this);
 }
 
 function Path() {
-    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
     this.points = [];
 
@@ -89,7 +89,7 @@ function Path() {
 
         console.log(d);
 
-        this.node.setAttribute('d', d);
+        this.node.setAttribute("d", d);
     };
 
     this.setPoints = function (points) {
@@ -97,18 +97,25 @@ function Path() {
         this.invalidate.apply(this);
     };
 
+    this.clear = function () {
+        this.points = [];
+        this.closePath = false;
+
+        this.node.setAttribute("d", "");
+    };
+
     this.build = function (points) {
 
         let res = [];
 
         for (let i = 1, l = points.length; i < l; i++) {
-            res.push(points[i].join(' '));
+            res.push(points[i].join(" "));
         }
 
         if (this.closePath) {
-            return 'M ' + points[0].join(' ') + ' L ' + res.join(' L ') + ' Z';
+            return "M " + points[0].join(" ") + " L " + res.join(" L ") + " Z";
         } else {
-            return 'M ' + points[0].join(' ') + ' L ' + res.join(' L ');
+            return "M " + points[0].join(" ") + " L " + res.join(" L ");
         }
 
 
@@ -121,7 +128,7 @@ function Polygon(startX, startY, polygonId) {
 
     this.handles = [];
 
-    this.node = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "g");
 
     this.patch = new Patch();
     this.node.append(this.patch.node);
@@ -131,7 +138,7 @@ function Polygon(startX, startY, polygonId) {
     this.path = new Path();
     this.node.append(this.path.node);
 
-    let handle = new Handle(startX, startY, 'first');
+    let handle = new Handle(startX, startY, "first");
     this.handles.push(handle);
 
     this.node.append(handle.node);
@@ -139,7 +146,7 @@ function Polygon(startX, startY, polygonId) {
     this.polygonId = polygonId;
 
     this.onPolygonClick = function (polygon) {
-        console.log('default onclick polygon');
+        console.log("default onclick polygon");
     };
 
     this.attribute = function (key, val) {
@@ -150,12 +157,29 @@ function Polygon(startX, startY, polygonId) {
     this.addPoint = function (x, y) {
         this.pointsList.push([x, y]);
 
-        let handle = new Handle(x, y, 'other');
+        let handle = new Handle(x, y, "other");
         this.handles.push(handle);
 
         this.node.append(handle.node);
 
         this.path.setPoints(this.pointsList);
+    };
+
+    this.removePoint = function (ind) {
+        let point = (this.pointsList.splice(ind, 1))[0];
+
+        let handle = this.handles[ind];
+        this.node.removeChild(handle.node);
+
+        this.handles.splice(ind, 1);
+
+        if (this.pointsList.length > 1) {
+            this.path.setPoints(this.pointsList);
+        } else {
+            this.path.clear();
+        }
+
+        return point;
     };
 
     this.shouldClose = function (x, y) {
@@ -180,17 +204,17 @@ function Polygon(startX, startY, polygonId) {
         this.path.invalidate();
 
         for (let i in this.handles) {
-            this.handles[i].type = 'normal';
+            this.handles[i].type = "normal";
             this.handles[i].invalidate();
         }
     };
 
     this.setSelected = function (selected) {
 
-        let type = 'normal';
+        let type = "normal";
 
         if (selected) {
-            type = 'selected';
+            type = "selected";
         }
 
         this.patch.state = type;
@@ -206,5 +230,5 @@ function Polygon(startX, startY, polygonId) {
     };
 
     // Setup event listeners
-    this.patch.node.addEventListener('click', this.onclick.bind(this), true);
+    this.patch.node.addEventListener("click", this.onclick.bind(this), true);
 }

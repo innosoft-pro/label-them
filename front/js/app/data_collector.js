@@ -8,6 +8,18 @@ function DataCollector() {
     this.activeEntity = null;
 }
 
+class DataEntityToBeExported {
+    constructor(entity) {
+        /*global polygonId, polygons*/
+        /*eslint no-undef: "error"*/
+        this.points = polygons[entity.polygonId].pointsList;
+        this.parameters = entity.parameters;
+    }
+    toString() {
+        return JSON.stringify(this);
+    }
+}
+
 DataCollector.prototype.addEntity = function (entity, id) {
     this.dataEntities[id] = entity;
 };
@@ -16,12 +28,20 @@ DataCollector.prototype.selectEntity = function (id) {
     this.activeEntity = this.dataEntities[id];
 };
 
+DataCollector.prototype.deleteEntity = function (id) {
+    if (id in this.dataEntities) {
+        delete this.dataEntities[id];
+    }
+};
+
 DataCollector.prototype.getActiveEntity = function () {
     return this.activeEntity;
 };
 
 
 function DataEntity(polygonId) {
+    /*global polygonId*/
+    /*eslint no-undef: "error"*/
     this.polygonId = polygonId;
     this.parameters = {};
 }
@@ -32,20 +52,14 @@ DataEntity.prototype.setParams = function (data) {
 
 DataCollector.prototype.getJSON = function () {
     let dataEntities = [];
+    /*global polygonId*/
+    /*eslint no-undef: "error"*/
     for (let i = 0; i < polygonId; i++) {
-        dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
+        if (this.dataEntities.hasOwnProperty(i)) { // check if data entity with id=i wasn't deleted (exists)
+            dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
+        }
     }
     let json = JSON.stringify(dataEntities);
     window.thisTask.setSolutionOutputValue("result", json);
     return json;
 };
-
-class DataEntityToBeExported {
-    constructor(entity) {
-        this.points = polygons[entity.polygonId].pointsList;
-        this.parameters = entity.parameters;
-    }
-    toString() {
-        return JSON.stringify(this);
-    }
-}

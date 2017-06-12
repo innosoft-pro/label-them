@@ -21,28 +21,6 @@ function changeButtonsSelectionState(btn) {
     }
 }
 
-function setElementsOnClick() {
-    setOnClick(btnSave);
-    setOnClick(btnHand);
-    setOnClick(btnPolygon);
-    setOnClick(btnEdit);
-    setOnClick(btnZoomIn);
-    setOnClick(btnZoomOut);
-    setOnClick(btnBrightnessHigh);
-    setOnClick(btnBrightnessLow);
-}
-
-function getElements() {
-    btnSave = document.getElementById(Tool.save().buttonId);
-    btnHand = document.getElementById(Tool.hand().buttonId);
-    btnPolygon = document.getElementById(Tool.polygon().buttonId);
-    btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
-    btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
-    btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
-    btnZoomIn = document.getElementById(Tool.zoomIn().buttonId);
-    btnZoomOut = document.getElementById(Tool.zoomOut().buttonId);
-}
-
 function initToolbar() {
     initSave();
     initHand();
@@ -107,5 +85,53 @@ function setOnClick(btn) {
                 activeTool = null;
             }
         }
-    }
+    };
+}
+
+function setElementsOnClick() {
+    setOnClick(btnSave);
+    setOnClick(btnHand);
+    setOnClick(btnPolygon);
+    setOnClick(btnEdit);
+    setOnClick(btnZoomIn);
+    setOnClick(btnZoomOut);
+    setOnClick(btnBrightnessHigh);
+    setOnClick(btnBrightnessLow);
+}
+
+function getElements() {
+    btnSave = document.getElementById(Tool.save().buttonId);
+    btnHand = document.getElementById(Tool.hand().buttonId);
+    btnPolygon = document.getElementById(Tool.polygon().buttonId);
+    btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
+    btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
+    btnBrightnessLow = document.getElementById(Tool.brightnessDecrease().buttonId);
+    btnZoomIn = document.getElementById(Tool.zoomIn().buttonId);
+    btnZoomOut = document.getElementById(Tool.zoomOut().buttonId);
+}
+
+function initToolbar() {
+    /*global initSave*/
+    /*eslint no-undef: "error"*/
+    initSave();
+    /*global initHand*/
+    /*eslint no-undef: "error"*/
+    initHand();
+    /*global initPolygon*/
+    /*eslint no-undef: "error"*/
+    initPolygon();
+    /*global initBrightnessIncrease*/
+    /*eslint no-undef: "error"*/
+    initBrightnessIncrease();
+    /*global initBrightnessDecrease*/
+    /*eslint no-undef: "error"*/
+    initBrightnessDecrease();
+    getElements();
+    setElementsOnClick();
+    /*global initBrightness*/
+    /*eslint no-undef: "error"*/
+    initBrightness();
+    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+    activeTool = Tool.polygon();
+    activeTool.onClick(true);
 }

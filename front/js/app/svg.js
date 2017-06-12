@@ -7,13 +7,29 @@ let selectedPolygon = null;
 
 let polygonId = 0;
 
+let redoPoints = [];
+
 function initSvg() {
     svgImg = document.getElementById("svg_img");
+    /*global initCoordinates*/
+    /*eslint no-undef: "error"*/
     initCoordinates(svgImg);
 }
 
+function svgImgCancelPolygon() {
+    if (currentPolygon != null) {
+        svgImg.removeChild(currentPolygon.node);
+        currentPolygon = null;
+    }
+}
+
 function svgImgOnClick(event) {
+  
     let point = getPoint(event);
+
+    if (redoPoints.length > 0) {
+        redoPoints = [];
+    }
 
     if (currentPolygon !== null) {
         if (currentPolygon.shouldClose(point.x, point.y)) {
@@ -23,6 +39,9 @@ function svgImgOnClick(event) {
         }
     } else {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
+
+
+
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
 
@@ -31,11 +50,55 @@ function svgImgOnClick(event) {
     }
 }
 
+function svgImgDeleteSelectedPolygon() {
+    if (selectedPolygon !== null) {
+        if (selectedPolygon.polygonId in polygons) {
+            delete polygons[selectedPolygon.polygonId];
+            onPolygonDeleted(selectedPolygon);
+
+            svgImg.removeChild(selectedPolygon.node);
+
+            selectedPolygon = null;
+        }
+
+
+    }
+}
+
 function svgImgOnClickSelect(event) {
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
         selectedPolygon = null;
     }
+}
+
+function undoLastPoint() {
+    if (currentPolygon === null) {
+      return;
+    }
+
+    let lastPointIdx = currentPolygon.pointsList.length - 1;
+
+    if (lastPointIdx <= 0) {
+        svgImg.removeChild(currentPolygon.node);
+        currentPolygon = null;
+    } else {
+        let point = currentPolygon.removePoint(lastPointIdx);
+        redoPoints.push(point);
+        console.log(point);
+    }
+}
+
+function redoLastPoint() {
+    if (currentPolygon === null || redoPoints.length < 1) {
+      return;
+    }
+
+    let point = redoPoints.pop();
+
+    console.log(point);
+
+    currentPolygon.addPoint(point[0], point[1]);
 }
 
 function closePolygon() {
@@ -79,6 +142,8 @@ function onPolygonClick(polygon) {
 }
 
 function showPolygonSelectedMessage() {
+    /*global MessageTypeEnum*/
+    /*eslint no-undef: "error"*/
     showMessage("Please, characterize the selected object in the right menu.",
         MessageTypeEnum.WARNING);
     setTimeout(function () {
