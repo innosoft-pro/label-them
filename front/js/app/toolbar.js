@@ -21,22 +21,6 @@ function changeButtonsSelectionState(btn) {
     }
 }
 
-function initToolbar() {
-    initSave();
-    initHand();
-    initPolygon();
-    initBrightnessIncrease();
-    initBrightnessDecrease();
-    initZoomIn();
-    initZoomOut();
-    getElements();
-    setElementsOnClick();
-    initBrightness();
-    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
-    activeTool = Tool.polygon();
-    activeTool.onClick(true);
-}
-
 function setOnClick(btn) {
     btn.onclick = function () {
         changeButtonsSelectionState(btn);
@@ -126,6 +110,10 @@ function initToolbar() {
     /*global initBrightnessDecrease*/
     /*eslint no-undef: "error"*/
     initBrightnessDecrease();
+
+    initZoomIn();
+    initZoomOut();
+
     getElements();
     setElementsOnClick();
     /*global initBrightness*/
