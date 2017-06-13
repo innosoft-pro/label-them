@@ -27,22 +27,21 @@
     margin-top: 14px;
 }
 
-#main-canvas {
-    display: flex;
-    margin: 0 auto;
-    float: left;
-}
-
 #canvas-parent {
-    overflow: scroll;
+    position: static;
+    width: 100%;
+    overflow: auto;
     min-height: 550px;
     padding: 0;
 }
 
-#svg_img {
-
+div.resizable {
+    position: relative;
 }
 
+canvas, svg {
+    position: absolute;
+}
 
 /*SVG*/
 circle {
@@ -51,7 +50,7 @@ circle {
 
 circle.first {
     stroke: #666600;
-    fill:   #cccc00;
+    fill: #cccc00;
 
 }
 
@@ -61,17 +60,17 @@ circle.first:hover {
 
 circle.other {
     stroke: #006600;
-    fill:   #00cc00;
+    fill: #00cc00;
 }
 
 circle.normal {
     stroke: #666666;
-    fill:   #000000;
+    fill: #000000;
 }
 
 circle.selected {
     stroke: #aaaaaa;
-    fill:   #000000;
+    fill: #000000;
 }
 
 circle.selected:hover {

@@ -35,6 +35,40 @@
         // });
     </script>
     <!-- Nav menu-->
+    <style>
+        div.outer {
+            position: fixed;
+
+            background-color: #AAAAFF;
+            width: 500px;
+            height: 500px;
+
+            left: 50px;
+            top: 50px;
+        }
+
+        div.scrollable {
+            position: static;
+            margin: 10px;
+            background-color: #AAFFAA;
+
+            width: 480px;
+            height: 480px;
+
+            overflow: auto;
+        }
+
+        div.resizable {
+            position: relative;
+            margin: 0px;
+            width: 1000px;
+            height: 1000px;
+        }
+
+        canvas, svg {
+            position: absolute;
+        }
+    </style>
 </head>
 <body>
 <!--<div class="parent">-->
@@ -86,13 +120,14 @@
                     </div>
                     <div class="panel panel-default">
                         <div class="panel-body">
-                                <div id="canvas-parent">
-                                    <div id="img_url" hidden>{{ proxy image_rel}}</div>
-                                    <div id="json_params" hidden>{{ json_params }}</div>
-                                    <canvas id="main-canvas">
-                                    </canvas>
-                                    <svg id="svg_img" class="svg-img"></svg>
+                            <div id="canvas-parent">
+                                <div id="img_url" hidden>{{ proxy image_rel}}</div>
+                                <div id="json_params" hidden>{{ json_params }}</div>
+                                <div class="resizable">
+                                    <canvas id="main-canvas"></canvas>
+                                    <svg id="svg_img"></svg>
                                 </div>
+                            </div>
                         </div>
                     </div>
                 </div>
