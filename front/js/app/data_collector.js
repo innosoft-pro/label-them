@@ -60,6 +60,9 @@ DataCollector.prototype.getJSON = function () {
         }
     }
     let json = JSON.stringify(dataEntities);
-    window.thisTask.setSolutionOutputValue("result", json);
+    if (window.thisTask != null) {
+      window.thisTask.setSolutionOutputValue("result", json);  
+    }
+
     return json;
 };
