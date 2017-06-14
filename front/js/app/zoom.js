@@ -1,26 +1,31 @@
 var canvas;
 var svg;
-var default_canvas_width;
+var defaultCanvasWidth;
+var maxWidth;
+var zoomCount = 4;
+var ratio = 2;
 
 function initZoom() {
     canvas = document.getElementById("main-canvas");
     svg = document.getElementById("svg_img");
-    default_canvas_width = canvas.width;
+    defaultCanvasWidth = canvas.width;
+    maxWidth = defaultCanvasWidth * ratio * ratio * zoomCount;
 }
 
 function zoomPlus() {
-    canvas.width = canvas.width * 2;
-    canvas.height = canvas.height * 2;
-    svg.style.width = svg.style.width.replace("px", "") * 2;
-    svg.style.height = svg.style.height.replace("px", "") * 2;
+    if (canvas.width === maxWidth) return;
+    canvas.width = canvas.width * ratio;
+    canvas.height = canvas.height * ratio;
+    svg.style.width = svg.style.width.replace("px", "") * ratio;
+    svg.style.height = svg.style.height.replace("px", "") * ratio;
     drawImg(img);
 }
 
 function zoomMinus() {
-    if (canvas.width === default_canvas_width) return;
-    canvas.width = canvas.width / 2;
-    canvas.height = canvas.height / 2;
-    svg.style.width = svg.style.width.replace("px", "") / 2;
-    svg.style.height = svg.style.height.replace("px", "") / 2;
+    if (canvas.width === defaultCanvasWidth) return;
+    canvas.width = canvas.width / ratio;
+    canvas.height = canvas.height / ratio;
+    svg.style.width = svg.style.width.replace("px", "") / ratio;
+    svg.style.height = svg.style.height.replace("px", "") / ratio;
     drawImg(img);
 }
