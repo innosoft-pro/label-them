@@ -15,6 +15,7 @@
 
 .history-table {
     border: 0;
+    height: 200px;
 }
 
 .history-icon-td {
@@ -25,6 +26,17 @@
     vertical-align: middle;
     text-align: left;
     margin-left: 16px;
+}
+
+.history-table-body {
+    overflow-y: scroll;
+    height: 200px;
+    position: absolute;
+}
+
+.history-table-row {
+    width: 100%;
+    display: inline-table;
 }
 
 /* Additional margin to add some space between input groups and drop down menus */
