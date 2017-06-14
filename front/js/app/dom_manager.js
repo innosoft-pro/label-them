@@ -277,7 +277,7 @@ function initRowsAdditionAndDeletion() {
     let rowsCount = 4;
     let addRowButton = document.getElementById("add-row");
     let deleteRowButton = document.getElementById("delete-row");
-    addRowButton.onclick=function () {
+    addRowButton.onclick = function () {
         let newRowsContents = [];
         newRowsContents.push("<td class=\"history-icon-td\">");
         newRowsContents.push("<button class=\"btn btn-default panTool\">");
@@ -297,7 +297,7 @@ function initRowsAdditionAndDeletion() {
         scrollHistoryTableBodyToBottom();
     };
 
-    deleteRowButton.onclick=function () {
+    deleteRowButton.onclick = function () {
         if (rowsCount > 0) {
             $("#historyRow" + (rowsCount - 1)).remove();
             rowsCount--;
