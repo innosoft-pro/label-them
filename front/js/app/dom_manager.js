@@ -299,8 +299,7 @@ function initRowsAdditionAndDeletion() {
 
     deleteRowButton.onclick=function () {
         if (rowsCount > 0) {
-            let historyRow = $("#historyRow" + (rowsCount - 1));
-            historyRow.remove();
+            $("#historyRow" + (rowsCount - 1)).remove();
             rowsCount--;
         }
         /*global scrollHistoryTableBodyToBottom*/
