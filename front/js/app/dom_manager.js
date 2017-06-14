@@ -266,8 +266,45 @@ function initDOM() {
 
     jsonParams = replaceAll(jsonParams, '\\', '"');
     generateHTMLCodeForClassesAndParameters(document, jsonParams);
+    initRowsAdditionAndDeletion();
 }
 
 function resetDOM() {
     resetClassesAndParametersValues(document);
+}
+
+function initRowsAdditionAndDeletion() {
+    let rowsCount = 4;
+    let addRowButton = document.getElementById("add-row");
+    let deleteRowButton = document.getElementById("delete-row");
+    addRowButton.onclick=function () {
+        let newRowsContents = [];
+        newRowsContents.push("<td class=\"history-icon-td\">");
+        newRowsContents.push("<button class=\"btn btn-default panTool\">");
+        newRowsContents.push("<img src=\"https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png\"");
+        newRowsContents.push("width=\"24\"/>");
+        newRowsContents.push("</button>");
+        newRowsContents.push("</td>");
+        newRowsContents.push("<td class=\"history-text-td\">");
+        newRowsContents.push("Polygon");
+        newRowsContents.push("</td>");
+        newRowsContents = newRowsContents.join("");
+        $('#history-table').append('<tr class="history-table-row" id="historyRow' + rowsCount + '"></tr>');
+        $('#historyRow' + rowsCount).html(newRowsContents);
+        rowsCount++;
+        /*global scrollHistoryTableBodyToBottom*/
+        /*eslint no-undef: "error"*/
+        scrollHistoryTableBodyToBottom();
+    };
+
+    deleteRowButton.onclick=function () {
+        if (rowsCount > 0) {
+            let historyRow = $("#historyRow" + (rowsCount - 1));
+            historyRow.remove();
+            rowsCount--;
+        }
+        /*global scrollHistoryTableBodyToBottom*/
+        /*eslint no-undef: "error"*/
+        scrollHistoryTableBodyToBottom();
+    };
 }

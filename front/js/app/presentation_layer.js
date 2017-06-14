@@ -14,6 +14,7 @@ function initPresentationLayer() {
 
     initSvg();
     changeScrollingPositionInTheHistoryBlock();
+    scrollHistoryTableBodyToBottom();
 }
 
 /*
@@ -28,6 +29,7 @@ function resize() {
     /*eslint no-undef: "error"*/
     resizeSvg(img);
     changeScrollingPositionInTheHistoryBlock();
+    scrollHistoryTableBodyToBottom();
 
     if (notificationString === "Not the full image will be shown") { // Notify the user that not the full image will be shown
         showMessage(
@@ -47,4 +49,9 @@ function changeScrollingPositionInTheHistoryBlock() {
     let historyTableBody = document.getElementsByClassName("history-table-body")[0];
     let width = historyTable.clientWidth;
     historyTableBody.style.width = width + "px";
+}
+
+function scrollHistoryTableBodyToBottom() {
+    let historyTableBody = document.getElementsByClassName("history-table-body")[0];
+    historyTableBody.scrollTop = historyTableBody.scrollHeight;
 }

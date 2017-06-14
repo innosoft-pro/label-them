@@ -29,7 +29,7 @@
 }
 
 .history-table-body {
-    overflow-y: scroll;
+    overflow-y: auto;
     height: 200px;
     position: absolute;
 }
