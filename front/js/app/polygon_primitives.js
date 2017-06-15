@@ -74,6 +74,12 @@ function Handle(x, y, type) {
         this.node.setAttribute("class", this.type);
     };
 
+
+    this.setPoint = function (x, y) {
+        this.x = x;
+        this.y = y;
+    }
+
     this.invalidate.apply(this);
 }
 
@@ -200,7 +206,6 @@ function Polygon(startX, startY, polygonId) {
         this.patch.invalidate();
 
         this.path.closePath = true;
-
         this.path.invalidate();
 
         for (let i in this.handles) {
@@ -228,6 +233,28 @@ function Polygon(startX, startY, polygonId) {
         console.log(type);
 
     };
+
+    this.scale = function (scaleFactor) {
+        for (var i = 0; i < this.pointsList.length; i++) {
+            let pt = this.pointsList[i];
+            pt[0] = pt[0] * scaleFactor;
+            pt[1] = pt[1] * scaleFactor;
+
+            this.pointsList[i] = pt;
+
+            this.handles[i].setPoint(pt[0], pt[1]);
+            this.handles[i].invalidate();
+
+            this.path.setPoints(this.pointsList);
+
+
+            if (this.path.closePath) {
+                this.patch.setPoints(this.pointsList);
+                this.patch.invalidate();
+            }
+
+        }
+    }
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);

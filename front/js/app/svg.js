@@ -24,7 +24,7 @@ function svgImgCancelPolygon() {
 }
 
 function svgImgOnClick(event) {
-  
+
     let point = getPoint(event);
 
     if (redoPoints.length > 0) {
@@ -62,6 +62,16 @@ function svgImgDeleteSelectedPolygon() {
         }
 
 
+    }
+}
+
+function svgScale(scaleFactor) {
+    if (currentPolygon != null) {
+        currentPolygon.scale(scaleFactor);
+    }
+
+    for (var key in polygons) {
+        polygons[key].scale(scaleFactor);
     }
 }
 
