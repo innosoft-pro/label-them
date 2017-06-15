@@ -256,8 +256,8 @@ function Polygon(startX, startY, polygonId) {
     };
 
     this.resetScale = function () {
-        this.scale.apply(this, [1/this.polygonScale])
-    }
+        this.scale.apply(this, [1 / this.polygonScale])
+    };
 
     this.scalePoints = function (scaleFactor) {
         // Create a deep copy of pointsList. If you know a better way, let me know
@@ -270,11 +270,11 @@ function Polygon(startX, startY, polygonId) {
         }
 
         return scaledPts;
-    }
+    };
 
     this.unscaledPoints = function () {
-        return this.scalePoints.apply(this, [1/this.polygonScale]);
-    }
+        return this.scalePoints.apply(this, [1 / this.polygonScale]);
+    };
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);
