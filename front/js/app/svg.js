@@ -186,16 +186,14 @@ function resizeSvg(img) {
     let svg = document.getElementById("svg_img");
 
     // 28 is the width of two 14px paddings from each side of the svg layer, specified in bootstrap
-    parent.style.minHeight = (img.height + 28) + "px";
+    parent.style.minHeight = (img.height + 16) + "px";
 
-    let height = parent.clientHeight;
-    let width = parent.clientWidth;
-
+    let height = img.height;
     // resizing svg if image width is smaller than the width of the block for the image
     // to avoid redundant markup over empty space in the block
-    if (width > img.width) {
-        width = img.width;
-    }
+    // and resizing svg if image width is bigger than the width of the block for the image
+    // to present the whole svg layer to markup rather then its part
+    let width = img.width;
 
     // modify both svg dimensions
     svg.style.width = width;

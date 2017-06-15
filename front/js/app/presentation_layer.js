@@ -30,10 +30,9 @@ function resize() {
     if (notificationString === "Not the full image will be shown") { // Notify the user that not the full image will be shown
         showMessage(
             "Image cannot fit the screen in width. " +
-            "Only left part of the image that fits the screen is displayed! " +
-            "Please, markup the visible part of the image displayed below using the " +
-            "tools from the block on the left or skip this image.",
-            MessageTypeEnum.DANGER);
+            "Please, uncover the whole image displayed below with the use of horizontal scrolling " +
+            "and markup it using the tools from the block on the left.",
+            MessageTypeEnum.WARNING);
     } else { // Display the instructions for the user
         showMessage(
             "Please, markup the image displayed below using the tools from the block on the left.",
