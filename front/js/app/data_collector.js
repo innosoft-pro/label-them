@@ -15,6 +15,7 @@ class DataEntityToBeExported {
         this.points = polygons[entity.polygonId].pointsList;
         this.parameters = entity.parameters;
     }
+
     toString() {
         return JSON.stringify(this);
     }
@@ -60,8 +61,8 @@ DataCollector.prototype.getJSON = function () {
         }
     }
     let json = JSON.stringify(dataEntities);
-    if (window.thisTask != null) {
-      window.thisTask.setSolutionOutputValue("result", json);  
+    if (window.thisTask !== undefined && window.thisTask !== null) {
+        window.thisTask.setSolutionOutputValue("result", json);
     }
 
     return json;

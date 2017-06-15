@@ -235,7 +235,7 @@ function Polygon(startX, startY, polygonId) {
     };
 
     this.scale = function (scaleFactor) {
-        for (var i = 0; i < this.pointsList.length; i++) {
+        for (let i = 0; i < this.pointsList.length; i++) {
             let pt = this.pointsList[i];
             pt[0] = pt[0] * scaleFactor;
             pt[1] = pt[1] * scaleFactor;
@@ -254,7 +254,7 @@ function Polygon(startX, startY, polygonId) {
             }
 
         }
-    }
+    };
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);

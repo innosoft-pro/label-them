@@ -17,7 +17,7 @@ function initSvg() {
 }
 
 function svgImgCancelPolygon() {
-    if (currentPolygon != null) {
+    if (currentPolygon !== null) {
         svgImg.removeChild(currentPolygon.node);
         currentPolygon = null;
     }
@@ -66,11 +66,11 @@ function svgImgDeleteSelectedPolygon() {
 }
 
 function svgScale(scaleFactor) {
-    if (currentPolygon != null) {
+    if (currentPolygon !== null) {
         currentPolygon.scale(scaleFactor);
     }
 
-    for (var key in polygons) {
+    for (let key in polygons) {
         polygons[key].scale(scaleFactor);
     }
 }
