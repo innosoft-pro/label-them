@@ -151,6 +151,8 @@ function Polygon(startX, startY, polygonId) {
 
     this.polygonId = polygonId;
 
+    this.polygonScale = 1;
+
     this.onPolygonClick = function (polygon) {
         console.log("default onclick polygon");
     };
@@ -235,18 +237,15 @@ function Polygon(startX, startY, polygonId) {
     };
 
     this.scale = function (scaleFactor) {
+
+        this.polygonScale = this.polygonScale * scaleFactor;
+        this.pointsList = this.scalePoints.apply(this, [scaleFactor])
+
         for (let i = 0; i < this.pointsList.length; i++) {
-            let pt = this.pointsList[i];
-            pt[0] = pt[0] * scaleFactor;
-            pt[1] = pt[1] * scaleFactor;
-
-            this.pointsList[i] = pt;
-
-            this.handles[i].setPoint(pt[0], pt[1]);
+            this.handles[i].setPoint(this.pointsList[i][0], this.pointsList[i][1]);
             this.handles[i].invalidate();
 
             this.path.setPoints(this.pointsList);
-
 
             if (this.path.closePath) {
                 this.patch.setPoints(this.pointsList);
@@ -255,6 +254,27 @@ function Polygon(startX, startY, polygonId) {
 
         }
     };
+
+    this.resetScale = function () {
+        this.scale.apply(this, [1/this.polygonScale])
+    }
+
+    this.scalePoints = function (scaleFactor) {
+        // Create a deep copy of pointsList. If you know a better way, let me know
+        let scaledPts = JSON.parse(JSON.stringify(this.pointsList));
+
+        for (let i = 0; i < scaledPts.length; i++) {
+            let pt = scaledPts[i];
+            pt[0] = pt[0] * scaleFactor;
+            pt[1] = pt[1] * scaleFactor;
+        }
+
+        return scaledPts;
+    }
+
+    this.unscaledPoints = function () {
+        return this.scalePoints.apply(this, [1/this.polygonScale]);
+    }
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);

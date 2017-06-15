@@ -12,7 +12,7 @@ class DataEntityToBeExported {
     constructor(entity) {
         /*global polygonId, polygons*/
         /*eslint no-undef: "error"*/
-        this.points = polygons[entity.polygonId].pointsList;
+        this.points = polygons[entity.polygonId].unscaledPoints();
         this.parameters = entity.parameters;
     }
 
