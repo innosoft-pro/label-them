@@ -9,7 +9,8 @@ function initBrightnessDecrease() {
         /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
-                minusBrightness();
+                // minusBrightness();
+                svgScale(0.5);
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
 

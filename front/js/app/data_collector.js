@@ -12,9 +12,10 @@ class DataEntityToBeExported {
     constructor(entity) {
         /*global polygonId, polygons*/
         /*eslint no-undef: "error"*/
-        this.points = polygons[entity.polygonId].pointsList;
+        this.points = polygons[entity.polygonId].unscaledPoints();
         this.parameters = entity.parameters;
     }
+
     toString() {
         return JSON.stringify(this);
     }
@@ -60,6 +61,11 @@ DataCollector.prototype.getJSON = function () {
         }
     }
     let json = JSON.stringify(dataEntities);
-    window.thisTask.setSolutionOutputValue("result", json);
+    if (window.thisTask !== undefined && window.thisTask !== null) {
+        window.thisTask.setSolutionOutputValue("result", json);
+    } else {
+        console.log(json); // To check output values on localhost
+    }
+
     return json;
 };
