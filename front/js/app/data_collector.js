@@ -63,6 +63,8 @@ DataCollector.prototype.getJSON = function () {
     let json = JSON.stringify(dataEntities);
     if (window.thisTask !== undefined && window.thisTask !== null) {
         window.thisTask.setSolutionOutputValue("result", json);
+    } else {
+        console.log(json); // To check output values on localhost
     }
 
     return json;
