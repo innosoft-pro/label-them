@@ -9,6 +9,8 @@ let polygonId = 0;
 
 let redoPoints = [];
 
+let currentScale = 1;
+
 function initSvg() {
     svgImg = document.getElementById("svg_img");
     /*global initCoordinates*/
@@ -39,6 +41,7 @@ function svgImgOnClick(event) {
         }
     } else {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
+        currentPolygon.polygonScale = currentScale;
 
 
 
@@ -66,6 +69,8 @@ function svgImgDeleteSelectedPolygon() {
 }
 
 function svgScale(scaleFactor) {
+    currentScale = currentScale * scaleFactor;
+
     if (currentPolygon !== null) {
         currentPolygon.scale(scaleFactor);
     }
