@@ -7,6 +7,8 @@ let btnZoomOut;
 let btnBrightnessHigh;
 let btnBrightnessLow;
 let activeTool;
+let zoomCount = 0;
+let maxZoomCount = 4;
 
 function isButtonSelected(btn) {
     return btn.style.background === 'rgb(27, 109, 133)';

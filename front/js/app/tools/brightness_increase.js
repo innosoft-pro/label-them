@@ -9,8 +9,7 @@ function initBrightnessIncrease() {
         /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
-                // plusBrightness();
-                svgScale(2);
+                plusBrightness();
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
 
