@@ -9,6 +9,9 @@ function initBrightnessDecrease() {
         /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
+
+                /*global minusBrightness*/
+                /*eslint no-undef: "error"*/
                 minusBrightness();
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {

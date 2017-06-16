@@ -9,6 +9,9 @@ function initBrightnessIncrease() {
         /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick(isButtonPressed) {
+
+                /*global plusBrightness*/
+                /*eslint no-undef: "error"*/
                 plusBrightness();
                 /*
                  if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {

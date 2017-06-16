@@ -5,9 +5,19 @@ function initZoomOut() {
     Tool.zoomOut = function () {
         return fromPrototype(Tool, {
             onClick: function (isButtonPressed) {
-                if (zoomCount === 0) return;
+
+                /*global zoomCount*/
+                /*eslint no-undef: "error"*/
+                if (zoomCount === 0) {
+                    return;
+                }
+                /*global zoomCount*/
+                /*eslint no-undef: "error"*/
                 zoomCount--;
                 zoomMinus();
+
+                /*global svgScale*/
+                /*eslint no-undef: "error"*/
                 svgScale(0.5);
             },
             isProlonged: false,
