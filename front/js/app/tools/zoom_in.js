@@ -8,6 +8,8 @@ function initZoomIn() {
 
                 /*global zoomCount*/
                 /*eslint no-undef: "error"*/
+                /*global maxZoomCount*/
+                /*eslint no-undef: "error"*/
                 if (zoomCount === maxZoomCount) {
                     return;
                 }
