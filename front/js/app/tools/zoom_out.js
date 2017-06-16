@@ -8,7 +8,7 @@ function initZoomOut() {
 
                 /*global zoomCount*/
                 /*eslint no-undef: "error"*/
-                if (zoomCount >= 0) {
+                if (zoomCount <= 0) {
                     return;
                 }
                 /*global zoomCount*/
