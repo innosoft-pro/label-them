@@ -63,6 +63,11 @@ circle.other {
     fill: #00cc00;
 }
 
+circle.other:hover {
+    stroke: #00aa00;
+    cursor: move;
+}
+
 circle.normal {
     stroke: #666666;
     fill: #000000;
@@ -75,6 +80,7 @@ circle.selected {
 
 circle.selected:hover {
     stroke: #ffffff;
+    cursor: move;
 }
 
 path {

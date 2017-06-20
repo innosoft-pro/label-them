@@ -26,6 +26,13 @@ function svgImgCancelPolygon() {
 }
 
 function svgImgOnClick(event) {
+    if (selectedPolygon !== null && selectedPolygon.shouldConsumeEvent.apply(selectedPolygon, [event])) {
+        return;
+    }
+
+    if (currentPolygon !== null && currentPolygon.shouldConsumeEvent.apply(currentPolygon, [event])) {
+        return;
+    }
 
     let point = getPoint(event);
 
@@ -43,11 +50,9 @@ function svgImgOnClick(event) {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
         currentPolygon.polygonScale = currentScale;
 
-
-
         svgImg.append(currentPolygon.node);
-        console.log(currentPolygon.node);
 
+        currentPolygon.setDragEnabled(true);
         // resetting classes and parameters values
         resetDOM();
     }
@@ -81,10 +86,10 @@ function svgScale(scaleFactor) {
 }
 
 function svgImgOnClickSelect(event) {
-    if (selectedPolygon !== null) {
-        selectedPolygon.setSelected(false);
-        selectedPolygon = null;
-    }
+    // if (selectedPolygon !== null) {
+    //     selectedPolygon.setSelected(false);
+    //     selectedPolygon = null;
+    // }
 }
 
 function undoLastPoint() {
@@ -127,10 +132,12 @@ function closePolygon() {
 
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
+        selectedPolygon.setDragEnabled(false);
     }
 
     selectedPolygon = currentPolygon;
     selectedPolygon.setSelected(true);
+    selectedPolygon.setDragEnabled(true);
     showPolygonSelectedMessage();
     onPolygonSelected(selectedPolygon);
 
@@ -141,10 +148,12 @@ function onPolygonClick(polygon) {
 
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
+        selectedPolygon.setDragEnabled(false);
     }
 
 
     polygon.setSelected(true);
+    polygon.setDragEnabled(true);
 
 
     selectedPolygon = polygon;
