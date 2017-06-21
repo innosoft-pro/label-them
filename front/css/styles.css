@@ -1,3 +1,8 @@
+/* To fix the issue with systems resize on the notification in message_space block */
+.task {
+    width: 98%;
+}
+
 .sidebar {
     float: left;
     width: 72px;
