@@ -4,10 +4,10 @@ describe('webdriver.io page', function () {
         browser.url('http://localhost:63342/label-them/front/main_local.html');
 
         //Click on canvas
-        browser.leftClick(".btn-save", 500, 500);
-        browser.leftClick(".btn-save", 400, 500);
-        browser.leftClick(".btn-save", 500, 400);
-        browser.leftClick(".btn-save", 500, 500);
+        browser.leftClick("#canvas-parent", 100, 100);
+        browser.leftClick("#canvas-parent", 100, 200);
+        browser.leftClick("#canvas-parent", 200, 100);
+        browser.leftClick("#canvas-parent", 100, 100);
 
         //Select object class
         var selectBox = $(".class-param");
@@ -26,6 +26,6 @@ describe('webdriver.io page', function () {
         console.log(result.value);
 
         //Assertion
-        assert.equal(result.value, "[{\"points\":[[395,392],[295,392],[395,292]],\"parameters\":{\"class\":\"Brown Bear\",\"is scary\":true}}]");
+        assert.equal(result.value, "[{\"points\":[[99,109.39999389648438],[99,209.39999389648438],[199,109.39999389648438]],\"parameters\":{\"class\":\"Brown Bear\",\"is scary\":true}}]");
     });
 });
