@@ -21,5 +21,6 @@ dist/
 #Selenium server
 /selenium-server-standalone-*.jar
 
-#Webdriver tests error screenshots
+#Webdriver tests error screenshots & configuration file
 errorShots/
+/wdio.conf.js
