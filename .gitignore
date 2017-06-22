@@ -20,3 +20,6 @@ dist/
 
 #Selenium server
 /selenium-server-standalone-*.jar
+
+#Webdriver tests error screenshots
+errorShots/
