@@ -1,7 +1,8 @@
 var assert = require('assert');
+let projectFolderName = "git";
 describe('webdriver.io page', function () {
     it("Should change image brightness", function () {
-        browser.url('http://localhost:63342/label-them/front/main_local.html');
+        browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
 
         //Click on canvas
         browser.leftClick(".btn-save", 500, 500);
