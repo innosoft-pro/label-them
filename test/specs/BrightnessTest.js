@@ -1,12 +1,23 @@
 var assert = require('assert');
 describe('webdriver.io page', function () {
-    it("Should change image brightness from 100 to 80", function () {
+    it("Should change image brightness from 100 to 90", function () {
         browser.url('http://localhost:63342/label-them/front/main_local.html');
         browser.click("#btn_brightness_low");
 
         var result = browser.execute("return defaultBrightness;")
+        console.log("Brightness: " + result.value);
 
         assert.equal(result.value, 90);
+    });
+
+    it("Should change image brightness from 100 to 110", function () {
+        browser.url('http://localhost:63342/label-them/front/main_local.html');
+        browser.click("#btn_brightness_high");
+
+        var result = browser.execute("return defaultBrightness;")
+        console.log("Brightness: " + result.value);
+
+        assert.equal(result.value, 110);
     });
 
     it("Should check that brightness cannot be less than 10", function () {
@@ -16,6 +27,7 @@ describe('webdriver.io page', function () {
         }
 
         var result = browser.execute("return defaultBrightness;")
+        console.log("Brightness: " + result.value);
 
         assert.equal(result.value, 10);
     });
@@ -27,7 +39,7 @@ describe('webdriver.io page', function () {
         }
 
         var result = browser.execute("return defaultBrightness;")
-
+        console.log("Brightness: " + result.value);
         assert.equal(result.value, 500);
     });
 }); 
