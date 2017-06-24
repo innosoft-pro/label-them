@@ -30,6 +30,8 @@ function setOnClick(btn) {
         let previouslyActivatedTool = activeTool;
 
         switch (btn.id) {
+            /*global Tool*/
+            /*eslint no-undef: "error"*/
             case Tool.save().buttonId:
                 activeTool = Tool.save();
                 break;
@@ -113,6 +115,8 @@ function initToolbar() {
     /*eslint no-undef: "error"*/
     initBrightnessDecrease();
 
+    /*global initZoomIn, initZoomOut*/
+    /*eslint no-undef: "error"*/
     initZoomIn();
     initZoomOut();
 

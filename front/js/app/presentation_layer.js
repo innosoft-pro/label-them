@@ -8,6 +8,8 @@ function initPresentationLayer() {
     img.src = document.getElementById("img_url").innerText;
     img.onload = function () {
         resize();
+        /*global initZoom*/
+        /*eslint no-undef: "error"*/
         initZoom();
         window.addEventListener("resize", resize, false);
     };
