@@ -12,6 +12,8 @@ function zoomPlus() {
     canvas.height = canvas.height * ratio;
     svg.style.width = svg.style.width.replace("px", "") * ratio;
     svg.style.height = svg.style.height.replace("px", "") * ratio;
+    /*global drawImg*/
+    /*eslint no-undef: "error"*/
     drawImg(img);
 }
 
@@ -20,5 +22,7 @@ function zoomMinus() {
     canvas.height = canvas.height / ratio;
     svg.style.width = svg.style.width.replace("px", "") / ratio;
     svg.style.height = svg.style.height.replace("px", "") / ratio;
+    /*global drawImg*/
+    /*eslint no-undef: "error"*/
     drawImg(img);
 }
