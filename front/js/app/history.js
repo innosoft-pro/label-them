@@ -113,7 +113,7 @@ function undoHistoryRecordsAddition() {
         undoObjectsAddition(historyRecord.polygon);
     } else if (historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
         undoObjectsDeletion(historyRecord.polygon, historyRecord.parameters);
-    } else if(historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
+    } else if (historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
         undoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.previousClassValue);
     } else {
         undoModificationOfTheObjectsParameter(historyRecord.recordType, historyRecord.polygonId,
@@ -133,10 +133,10 @@ function redoHistoryRecordsAddition() {
     if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
         redoObjectsAddition(historyRecord.polygon);
         addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, null, true);
-    } else if(historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
+    } else if (historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
         redoObjectsDeletion(historyRecord.polygon);
         addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, historyRecord.parameters, true);
-    } else if(historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
+    } else if (historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
         redoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.newClassValue);
         addHistoryRecordClass(historyRecord.recordType, historyRecord.polygonId, historyRecord.newClassValue,
             historyRecord.previousClassValue, true);
@@ -155,7 +155,7 @@ function undoObjectsAddition(polygon) {
 
         svgImg.removeChild(polygon.node);
 
-        if(selectedPolygon !== null && selectedPolygon.polygonId === polygon.polygonId) {
+        if (selectedPolygon !== null && selectedPolygon.polygonId === polygon.polygonId) {
             selectedPolygon = null;
         }
     }
@@ -181,13 +181,13 @@ function redoObjectsDeletion(polygon) {
 
 function undoModificationOfTheObjectsClass(polygonId, classValue) { // class value = previous class value
     let currentActiveEntityId = null;
-    if(dc.getActiveEntity() !== null) {
+    if (dc.getActiveEntity() !== null) {
         currentActiveEntityId = dc.getActiveEntity().polygonId;
     }
     dc.selectEntity(polygonId);
     onObjectClassUpdate(classValue, true);
     dc.selectEntity(currentActiveEntityId);
-    if(currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
+    if (currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
         setClassesAndParametersValues(dc.getActiveEntity());
     }
 }
@@ -198,7 +198,7 @@ function redoModificationOfTheObjectsClass(polygonId, classValue) { // class val
 
 function undoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue) { // parameter value = previous parameter value
     let currentActiveEntityId = null;
-    if(dc.getActiveEntity() !== null) {
+    if (dc.getActiveEntity() !== null) {
         currentActiveEntityId = dc.getActiveEntity().polygonId;
     }
     dc.selectEntity(polygonId);
@@ -216,7 +216,7 @@ function undoModificationOfTheObjectsParameter(recordType, polygonId, parameterN
             break;
     }
     dc.selectEntity(currentActiveEntityId);
-    if(currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
+    if (currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
         setClassesAndParametersValues(dc.getActiveEntity());
     }
 }

@@ -292,7 +292,7 @@ function initRowsAdditionAndDeletion() {
 let rowsCount = 0;
 
 function addHistoryRow(text = "Polygon",
-                icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png") {
+                       icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png") {
     let newRowsContents = [];
     newRowsContents.push("<td class=\"history-icon-td\">");
     newRowsContents.push("<button class=\"btn btn-default\">");
@@ -328,7 +328,7 @@ function deleteHistoryRow() {
 function addOnConcreteRecordButtonClickListener(i) {
     let concreteRecordButton = document.getElementById("historyRow" + i.toString());
     concreteRecordButton.onclick = function () {
-        for(let j=rowsCount-1; j>=i; j--) {
+        for (let j = rowsCount - 1; j >= i; j--) {
             undoHistoryRecordsAddition();
         }
     }

@@ -18,7 +18,7 @@ function onPolygonClosed(data, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         addHistoryRecordPolygon(HistoryRecordTypeEnum.ADD_OBJECT, data);
     }
 }
@@ -34,7 +34,7 @@ function onPolygonDeleted(data, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         resetDOM();
         addHistoryRecordPolygon(HistoryRecordTypeEnum.DELETE_OBJECT, data, parameters);
     }
@@ -42,7 +42,7 @@ function onPolygonDeleted(data, calledByHistory = false) {
 
 function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    if(isChecked === null) {
+    if (isChecked === null) {
         dc.getActiveEntity().deleteParameterByName(name);
     } else {
         dc.getActiveEntity().setParams({[name]: isChecked});
@@ -50,7 +50,7 @@ function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         addHistoryRecordParameter(HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE,
             dc.getActiveEntity().polygonId, name, isChecked, previousParameterValue);
     }
@@ -58,7 +58,7 @@ function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
 
 function onObjectClassUpdate(value, calledByHistory = false) {
     let previousClassValue = dc.getActiveEntity().getParameterByName("class");
-    if(value === null) {
+    if (value === null) {
         dc.getActiveEntity().deleteParameterByName("class");
     } else {
         dc.getActiveEntity().setParams({"class": value});
@@ -66,7 +66,7 @@ function onObjectClassUpdate(value, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         addHistoryRecordClass(HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS,
             dc.getActiveEntity().polygonId, value, previousClassValue);
     }
@@ -74,7 +74,7 @@ function onObjectClassUpdate(value, calledByHistory = false) {
 
 function onSelectParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    if(value === null) {
+    if (value === null) {
         dc.getActiveEntity().deleteParameterByName(name);
     } else {
         dc.getActiveEntity().setParams({[name]: value});
@@ -82,7 +82,7 @@ function onSelectParamUpdate(name, value, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         addHistoryRecordParameter(HistoryRecordTypeEnum.MODIFY_SELECT_PARAMETERS_VALUE,
             dc.getActiveEntity().polygonId, name, value, previousParameterValue);
     }
@@ -90,7 +90,7 @@ function onSelectParamUpdate(name, value, calledByHistory = false) {
 
 function onStringParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    if(value === null) {
+    if (value === null) {
         dc.getActiveEntity().deleteParameterByName(name);
     } else {
         dc.getActiveEntity().setParams({[name]: value});
@@ -98,7 +98,7 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
 
     onSave();
 
-    if(calledByHistory === false) {
+    if (calledByHistory === false) {
         addHistoryRecordParameter(HistoryRecordTypeEnum.MODIFY_STRING_PARAMETERS_VALUE,
             dc.getActiveEntity().polygonId, name, value, previousParameterValue);
     }
