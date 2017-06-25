@@ -9,7 +9,7 @@ let polygonId = 0;
 
 let redoPoints = [];
 
-let currentScale = 1;
+var currentScale = 1;
 
 function initSvg() {
     svgImg = document.getElementById("svg_img");

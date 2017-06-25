@@ -2,8 +2,10 @@
  * Created by alnedorezov on 6/25/17.
  */
 
-var HistoryRecordTypeEnum = Object.freeze({ADD_OBJECT: 1, DELETE_OBJECT: 2, MODIFY_OBJECTS_CLASS: 3,
-    MODIFY_BOOLEAN_PARAMETERS_VALUE: 4, MODIFY_STRING_PARAMETERS_VALUE: 5, MODIFY_SELECT_PARAMETERS_VALUE: 6});
+var HistoryRecordTypeEnum = Object.freeze({
+    ADD_OBJECT: 1, DELETE_OBJECT: 2, MODIFY_OBJECTS_CLASS: 3,
+    MODIFY_BOOLEAN_PARAMETERS_VALUE: 4, MODIFY_STRING_PARAMETERS_VALUE: 5, MODIFY_SELECT_PARAMETERS_VALUE: 6
+});
 
 var historyRecords = [];
 var redoHistoryPoints = [];
@@ -65,7 +67,13 @@ function addHistoryRecord(recordType, isRedo = false) {
 
 function addHistoryRecordPolygon(recordType, polygon, isRedo = false) {
     historyRecords.push(new HistoryRecordPolygon(recordType, polygon));
-    addHistoryRow("Polygon " + JSON.stringify(polygon.pointsList) + " was added");
+    let textToHistoryRow = "Polygon " + JSON.stringify(polygon.pointsList) + " was ";
+    if (recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
+        textToHistoryRow += "added"
+    } else if (recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
+        textToHistoryRow += "deleted"
+    }
+    addHistoryRow(textToHistoryRow);
     if (!isRedo) {
         redoHistoryPoints = [];
     }
@@ -86,18 +94,19 @@ function addHistoryRecordParameter(recordType, polygonId, parameterName, paramet
 }
 
 function undoHistoryRecordsAddition() {
-    if(historyRecords.length<=0) {
+    if (historyRecords.length <= 0) {
         return;
     }
 
     let historyRecord = historyRecords.pop();
     redoHistoryPoints.push(historyRecord);
 
-    switch(historyRecord.recordType) {
+    switch (historyRecord.recordType) {
         case HistoryRecordTypeEnum.ADD_OBJECT:
-            undoObjectsAddition(historyRecord);
+            undoObjectsAddition(historyRecord.polygon);
             break;
         case HistoryRecordTypeEnum.DELETE_OBJECT:
+            undoObjectsDeletion(historyRecord.polygon);
             break;
         case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
             break;
@@ -115,17 +124,20 @@ function undoHistoryRecordsAddition() {
 }
 
 function redoHistoryRecordsAddition() {
-    if(redoHistoryPoints.length<=0) {
+    if (redoHistoryPoints.length <= 0) {
         return;
     }
 
     let historyRecord = redoHistoryPoints.pop();
 
-    switch(historyRecord.recordType) {
+    switch (historyRecord.recordType) {
         case HistoryRecordTypeEnum.ADD_OBJECT:
+            redoObjectsAddition(historyRecord.polygon);
             addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
             break;
         case HistoryRecordTypeEnum.DELETE_OBJECT:
+            redoObjectsDeletion(historyRecord.polygon);
+            addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
             break;
         case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
             break;
@@ -147,4 +159,19 @@ function undoObjectsAddition(polygon) {
 
         svgImg.removeChild(polygon.node);
     }
+}
+
+function redoObjectsAddition(polygon) {
+    polygons[polygon.polygonId] = polygon;
+    svgImg.append(polygon.node);
+    polygons[polygon.polygonId].scale((1 / polygon.polygonScale) * currentScale);
+    onPolygonClosed(polygon, true);
+}
+
+function undoObjectsDeletion(polygon) {
+    redoObjectsAddition(polygon);
+}
+
+function redoObjectsDeletion(polygon) {
+    undoObjectsAddition(polygon)
 }
