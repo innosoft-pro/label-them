@@ -21,9 +21,10 @@ class HistoryRecord {
 }
 
 class HistoryRecordPolygon extends HistoryRecord {
-    constructor(recordType, polygon) {
+    constructor(recordType, polygon, parameters = null) {
         super(recordType);
         this.polygon = polygon;
+        this.parameters = parameters;
     }
 
     toString() {
@@ -65,13 +66,13 @@ function addHistoryRecord(recordType, isRedo = false) {
     }
 }
 
-function addHistoryRecordPolygon(recordType, polygon, isRedo = false) {
-    historyRecords.push(new HistoryRecordPolygon(recordType, polygon));
-    let textToHistoryRow = "Polygon " + JSON.stringify(polygon.pointsList) + " was ";
+function addHistoryRecordPolygon(recordType, polygon, parameters = null, isRedo = false) {
+    historyRecords.push(new HistoryRecordPolygon(recordType, polygon, parameters));
+    let textToHistoryRow = "Polygon " + JSON.stringify(polygon.pointsList);
     if (recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
-        textToHistoryRow += "added"
+        textToHistoryRow += " was added and assigned an id " + polygonId
     } else if (recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
-        textToHistoryRow += "deleted"
+        textToHistoryRow += " (with id " + polygonId + ") was deleted"
     }
     addHistoryRow(textToHistoryRow);
     if (!isRedo) {
@@ -108,24 +109,15 @@ function undoHistoryRecordsAddition() {
     let historyRecord = historyRecords.pop();
     redoHistoryPoints.push(historyRecord);
 
-    switch (historyRecord.recordType) {
-        case HistoryRecordTypeEnum.ADD_OBJECT:
-            undoObjectsAddition(historyRecord.polygon);
-            break;
-        case HistoryRecordTypeEnum.DELETE_OBJECT:
-            undoObjectsDeletion(historyRecord.polygon);
-            break;
-        case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
-            undoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.previousClassValue);
-            break;
-        case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
-            break;
-        case HistoryRecordTypeEnum.MODIFY_STRING_PARAMETERS_VALUE:
-            break;
-        case HistoryRecordTypeEnum.MODIFY_SELECT_PARAMETERS_VALUE:
-            break;
-        default:
-            break;
+    if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
+        undoObjectsAddition(historyRecord.polygon);
+    } else if (historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
+        undoObjectsDeletion(historyRecord.polygon, historyRecord.parameters);
+    } else if(historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
+        undoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.previousClassValue);
+    } else {
+        undoModificationOfTheObjectsParameter(historyRecord.recordType, historyRecord.polygonId,
+            historyRecord.parameterName, historyRecord.previousParameterValue);
     }
 
     deleteHistoryRow();
@@ -138,28 +130,21 @@ function redoHistoryRecordsAddition() {
 
     let historyRecord = redoHistoryPoints.pop();
 
-    switch (historyRecord.recordType) {
-        case HistoryRecordTypeEnum.ADD_OBJECT:
-            redoObjectsAddition(historyRecord.polygon);
-            addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
-            break;
-        case HistoryRecordTypeEnum.DELETE_OBJECT:
-            redoObjectsDeletion(historyRecord.polygon);
-            addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
-            break;
-        case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
-            redoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.newClassValue);
-            addHistoryRecordClass(historyRecord.recordType, historyRecord.polygonId, historyRecord.newClassValue,
-                historyRecord.previousClassValue, true);
-            break;
-        case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
-            break;
-        case HistoryRecordTypeEnum.MODIFY_STRING_PARAMETERS_VALUE:
-            break;
-        case HistoryRecordTypeEnum.MODIFY_SELECT_PARAMETERS_VALUE:
-            break;
-        default:
-            break;
+    if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
+        redoObjectsAddition(historyRecord.polygon);
+        addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, null, true);
+    } else if(historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
+        redoObjectsDeletion(historyRecord.polygon);
+        addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, historyRecord.parameters, true);
+    } else if(historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
+        redoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.newClassValue);
+        addHistoryRecordClass(historyRecord.recordType, historyRecord.polygonId, historyRecord.newClassValue,
+            historyRecord.previousClassValue, true);
+    } else {
+        redoModificationOfTheObjectsParameter(historyRecord.recordType, historyRecord.polygonId,
+            historyRecord.parameterName, historyRecord.newParameterValue);
+        addHistoryRecordParameter(historyRecord.recordType, historyRecord.polygonId, historyRecord.parameterName,
+            historyRecord.newParameterValue, historyRecord.previousParameterValue, true);
     }
 }
 
@@ -169,34 +154,73 @@ function undoObjectsAddition(polygon) {
         onPolygonDeleted(polygon, true);
 
         svgImg.removeChild(polygon.node);
+
+        if(selectedPolygon !== null && selectedPolygon.polygonId === polygon.polygonId) {
+            selectedPolygon = null;
+        }
     }
 }
 
 function redoObjectsAddition(polygon) {
+    polygon.scale((1 / polygon.polygonScale) * currentScale);
     polygons[polygon.polygonId] = polygon;
-    svgImg.append(polygon.node);
-    polygons[polygon.polygonId].scale((1 / polygon.polygonScale) * currentScale);
     onPolygonClosed(polygon, true);
+    onPolygonClick(polygon);
 }
 
-function undoObjectsDeletion(polygon) {
+function undoObjectsDeletion(polygon, parameters) {
     redoObjectsAddition(polygon);
+    // polygon with id=polygon.polygonId is now selected
+    dc.getActiveEntity().setParams(parameters);
+    setClassesAndParametersValues(dc.getActiveEntity());
 }
 
 function redoObjectsDeletion(polygon) {
-    undoObjectsAddition(polygon)
+    undoObjectsAddition(polygon);
 }
 
 function undoModificationOfTheObjectsClass(polygonId, classValue) { // class value = previous class value
-    let currentActiveEntityId = dc.getActiveEntity().polygonId;
+    let currentActiveEntityId = null;
+    if(dc.getActiveEntity() !== null) {
+        currentActiveEntityId = dc.getActiveEntity().polygonId;
+    }
     dc.selectEntity(polygonId);
     onObjectClassUpdate(classValue, true);
     dc.selectEntity(currentActiveEntityId);
-    if(currentActiveEntityId === polygonId) {
+    if(currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
         setClassesAndParametersValues(dc.getActiveEntity());
     }
 }
 
 function redoModificationOfTheObjectsClass(polygonId, classValue) { // class value = new class value
     undoModificationOfTheObjectsClass(polygonId, classValue);
+}
+
+function undoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue) { // parameter value = previous parameter value
+    let currentActiveEntityId = null;
+    if(dc.getActiveEntity() !== null) {
+        currentActiveEntityId = dc.getActiveEntity().polygonId;
+    }
+    dc.selectEntity(polygonId);
+    switch (recordType) {
+        case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
+            onBoolParamUpdate(parameterName, parameterValue, true);
+            break;
+        case HistoryRecordTypeEnum.MODIFY_STRING_PARAMETERS_VALUE:
+            onStringParamUpdate(parameterName, parameterValue, true);
+            break;
+        case HistoryRecordTypeEnum.MODIFY_SELECT_PARAMETERS_VALUE:
+            onSelectParamUpdate(parameterName, parameterValue, true);
+            break;
+        default:
+            break;
+    }
+    dc.selectEntity(currentActiveEntityId);
+    if(currentActiveEntityId !== null && currentActiveEntityId === polygonId) {
+        setClassesAndParametersValues(dc.getActiveEntity());
+    }
+}
+
+function redoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue) { // parameter value = new parameter value
+    undoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue);
 }

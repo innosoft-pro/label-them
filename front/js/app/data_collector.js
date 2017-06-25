@@ -29,14 +29,23 @@ DataCollector.prototype.selectEntity = function (id) {
     this.activeEntity = this.dataEntities[id];
 };
 
+DataCollector.prototype.getEntitiesParameters = function (id) {
+    return this.dataEntities[id].parameters;
+};
+
 DataCollector.prototype.deleteEntity = function (id) {
     if (id in this.dataEntities) {
         delete this.dataEntities[id];
+        this.activeEntity = null;
     }
 };
 
 DataCollector.prototype.getActiveEntity = function () {
     return this.activeEntity;
+};
+
+DataCollector.prototype.nullifyActiveEntity = function () {
+    this.activeEntity = null;
 };
 
 

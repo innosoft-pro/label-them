@@ -3,7 +3,7 @@ var svgImg;
 var polygons = {};
 
 let currentPolygon = null;
-let selectedPolygon = null;
+var selectedPolygon = null;
 
 let polygonId = 0;
 
@@ -135,14 +135,11 @@ function closePolygon() {
 }
 
 function onPolygonClick(polygon) {
-
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
     }
 
-
     polygon.setSelected(true);
-
 
     selectedPolygon = polygon;
 

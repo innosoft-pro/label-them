@@ -25,25 +25,27 @@ function onPolygonClosed(data, calledByHistory = false) {
 
 function onPolygonSelected(data, calledByHistory = false) {
     dc.selectEntity(data.polygonId);
-    setClassesAndParametersValues(dc.getActiveEntity())
+    setClassesAndParametersValues(dc.getActiveEntity());
 }
 
 function onPolygonDeleted(data, calledByHistory = false) {
+    let parameters = dc.getEntitiesParameters(data.polygonId);
     dc.deleteEntity(data.polygonId);
 
     onSave();
 
     if(calledByHistory === false) {
-        addHistoryRecordPolygon(HistoryRecordTypeEnum.DELETE_OBJECT, data);
+        resetDOM();
+        addHistoryRecordPolygon(HistoryRecordTypeEnum.DELETE_OBJECT, data, parameters);
     }
 }
 
 function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    if(value === null) {
+    if(isChecked === null) {
         dc.getActiveEntity().deleteParameterByName(name);
     } else {
-        dc.getActiveEntity().setParams({[name]: value});
+        dc.getActiveEntity().setParams({[name]: isChecked});
     }
 
     onSave();
