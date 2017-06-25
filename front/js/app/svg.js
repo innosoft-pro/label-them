@@ -44,7 +44,6 @@ function svgImgOnClick(event) {
         currentPolygon.polygonScale = currentScale;
 
 
-
         svgImg.append(currentPolygon.node);
         console.log(currentPolygon.node);
 
@@ -63,8 +62,6 @@ function svgImgDeleteSelectedPolygon() {
 
             selectedPolygon = null;
         }
-
-
     }
 }
 
@@ -89,7 +86,7 @@ function svgImgOnClickSelect(event) {
 
 function undoLastPoint() {
     if (currentPolygon === null) {
-      return;
+        return;
     }
 
     let lastPointIdx = currentPolygon.pointsList.length - 1;
@@ -106,7 +103,7 @@ function undoLastPoint() {
 
 function redoLastPoint() {
     if (currentPolygon === null || redoPoints.length < 1) {
-      return;
+        return;
     }
 
     let point = redoPoints.pop();

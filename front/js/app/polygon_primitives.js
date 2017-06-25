@@ -78,7 +78,7 @@ function Handle(x, y, type) {
     this.setPoint = function (x, y) {
         this.x = x;
         this.y = y;
-    }
+    };
 
     this.invalidate.apply(this);
 }
