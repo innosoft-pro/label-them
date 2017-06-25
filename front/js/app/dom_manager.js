@@ -274,19 +274,30 @@ function resetDOM() {
 }
 
 function initRowsAdditionAndDeletion() {
-    let rowsCount = 4;
+    let rowsCount = 0;
     let addRowButton = document.getElementById("add-row");
     let deleteRowButton = document.getElementById("delete-row");
     addRowButton.onclick = function () {
+        addRow();
+    };
+
+    deleteRowButton.onclick = function () {
+        deleteRow();
+    };
+
+    function addRow(icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png",
+                text = "Polygon") {
         let newRowsContents = [];
         newRowsContents.push("<td class=\"history-icon-td\">");
-        newRowsContents.push("<button class=\"btn btn-default panTool\">");
-        newRowsContents.push("<img src=\"https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png\"");
+        newRowsContents.push("<button class=\"btn btn-default\">");
+        newRowsContents.push("<img src=\"");
+        newRowsContents.push(icon);
+        newRowsContents.push("\"");
         newRowsContents.push("width=\"24\"/>");
         newRowsContents.push("</button>");
         newRowsContents.push("</td>");
         newRowsContents.push("<td class=\"history-text-td\">");
-        newRowsContents.push("Polygon");
+        newRowsContents.push(text);
         newRowsContents.push("</td>");
         newRowsContents = newRowsContents.join("");
         $('#history-table').append('<tr class="history-table-row" id="historyRow' + rowsCount + '"></tr>');
@@ -295,9 +306,9 @@ function initRowsAdditionAndDeletion() {
         /*global scrollHistoryTableBodyToBottom*/
         /*eslint no-undef: "error"*/
         scrollHistoryTableBodyToBottom();
-    };
+    }
 
-    deleteRowButton.onclick = function () {
+    function deleteRow() {
         if (rowsCount > 0) {
             $("#historyRow" + (rowsCount - 1)).remove();
             rowsCount--;
@@ -305,5 +316,5 @@ function initRowsAdditionAndDeletion() {
         /*global scrollHistoryTableBodyToBottom*/
         /*eslint no-undef: "error"*/
         scrollHistoryTableBodyToBottom();
-    };
+    }
 }
