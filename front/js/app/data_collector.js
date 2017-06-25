@@ -51,6 +51,14 @@ DataEntity.prototype.setParams = function (data) {
     this.parameters = Object.assign(this.parameters, data);
 };
 
+DataEntity.prototype.getParameterByName = function (parameterName) {
+    if(this.parameters === undefined || this.parameters === null || !this.parameters.hasOwnProperty(parameterName)) {
+        return null;
+    } else {
+        return Object.getOwnPropertyDescriptor(this.parameters, parameterName).value;
+    }
+};
+
 DataCollector.prototype.getJSON = function () {
     let dataEntities = [];
     /*global polygonId*/

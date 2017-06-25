@@ -30,10 +30,11 @@ class HistoryRecordPolygon extends HistoryRecord {
 }
 
 class HistoryRecordClass extends HistoryRecord {
-    constructor(recordType, polygonId, classValue) {
+    constructor(recordType, polygonId, newClassValue, previousClassValue) {
         super(recordType);
         this.polygonId = polygonId;
-        this.classValue = classValue;
+        this.newClassValue = newClassValue;
+        this.previousClassValue = previousClassValue;
     }
 
     toString() {
@@ -42,11 +43,12 @@ class HistoryRecordClass extends HistoryRecord {
 }
 
 class HistoryRecordParameter extends HistoryRecord {
-    constructor(recordType, polygonId, parameterName, parameterValue) {
+    constructor(recordType, polygonId, parameterName, newParameterValue, previousParameterValue) {
         super(recordType);
         this.polygonId = polygonId;
         this.parameterName = parameterName;
-        this.parameterValue = parameterValue;
+        this.newParameterValue = newParameterValue;
+        this.previousParameterValue = previousParameterValue;
     }
 
     toString() {
