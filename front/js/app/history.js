@@ -54,24 +54,33 @@ class HistoryRecordParameter extends HistoryRecord {
     }
 }
 
-function addHistoryRecord(recordType) {
+function addHistoryRecord(recordType, isRedo = false) {
     historyRecords.push(new HistoryRecord(recordType));
-    redoHistoryPoints = [];
+    if (!isRedo) {
+        redoHistoryPoints = [];
+    }
 }
 
-function addHistoryRecordPolygon(recordType, polygon) {
+function addHistoryRecordPolygon(recordType, polygon, isRedo = false) {
     historyRecords.push(new HistoryRecordPolygon(recordType, polygon));
-    redoHistoryPoints = [];
+    addHistoryRow("Polygon " + JSON.stringify(polygon.pointsList) + " was added");
+    if (!isRedo) {
+        redoHistoryPoints = [];
+    }
 }
 
-function addHistoryRecordClass(recordType, polygonId, classValue) {
+function addHistoryRecordClass(recordType, polygonId, classValue, isRedo = false) {
     historyRecords.push(new HistoryRecordClass(recordType, polygonId, classValue));
-    redoHistoryPoints = [];
+    if (!isRedo) {
+        redoHistoryPoints = [];
+    }
 }
 
-function addHistoryRecordParameter(recordType, polygonId, parameterName, parameterValue) {
+function addHistoryRecordParameter(recordType, polygonId, parameterName, parameterValue, isRedo = false) {
     historyRecords.push(new HistoryRecordParameter(recordType, polygonId, parameterName, parameterValue));
-    redoHistoryPoints = [];
+    if (!isRedo) {
+        redoHistoryPoints = [];
+    }
 }
 
 function undoHistoryRecordsAddition() {
@@ -85,6 +94,34 @@ function undoHistoryRecordsAddition() {
     switch(historyRecord.recordType) {
         case HistoryRecordTypeEnum.ADD_OBJECT:
             undoObjectsAddition(historyRecord);
+            break;
+        case HistoryRecordTypeEnum.DELETE_OBJECT:
+            break;
+        case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
+            break;
+        case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
+            break;
+        case HistoryRecordTypeEnum.MODIFY_STRING_PARAMETERS_VALUE:
+            break;
+        case HistoryRecordTypeEnum.MODIFY_SELECT_PARAMETERS_VALUE:
+            break;
+        default:
+            break;
+    }
+
+    deleteHistoryRow();
+}
+
+function redoHistoryRecordsAddition() {
+    if(redoHistoryPoints.length<=0) {
+        return;
+    }
+
+    let historyRecord = redoHistoryPoints.pop();
+
+    switch(historyRecord.recordType) {
+        case HistoryRecordTypeEnum.ADD_OBJECT:
+            addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
             break;
         case HistoryRecordTypeEnum.DELETE_OBJECT:
             break;

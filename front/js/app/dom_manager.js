@@ -274,47 +274,62 @@ function resetDOM() {
 }
 
 function initRowsAdditionAndDeletion() {
-    let rowsCount = 0;
     let addRowButton = document.getElementById("add-row");
     let deleteRowButton = document.getElementById("delete-row");
     addRowButton.onclick = function () {
-        addRow();
+        /*global redoHistoryRecordsAddition*/
+        /*eslint no-undef: "error"*/
+        redoHistoryRecordsAddition();
     };
 
     deleteRowButton.onclick = function () {
-        deleteRow();
+        /*global undoHistoryRecordsAddition*/
+        /*eslint no-undef: "error"*/
+        undoHistoryRecordsAddition();
     };
+}
 
-    function addRow(icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png",
-                text = "Polygon") {
-        let newRowsContents = [];
-        newRowsContents.push("<td class=\"history-icon-td\">");
-        newRowsContents.push("<button class=\"btn btn-default\">");
-        newRowsContents.push("<img src=\"");
-        newRowsContents.push(icon);
-        newRowsContents.push("\"");
-        newRowsContents.push("width=\"24\"/>");
-        newRowsContents.push("</button>");
-        newRowsContents.push("</td>");
-        newRowsContents.push("<td class=\"history-text-td\">");
-        newRowsContents.push(text);
-        newRowsContents.push("</td>");
-        newRowsContents = newRowsContents.join("");
-        $('#history-table').append('<tr class="history-table-row" id="historyRow' + rowsCount + '"></tr>');
-        $('#historyRow' + rowsCount).html(newRowsContents);
-        rowsCount++;
-        /*global scrollHistoryTableBodyToBottom*/
-        /*eslint no-undef: "error"*/
-        scrollHistoryTableBodyToBottom();
+let rowsCount = 0;
+
+function addHistoryRow(text = "Polygon",
+                icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png") {
+    let newRowsContents = [];
+    newRowsContents.push("<td class=\"history-icon-td\">");
+    newRowsContents.push("<button class=\"btn btn-default\">");
+    newRowsContents.push("<img src=\"");
+    newRowsContents.push(icon);
+    newRowsContents.push("\"");
+    newRowsContents.push("width=\"24\"/>");
+    newRowsContents.push("</button>");
+    newRowsContents.push("</td>");
+    newRowsContents.push("<td class=\"history-text-td\">");
+    newRowsContents.push(text);
+    newRowsContents.push("</td>");
+    newRowsContents = newRowsContents.join("");
+    $('#history-table').append('<tr class="history-table-row" id="historyRow' + rowsCount + '"></tr>');
+    $('#historyRow' + rowsCount).html(newRowsContents);
+    addOnConcreteRecordButtonClickListener(rowsCount);
+    rowsCount++;
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
+
+function deleteHistoryRow() {
+    if (rowsCount > 0) {
+        $("#historyRow" + (rowsCount - 1)).remove();
+        rowsCount--;
     }
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
 
-    function deleteRow() {
-        if (rowsCount > 0) {
-            $("#historyRow" + (rowsCount - 1)).remove();
-            rowsCount--;
+function addOnConcreteRecordButtonClickListener(i) {
+    let concreteRecordButton = document.getElementById("historyRow" + i.toString());
+    concreteRecordButton.onclick = function () {
+        for(let j=rowsCount-1; j>=i; j--) {
+            undoHistoryRecordsAddition();
         }
-        /*global scrollHistoryTableBodyToBottom*/
-        /*eslint no-undef: "error"*/
-        scrollHistoryTableBodyToBottom();
     }
 }
