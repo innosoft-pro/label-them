@@ -79,15 +79,22 @@ function addHistoryRecordPolygon(recordType, polygon, isRedo = false) {
     }
 }
 
-function addHistoryRecordClass(recordType, polygonId, classValue, isRedo = false) {
-    historyRecords.push(new HistoryRecordClass(recordType, polygonId, classValue));
+function addHistoryRecordClass(recordType, polygonId, newClassValue, previousClassValue, isRedo = false) {
+    historyRecords.push(new HistoryRecordClass(recordType, polygonId, newClassValue, previousClassValue));
+    let textToHistoryRow = "Class of polygon " + polygonId + " was changed to " + newClassValue;
+    addHistoryRow(textToHistoryRow);
     if (!isRedo) {
         redoHistoryPoints = [];
     }
 }
 
-function addHistoryRecordParameter(recordType, polygonId, parameterName, parameterValue, isRedo = false) {
-    historyRecords.push(new HistoryRecordParameter(recordType, polygonId, parameterName, parameterValue));
+function addHistoryRecordParameter(recordType, polygonId, parameterName, newParameterValue, previousParameterValue,
+                                   isRedo = false) {
+    historyRecords.push(new HistoryRecordParameter(recordType, polygonId, parameterName, newParameterValue,
+        previousParameterValue));
+    let textToHistoryRow = "Parameter " + parameterName + " of polygon " + polygonId +
+        " was changed to " + newParameterValue;
+    addHistoryRow(textToHistoryRow);
     if (!isRedo) {
         redoHistoryPoints = [];
     }
@@ -109,6 +116,7 @@ function undoHistoryRecordsAddition() {
             undoObjectsDeletion(historyRecord.polygon);
             break;
         case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
+            undoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.previousClassValue);
             break;
         case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
             break;
@@ -140,6 +148,9 @@ function redoHistoryRecordsAddition() {
             addHistoryRecordPolygon(historyRecord.recordType, historyRecord.polygon, true);
             break;
         case HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS:
+            redoModificationOfTheObjectsClass(historyRecord.polygonId, historyRecord.newClassValue);
+            addHistoryRecordClass(historyRecord.recordType, historyRecord.polygonId, historyRecord.newClassValue,
+                historyRecord.previousClassValue, true);
             break;
         case HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE:
             break;
@@ -174,4 +185,18 @@ function undoObjectsDeletion(polygon) {
 
 function redoObjectsDeletion(polygon) {
     undoObjectsAddition(polygon)
+}
+
+function undoModificationOfTheObjectsClass(polygonId, classValue) { // class value = previous class value
+    let currentActiveEntityId = dc.getActiveEntity().polygonId;
+    dc.selectEntity(polygonId);
+    onObjectClassUpdate(classValue, true);
+    dc.selectEntity(currentActiveEntityId);
+    if(currentActiveEntityId === polygonId) {
+        setClassesAndParametersValues(dc.getActiveEntity());
+    }
+}
+
+function redoModificationOfTheObjectsClass(polygonId, classValue) { // class value = new class value
+    undoModificationOfTheObjectsClass(polygonId, classValue);
 }
