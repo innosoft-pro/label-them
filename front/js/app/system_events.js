@@ -39,19 +39,28 @@ function onPolygonDeleted(data, calledByHistory = false) {
 }
 
 function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
-    dc.getActiveEntity().setParams({[name]: isChecked});
+    let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
+    if(value === null) {
+        dc.getActiveEntity().deleteParameterByName(name);
+    } else {
+        dc.getActiveEntity().setParams({[name]: value});
+    }
 
     onSave();
 
     if(calledByHistory === false) {
         addHistoryRecordParameter(HistoryRecordTypeEnum.MODIFY_BOOLEAN_PARAMETERS_VALUE,
-            dc.getActiveEntity().polygonId, name, isChecked, !isChecked);
+            dc.getActiveEntity().polygonId, name, isChecked, previousParameterValue);
     }
 }
 
 function onObjectClassUpdate(value, calledByHistory = false) {
     let previousClassValue = dc.getActiveEntity().getParameterByName("class");
-    dc.getActiveEntity().setParams({"class": value});
+    if(value === null) {
+        dc.getActiveEntity().deleteParameterByName("class");
+    } else {
+        dc.getActiveEntity().setParams({"class": value});
+    }
 
     onSave();
 
@@ -63,7 +72,11 @@ function onObjectClassUpdate(value, calledByHistory = false) {
 
 function onSelectParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    dc.getActiveEntity().setParams({[name]: value});
+    if(value === null) {
+        dc.getActiveEntity().deleteParameterByName(name);
+    } else {
+        dc.getActiveEntity().setParams({[name]: value});
+    }
 
     onSave();
 
@@ -75,7 +88,11 @@ function onSelectParamUpdate(name, value, calledByHistory = false) {
 
 function onStringParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
-    dc.getActiveEntity().setParams({[name]: value});
+    if(value === null) {
+        dc.getActiveEntity().deleteParameterByName(name);
+    } else {
+        dc.getActiveEntity().setParams({[name]: value});
+    }
 
     onSave();
 

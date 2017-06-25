@@ -59,6 +59,12 @@ DataEntity.prototype.getParameterByName = function (parameterName) {
     }
 };
 
+DataEntity.prototype.deleteParameterByName = function (parameterName) {
+    if(this.parameters.hasOwnProperty(parameterName)) {
+        delete this.parameters[parameterName];
+    }
+};
+
 DataCollector.prototype.getJSON = function () {
     let dataEntities = [];
     /*global polygonId*/
