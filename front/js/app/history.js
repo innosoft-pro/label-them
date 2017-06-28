@@ -127,7 +127,7 @@ function undoHistoryRecordsAddition() {
     deleteHistoryRow();
     enableOrDisableAnElementById("add-row");
 
-    if(historyRecords.length <= 0) {
+    if (historyRecords.length <= 0) {
         enableOrDisableAnElementById("delete-row", false);
     }
 }
@@ -156,7 +156,7 @@ function redoHistoryRecordsAddition() {
             historyRecord.newParameterValue, historyRecord.previousParameterValue, true);
     }
 
-    if(redoHistoryPoints.length <= 0) {
+    if (redoHistoryPoints.length <= 0) {
         enableOrDisableAnElementById("add-row", false);
     }
 }

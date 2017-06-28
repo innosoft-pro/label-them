@@ -350,7 +350,7 @@ function enableOrDisableAnElementById(buttonId, toEnable = true) {
         return;
     }
 
-    if(toEnable) {
+    if (toEnable) {
         $("#" + buttonId).removeClass("disabled");
     } else {
         $("#" + buttonId).addClass("disabled");
