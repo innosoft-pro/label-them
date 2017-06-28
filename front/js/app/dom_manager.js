@@ -287,6 +287,9 @@ function initRowsAdditionAndDeletion() {
         /*eslint no-undef: "error"*/
         undoHistoryRecordsAddition();
     };
+
+    enableOrDisableAnElementById("delete-row", false);
+    enableOrDisableAnElementById("add-row", false);
 }
 
 let rowsCount = 0;
@@ -331,5 +334,25 @@ function addOnConcreteRecordButtonClickListener(i) {
         for (let j = rowsCount - 1; j >= i; j--) {
             undoHistoryRecordsAddition();
         }
+    }
+}
+
+/**
+ * Enables or disables an element (e.g. a button) by adding a disabled class. Does nothing if buttonId is not a string.
+ * @param buttonId - a string - Id of the button to enable or disable, without the number (#) sign
+ * @param toEnable - a boolean variable, when true - removes "disabled" class, if specified.
+ *                   Otherwise adds "disabled" class. (Is true by default)
+ *
+ * See https://www.w3schools.com/bootstrap/bootstrap_buttons.asp & http://api.jquery.com/removeClass/ for reference.
+ */
+function enableOrDisableAnElementById(buttonId, toEnable = true) {
+    if (!(typeof buttonId === "string" || buttonId instanceof String)) {
+        return;
+    }
+
+    if(toEnable) {
+        $("#" + buttonId).removeClass("disabled");
+    } else {
+        $("#" + buttonId).addClass("disabled");
     }
 }

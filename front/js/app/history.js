@@ -61,8 +61,9 @@ class HistoryRecordParameter extends HistoryRecord {
 
 function addHistoryRecord(recordType, isRedo = false) {
     historyRecords.push(new HistoryRecord(recordType));
+    enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
-        redoHistoryPoints = [];
+        resetRedoHistoryPointsData();
     }
 }
 
@@ -75,8 +76,9 @@ function addHistoryRecordPolygon(recordType, polygon, parameters = null, isRedo 
         textToHistoryRow += " (with id " + polygonId + ") was deleted"
     }
     addHistoryRow(textToHistoryRow);
+    enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
-        redoHistoryPoints = [];
+        resetRedoHistoryPointsData();
     }
 }
 
@@ -84,8 +86,9 @@ function addHistoryRecordClass(recordType, polygonId, newClassValue, previousCla
     historyRecords.push(new HistoryRecordClass(recordType, polygonId, newClassValue, previousClassValue));
     let textToHistoryRow = "Class of polygon " + polygonId + " was changed to " + newClassValue;
     addHistoryRow(textToHistoryRow);
+    enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
-        redoHistoryPoints = [];
+        resetRedoHistoryPointsData();
     }
 }
 
@@ -96,8 +99,9 @@ function addHistoryRecordParameter(recordType, polygonId, parameterName, newPara
     let textToHistoryRow = "Parameter " + parameterName + " of polygon " + polygonId +
         " was changed to " + newParameterValue;
     addHistoryRow(textToHistoryRow);
+    enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
-        redoHistoryPoints = [];
+        resetRedoHistoryPointsData();
     }
 }
 
@@ -121,6 +125,11 @@ function undoHistoryRecordsAddition() {
     }
 
     deleteHistoryRow();
+    enableOrDisableAnElementById("add-row");
+
+    if(historyRecords.length <= 0) {
+        enableOrDisableAnElementById("delete-row", false);
+    }
 }
 
 function redoHistoryRecordsAddition() {
@@ -145,6 +154,10 @@ function redoHistoryRecordsAddition() {
             historyRecord.parameterName, historyRecord.newParameterValue);
         addHistoryRecordParameter(historyRecord.recordType, historyRecord.polygonId, historyRecord.parameterName,
             historyRecord.newParameterValue, historyRecord.previousParameterValue, true);
+    }
+
+    if(redoHistoryPoints.length <= 0) {
+        enableOrDisableAnElementById("add-row", false);
     }
 }
 
@@ -223,4 +236,9 @@ function undoModificationOfTheObjectsParameter(recordType, polygonId, parameterN
 
 function redoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue) { // parameter value = new parameter value
     undoModificationOfTheObjectsParameter(recordType, polygonId, parameterName, parameterValue);
+}
+
+function resetRedoHistoryPointsData() {
+    redoHistoryPoints = [];
+    enableOrDisableAnElementById("add-row", false);
 }
