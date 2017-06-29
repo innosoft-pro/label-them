@@ -381,14 +381,6 @@ function displayLanguageSelection(languagesArray) {
     languageSelectionBlockCode.push("<select class=\"form-control\" id=\"language-selection-select\">");
     for (let i = 0; i < languagesArray.length; i++) {
         if (languagesArray[i].hasOwnProperty("getLanguageName")) {
-            /*
-             languageSelectionBlockCode.push("<button class=\"btn btn-default\"");
-             languageSelectionBlockCode.push(" id=\"btn-language-");
-             languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
-             languageSelectionBlockCode.push("\">");
-             languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
-             languageSelectionBlockCode.push("</button>");
-             */
             languageSelectionBlockCode.push("<option ");
             languageSelectionBlockCode.push("value=\"");
             languageSelectionBlockCode.push(i);
