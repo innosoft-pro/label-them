@@ -2,6 +2,9 @@ var canvas;
 var svg;
 var ratio = 2;
 
+let zoomCount = 0;
+let maxZoomCount = 0;
+
 function initZoom() {
     canvas = document.getElementById("main-canvas");
     svg = document.getElementById("svg_img");
