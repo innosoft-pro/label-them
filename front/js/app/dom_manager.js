@@ -329,7 +329,7 @@ function deleteHistoryRow() {
 }
 
 function clearHistoryTable() {
-    while(rowsCount>0) {
+    while (rowsCount > 0) {
         $("#historyRow" + (rowsCount - 1)).remove();
         rowsCount--;
     }
@@ -379,22 +379,22 @@ function displayLanguageSelection(languagesArray) {
     let languageSelectionBlockCode = [];
     $("#language-selection-sidebar").removeClass("hidden");
     languageSelectionBlockCode.push("<select class=\"form-control\" id=\"language-selection-select\">");
-    for(let i=0; i<languagesArray.length; i++) {
+    for (let i = 0; i < languagesArray.length; i++) {
         if (languagesArray[i].hasOwnProperty("getLanguageName")) {
             /*
-            languageSelectionBlockCode.push("<button class=\"btn btn-default\"");
-            languageSelectionBlockCode.push(" id=\"btn-language-");
-            languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
+             languageSelectionBlockCode.push("<button class=\"btn btn-default\"");
+             languageSelectionBlockCode.push(" id=\"btn-language-");
+             languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
+             languageSelectionBlockCode.push("\">");
+             languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
+             languageSelectionBlockCode.push("</button>");
+             */
+            languageSelectionBlockCode.push("<option ");
+            languageSelectionBlockCode.push("value=\"");
+            languageSelectionBlockCode.push(i);
             languageSelectionBlockCode.push("\">");
-            languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
-            languageSelectionBlockCode.push("</button>");
-            */
-                languageSelectionBlockCode.push("<option ");
-                languageSelectionBlockCode.push("value=\"");
-                languageSelectionBlockCode.push(i);
-                languageSelectionBlockCode.push("\">");
-                languageSelectionBlockCode.push(languagesArray[i].getLanguageName());
-                languageSelectionBlockCode.push("</option>");
+            languageSelectionBlockCode.push(languagesArray[i].getLanguageName());
+            languageSelectionBlockCode.push("</option>");
         }
     }
     languageSelectionBlockCode.push("</select>");

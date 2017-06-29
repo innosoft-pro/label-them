@@ -23,8 +23,8 @@ function initEnglishLanguageSupport() {
                 return "Parameter " + parameterName + " of polygon " + polygonId +
                     " was changed to " + newParameterValue;
             },
-            objectCreateImplementationOnlyAcceptsTheFirstParameter:
-                "Object.create implementation only accepts the first parameter.",
+            objectCreateImplementationOnlyAcceptsTheFirstParameter: "Object.create implementation only accepts " +
+            "the first parameter.",
             notTheFullImageWillBeShownNotificationString: "Image cannot fit the screen in width. " +
             "Please, uncover the whole image displayed below with the use of horizontal scrolling " +
             "and markup it using the tools from the block on the left.",

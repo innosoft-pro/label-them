@@ -245,7 +245,7 @@ function resetRedoHistoryPointsData() {
 }
 
 function generateHistoryBlockContents() {
-    for(let historyRecord of historyRecords) {
+    for (let historyRecord of historyRecords) {
         let textToHistoryRow;
         if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
             textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(historyRecord.polygon.pointsList) +

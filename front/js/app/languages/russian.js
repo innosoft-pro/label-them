@@ -23,9 +23,9 @@ function initRussianLanguageSupport() {
                 return "Параметр " + parameterName + " многоугольника " + polygonId +
                     " был изменён на " + newParameterValue;
             },
-            objectCreateImplementationOnlyAcceptsTheFirstParameter:
-                "Реализация метода Object.create принимает только первый параметр.",
-            notTheFullImageWillBeShownNotificationString: "Ширина изображения превышает размер выделенного " + "" +
+            objectCreateImplementationOnlyAcceptsTheFirstParameter: "Реализация метода Object.create принимает" +
+            " только первый параметр.",
+            notTheFullImageWillBeShownNotificationString: "Ширина изображения превышает размер выделенного " +
             "под него блока. Пожалуйста, используйте горизонтальную прокрутку для просмотра всего изображения " +
             "и разметьте его при помощи инструментов расположенных в блоке слева.",
             markupImageWithToolsNotificationString: "Пожалуйста, разметьте отображённое ниже изображение при помощи " +
