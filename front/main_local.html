@@ -66,6 +66,11 @@
                                  width="48"/>
                         </button>
                     </div>
+
+
+                    <div id="language-selection-sidebar" class="btn-group-vertical" role="group" aria-label="...">
+                        <!-- Language selection block is to be displayed here -->
+                    </div>
                 </div>
 
                 <div class="image-to-be-labeled">
@@ -137,7 +142,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" id="label-parameters-block-title">
                                 <h3 class="panel-title">Label Parameters</h3>
                             </div>
                             <div class="panel-body" id="classes-and-parameters">
@@ -151,9 +156,8 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="panel panel-default">
-                            <div class="panel-heading">
+                            <div class="panel-heading" id="history-block-title">
                                 <h3 class="panel-title">History</h3>
-
                             </div>
                             <!-- Table -->
                             <table class="table history-table" id="history-table">
@@ -185,6 +189,7 @@
     initDOM();
     initPresentationLayer();
     initToolbar();
+    initMultiLanguageSupport();
 </script>
 </body>
 </html>

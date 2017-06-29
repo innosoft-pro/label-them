@@ -6,6 +6,7 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
             initDOM();
             initPresentationLayer();
             initToolbar();
+            initMultiLanguageSupport();
         });
 
         window.thisTask = this;

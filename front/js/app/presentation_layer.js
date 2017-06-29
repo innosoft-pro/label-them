@@ -3,6 +3,7 @@
  */
 // loading remote image
 let img = new Image();
+let latestNotificationFromCanvas = null;
 
 function initPresentationLayer() {
     img.src = document.getElementById("img_url").innerText;
@@ -26,24 +27,13 @@ function initPresentationLayer() {
 function resize() {
     /*global resizeCanvas*/
     /*eslint no-undef: "error"*/
-    let notificationString = resizeCanvas(img);
+    latestNotificationFromCanvas = resizeCanvas(img);
     /*global resizeSvg*/
     /*eslint no-undef: "error"*/
     resizeSvg(img);
     changeScrollingPositionInTheHistoryBlock();
     scrollHistoryTableBodyToBottom();
-
-    if (notificationString === "Not the full image will be shown") { // Notify the user that not the full image will be shown
-        showMessage(
-            "Image cannot fit the screen in width. " +
-            "Please, uncover the whole image displayed below with the use of horizontal scrolling " +
-            "and markup it using the tools from the block on the left.",
-            MessageTypeEnum.WARNING);
-    } else { // Display the instructions for the user
-        showMessage(
-            "Please, markup the image displayed below using the tools from the block on the left.",
-            MessageTypeEnum.INFO);
-    }
+    showMessageToTheUserDependingOnTheLatestNotificationFromCanvas();
 }
 
 function changeScrollingPositionInTheHistoryBlock() {
@@ -56,4 +46,13 @@ function changeScrollingPositionInTheHistoryBlock() {
 function scrollHistoryTableBodyToBottom() {
     let historyTableBody = document.getElementsByClassName("history-table-body")[0];
     historyTableBody.scrollTop = historyTableBody.scrollHeight;
+}
+
+function showMessageToTheUserDependingOnTheLatestNotificationFromCanvas() {
+    if (latestNotificationFromCanvas === "Not the full image will be shown") { // Notify the user that not the full image will be shown
+        showMessage(activeLanguage.notTheFullImageWillBeShownNotificationString, MessageTypeEnum.WARNING);
+    } else { // Display the instructions for the user
+        showMessage(
+            activeLanguage.markupImageWithToolsNotificationString, MessageTypeEnum.INFO);
+    }
 }

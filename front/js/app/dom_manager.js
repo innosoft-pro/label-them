@@ -328,6 +328,16 @@ function deleteHistoryRow() {
     scrollHistoryTableBodyToBottom();
 }
 
+function clearHistoryTable() {
+    while(rowsCount>0) {
+        $("#historyRow" + (rowsCount - 1)).remove();
+        rowsCount--;
+    }
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
+
 function addOnConcreteRecordButtonClickListener(i) {
     let concreteRecordButton = document.getElementById("historyRow" + i.toString());
     concreteRecordButton.onclick = function () {
@@ -355,4 +365,41 @@ function enableOrDisableAnElementById(buttonId, toEnable = true) {
     } else {
         $("#" + buttonId).addClass("disabled");
     }
+}
+
+function translateBlocksTitles() {
+    let beginH3tag = "<h3 class=\"panel-title\">";
+    let endH3tag = "</h3>";
+    document.getElementById("label-parameters-block-title").innerHTML = beginH3tag + activeLanguage.labelParameters +
+        endH3tag;
+    document.getElementById("history-block-title").innerHTML = beginH3tag + activeLanguage.history + endH3tag;
+}
+
+function displayLanguageSelection(languagesArray) {
+    let languageSelectionBlockCode = [];
+    $("#language-selection-sidebar").removeClass("hidden");
+    languageSelectionBlockCode.push("<select class=\"form-control\" id=\"language-selection-select\">");
+    for(let i=0; i<languagesArray.length; i++) {
+        if (languagesArray[i].hasOwnProperty("getLanguageName")) {
+            /*
+            languageSelectionBlockCode.push("<button class=\"btn btn-default\"");
+            languageSelectionBlockCode.push(" id=\"btn-language-");
+            languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
+            languageSelectionBlockCode.push("\">");
+            languageSelectionBlockCode.push(concreteLanguage.getLanguageName());
+            languageSelectionBlockCode.push("</button>");
+            */
+                languageSelectionBlockCode.push("<option ");
+                languageSelectionBlockCode.push("value=\"");
+                languageSelectionBlockCode.push(i);
+                languageSelectionBlockCode.push("\">");
+                languageSelectionBlockCode.push(languagesArray[i].getLanguageName());
+                languageSelectionBlockCode.push("</option>");
+        }
+    }
+    languageSelectionBlockCode.push("</select>");
+    document.getElementById("language-selection-sidebar").innerHTML = languageSelectionBlockCode.join("");
+    document.getElementById("language-selection-select").addEventListener("change", function () {
+        selectLanguage(languagesArray[document.getElementById("language-selection-select").value])
+    }, false);
 }

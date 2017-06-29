@@ -112,3 +112,7 @@ polygon.selected {
     fill: #003300;
     fill-opacity: 0.3;
 }
+
+#language-selection-sidebar{
+    padding-top: 16px;
+}

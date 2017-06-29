@@ -239,7 +239,7 @@ function Polygon(startX, startY, polygonId) {
     this.scale = function (scaleFactor) {
 
         this.polygonScale = this.polygonScale * scaleFactor;
-        this.pointsList = this.scalePoints.apply(this, [scaleFactor])
+        this.pointsList = this.scalePoints.apply(this, [scaleFactor]);
 
         for (let i = 0; i < this.pointsList.length; i++) {
             this.handles[i].setPoint(this.pointsList[i][0], this.pointsList[i][1]);

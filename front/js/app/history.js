@@ -69,11 +69,12 @@ function addHistoryRecord(recordType, isRedo = false) {
 
 function addHistoryRecordPolygon(recordType, polygon, parameters = null, isRedo = false) {
     historyRecords.push(new HistoryRecordPolygon(recordType, polygon, parameters));
-    let textToHistoryRow = "Polygon " + JSON.stringify(polygon.pointsList);
+    let textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(polygon.pointsList);
     if (recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
-        textToHistoryRow += " was added and assigned an id " + polygonId
+        textToHistoryRow += activeLanguage.spaceSignWasAssignedAnId + polygonId;
     } else if (recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
-        textToHistoryRow += " (with id " + polygonId + ") was deleted"
+        textToHistoryRow += activeLanguage.spaceSignOpenBracketWithIdSpaceSign + polygonId +
+            activeLanguage.closeBracketSpaceSignWasDeleted;
     }
     addHistoryRow(textToHistoryRow);
     enableOrDisableAnElementById("delete-row");
@@ -84,7 +85,7 @@ function addHistoryRecordPolygon(recordType, polygon, parameters = null, isRedo 
 
 function addHistoryRecordClass(recordType, polygonId, newClassValue, previousClassValue, isRedo = false) {
     historyRecords.push(new HistoryRecordClass(recordType, polygonId, newClassValue, previousClassValue));
-    let textToHistoryRow = "Class of polygon " + polygonId + " was changed to " + newClassValue;
+    let textToHistoryRow = activeLanguage.classOfPolygonIdWasChangedToNewClassValue(polygonId, newClassValue);
     addHistoryRow(textToHistoryRow);
     enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
@@ -96,8 +97,8 @@ function addHistoryRecordParameter(recordType, polygonId, parameterName, newPara
                                    isRedo = false) {
     historyRecords.push(new HistoryRecordParameter(recordType, polygonId, parameterName, newParameterValue,
         previousParameterValue));
-    let textToHistoryRow = "Parameter " + parameterName + " of polygon " + polygonId +
-        " was changed to " + newParameterValue;
+    let textToHistoryRow = activeLanguage.parameterParameterNameOfPolygonPolygonIdWasChangedToNewParameterValue(
+        parameterName, polygonId, newParameterValue);
     addHistoryRow(textToHistoryRow);
     enableOrDisableAnElementById("delete-row");
     if (!isRedo) {
@@ -241,4 +242,30 @@ function redoModificationOfTheObjectsParameter(recordType, polygonId, parameterN
 function resetRedoHistoryPointsData() {
     redoHistoryPoints = [];
     enableOrDisableAnElementById("add-row", false);
+}
+
+function generateHistoryBlockContents() {
+    for(let historyRecord of historyRecords) {
+        let textToHistoryRow;
+        if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
+            textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(historyRecord.polygon.pointsList) +
+                activeLanguage.spaceSignWasAssignedAnId + polygonId;
+        } else if (historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
+            textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(historyRecord.polygon.pointsList) +
+                activeLanguage.spaceSignOpenBracketWithIdSpaceSign + polygonId +
+                activeLanguage.closeBracketSpaceSignWasDeleted;
+        } else if (historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
+            textToHistoryRow = activeLanguage.classOfPolygonIdWasChangedToNewClassValue(historyRecord.polygonId,
+                historyRecord.newClassValue);
+        } else {
+            textToHistoryRow = activeLanguage.parameterParameterNameOfPolygonPolygonIdWasChangedToNewParameterValue(
+                historyRecord.parameterName, historyRecord.polygonId, historyRecord.newParameterValue);
+        }
+        addHistoryRow(textToHistoryRow);
+    }
+}
+
+function recreateHistoryBlockContents() {
+    clearHistoryTable();
+    generateHistoryBlockContents();
 }

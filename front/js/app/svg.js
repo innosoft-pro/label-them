@@ -153,12 +153,10 @@ function onPolygonClick(polygon) {
 function showPolygonSelectedMessage() {
     /*global MessageTypeEnum*/
     /*eslint no-undef: "error"*/
-    showMessage("Please, characterize the selected object in the right menu.",
-        MessageTypeEnum.WARNING);
+    showMessage(activeLanguage.characterizeObjectInTheRightMenu, MessageTypeEnum.WARNING);
     setTimeout(function () {
         showMessage(
-            "Please, markup the image displayed below using the tools from the block on the left.",
-            MessageTypeEnum.INFO);
+            activeLanguage.markupImageWithToolsNotificationString, MessageTypeEnum.INFO);
     }, 5000);
 }
 
