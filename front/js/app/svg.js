@@ -149,16 +149,20 @@ function onPolygonClick(polygon) {
         selectedPolygon.setDragEnabled(false);
     }
 
+    selectedPolygon = polygon;
+
+    // Bring it to top
+    svgImg.append(selectedPolygon.node);
+
     polygon.setSelected(true);
     polygon.setDragEnabled(true);
 
-    selectedPolygon = polygon;
+
 
     onPolygonSelected(selectedPolygon);
 
     showPolygonSelectedMessage();
-    // Bring it to top
-    svgImg.append(selectedPolygon.node);
+
 }
 
 function onPolygonChanged(polygon) {
