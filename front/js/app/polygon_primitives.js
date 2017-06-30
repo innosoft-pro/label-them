@@ -87,27 +87,29 @@ function Handle(x, y, type) {
     this.onMouseDown = function (evt) {
         this.shouldDrag = true;
         this.onHandlePressed(this);
-    }
+    };
 
     this.onMouseUp = function (evt) {
         this.shouldDrag = false;
         this.onHandleReleased();
-    }
+    };
 
-    this.onHandlePressed = function (handle) {}
+    this.onHandlePressed = function (handle) {
+    };
 
-    this.onHandleReleased = function () {}
+    this.onHandleReleased = function () {
+    };
 
-    this.dragHandle = function(dx, dy) {
+    this.dragHandle = function (dx, dy) {
         this.x = this.x + dx;
         this.y = this.y + dy;
 
         this.invalidate();
-    }
+    };
 
     this.onHandleDrag = function (handle) {
         console.log("Dragging handle with id: " + handle.id);
-    }
+    };
 
     this.onMouseMove = function (evt) {
         if (this.shouldDrag) {
@@ -117,10 +119,10 @@ function Handle(x, y, type) {
             this.dragHandle(dx, dy);
             this.onHandleDrag(this);
         }
-    }
+    };
 
     // Setup events for drag and resize
-    this.setupEventListeners = function(selected) {
+    this.setupEventListeners = function (selected) {
         if (selected) {
             this.node.addEventListener("mousedown", this.onMouseDownRef, true);
             this.node.addEventListener("mouseup", this.onMouseUpRef, true);
@@ -129,7 +131,7 @@ function Handle(x, y, type) {
             this.node.removeEventListener("mouseup", this.onMouseUpRef, true);
             this.shouldDrag = false;
         }
-    }
+    };
 
     this.invalidate.apply(this);
 
@@ -181,7 +183,7 @@ function Path() {
 
 }
 
-function Polygon(startX, startY, polygonId, type="poly") {
+function Polygon(startX, startY, polygonId, type = "poly") {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
@@ -220,20 +222,20 @@ function Polygon(startX, startY, polygonId, type="poly") {
         this.path.setPoints(this.pointsList);
     };
 
-    this.setupHandle = function(x, y, tag, allowDrag) {
-      let handle = new Handle(x, y, tag);
+    this.setupHandle = function (x, y, tag, allowDrag) {
+        let handle = new Handle(x, y, tag);
 
-      handle.id = this.pointsList.length - 1;
-      handle.onHandlePressed = this.onHPrRef;
-      handle.onHandleReleased = this.onHRelRef;
+        handle.id = this.pointsList.length - 1;
+        handle.onHandlePressed = this.onHPrRef;
+        handle.onHandleReleased = this.onHRelRef;
 
-      this.handles.push(handle);
-      this.node.append(handle.node);
+        this.handles.push(handle);
+        this.node.append(handle.node);
 
-      if (allowDrag) {
-          handle.setupEventListeners(true);
-      }
-    }
+        if (allowDrag) {
+            handle.setupEventListeners(true);
+        }
+    };
 
     this.removePoint = function (ind) {
         let point = (this.pointsList.splice(ind, 1))[0];
@@ -257,8 +259,8 @@ function Polygon(startX, startY, polygonId, type="poly") {
         this.path.setPoints(this.pointsList);
 
         if (this.path.closePath) {
-          this.patch.setPoints(this.pointsList);
-          this.patch.invalidate();
+            this.patch.setPoints(this.pointsList);
+            this.patch.invalidate();
         }
 
         handle.x = this.pointsList[handle.id][0];
@@ -267,20 +269,20 @@ function Polygon(startX, startY, polygonId, type="poly") {
         handle.invalidate.apply(handle);
 
         this.onPolygonModified(this);
-    }
+    };
 
     this.onHandlePressed = function (handle) {
         this.activeHandle = handle;
         // console.log("Handle pressed: " + handle.id);
-    }
+    };
 
     this.onHandleReleased = function () {
         this.activeHandle = null;
         // console.log("Handle released");
-    }
+    };
 
     this.onDrag = function (evt) {
-        point  = getPoint(evt);
+        point = getPoint(evt);
 
         if (this.type === "poly" && this.activeHandle !== null) {
             this.activeHandle.x = point.x;
@@ -290,7 +292,7 @@ function Polygon(startX, startY, polygonId, type="poly") {
         } else if (type === "rect") {
             // this.setupHandle(point.x, point.y, "other", false);
         }
-    }
+    };
 
     this.shouldClose = function (x, y) {
         let x0 = this.pointsList[0][0];
@@ -392,7 +394,7 @@ function Polygon(startX, startY, polygonId, type="poly") {
             svgParent.removeEventListener("mousemove", this.onDragRef);
             svgParent.removeEventListener("mouseup", this.onHRelRef);
         }
-    }
+    };
 
     // Consume event if the click is near one of the points of the selected polygon
     // Any ideas how to do it better?
@@ -402,18 +404,18 @@ function Polygon(startX, startY, polygonId, type="poly") {
 
         let minDist = 99;
 
-        for (pt in this.pointsList) {
-          let x0 = this.pointsList[pt][0];
-          let y0 = this.pointsList[pt][1];
+        for (pt of this.pointsList) {
+            let x0 = this.pointsList[pt][0];
+            let y0 = this.pointsList[pt][1];
 
-          let dist = Math.sqrt((x0 - evPoint.x) * (x0 - evPoint.x) + (y0 - evPoint.y) * (y0 - evPoint.y));
+            let dist = Math.sqrt((x0 - evPoint.x) * (x0 - evPoint.x) + (y0 - evPoint.y) * (y0 - evPoint.y));
 
-          if (dist < minDist) {
-              minDist = dist;
-          }
+            if (dist < minDist) {
+                minDist = dist;
+            }
         }
         return minDist < 2;
-    }
+    };
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);
