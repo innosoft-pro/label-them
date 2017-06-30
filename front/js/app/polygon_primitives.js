@@ -205,6 +205,10 @@ function Polygon(startX, startY, polygonId, type="poly") {
         console.log("default onclick polygon");
     };
 
+    this.onPolygonModified = function (polygon) {
+        console.log("default on polygon modified");
+    };
+
     this.attribute = function (key, val) {
         if (val === undefined) return this.node.getAttribute(key); // FIXME: Does this node need to be changed to this.node?
         this.node.setAttribute(key, val);
@@ -261,16 +265,18 @@ function Polygon(startX, startY, polygonId, type="poly") {
         handle.y = this.pointsList[handle.id][1];
 
         handle.invalidate.apply(handle);
+
+        this.onPolygonModified(this);
     }
 
     this.onHandlePressed = function (handle) {
         this.activeHandle = handle;
-        console.log("Handle pressed: " + handle.id);
+        // console.log("Handle pressed: " + handle.id);
     }
 
     this.onHandleReleased = function () {
         this.activeHandle = null;
-        console.log("Handle released");
+        // console.log("Handle released");
     }
 
     this.onDrag = function (evt) {

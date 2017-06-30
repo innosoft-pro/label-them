@@ -42,6 +42,10 @@ function onObjectClassUpdate(value) {
     onSave();
 }
 
+function onPolygonModified(polygon) {
+    onSave();
+}
+
 function onSelectParamUpdate(name, value) {
     dc.getActiveEntity().setParams({[name]: value});
 

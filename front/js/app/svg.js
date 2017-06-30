@@ -124,6 +124,7 @@ function redoLastPoint() {
 function closePolygon() {
     currentPolygon.close();
     currentPolygon.onPolygonClick = onPolygonClick;
+    currentPolygon.onPolygonModified = onPolygonChanged;
     polygons[polygonId] = currentPolygon;
     polygonId = polygonId + 1;
 
@@ -163,6 +164,10 @@ function onPolygonClick(polygon) {
     showPolygonSelectedMessage();
     // Bring it to top
     svgImg.append(selectedPolygon.node);
+}
+
+function onPolygonChanged(polygon) {
+    onPolygonModified();
 }
 
 function showPolygonSelectedMessage() {
