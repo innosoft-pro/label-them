@@ -2,7 +2,13 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initZoomIn() {
+
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.zoomIn = function () {
+
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick: function (isButtonPressed) {
 
@@ -16,6 +22,9 @@ function initZoomIn() {
                 /*global zoomCount*/
                 /*eslint no-undef: "error"*/
                 zoomCount++;
+
+                /*global zoomPlus*/
+                /*eslint no-undef: "error"*/
                 zoomPlus();
 
                 /*global svgScale*/

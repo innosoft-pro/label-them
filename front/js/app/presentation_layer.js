@@ -8,11 +8,15 @@ function initPresentationLayer() {
     img.src = document.getElementById("img_url").innerText;
     img.onload = function () {
         resize();
+        /*global initZoom*/
+        /*eslint no-undef: "error"*/
         initZoom();
         window.addEventListener("resize", resize, false);
     };
 
     initSvg();
+    changeScrollingPositionInTheHistoryBlock();
+    scrollHistoryTableBodyToBottom();
 }
 
 /*
@@ -26,6 +30,8 @@ function resize() {
     /*global resizeSvg*/
     /*eslint no-undef: "error"*/
     resizeSvg(img);
+    changeScrollingPositionInTheHistoryBlock();
+    scrollHistoryTableBodyToBottom();
 
     if (notificationString === "Not the full image will be shown") { // Notify the user that not the full image will be shown
         showMessage(
@@ -38,4 +44,16 @@ function resize() {
             "Please, markup the image displayed below using the tools from the block on the left.",
             MessageTypeEnum.INFO);
     }
+}
+
+function changeScrollingPositionInTheHistoryBlock() {
+    let historyTable = document.getElementsByClassName("history-table")[0];
+    let historyTableBody = document.getElementsByClassName("history-table-body")[0];
+    let width = historyTable.clientWidth;
+    historyTableBody.style.width = width + "px";
+}
+
+function scrollHistoryTableBodyToBottom() {
+    let historyTableBody = document.getElementsByClassName("history-table-body")[0];
+    historyTableBody.scrollTop = historyTableBody.scrollHeight;
 }

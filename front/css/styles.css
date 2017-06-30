@@ -1,3 +1,8 @@
+/* To fix the issue with systems resize on the notification in message_space block */
+.task {
+    width: 98%;
+}
+
 .sidebar {
     float: left;
     width: 72px;
@@ -10,6 +15,7 @@
 
 .history-table {
     border: 0;
+    height: 200px;
 }
 
 .history-icon-td {
@@ -20,6 +26,17 @@
     vertical-align: middle;
     text-align: left;
     margin-left: 16px;
+}
+
+.history-table-body {
+    overflow-y: auto;
+    height: 200px;
+    position: absolute;
+}
+
+.history-table-row {
+    width: 100%;
+    display: inline-table;
 }
 
 /* Additional margin to add some space between input groups and drop down menus */

@@ -2,7 +2,13 @@
  * Created by alnedorezov on 5/26/17.
  */
 function initZoomOut() {
+
+    /*global Tool*/
+    /*eslint no-undef: "error"*/
     Tool.zoomOut = function () {
+
+        /*global fromPrototype*/
+        /*eslint no-undef: "error"*/
         return fromPrototype(Tool, {
             onClick: function (isButtonPressed) {
 
@@ -11,7 +17,7 @@ function initZoomOut() {
                 if (zoomCount <= 0) {
                     return;
                 }
-                /*global zoomCount*/
+                /*global zoomCount, zoomMinus*/
                 /*eslint no-undef: "error"*/
                 zoomCount--;
                 zoomMinus();

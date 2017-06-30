@@ -3,13 +3,13 @@ var svgImg;
 var polygons = {};
 
 let currentPolygon = null;
-let selectedPolygon = null;
+var selectedPolygon = null;
 
 let polygonId = 0;
 
 let redoPoints = [];
 
-let currentScale = 1;
+var currentScale = 1;
 
 function initSvg() {
     svgImg = document.getElementById("svg_img");
@@ -68,8 +68,6 @@ function svgImgDeleteSelectedPolygon() {
 
             selectedPolygon = null;
         }
-
-
     }
 }
 
@@ -94,7 +92,7 @@ function svgImgOnClickSelect(event) {
 
 function undoLastPoint() {
     if (currentPolygon === null) {
-      return;
+        return;
     }
 
     let lastPointIdx = currentPolygon.pointsList.length - 1;
@@ -111,7 +109,7 @@ function undoLastPoint() {
 
 function redoLastPoint() {
     if (currentPolygon === null || redoPoints.length < 1) {
-      return;
+        return;
     }
 
     let point = redoPoints.pop();
@@ -146,16 +144,13 @@ function closePolygon() {
 }
 
 function onPolygonClick(polygon) {
-
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
         selectedPolygon.setDragEnabled(false);
     }
 
-
     polygon.setSelected(true);
     polygon.setDragEnabled(true);
-
 
     selectedPolygon = polygon;
 

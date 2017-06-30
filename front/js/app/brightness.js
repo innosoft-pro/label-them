@@ -13,7 +13,9 @@ function updateBrightness() {
 }
 
 function plusBrightness() {
-    if (defaultBrightness >= maxBrightness) return;
+    if (defaultBrightness >= maxBrightness) {
+        return;
+    }
     defaultBrightness += step;
     updateBrightness();
 }
