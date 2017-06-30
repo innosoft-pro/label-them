@@ -404,7 +404,7 @@ function Polygon(startX, startY, polygonId, type = "poly") {
 
         let minDist = 99;
 
-        for (pt of this.pointsList) {
+        for (pt in this.pointsList) {
             let x0 = this.pointsList[pt][0];
             let y0 = this.pointsList[pt][1];
 
