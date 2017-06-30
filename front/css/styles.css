@@ -92,6 +92,7 @@ circle.selected {
 
 circle.selected:hover {
     stroke: #ffffff;
+    cursor: move;
 }
 
 path {

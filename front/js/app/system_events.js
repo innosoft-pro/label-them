@@ -72,6 +72,10 @@ function onObjectClassUpdate(value, calledByHistory = false) {
     }
 }
 
+function onPolygonModified(polygon) {
+    onSave();
+}
+
 function onSelectParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (value === null) {

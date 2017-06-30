@@ -11,10 +11,9 @@ function initRussianLanguageSupport() {
             getLanguageName() {
                 return "russian";
             },
-            polygonSpaceSign: "Многоугольник ",
-            spaceSignWasAssignedAnId: " создан. Ему присвоен номер ",
-            spaceSignOpenBracketWithIdSpaceSign: " (под номером ",
-            closeBracketSpaceSignWasDeleted: ") был удалён",
+            polygonWasAddedAndAssignedAnId: "Добавлен многоугольник. Ему присвоен номер ",
+            polygonWithIdSpaceSign: "Многоугольник под номером ",
+            closeBracketSpaceSignWasDeleted: " был удалён",
             classOfPolygonIdWasChangedToNewClassValue(polygonId, newClassValue) {
                 return "Класс многоугольника " + polygonId + " был изменён на " + newClassValue;
             },

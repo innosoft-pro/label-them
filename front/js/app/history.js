@@ -69,11 +69,11 @@ function addHistoryRecord(recordType, isRedo = false) {
 
 function addHistoryRecordPolygon(recordType, polygon, parameters = null, isRedo = false) {
     historyRecords.push(new HistoryRecordPolygon(recordType, polygon, parameters));
-    let textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(polygon.pointsList);
+    let textToHistoryRow;
     if (recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
-        textToHistoryRow += activeLanguage.spaceSignWasAssignedAnId + polygonId;
+        textToHistoryRow = activeLanguage.polygonWasAddedAndAssignedAnId + polygon.polygonId;
     } else if (recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
-        textToHistoryRow += activeLanguage.spaceSignOpenBracketWithIdSpaceSign + polygonId +
+        textToHistoryRow = activeLanguage.polygonWithIdSpaceSign + polygon.polygonId +
             activeLanguage.closeBracketSpaceSignWasDeleted;
     }
     addHistoryRow(textToHistoryRow);
@@ -248,11 +248,9 @@ function generateHistoryBlockContents() {
     for (let historyRecord of historyRecords) {
         let textToHistoryRow;
         if (historyRecord.recordType === HistoryRecordTypeEnum.ADD_OBJECT) {
-            textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(historyRecord.polygon.pointsList) +
-                activeLanguage.spaceSignWasAssignedAnId + polygonId;
+            textToHistoryRow = activeLanguage.polygonWasAddedAndAssignedAnId + historyRecord.polygon.polygonId;
         } else if (historyRecord.recordType === HistoryRecordTypeEnum.DELETE_OBJECT) {
-            textToHistoryRow = activeLanguage.polygonSpaceSign + JSON.stringify(historyRecord.polygon.pointsList) +
-                activeLanguage.spaceSignOpenBracketWithIdSpaceSign + polygonId +
+            textToHistoryRow = activeLanguage.polygonWithIdSpaceSign + historyRecord.polygon.polygonId +
                 activeLanguage.closeBracketSpaceSignWasDeleted;
         } else if (historyRecord.recordType === HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS) {
             textToHistoryRow = activeLanguage.classOfPolygonIdWasChangedToNewClassValue(historyRecord.polygonId,

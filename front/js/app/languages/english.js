@@ -11,10 +11,9 @@ function initEnglishLanguageSupport() {
             getLanguageName() {
                 return "english";
             },
-            polygonSpaceSign: "Polygon ",
-            spaceSignWasAssignedAnId: " was added and assigned an id ",
-            spaceSignOpenBracketWithIdSpaceSign: " (with id ",
-            closeBracketSpaceSignWasDeleted: ") was deleted",
+            polygonWasAddedAndAssignedAnId: "Polygon was added and assigned an id ",
+            polygonWithIdSpaceSign: "Polygon with id ",
+            closeBracketSpaceSignWasDeleted: " was deleted",
             classOfPolygonIdWasChangedToNewClassValue(polygonId, newClassValue) {
                 return "Class of polygon " + polygonId + " was changed to " + newClassValue;
             },
