@@ -165,7 +165,7 @@ function onPolygonClick(polygon) {
 
 }
 
-function onPolygonChanged(polygon) {
+function onPolygonChanged() {
     onPolygonModified();
 }
 
