@@ -74,6 +74,8 @@ function onObjectClassUpdate(value, calledByHistory = false) {
 
 function onPolygonModified(polygon) {
     onSave();
+
+    modifyPointsOfPolygonInHistoryRecords(polygon);
 }
 
 function onSelectParamUpdate(name, value, calledByHistory = false) {

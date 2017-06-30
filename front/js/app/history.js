@@ -267,3 +267,16 @@ function recreateHistoryBlockContents() {
     clearHistoryTable();
     generateHistoryBlockContents();
 }
+
+function modifyPointsOfPolygonInHistoryRecords(polygon) {
+    let recordWasModified = false;
+    for(let i=historyRecords.length-1; i>0; i--) {
+        if(recordWasModified) {
+            break;
+        }
+        if(historyRecords[i].recordType === HistoryRecordTypeEnum.ADD_OBJECT &&
+            historyRecords[i].polygon.polygonId === polygon.polygonId) {
+                historyRecords[i].polygon = polygon;
+        }
+    }
+}
