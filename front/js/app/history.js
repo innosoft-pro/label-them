@@ -277,6 +277,7 @@ function modifyPointsOfPolygonInHistoryRecords(polygon) {
         if(historyRecords[i].recordType === HistoryRecordTypeEnum.ADD_OBJECT &&
             historyRecords[i].polygon.polygonId === polygon.polygonId) {
                 historyRecords[i].polygon = polygon;
+                recordWasModified = true;
         }
     }
 }
