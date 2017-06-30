@@ -165,8 +165,8 @@ function onPolygonClick(polygon) {
 
 }
 
-function onPolygonChanged() {
-    onPolygonModified();
+function onPolygonChanged(polygon) {
+    onPolygonModified(polygon);
 }
 
 function showPolygonSelectedMessage() {
