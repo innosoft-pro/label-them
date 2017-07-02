@@ -1,14 +1,18 @@
 var assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe('webdriver.io page', function () {
-    it("Should change image brightness", function () {
+    it("Should label image", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
+        browser.windowHandleSize({width:1920,height:1080});
+
+        var error = 2;
+        var points = [[100,100], [100,200], [200,100]];
 
         //Click on canvas
-        browser.leftClick("#canvas-parent", 100, 100);
-        browser.leftClick("#canvas-parent", 100, 200);
-        browser.leftClick("#canvas-parent", 200, 100);
-        browser.leftClick("#canvas-parent", 100, 100);
+        browser.leftClick("#canvas-parent", points[0][0], points[0][1]);
+        browser.leftClick("#canvas-parent", points[1][0], points[1][1]);
+        browser.leftClick("#canvas-parent", points[2][0], points[2][1]);
+        browser.leftClick("#canvas-parent", points[0][0], points[0][1]);
 
         //Select object class
         var selectBox = $(".class-param");
@@ -24,9 +28,21 @@ describe('webdriver.io page', function () {
 
         //Get outputJson
         var result = browser.execute("return outputJson;");
-        console.log(result.value);
 
-        //Assertion
-        assert.equal(result.value, "[{\"points\":[[99,109.39999389648438],[99,209.39999389648438],[199,109.39999389648438]],\"parameters\":{\"class\":\"Brown Bear\",\"is scary\":true}}]");
+        var json = result.value.substring(0, result.value.length - 1);
+        json = json.substring(1, result.value.length);
+        let jsonResponse = JSON.parse(json);
+        var results = [];
+
+        for (var i = 0; i < jsonResponse.points.length; i++) {
+            for (var j = 0; j < 2; j++) {
+                var difference = Math.abs(jsonResponse.points[i][j] - points[i][j]);
+                results.push(difference <= error);
+            }
+        }
+
+        results.forEach(function (obj) {
+            assert.equal(obj, true);
+        });
     });
 });
