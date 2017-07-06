@@ -5,7 +5,7 @@
 let img = new Image();
 let latestNotificationFromCanvas = null;
 
-function initPresentationLayer() {
+function initPresentationLayer(acceptMode) {
     img.src = document.getElementById("img_url").innerText;
     img.onload = function () {
         resize();
@@ -18,6 +18,25 @@ function initPresentationLayer() {
     initSvg();
     changeScrollingPositionInTheHistoryBlock();
     scrollHistoryTableBodyToBottom();
+
+    if (acceptMode) {
+        let polygonsArray = JSON.parse(window.thisTask.getSolution().output_values.result);
+
+        for (let polygonObjectId in polygonsArray) {
+            let polygonObject = polygonsArray[polygonObjectId];
+            let polygon = addPolygonFromObject(polygonObject);
+
+            let de = new DataEntity(polygon.polygonId);
+            de.parameters = polygonObject["parameters"];
+            dc.addEntity(de, polygon.polygonId);
+        }
+    }
+
+
+    // if (acceptMode) {
+    //     hideToolbar();
+    //     hideHistory();
+    // }
 }
 
 /*
@@ -34,6 +53,16 @@ function resize() {
     changeScrollingPositionInTheHistoryBlock();
     scrollHistoryTableBodyToBottom();
     showMessageToTheUserDependingOnTheLatestNotificationFromCanvas();
+}
+
+function hideToolbar() {
+    var toolbar = document.getElementsByClassName("btn-group-vertical")[0];
+    toolbar.style.display = 'none';
+}
+
+function hideHistory() {
+    var history = document.getElementById("history-panel");
+    history.style.display = 'none';
 }
 
 function changeScrollingPositionInTheHistoryBlock() {

@@ -210,3 +210,27 @@ function resizeSvg(img) {
     svg.style.width = width;
     svg.style.height = height;
 }
+
+function addPolygonFromObject(object) {
+    let points = object["points"];
+
+    let polygon = new Polygon(points[0][0], points[0][1], polygonId);
+    polygon.polygonScale = currentScale;
+
+    svgImg.append(polygon.node);
+
+    polygon.setDragEnabled(true);
+
+    for (let i = 1; i < points.length; i++) {
+        let pt = points[i];
+        polygon.addPoint(pt[0], pt[1]);
+    }
+
+    polygon.close();
+    polygon.onPolygonClick = onPolygonClick;
+    polygon.onPolygonModified = onPolygonChanged;
+    polygons[polygonId] = currentPolygon;
+    polygonId = polygonId + 1;
+
+    return polygon;
+}

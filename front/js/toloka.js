@@ -3,10 +3,12 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
 }, {
     onRender: function () {
         $(document).ready(function () {
+            var acceptMode = document.referrer.includes("status=SUBMITTED");
+
             initDOM();
-            initPresentationLayer();
-            initToolbar();
             initMultiLanguageSupport();
+            initPresentationLayer(acceptMode);
+            initToolbar();
         });
 
         window.thisTask = this;
