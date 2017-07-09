@@ -56,7 +56,26 @@ describe('webdriver.io page', function () {
         var result = browser.execute("return outputJson;");
         console.log(result.value);
 
-        // Assertion
-        assert.equal(result.value, "[{\"points\":[[100,100],[100,200],[200,100]],\"parameters\":{\"class\":\"Brown Bear\",\"is scary\":false}}, {\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"Brown Bear\",\"is scary\":true}}]");
+        var pointsTemp = [[[100, 100], [100, 200], [200, 100]], [[300, 300], [300, 400], [400, 300]]];
+        let error = 1;
+        let jsonResponse = JSON.parse(result.value);
+        let results = [];
+
+        for (let k = 0; k < jsonResponse.length; k++) {
+            let points = jsonResponse[k].points;
+            let tempPoints = pointsTemp[k];
+            // assert
+            for (let i = 0; i < points.length; i++) {
+                for (let j = 0; j < 2; j++) {
+                    let point = points[i][j];
+                    let difference = Math.abs(points[i][j] - tempPoints[i][j]);
+                    results.push(difference <= error);
+                }
+            }
+
+        }
+        results.forEach(function (obj) {
+            assert.equal(obj, true);
+        });
     });
 });
