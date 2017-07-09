@@ -6,11 +6,15 @@ function initCoordinates(svg) {
 
 function getX(event) {
     event = event || window.event;
+    /*global svgImg*/
+    /*eslint no-undef: "error"*/
     return event.pageX - svgImg.getBoundingClientRect().left;
 }
 
 function getY(event) {
     event = event || window.event;
+    /*global svgImg*/
+    /*eslint no-undef: "error"*/
     return event.pageY - svgImg.getBoundingClientRect().top;
 }
 

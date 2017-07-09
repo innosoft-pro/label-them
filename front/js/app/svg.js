@@ -3,13 +3,13 @@ var svgImg;
 var polygons = {};
 
 let currentPolygon = null;
-let selectedPolygon = null;
+var selectedPolygon = null;
 
 let polygonId = 0;
 
 let redoPoints = [];
 
-let currentScale = 1;
+var currentScale = 1;
 
 function initSvg() {
     svgImg = document.getElementById("svg_img");
@@ -26,6 +26,13 @@ function svgImgCancelPolygon() {
 }
 
 function svgImgOnClick(event) {
+    if (selectedPolygon !== null && selectedPolygon.shouldConsumeEvent.apply(selectedPolygon, [event])) {
+        return;
+    }
+
+    if (currentPolygon !== null && currentPolygon.shouldConsumeEvent.apply(currentPolygon, [event])) {
+        return;
+    }
 
     let point = getPoint(event);
 
@@ -43,11 +50,9 @@ function svgImgOnClick(event) {
         currentPolygon = new Polygon(point.x, point.y, polygonId);
         currentPolygon.polygonScale = currentScale;
 
-
-
         svgImg.append(currentPolygon.node);
-        console.log(currentPolygon.node);
 
+        currentPolygon.setDragEnabled(true);
         // resetting classes and parameters values
         resetDOM();
     }
@@ -63,8 +68,6 @@ function svgImgDeleteSelectedPolygon() {
 
             selectedPolygon = null;
         }
-
-
     }
 }
 
@@ -81,15 +84,15 @@ function svgScale(scaleFactor) {
 }
 
 function svgImgOnClickSelect(event) {
-    if (selectedPolygon !== null) {
-        selectedPolygon.setSelected(false);
-        selectedPolygon = null;
-    }
+    // if (selectedPolygon !== null) {
+    //     selectedPolygon.setSelected(false);
+    //     selectedPolygon = null;
+    // }
 }
 
 function undoLastPoint() {
     if (currentPolygon === null) {
-      return;
+        return;
     }
 
     let lastPointIdx = currentPolygon.pointsList.length - 1;
@@ -106,7 +109,7 @@ function undoLastPoint() {
 
 function redoLastPoint() {
     if (currentPolygon === null || redoPoints.length < 1) {
-      return;
+        return;
     }
 
     let point = redoPoints.pop();
@@ -119,6 +122,7 @@ function redoLastPoint() {
 function closePolygon() {
     currentPolygon.close();
     currentPolygon.onPolygonClick = onPolygonClick;
+    currentPolygon.onPolygonModified = onPolygonChanged;
     polygons[polygonId] = currentPolygon;
     polygonId = polygonId + 1;
 
@@ -127,10 +131,12 @@ function closePolygon() {
 
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
+        selectedPolygon.setDragEnabled(false);
     }
 
     selectedPolygon = currentPolygon;
     selectedPolygon.setSelected(true);
+    selectedPolygon.setDragEnabled(true);
     showPolygonSelectedMessage();
     onPolygonSelected(selectedPolygon);
 
@@ -138,33 +144,38 @@ function closePolygon() {
 }
 
 function onPolygonClick(polygon) {
-
     if (selectedPolygon !== null) {
         selectedPolygon.setSelected(false);
+        selectedPolygon.setDragEnabled(false);
     }
 
+    selectedPolygon = polygon;
+
+    // Bring it to top
+    svgImg.append(selectedPolygon.node);
 
     polygon.setSelected(true);
+    polygon.setDragEnabled(true);
 
 
-    selectedPolygon = polygon;
 
     onPolygonSelected(selectedPolygon);
 
     showPolygonSelectedMessage();
-    // Bring it to top
-    svgImg.append(selectedPolygon.node);
+
+}
+
+function onPolygonChanged(polygon) {
+    onPolygonModified(polygon);
 }
 
 function showPolygonSelectedMessage() {
     /*global MessageTypeEnum*/
     /*eslint no-undef: "error"*/
-    showMessage("Please, characterize the selected object in the right menu.",
-        MessageTypeEnum.WARNING);
+    showMessage(activeLanguage.characterizeObjectInTheRightMenu, MessageTypeEnum.WARNING);
     setTimeout(function () {
         showMessage(
-            "Please, markup the image displayed below using the tools from the block on the left.",
-            MessageTypeEnum.INFO);
+            activeLanguage.markupImageWithToolsNotificationString, MessageTypeEnum.INFO);
     }, 5000);
 }
 

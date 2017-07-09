@@ -266,8 +266,132 @@ function initDOM() {
 
     jsonParams = replaceAll(jsonParams, '\\', '"');
     generateHTMLCodeForClassesAndParameters(document, jsonParams);
+    initRowsAdditionAndDeletion();
 }
 
 function resetDOM() {
     resetClassesAndParametersValues(document);
+}
+
+function initRowsAdditionAndDeletion() {
+    let addRowButton = document.getElementById("add-row");
+    let deleteRowButton = document.getElementById("delete-row");
+    addRowButton.onclick = function () {
+        /*global redoHistoryRecordsAddition*/
+        /*eslint no-undef: "error"*/
+        redoHistoryRecordsAddition();
+    };
+
+    deleteRowButton.onclick = function () {
+        /*global undoHistoryRecordsAddition*/
+        /*eslint no-undef: "error"*/
+        undoHistoryRecordsAddition();
+    };
+
+    enableOrDisableAnElementById("delete-row", false);
+    enableOrDisableAnElementById("add-row", false);
+}
+
+let rowsCount = 0;
+
+function addHistoryRow(text = "Polygon",
+                       icon = "https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png") {
+    let newRowsContents = [];
+    newRowsContents.push("<td class=\"history-icon-td\">");
+    newRowsContents.push("<button class=\"btn btn-default\">");
+    newRowsContents.push("<img src=\"");
+    newRowsContents.push(icon);
+    newRowsContents.push("\"");
+    newRowsContents.push("width=\"24\"/>");
+    newRowsContents.push("</button>");
+    newRowsContents.push("</td>");
+    newRowsContents.push("<td class=\"history-text-td\">");
+    newRowsContents.push(text);
+    newRowsContents.push("</td>");
+    newRowsContents = newRowsContents.join("");
+    $('#history-table').append('<tr class="history-table-row" id="historyRow' + rowsCount + '"></tr>');
+    $('#historyRow' + rowsCount).html(newRowsContents);
+    addOnConcreteRecordButtonClickListener(rowsCount);
+    rowsCount++;
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
+
+function deleteHistoryRow() {
+    if (rowsCount > 0) {
+        $("#historyRow" + (rowsCount - 1)).remove();
+        rowsCount--;
+    }
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
+
+function clearHistoryTable() {
+    while (rowsCount > 0) {
+        $("#historyRow" + (rowsCount - 1)).remove();
+        rowsCount--;
+    }
+    /*global scrollHistoryTableBodyToBottom*/
+    /*eslint no-undef: "error"*/
+    scrollHistoryTableBodyToBottom();
+}
+
+function addOnConcreteRecordButtonClickListener(i) {
+    let concreteRecordButton = document.getElementById("historyRow" + i.toString());
+    concreteRecordButton.onclick = function () {
+        for (let j = rowsCount - 1; j >= i; j--) {
+            undoHistoryRecordsAddition();
+        }
+    }
+}
+
+/**
+ * Enables or disables an element (e.g. a button) by adding a disabled class. Does nothing if buttonId is not a string.
+ * @param buttonId - a string - Id of the button to enable or disable, without the number (#) sign
+ * @param toEnable - a boolean variable, when true - removes "disabled" class, if specified.
+ *                   Otherwise adds "disabled" class. (Is true by default)
+ *
+ * See https://www.w3schools.com/bootstrap/bootstrap_buttons.asp & http://api.jquery.com/removeClass/ for reference.
+ */
+function enableOrDisableAnElementById(buttonId, toEnable = true) {
+    if (!(typeof buttonId === "string" || buttonId instanceof String)) {
+        return;
+    }
+
+    if (toEnable) {
+        $("#" + buttonId).removeClass("disabled");
+    } else {
+        $("#" + buttonId).addClass("disabled");
+    }
+}
+
+function translateBlocksTitles() {
+    let beginH3tag = "<h3 class=\"panel-title\">";
+    let endH3tag = "</h3>";
+    document.getElementById("label-parameters-block-title").innerHTML = beginH3tag + activeLanguage.labelParameters +
+        endH3tag;
+    document.getElementById("history-block-title").innerHTML = beginH3tag + activeLanguage.history + endH3tag;
+}
+
+function displayLanguageSelection(languagesArray) {
+    let languageSelectionBlockCode = [];
+    $("#language-selection-sidebar").removeClass("hidden");
+    languageSelectionBlockCode.push("<select class=\"form-control\" id=\"language-selection-select\">");
+    for (let i = 0; i < languagesArray.length; i++) {
+        if (languagesArray[i].hasOwnProperty("getLanguageName")) {
+            languageSelectionBlockCode.push("<option ");
+            languageSelectionBlockCode.push("value=\"");
+            languageSelectionBlockCode.push(i);
+            languageSelectionBlockCode.push("\">");
+            languageSelectionBlockCode.push(languagesArray[i].getLanguageName());
+            languageSelectionBlockCode.push("</option>");
+        }
+    }
+    languageSelectionBlockCode.push("</select>");
+    document.getElementById("language-selection-sidebar").innerHTML = languageSelectionBlockCode.join("");
+    document.getElementById("language-selection-select").addEventListener("change", function () {
+        selectLanguage(languagesArray[document.getElementById("language-selection-select").value])
+    }, false);
 }

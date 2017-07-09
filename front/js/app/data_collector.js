@@ -31,14 +31,25 @@ DataCollector.prototype.selectEntity = function (id) {
     this.activeEntity = this.dataEntities[id];
 };
 
+DataCollector.prototype.getEntitiesParameters = function (id) {
+    return this.dataEntities[id].parameters;
+};
+
 DataCollector.prototype.deleteEntity = function (id) {
     if (id in this.dataEntities) {
         delete this.dataEntities[id];
+        if(id === this.getActiveEntity().polygonId) {
+            this.activeEntity = null;
+        }
     }
 };
 
 DataCollector.prototype.getActiveEntity = function () {
     return this.activeEntity;
+};
+
+DataCollector.prototype.nullifyActiveEntity = function () {
+    this.activeEntity = null;
 };
 
 
@@ -51,6 +62,20 @@ function DataEntity(polygonId) {
 
 DataEntity.prototype.setParams = function (data) {
     this.parameters = Object.assign(this.parameters, data);
+};
+
+DataEntity.prototype.getParameterByName = function (parameterName) {
+    if (this.parameters === undefined || this.parameters === null || !this.parameters.hasOwnProperty(parameterName)) {
+        return null;
+    } else {
+        return Object.getOwnPropertyDescriptor(this.parameters, parameterName).value;
+    }
+};
+
+DataEntity.prototype.deleteParameterByName = function (parameterName) {
+    if (this.parameters.hasOwnProperty(parameterName)) {
+        delete this.parameters[parameterName];
+    }
 };
 
 DataCollector.prototype.getJSON = function () {

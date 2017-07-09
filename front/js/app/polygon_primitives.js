@@ -67,6 +67,10 @@ function Handle(x, y, type) {
 
     this.type = type;
 
+    this.id = -1;
+
+    this.shouldDrag = false;
+
     this.invalidate = function () {
         this.node.setAttribute("cx", this.x);
         this.node.setAttribute("cy", this.y);
@@ -78,9 +82,62 @@ function Handle(x, y, type) {
     this.setPoint = function (x, y) {
         this.x = x;
         this.y = y;
-    }
+    };
+
+    this.onMouseDown = function (evt) {
+        this.shouldDrag = true;
+        this.onHandlePressed(this);
+    };
+
+    this.onMouseUp = function (evt) {
+        this.shouldDrag = false;
+        this.onHandleReleased();
+    };
+
+    this.onHandlePressed = function (handle) {
+    };
+
+    this.onHandleReleased = function () {
+    };
+
+    this.dragHandle = function (dx, dy) {
+        this.x = this.x + dx;
+        this.y = this.y + dy;
+
+        this.invalidate();
+    };
+
+    this.onHandleDrag = function (handle) {
+        console.log("Dragging handle with id: " + handle.id);
+    };
+
+    this.onMouseMove = function (evt) {
+        if (this.shouldDrag) {
+            point = getPoint(evt);
+            let dx = point.x - this.x;
+            let dy = point.y - this.y;
+            this.dragHandle(dx, dy);
+            this.onHandleDrag(this);
+        }
+    };
+
+    // Setup events for drag and resize
+    this.setupEventListeners = function (selected) {
+        if (selected) {
+            this.node.addEventListener("mousedown", this.onMouseDownRef, true);
+            this.node.addEventListener("mouseup", this.onMouseUpRef, true);
+        } else {
+            this.node.removeEventListener("mousedown", this.onMouseDownRef, true);
+            this.node.removeEventListener("mouseup", this.onMouseUpRef, true);
+            this.shouldDrag = false;
+        }
+    };
 
     this.invalidate.apply(this);
+
+    // Ref Magic
+    this.onMouseDownRef = this.onMouseDown.bind(this);
+    this.onMouseUpRef = this.onMouseUp.bind(this);
 }
 
 function Path() {
@@ -92,9 +149,6 @@ function Path() {
 
     this.invalidate = function () {
         let d = this.build(this.points);
-
-        console.log(d);
-
         this.node.setAttribute("d", d);
     };
 
@@ -129,7 +183,7 @@ function Path() {
 
 }
 
-function Polygon(startX, startY, polygonId) {
+function Polygon(startX, startY, polygonId, type = "poly") {
     this.pointsList = [[startX, startY]];
 
     this.handles = [];
@@ -139,22 +193,22 @@ function Polygon(startX, startY, polygonId) {
     this.patch = new Patch();
     this.node.append(this.patch.node);
 
-    // this.patch.onclick = this.onclick;
-
     this.path = new Path();
     this.node.append(this.path.node);
 
-    let handle = new Handle(startX, startY, "first");
-    this.handles.push(handle);
-
-    this.node.append(handle.node);
-
     this.polygonId = polygonId;
-
     this.polygonScale = 1;
+
+    this.activeHandle = null;
+
+    this.type = type;
 
     this.onPolygonClick = function (polygon) {
         console.log("default onclick polygon");
+    };
+
+    this.onPolygonModified = function (polygon) {
+        console.log("default on polygon modified");
     };
 
     this.attribute = function (key, val) {
@@ -164,13 +218,23 @@ function Polygon(startX, startY, polygonId) {
 
     this.addPoint = function (x, y) {
         this.pointsList.push([x, y]);
+        this.setupHandle(x, y, "other", true);
+        this.path.setPoints(this.pointsList);
+    };
 
-        let handle = new Handle(x, y, "other");
+    this.setupHandle = function (x, y, tag, allowDrag) {
+        let handle = new Handle(x, y, tag);
+
+        handle.id = this.pointsList.length - 1;
+        handle.onHandlePressed = this.onHPrRef;
+        handle.onHandleReleased = this.onHRelRef;
+
         this.handles.push(handle);
-
         this.node.append(handle.node);
 
-        this.path.setPoints(this.pointsList);
+        if (allowDrag) {
+            handle.setupEventListeners(true);
+        }
     };
 
     this.removePoint = function (ind) {
@@ -190,6 +254,46 @@ function Polygon(startX, startY, polygonId) {
         return point;
     };
 
+    this.onHandleDrag = function (handle, dx, dy) {
+        this.pointsList[handle.id] = [handle.x + dx, handle.y + dy];
+        this.path.setPoints(this.pointsList);
+
+        if (this.path.closePath) {
+            this.patch.setPoints(this.pointsList);
+            this.patch.invalidate();
+        }
+
+        handle.x = this.pointsList[handle.id][0];
+        handle.y = this.pointsList[handle.id][1];
+
+        handle.invalidate.apply(handle);
+
+        this.onPolygonModified(this);
+    };
+
+    this.onHandlePressed = function (handle) {
+        this.activeHandle = handle;
+        // console.log("Handle pressed: " + handle.id);
+    };
+
+    this.onHandleReleased = function () {
+        this.activeHandle = null;
+        // console.log("Handle released");
+    };
+
+    this.onDrag = function (evt) {
+        let point = getPoint(evt);
+
+        if (this.type === "poly" && this.activeHandle !== null) {
+            this.activeHandle.x = point.x;
+            this.activeHandle.y = point.y;
+
+            this.onHandleDrag(this.activeHandle, point.x - this.activeHandle.x, point.y - this.activeHandle.y);
+        } else if (type === "rect") {
+            // this.setupHandle(point.x, point.y, "other", false);
+        }
+    };
+
     this.shouldClose = function (x, y) {
         let x0 = this.pointsList[0][0];
         let y0 = this.pointsList[0][1];
@@ -199,7 +303,9 @@ function Polygon(startX, startY, polygonId) {
         return dist < 8;
     };
 
-    this.onclick = function () {
+    this.onclick = function (event) {
+        console.log("Polygon on click");
+        event.stopPropagation();
         this.onPolygonClick(this);
     };
 
@@ -219,6 +325,7 @@ function Polygon(startX, startY, polygonId) {
     this.setSelected = function (selected) {
 
         let type = "normal";
+        let svgParent = this.node.parentNode;
 
         if (selected) {
             type = "selected";
@@ -228,18 +335,19 @@ function Polygon(startX, startY, polygonId) {
         this.patch.invalidate();
 
         for (let i in this.handles) {
+
+            this.handles[i].id = i;
+            this.handles[i].setupEventListeners(selected);
+
             this.handles[i].type = type;
             this.handles[i].invalidate();
         }
-
-        console.log(type);
-
     };
 
     this.scale = function (scaleFactor) {
 
         this.polygonScale = this.polygonScale * scaleFactor;
-        this.pointsList = this.scalePoints.apply(this, [scaleFactor])
+        this.pointsList = this.scalePoints.apply(this, [scaleFactor]);
 
         for (let i = 0; i < this.pointsList.length; i++) {
             this.handles[i].setPoint(this.pointsList[i][0], this.pointsList[i][1]);
@@ -276,6 +384,47 @@ function Polygon(startX, startY, polygonId) {
         return this.scalePoints.apply(this, [1 / this.polygonScale]);
     };
 
+    this.setDragEnabled = function (enabled) {
+        let svgParent = this.node.parentNode;
+
+        if (enabled) {
+            svgParent.addEventListener("mousemove", this.onDragRef, true);
+            svgParent.addEventListener("mouseup", this.onHRelRef, true);
+        } else {
+            svgParent.removeEventListener("mousemove", this.onDragRef);
+            svgParent.removeEventListener("mouseup", this.onHRelRef);
+        }
+    };
+
+    // Consume event if the click is near one of the points of the selected polygon
+    // Any ideas how to do it better?
+    this.shouldConsumeEvent = function (event) {
+
+        let evPoint = getPoint(event);
+
+        let minDist = 99;
+
+        for (let pt in this.pointsList) {
+            let x0 = this.pointsList[pt][0];
+            let y0 = this.pointsList[pt][1];
+
+            let dist = Math.sqrt((x0 - evPoint.x) * (x0 - evPoint.x) + (y0 - evPoint.y) * (y0 - evPoint.y));
+
+            if (dist < minDist) {
+                minDist = dist;
+            }
+        }
+        return minDist < 2;
+    };
+
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);
+
+    // Some magic:
+    this.onDragRef = this.onDrag.bind(this);
+    this.onHRelRef = this.onHandleReleased.bind(this);
+    this.onHPrRef = this.onHandlePressed.bind(this);
+
+    this.setupHandle(startX, startY, "first", false);
+
 }

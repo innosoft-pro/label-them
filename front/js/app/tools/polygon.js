@@ -32,13 +32,13 @@ function initPolygon() {
                 if (typeof isButtonPressed === "boolean" || isButtonPressed instanceof Boolean) {
                     if (isButtonPressed) {
                         console.log("polygon enabled");
-                        svgImg.addEventListener("click", handleClicksOnSvgWithPolygonTool, true);
+                        svgImg.addEventListener("click", handleClicksOnSvgWithPolygonTool, false);
                         svgImg.addEventListener("contextmenu", handleContextMenu, true);
                         window.addEventListener("keydown", handleKeydown, true);
 
                     } else {
                         console.log("polygon disabled");
-                        svgImg.removeEventListener("click", handleClicksOnSvgWithPolygonTool, true);
+                        svgImg.removeEventListener("click", handleClicksOnSvgWithPolygonTool, false);
                         svgImg.removeEventListener("contextmenu", handleContextMenu, true);
                         window.removeEventListener("keydown", handleKeydown, true);
                     }
