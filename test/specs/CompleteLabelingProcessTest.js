@@ -3,10 +3,10 @@ let projectFolderName = "git";
 describe('webdriver.io page', function () {
     it("Should label image", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
-        browser.windowHandleSize({width:1920,height:1080});
+        browser.windowHandleSize({width: 1920, height: 1080});
 
         let error = 2;
-        let points = [[100,100], [100,200], [200,100]];
+        let points = [[100, 100], [100, 200], [200, 100]];
 
         //Click on canvas
         browser.leftClick("#canvas-parent", points[0][0], points[0][1]);
@@ -47,10 +47,10 @@ describe('webdriver.io page', function () {
 
     it("Should label image without saving", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
-        browser.windowHandleSize({width:1920,height:1080});
+        browser.windowHandleSize({width: 1920, height: 1080});
 
         let error = 2;
-        let points = [[100,100], [100,200], [200,100]];
+        let points = [[100, 100], [100, 200], [200, 100]];
 
         //Click on canvas
         browser.leftClick("#canvas-parent", points[0][0], points[0][1]);
