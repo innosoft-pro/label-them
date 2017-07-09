@@ -36,7 +36,9 @@ DataCollector.prototype.getEntitiesParameters = function (id) {
 DataCollector.prototype.deleteEntity = function (id) {
     if (id in this.dataEntities) {
         delete this.dataEntities[id];
-        this.activeEntity = null;
+        if(id === this.getActiveEntity().polygonId) {
+            this.activeEntity = null;
+        }
     }
 };
 
