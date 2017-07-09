@@ -272,14 +272,14 @@ function recreateHistoryBlockContents() {
 
 function modifyPointsOfPolygonInHistoryRecords(polygon) {
     let recordWasModified = false;
-    for(let i=historyRecords.length-1; i>0; i--) {
-        if(recordWasModified) {
+    for (let i = historyRecords.length - 1; i > 0; i--) {
+        if (recordWasModified) {
             break;
         }
-        if(historyRecords[i].recordType === HistoryRecordTypeEnum.ADD_OBJECT &&
+        if (historyRecords[i].recordType === HistoryRecordTypeEnum.ADD_OBJECT &&
             historyRecords[i].polygon.polygonId === polygon.polygonId) {
-                historyRecords[i].polygon = polygon;
-                recordWasModified = true;
+            historyRecords[i].polygon = polygon;
+            recordWasModified = true;
         }
     }
 }
