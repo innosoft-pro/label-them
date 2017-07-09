@@ -2,6 +2,8 @@
  * Created by Alexey Merzlikin on 08.04.2017.
  */
 
+var outputJson = "";
+
 function DataCollector() {
     this.dataEntities = {};
 
@@ -36,7 +38,9 @@ DataCollector.prototype.getEntitiesParameters = function (id) {
 DataCollector.prototype.deleteEntity = function (id) {
     if (id in this.dataEntities) {
         delete this.dataEntities[id];
-        this.activeEntity = null;
+        if(id === this.getActiveEntity().polygonId) {
+            this.activeEntity = null;
+        }
     }
 };
 
@@ -83,12 +87,12 @@ DataCollector.prototype.getJSON = function () {
             dataEntities.push(new DataEntityToBeExported(this.dataEntities[i]));
         }
     }
-    let json = JSON.stringify(dataEntities);
+    outputJson = JSON.stringify(dataEntities);
     if (window.thisTask !== undefined && window.thisTask !== null) {
-        window.thisTask.setSolutionOutputValue("result", json);
+        window.thisTask.setSolutionOutputValue("result", outputJson);
     } else {
-        console.log(json); // To check output values on localhost
+        console.log(outputJson); // To check output values on localhost
     }
 
-    return json;
+    return outputJson;
 };

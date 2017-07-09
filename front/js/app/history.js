@@ -187,6 +187,8 @@ function undoObjectsDeletion(polygon, parameters) {
     // polygon with id=polygon.polygonId is now selected
     dc.getActiveEntity().setParams(parameters);
     setClassesAndParametersValues(dc.getActiveEntity());
+
+    onSave();
 }
 
 function redoObjectsDeletion(polygon) {

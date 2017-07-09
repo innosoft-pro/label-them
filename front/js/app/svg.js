@@ -30,11 +30,12 @@ function svgImgOnClick(event) {
         return;
     }
 
-    if (currentPolygon !== null && currentPolygon.shouldConsumeEvent.apply(currentPolygon, [event])) {
+    let point = getPoint(event);
+
+    if (currentPolygon !== null && !currentPolygon.shouldClose(point.x, point.y) &&
+        currentPolygon.shouldConsumeEvent.apply(currentPolygon, [event])) {
         return;
     }
-
-    let point = getPoint(event);
 
     if (redoPoints.length > 0) {
         redoPoints = [];
@@ -156,7 +157,6 @@ function onPolygonClick(polygon) {
 
     polygon.setSelected(true);
     polygon.setDragEnabled(true);
-
 
 
     onPolygonSelected(selectedPolygon);
