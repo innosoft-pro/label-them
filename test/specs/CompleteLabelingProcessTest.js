@@ -16,7 +16,7 @@ describe('webdriver.io page', function () {
 
         //Select object class
         let selectBox = $(".class-param");
-        selectBox.selectByValue("Brown Bear");
+        selectBox.selectByValue("class 0");
 
         //Set bool param to true
         let checkBox = $(".bool-param");
@@ -60,7 +60,7 @@ describe('webdriver.io page', function () {
 
         //Select object class
         let selectBox = $(".class-param");
-        selectBox.selectByValue("Brown Bear");
+        selectBox.selectByValue("class 0");
 
         //Set bool param to true
         let checkBox = $(".bool-param");
