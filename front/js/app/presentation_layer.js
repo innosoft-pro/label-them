@@ -13,10 +13,14 @@ function initPresentationLayer(acceptMode) {
         /*eslint no-undef: "error"*/
         initZoom();
         window.addEventListener("resize", resize, false);
-        /*global drawFOV*/
-        /*eslint no-undef: "error"*/
+
         //Draw rectangle on the minimap on initialization
-        drawFOV(0,0);
+        /*global onResize*/
+        /*eslint no-undef: "error"*/
+        onResize();
+        /*global onScroll*/
+        /*eslint no-undef: "error"*/
+        onScroll();
     };
 
     initSvg();
