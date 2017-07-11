@@ -6,7 +6,9 @@ let projectFolderName = "git";
 describe("webdriver.io page", function () {
     it("should be able to scale images (case 10)", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
-        browser.windowHandleSize({width: 1920, height: 1080});
+        if (browser.desiredCapabilities.platform === "WINDOWS" || browser.desiredCapabilities.platform === "LINUX") {
+            browser.windowHandleSize({width: 1920, height: 1080});
+        }
 
         // See https://github.com/innosoft-pro/label-them/wiki/Test-cases#case-10 for the summary
         // description of this case steps
@@ -29,40 +31,39 @@ describe("webdriver.io page", function () {
         let initialMainCanvasWidth = browser.execute("return document.getElementById(\"main-canvas\").width;").value;
         let initialMainCanvasHeight = browser.execute("return document.getElementById(\"main-canvas\").height;").value;
         let initialSvgImgWidth = browser.execute("return document.getElementById(\"svg_img\").style.width;").value;
-        initialSvgImgWidth = Math.floor(initialSvgImgWidth.slice(0, initialSvgImgWidth.length-2));
+        initialSvgImgWidth = Math.floor(initialSvgImgWidth.slice(0, initialSvgImgWidth.length - 2));
         let initialSvgImgHeight = browser.execute("return document.getElementById(\"svg_img\").style.height;").value;
-        initialSvgImgHeight = Math.floor(initialSvgImgHeight.slice(0, initialSvgImgHeight.length-2));
+        initialSvgImgHeight = Math.floor(initialSvgImgHeight.slice(0, initialSvgImgHeight.length - 2));
 
         function mainCanvasAndSvgImgSizesEqualToTheirInitialValuesMultipliedByScalingFactor(scalingFactor) {
             mainCanvasWidth = browser.execute("return document.getElementById(\"main-canvas\").width;").value;
             mainCanvasHeight = browser.execute("return document.getElementById(\"main-canvas\").height;").value;
             svgImgWidth = browser.execute("return document.getElementById(\"svg_img\").style.width;").value;
-            svgImgWidth = Math.floor(svgImgWidth.slice(0, svgImgWidth.length-2));
+            svgImgWidth = Math.floor(svgImgWidth.slice(0, svgImgWidth.length - 2));
             svgImgHeight = browser.execute("return document.getElementById(\"svg_img\").style.height;").value;
-            svgImgHeight = Math.floor(svgImgHeight.slice(0, svgImgHeight.length-2));
+            svgImgHeight = Math.floor(svgImgHeight.slice(0, svgImgHeight.length - 2));
             assert.deepStrictEqual(initialMainCanvasWidth * scalingFactor, mainCanvasWidth);
             assert.deepStrictEqual(initialMainCanvasHeight * scalingFactor, mainCanvasHeight);
             assert.deepStrictEqual(initialSvgImgWidth * scalingFactor, svgImgWidth);
             assert.deepStrictEqual(initialSvgImgHeight * scalingFactor, svgImgHeight);
             return initialMainCanvasWidth * scalingFactor === mainCanvasWidth &&
-                    initialMainCanvasHeight * scalingFactor === mainCanvasHeight &&
-                    initialSvgImgWidth * scalingFactor === svgImgWidth &&
-                    initialSvgImgHeight * scalingFactor === svgImgHeight;
+                initialMainCanvasHeight * scalingFactor === mainCanvasHeight &&
+                initialSvgImgWidth * scalingFactor === svgImgWidth &&
+                initialSvgImgHeight * scalingFactor === svgImgHeight;
         }
 
-        function valuesInFirstArrayAreSimilarUpToTheSetErrorWithTheOnesInTheSecondArrayMultipliedByScalingFactor(
-            pointsArray1, pointsArray2, scalingFactor, error) {
+        function valuesInFirstArrayAreSimilarUpToTheSetErrorWithTheOnesInTheSecondArrayMultipliedByScalingFactor(pointsArray1, pointsArray2, scalingFactor, error) {
             let result = true;
             assert.deepStrictEqual(pointsArray1.length, pointsArray2.length);
-            if(pointsArray1.length !== pointsArray2.length) {
+            if (pointsArray1.length !== pointsArray2.length) {
                 result = false;
                 return result;
             }
 
             for (let i = 0; i < pointsArray1.length; i++) {
                 for (let j = 0; j < 2; j++) {
-                    let difference = Math.abs(pointsArray1[i][j] - (pointsArray2[i][j]*scalingFactor));
-                    if(difference > error) {
+                    let difference = Math.abs(pointsArray1[i][j] - (pointsArray2[i][j] * scalingFactor));
+                    if (difference > error) {
                         result = false;
                     }
                     assert.ok(difference <= error);
