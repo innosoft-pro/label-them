@@ -1,24 +1,26 @@
 var width;
 var height;
-var mu = true;
+var mouseUp = true;
 var minimap;
 var canvasParent;
-var mainImage;
 var ctx;
 var minimapCanvas;
 var mainCanvas;
 
 function onMinimapClick(e) {
-    var x = (e.pageX - getOffset(minimapCanvas[0]).left);
-    var y = (e.pageY - getOffset(minimapCanvas[0]).top);
-    var ratioX = x / minimapCanvas[0].offsetWidth;
-    var ratioY = y / minimapCanvas[0].offsetHeight;
+    var x = (e.pageX - getOffset(minimapCanvas).left);
+    var y = (e.pageY - getOffset(minimapCanvas).top);
+    var ratioX = x / minimapCanvas.offsetWidth;
+    var ratioY = y / minimapCanvas.offsetHeight;
     scrollImage(ratioX, ratioY);
-    drawFOV(ratioX, ratioY);
 }
 
-function onScrollMainCanvas(){
-
+function onScroll() {
+    var scrollLeftMax = getScrollLeftMax();
+    var scrollTopMax = getScrollTopMax();
+    var ratioX = canvasParent.scrollLeft() / scrollLeftMax;
+    var ratioY = canvasParent.scrollTop() / scrollTopMax;
+    drawFOV(ratioX, ratioY);
 }
 
 function scrollImage(ratioX, ratioY) {
@@ -38,17 +40,19 @@ function getOffset(elem) {
 
 function getScrollLeftMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
+    var tempScroll = canvasParent.scrollLeft();
     canvasParent.scrollLeft(10000);
     var scrollMax = canvasParent.scrollLeft();
-    canvasParent.scrollLeft(0);
+    canvasParent.scrollLeft(tempScroll);
     return scrollMax;
 }
 
 function getScrollTopMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
+    var tempScroll = canvasParent.scrollTop();
     canvasParent.scrollTop(10000);
     var scrollMax = canvasParent.scrollTop();
-    canvasParent.scrollTop(0);
+    canvasParent.scrollTop(tempScroll);
     return scrollMax;
 }
 
@@ -56,39 +60,42 @@ function initMinimap() {
     mainCanvas = $("#main-canvas");
     canvasParent = $("#canvas-parent");
     minimap = document.getElementById("minimap_img");
-    mainImage = document.getElementById("img_url");
-    minimapCanvas = document.getElementById("minimap_canvas");
+    minimapCanvas = $("#minimap_canvas")[0];
+
     minimapCanvas.width = minimap.width;
     minimapCanvas.height = minimap.height;
     ctx = minimapCanvas.getContext("2d");
     ctx.strokeStyle = "white";
 
     minimapCanvas.addEventListener("mousedown", function (e) {
-        mu = false;
+        mouseUp = false;
         onMinimapClick(e);
         e.preventDefault();
         e.stopPropagation()
     }, false);
     minimapCanvas.addEventListener("mousemove", function (e) {
-        mu || onMinimapClick(e)
+        mouseUp || onMinimapClick(e)
     }, false);
     minimapCanvas.addEventListener("mouseup", function (e) {
-        mu = true
+        mouseUp = true
     }, false);
 
-    minimapCanvas.onLoad = function () {
-        width = this.width;
-        height = this.height;
+    window.addEventListener("resize", onResize);
+    canvasParent[0].onscroll = function() {
+        onScroll();
     }
-    minimapCanvas.onLoad();
-    minimapCanvas = $("#minimap_canvas");
-    drawFOV(0.01, 0.01);
+}
+
+function onResize() {
+    minimapCanvas.width = minimap.width;
+    minimapCanvas.height = minimap.height;
+    ctx = minimapCanvas.getContext("2d");
+    ctx.strokeStyle = "white";
 }
 
 function drawFOV(x, y) {
-    minimapWidth = minimapCanvas[0].offsetWidth;
-    minimapHeight = minimapCanvas[0].offsetHeight;
-    console.log(minimapWidth + "::" + minimapHeight);
+    var minimapWidth = minimapCanvas.offsetWidth;
+    var minimapHeight = minimapCanvas.offsetHeight;
     height = minimapHeight * (canvasParent[0].clientHeight / mainCanvas[0].clientHeight);
     width = minimapWidth * (canvasParent[0].clientWidth / mainCanvas[0].clientWidth);
     x *= minimapWidth - width;
