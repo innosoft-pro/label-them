@@ -110,6 +110,12 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
+function onZoom(){
+    /*global onScroll*/
+    /*eslint no-undef: "error"*/
+    onScroll();
+}
+
 function resetDataCollector() {
     dc = new DataCollector();
 }

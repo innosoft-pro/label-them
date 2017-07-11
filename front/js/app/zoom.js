@@ -20,6 +20,9 @@ function zoomPlus() {
     /*global drawImg*/
     /*eslint no-undef: "error"*/
     drawImg(img);
+    /*global onZoom*/
+    /*eslint no-undef: "error"*/
+    onZoom();
 }
 
 function zoomMinus() {
@@ -30,4 +33,7 @@ function zoomMinus() {
     /*global drawImg*/
     /*eslint no-undef: "error"*/
     drawImg(img);
+    /*global onZoom*/
+    /*eslint no-undef: "error"*/
+    onZoom();
 }
