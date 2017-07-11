@@ -15,7 +15,7 @@ describe('webdriver.io page', function () {
 
         // Step 2
         var selectBox = $(".class-param");
-        selectBox.selectByValue("Brown Bear");
+        selectBox.selectByValue("class 0");
 
         // Step 3
         var checkBox = $(".bool-param");
@@ -29,7 +29,7 @@ describe('webdriver.io page', function () {
 
 
         // Step 5
-        selectBox.selectByValue("Grizzly");
+        selectBox.selectByValue("class 1");
 
         // Step 6 checkbox's default value is false
         // checkBox.click();
@@ -47,7 +47,7 @@ describe('webdriver.io page', function () {
         browser.leftClick("#canvas-parent", 320, 320);
 
         // Step 11
-        selectBox.selectByValue("Brown Bear");
+        selectBox.selectByValue("class 0");
 
         // Step 12
         checkBox.click();
