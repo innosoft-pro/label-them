@@ -4,6 +4,10 @@ describe('webdriver.io page', function () {
     it("Should redo the addition of the cancelled point", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
 
+        if (browser.desiredCapabilities == "WINDOWS") {
+          browser.windowHandleSize({width: 1920, height: 1080});
+        }
+
         let error = 2;
         let points = [[100, 100], [100, 200], [200, 100], [200, 200], [150, 150]];
 
