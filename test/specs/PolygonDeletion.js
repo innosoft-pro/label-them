@@ -1,7 +1,7 @@
 let assert = require('assert');
 let projectFolderName = "git";
 describe('webdriver.io page', function () {
-    it("Should redo the addition of the cancelled point", function () {
+    it("Should be able to delete selected polygons", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
 
         let error = 2;
