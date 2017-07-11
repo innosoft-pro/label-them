@@ -143,8 +143,6 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
             onSelectParamUpdate(param.name, param.value);
         }, false);
     });
-
-
 }
 
 /*

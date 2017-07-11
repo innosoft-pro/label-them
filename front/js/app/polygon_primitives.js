@@ -282,7 +282,7 @@ function Polygon(startX, startY, polygonId, type = "poly") {
     };
 
     this.onDrag = function (evt) {
-        point = getPoint(evt);
+        let point = getPoint(evt);
 
         if (this.type === "poly" && this.activeHandle !== null) {
             this.activeHandle.x = point.x;
@@ -400,11 +400,11 @@ function Polygon(startX, startY, polygonId, type = "poly") {
     // Any ideas how to do it better?
     this.shouldConsumeEvent = function (event) {
 
-        evPoint = getPoint(event);
+        let evPoint = getPoint(event);
 
         let minDist = 99;
 
-        for (pt in this.pointsList) {
+        for (let pt in this.pointsList) {
             let x0 = this.pointsList[pt][0];
             let y0 = this.pointsList[pt][1];
 

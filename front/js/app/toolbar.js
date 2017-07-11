@@ -96,7 +96,7 @@ function getElements() {
     btnZoomOut = document.getElementById(Tool.zoomOut().buttonId);
 }
 
-function initToolbar() {
+function initToolbar(acceptMode) {
     /*global initSave*/
     /*eslint no-undef: "error"*/
     initSave();
@@ -123,7 +123,12 @@ function initToolbar() {
     /*global initBrightness*/
     /*eslint no-undef: "error"*/
     initBrightness();
-    changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+    if (acceptMode) {
+        changeButtonsSelectionState(btnHand);    // hand tool is selected by default
+    } else {
+        changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+    }
+
     activeTool = Tool.polygon();
     activeTool.onClick(true);
 }

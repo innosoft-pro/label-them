@@ -5,7 +5,7 @@ var minimap;
 var canvasParent;
 var ctx;
 var minimapCanvas;
-var mainCanvas;
+var mainCanvasBlock;
 
 function onMinimapClick(e) {
     var x = (e.pageX - getOffset(minimapCanvas).left);
@@ -57,7 +57,7 @@ function getScrollTopMax() {
 }
 
 function initMinimap() {
-    mainCanvas = $("#main-canvas");
+    mainCanvasBlock = $("#main-canvas");
     canvasParent = $("#canvas-parent");
     minimap = document.getElementById("minimap_img");
     minimapCanvas = $("#minimap_canvas")[0];
@@ -83,7 +83,7 @@ function initMinimap() {
     window.addEventListener("resize", onResize);
     canvasParent[0].onscroll = function () {
         onScroll();
-    }
+    };
 
     canvasParent[0].addEventListener("onload", function(){
         drawFOV(0, 0);
@@ -100,8 +100,8 @@ function onResize() {
 function drawFOV(x, y) {
     var minimapWidth = minimapCanvas.offsetWidth;
     var minimapHeight = minimapCanvas.offsetHeight;
-    height = minimapHeight * (canvasParent[0].clientHeight / mainCanvas[0].clientHeight);
-    width = minimapWidth * (canvasParent[0].clientWidth / mainCanvas[0].clientWidth);
+    height = minimapHeight * (canvasParent[0].clientHeight / mainCanvasBlock[0].clientHeight);
+    width = minimapWidth * (canvasParent[0].clientWidth / mainCanvasBlock[0].clientWidth);
     x *= minimapWidth - width;
     y *= minimapHeight - height;
     ctx.clearRect(0, 0, minimapWidth, minimapHeight);
