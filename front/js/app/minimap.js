@@ -65,7 +65,7 @@ function initMinimap() {
     minimapCanvas.width = minimap.width;
     minimapCanvas.height = minimap.height;
     ctx = minimapCanvas.getContext("2d");
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "red";
 
     minimapCanvas.addEventListener("mousedown", function (e) {
         mouseUp = false;
@@ -81,16 +81,20 @@ function initMinimap() {
     }, false);
 
     window.addEventListener("resize", onResize);
-    canvasParent[0].onscroll = function() {
+    canvasParent[0].onscroll = function () {
         onScroll();
     }
+
+    canvasParent[0].addEventListener("onload", function(){
+        drawFOV(0, 0);
+    });
 }
 
 function onResize() {
     minimapCanvas.width = minimap.width;
     minimapCanvas.height = minimap.height;
     ctx = minimapCanvas.getContext("2d");
-    ctx.strokeStyle = "white";
+    ctx.strokeStyle = "red";
 }
 
 function drawFOV(x, y) {
@@ -101,7 +105,5 @@ function drawFOV(x, y) {
     x *= minimapWidth - width;
     y *= minimapHeight - height;
     ctx.clearRect(0, 0, minimapWidth, minimapHeight);
-    ctx.beginPath();
-    ctx.rect(x, y, width, height);
-    ctx.stroke();
+    ctx.strokeRect(x, y, width, height);
 }
