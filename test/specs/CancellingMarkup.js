@@ -1,4 +1,3 @@
-
 let assert = require('assert');
 let projectFolderName = "git";
 describe('webdriver.io page', function () {
