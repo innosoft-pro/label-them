@@ -1,10 +1,10 @@
 var assert = require('assert');
 browser.leftClick("#canvas-parent", 100, 100);
-let projectFolderName = "label-them";
+let projectFolderName = "git";
 describe('webdriver.io page', function () {
     it("Undoing points addition during objects markup", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
-        if (browser.desiredCapabilities == "WINDOWS") {
+        if (browser.desiredCapabilities.platform === "WINDOWS" || browser.desiredCapabilities.platform === "LINUX") {
             browser.windowHandleSize({width: 1920, height: 1080});
         }
         // Step 1

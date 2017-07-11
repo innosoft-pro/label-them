@@ -1,9 +1,9 @@
 var assert = require('assert');
-let projectFolderName = "label-them";
+let projectFolderName = "git";
 describe('webdriver.io page', function () {
     it("Polygons selection and modification of classes and parameters of the selected polygon", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
-        if (browser.desiredCapabilities == "WINDOWS") {
+        if (browser.desiredCapabilities.platform === "WINDOWS" || browser.desiredCapabilities.platform === "LINUX") {
             browser.windowHandleSize({width: 1920, height: 1080});
         }
 
