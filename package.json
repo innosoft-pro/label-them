@@ -23,6 +23,8 @@
     "grunt": "^1.0.1",
     "grunt-contrib-concat": "^1.0.1",
     "grunt-contrib-cssmin": "^2.1.0",
-    "grunt-contrib-uglify": "^2.3.0"
+    "grunt-contrib-uglify": "^2.3.0",
+    "wdio-dot-reporter": "0.0.8",
+    "wdio-mocha-framework": "^0.5.10"
   }
 }
