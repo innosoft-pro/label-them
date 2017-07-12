@@ -4,6 +4,7 @@
 // loading remote image
 let img = new Image();
 let latestNotificationFromCanvas = null;
+let minimapImage = new Image();
 
 function initPresentationLayer(acceptMode) {
     img.src = document.getElementById("img_url").innerText;
@@ -13,15 +14,20 @@ function initPresentationLayer(acceptMode) {
         /*eslint no-undef: "error"*/
         initZoom();
         window.addEventListener("resize", resize, false);
+    };
 
+    minimapImage = $("#minimap_img")[0];
+    minimapImage.src = img.src;
+    minimapImage.onload = function(){
         //Draw rectangle on the minimap on initialization
-        /*global onResize*/
-        /*eslint no-undef: "error"*/
-        onResize();
         /*global onScroll*/
         /*eslint no-undef: "error"*/
         onScroll();
-    };
+        /*global onResize*/
+        /*eslint no-undef: "error"*/
+        redrawMinimapOnResize();
+    }
+    
 
     initSvg();
     changeScrollingPositionInTheHistoryBlock();
@@ -61,6 +67,9 @@ function resize() {
     changeScrollingPositionInTheHistoryBlock();
     scrollHistoryTableBodyToBottom();
     showMessageToTheUserDependingOnTheLatestNotificationFromCanvas();
+    /*global redrawMinimapOnResize*/
+    /*eslint no-undef: "error"*/
+    redrawMinimapOnResize();
 }
 
 function hideToolbar() {
