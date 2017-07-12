@@ -32,7 +32,30 @@ describe('webdriver.io page', function () {
 
         browser.leftClick(".btn-save");
 
+
+        function matchPointArrays(arr1, arr2, error) {
+            let result = true;
+            assert.deepStrictEqual(arr1.length, arr2.length);
+
+            for (let i = 0; i < arr1.length; i++) {
+                for (let j = 0; j < 2; j++) {
+                    let difference = Math.abs(arr1[i][j] - (arr2[i][j]));
+                    if (difference > error) {
+                        result = false;
+                    }
+                    assert.ok(difference <= error);
+                }
+            }
+            return result;
+        }
+
+        let finalArr1 = [[100,100],[100,200],[200,100]];
+        let finalArr2 = [[50,50],[50,75],[75,50]];
+
+
         let result = browser.execute("return outputJson;");
-        assert.equal(result.value, "[{\"points\":[[100,100],[100,200],[200,100]],\"parameters\":{}},{\"points\":[[50,50],[50,75],[75,50]],\"parameters\":{}}]");
+        result = JSON.parse(result.value);
+        assert.ok(matchPointArrays(result[0].points, finalArr1, 2));
+        assert.ok(matchPointArrays(result[1].points, finalArr2, 2));
     });
 });

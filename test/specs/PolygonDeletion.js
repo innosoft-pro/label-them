@@ -59,7 +59,32 @@ describe('webdriver.io page', function () {
 
         browser.leftClick(".btn-save");
 
+        function matchPointArrays(arr1, arr2, error) {
+            let result = true;
+            assert.deepStrictEqual(arr1.length, arr2.length);
+
+            for (let i = 0; i < arr1.length; i++) {
+                for (let j = 0; j < 2; j++) {
+                    let difference = Math.abs(arr1[i][j] - (arr2[i][j]));
+                    if (difference > error) {
+                        result = false;
+                    }
+                    assert.ok(difference <= error);
+                }
+            }
+            return result;
+        }
+
+        function matchParamsDict(dict1, dict2) {
+            return JSON.stringify(dict1) === JSON.stringify(dict2);
+        }
+
+        let finalArr1 = [[100,100],[100,200],[200,100]];
+        let finalParams = {"class":"class 0","is occluded":true};
+
         let result = browser.execute("return outputJson;");
-        assert.equal(result.value, "[{\"points\":[[100,100],[100,200],[200,100]],\"parameters\":{\"class\":\"class 0\",\"is occluded\":true}}]");
+        result = JSON.parse(result.value);
+        assert.ok(matchPointArrays(result[0].points, finalArr1, 2));
+        assert.ok(matchParamsDict(result[0].parameters, finalParams, 2));
     });
 });
