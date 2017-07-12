@@ -98,6 +98,7 @@ function redrawMinimapOnResize() {
     ctx = minimapCanvas.getContext("2d");
     ctx.lineWidth = "3";
     ctx.strokeStyle = "red";
+    onScroll();
 }
 
 function drawFOV(x, y) {
