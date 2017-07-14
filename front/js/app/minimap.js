@@ -1,32 +1,32 @@
-var width;
-var height;
-var mouseUp = true;
-var minimap;
-var canvasParent;
-var ctx;
-var minimapCanvas;
-var mainCanvasBlock;
+let width;
+let height;
+let mouseUp = true;
+let minimap;
+let canvasParent;
+let ctx;
+let minimapCanvas;
+let mainCanvasBlock;
 
 function onMinimapClick(e) {
-    var x = (e.pageX - getOffset(minimapCanvas).left);
-    var y = (e.pageY - getOffset(minimapCanvas).top);
-    var ratioX = x / minimapCanvas.offsetWidth;
-    var ratioY = y / minimapCanvas.offsetHeight;
+    let x = (e.pageX - getOffset(minimapCanvas).left);
+    let y = (e.pageY - getOffset(minimapCanvas).top);
+    let ratioX = x / minimapCanvas.offsetWidth;
+    let ratioY = y / minimapCanvas.offsetHeight;
     scrollImage(ratioX, ratioY);
 }
 
 function onScroll() {
-    var scrollLeftMax = getScrollLeftMax();
-    var scrollTopMax = getScrollTopMax();
-    var ratioX = canvasParent.scrollLeft() / scrollLeftMax;
-    var ratioY = canvasParent.scrollTop() / scrollTopMax;
+    let scrollLeftMax = getScrollLeftMax();
+    let scrollTopMax = getScrollTopMax();
+    let ratioX = canvasParent.scrollLeft() / scrollLeftMax;
+    let ratioY = canvasParent.scrollTop() / scrollTopMax;
     drawFOV(ratioX, ratioY);
 }
 
 function scrollImage(ratioX, ratioY) {
-    var scrollLeftMax = getScrollLeftMax();
+    let scrollLeftMax = getScrollLeftMax();
     canvasParent.scrollLeft(scrollLeftMax * ratioX);
-    var scrollTopMax = getScrollTopMax();
+    let scrollTopMax = getScrollTopMax();
     canvasParent.scrollTop(scrollTopMax * ratioY);
 }
 
@@ -40,18 +40,18 @@ function getOffset(elem) {
 
 function getScrollLeftMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
-    var tempScroll = canvasParent.scrollLeft();
+    let tempScroll = canvasParent.scrollLeft();
     canvasParent.scrollLeft(10000);
-    var scrollMax = canvasParent.scrollLeft();
+    let scrollMax = canvasParent.scrollLeft();
     canvasParent.scrollLeft(tempScroll);
     return scrollMax;
 }
 
 function getScrollTopMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
-    var tempScroll = canvasParent.scrollTop();
+    let tempScroll = canvasParent.scrollTop();
     canvasParent.scrollTop(10000);
-    var scrollMax = canvasParent.scrollTop();
+    let scrollMax = canvasParent.scrollTop();
     canvasParent.scrollTop(tempScroll);
     return scrollMax;
 }
@@ -102,8 +102,8 @@ function redrawMinimapOnResize() {
 }
 
 function drawFOV(x, y) {
-    var minimapWidth = minimapCanvas.offsetWidth;
-    var minimapHeight = minimapCanvas.offsetHeight;
+    let minimapWidth = minimapCanvas.offsetWidth;
+    let minimapHeight = minimapCanvas.offsetHeight;
     height = minimapHeight * (canvasParent[0].clientHeight / mainCanvasBlock[0].clientHeight);
     width = minimapWidth * (canvasParent[0].clientWidth / mainCanvasBlock[0].clientWidth);
     x *= minimapWidth - width;
