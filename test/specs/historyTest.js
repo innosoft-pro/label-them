@@ -18,6 +18,7 @@ describe("webdriver.io page", function () {
         let error = 2;
         let outputJson;
         let checkedHistoryRowElement;
+        let pointsForStep2 = [[100, 100], [100, 200], [200, 200]];
 
         function compareTwoJSONsWithMarkup(jsonString1, jsonString2, error) {
             let json1 = JSON.parse(jsonString1);
@@ -67,6 +68,14 @@ describe("webdriver.io page", function () {
         checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow0\");").value;
         assert.equal(checkedHistoryRowElement, null);
 
-
+        // Step 2: Label {(100, 100), (100, 200), (200, 100)} polygon.
+        // 2.1. left click on the 100, 100 pixel of the image
+        browser.leftClick("#canvas-parent", pointsForStep2[0][0], pointsForStep2[0][1]);
+        // 2.2. left click on the 100, 200 pixel of the image
+        browser.leftClick("#canvas-parent", pointsForStep2[1][0], pointsForStep2[1][1]);
+        // 2.3. left click on the 200, 100 pixel of the image
+        browser.leftClick("#canvas-parent", pointsForStep2[2][0], pointsForStep2[2][1]);
+        // 2.4. left click on the 100, 100 pixel of the image
+        browser.leftClick("#canvas-parent", pointsForStep2[0][0], pointsForStep2[0][1]);
     });
 });
