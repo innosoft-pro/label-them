@@ -157,8 +157,132 @@ describe("webdriver.io page", function () {
         // \"parameters\":{\"class\":\"class 0\"}}]
         outputJson = browser.execute("return outputJson;").value;
         goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 0\"}}]";
-        console.log(outputJson);
-        console.log(goldenJsonString);
         assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 20: Click “Undo” button (#delete-row)
+        browser.click("#delete-row");
+
+        // Step 21: Check that historyRow6 DOM element does not exist
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow6\");").value;
+        assert.equal(checkedHistoryRowElement, null);
+
+        // Step 22: Compare returned JSON markup to
+        // [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 23: Click “Undo” button (#delete-row)
+        browser.click("#delete-row");
+
+        // Step 24: Check that historyRow5 DOM element does not exist
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow5\");").value;
+        assert.equal(checkedHistoryRowElement, null);
+
+        // Step 25: Compare returned JSON markup to [{\"points\":[[100,100],[100,200],[200,100]],
+        // \"parameters\":{\"class\":\"class 0\",\"is occluded\":true,
+        // \"select an option\":\"option 1 name\"}},
+        // {\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[100,100],[100,200],[200,100]]," +
+            "\"parameters\":{\"class\":\"class 0\",\"is occluded\":true," +
+            "\"select an option\":\"option 1 name\"}}, " +
+            "{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 26: Click “Undo” button (#delete-row)
+        browser.click("#delete-row");
+
+        // Step 27: Check that historyRow4 DOM element does not exist
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow4\");").value;
+        assert.equal(checkedHistoryRowElement, null);
+
+        // Step 28: Compare returned JSON markup to
+        // [{\"points\":[[100,100],[100,200],[200,100]],
+        // \"parameters\":{\"class\":\"class 0\",\"is occluded\":true,
+        // \"select an option\":\"option 1 name\"}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[100,100],[100,200],[200,100]]," +
+            "\"parameters\":{\"class\":\"class 0\"," +
+            "\"is occluded\":true,\"select an option\":\"option 1 name\"}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 29: Click “Undo” button (#delete-row)
+        browser.click("#delete-row");
+
+        // Step 30: Check that historyRow3 DOM element does not exist
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow3\");").value;
+        assert.equal(checkedHistoryRowElement, null);
+
+        // Step 31: Compare returned JSON markup to
+        // [{\"points\":[[100,100],[100,200],[200,100]],
+        // \"parameters\":{\"class\":\"class 0\",\"is occluded\":true}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[100,100],[100,200],[200,100]]," +
+            "\"parameters\":{\"class\":\"class 0\",\"is occluded\":true}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 32: Click “Redo” button (#add-row)
+        browser.click("#add-row");
+
+        // Step 33: Check that historyRow3 DOM element exists and contains
+        // a string “Parameter select an option of polygon 0 was changed to option 1 name”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow3\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Parameter select an option " +
+            "of polygon 0 was changed to option 1 name"));
+
+        // Step 34: Compare returned JSON markup to
+        // [{\"points\":[[100,100],[100,200],[200,100]],
+        // \"parameters\":{\"class\":\"class 0\",\"is occluded\":true,
+        // \"select an option\":\"option 1 name\"}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[100,100],[100,200],[200,100]]," +
+            "\"parameters\":{\"class\":\"class 0\",\"is occluded\":true," +
+            "\"select an option\":\"option 1 name\"}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 35: Click “Redo” button (#add-row)
+        browser.click("#add-row");
+
+        // Step 36: Check that historyRow4 DOM element exists and contains a string “Polygon was added and assigned an id 1”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow4\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Polygon was added and assigned an id 1"));
+
+        // Step 37: Compare returned JSON markup to [{\"points\":[[100,100],[100,200],[200,100]],
+        // \"parameters\":{\"class\":\"class 0\",\"is occluded\":true,
+        // \"select an option\":\"option 1 name\"}}, {\"points\":[[300,300],[300,400],[400,300]],
+        // \"parameters\":{}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[100,100],[100,200],[200,100]]," +
+            "\"parameters\":{\"class\":\"class 0\",\"is occluded\":true," +
+            "\"select an option\":\"option 1 name\"}}, " +
+            "{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 38: Click “Redo” button (#add-row)
+        browser.click("#add-row");
+
+        // Step 39: Check that historyRow5 DOM element exists and contains a string “Polygon with id 0 was deleted”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow5\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Polygon with id 0 was deleted"));
+
+        // Step 40: Compare returned JSON markup to
+        // [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 41: Click “Redo” button (#add-row)
+        // Step 42: Check that historyRow6 DOM element exists and contains a string “Class of polygon 1 was changed to class 0”
+        // Step 43: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 0\"}}]
+        // Step 44: Click “Undo” button (#delete-row)
+        // Step 45: Check that historyRow6 DOM element does not exist
+        // Step 46: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
+        // Step 47: Check that #delete-row DOM element does not contain class “disabled”
+        // Step 48: Left click on the image on (320, 320) point // “Hand” tool is still selected at this point
+        // Step 49: Select object class “class 1”
+        // Step 50: Check that historyRow6 DOM element exists and contains a string “Class of polygon 1 was changed to class 1”
+        // Step 51: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 1\"}}]
+        // Step 52: Check that #delete-row DOM element does contain class “disabled”
     });
 });
