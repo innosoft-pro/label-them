@@ -24,6 +24,7 @@ describe("webdriver.io page", function () {
         let classSelectBox = $(".class-param");
         let isOccludedCheckBox = $(".bool-param");
         let selectAnOptionSelect = $(".select-param");
+        let checkedValue;
 
         function compareTwoJSONsWithMarkup(jsonString1, jsonString2, error) {
             let json1 = JSON.parse(jsonString1);
@@ -273,16 +274,63 @@ describe("webdriver.io page", function () {
         assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
 
         // Step 41: Click “Redo” button (#add-row)
+        browser.click("#add-row");
+
         // Step 42: Check that historyRow6 DOM element exists and contains a string “Class of polygon 1 was changed to class 0”
-        // Step 43: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 0\"}}]
-        // Step 44: Click “Undo” button (#delete-row)
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow6\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Class of polygon 1 was changed to class 0"));
+
+        // Step 43: Compare returned JSON markup to
+        // [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 0\"}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]]," +
+            "\"parameters\":{\"class\":\"class 0\"}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 44: Click “iconOnHistoryRow6” button (#iconOnHistoryRow6)
+        browser.click("#iconOnHistoryRow6");
+
         // Step 45: Check that historyRow6 DOM element does not exist
-        // Step 46: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
-        // Step 47: Check that #delete-row DOM element does not contain class “disabled”
-        // Step 48: Left click on the image on (320, 320) point // “Hand” tool is still selected at this point
-        // Step 49: Select object class “class 1”
-        // Step 50: Check that historyRow6 DOM element exists and contains a string “Class of polygon 1 was changed to class 1”
-        // Step 51: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 1\"}}]
-        // Step 52: Check that #delete-row DOM element does contain class “disabled”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow6\");").value;
+        assert.equal(checkedHistoryRowElement, null);
+
+        // Step 46: Check that historyRow5 DOM element exists and contains
+        // a string “Polygon with id 0 was deleted”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow5\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Polygon with id 0 was deleted"));
+
+        // Step 47: Compare returned JSON markup to [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 48: Check that #delete-row DOM element does not contain class “disabled”
+        checkedValue = browser.execute("return $(\"#delete-row\").hasClass(\"disabled\");").value;
+        assert.equal(checkedValue, false);
+
+        // Step 49: Left click on the image on (305, 320) point // “Hand” tool is still selected at this point
+        browser.leftClick("#canvas-parent", 305, 320);
+
+        // Step 50: Select object class “class 1”
+        classSelectBox.selectByValue("class 1");
+
+        // Step 51: Check that historyRow6 DOM element exists and contains a string “Class of polygon 1 was changed to class 1”
+        checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow6\").innerText;").value;
+        assert.ok(checkedHistoryRowElement.includes("Class of polygon 1 was changed to class 1"));
+
+        // Step 52: Compare returned JSON markup to
+        // [{\"points\":[[300,300],[300,400],[400,300]],\"parameters\":{\"class\":\"class 1\"}}]
+        outputJson = browser.execute("return outputJson;").value;
+        goldenJsonString = "[{\"points\":[[300,300],[300,400],[400,300]]," +
+            "\"parameters\":{\"class\":\"class 1\"}}]";
+        assert.ok(compareTwoJSONsWithMarkup(outputJson, goldenJsonString, error));
+
+        // Step 53: Check that #delete-row DOM element does not contain class “disabled”
+        checkedValue = browser.execute("return $(\"#delete-row\").hasClass(\"disabled\");").value;
+        assert.equal(checkedValue, false);
+
+        // Step 54: Check that #add-row DOM element does contain class “disabled”
+        checkedValue = browser.execute("return $(\"#add-row\").hasClass(\"disabled\");").value;
+        assert.equal(checkedValue, true);
     });
 });
