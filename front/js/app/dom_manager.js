@@ -373,6 +373,7 @@ function translateBlocksTitles() {
     document.getElementById("label-parameters-block-title").innerHTML = beginH3tag + activeLanguage.labelParameters +
         endH3tag;
     document.getElementById("history-block-title").innerHTML = beginH3tag + activeLanguage.history + endH3tag;
+    document.getElementById("minimap-block-title").innerHTML = beginH3tag + activeLanguage.miniMap + endH3tag;
 }
 
 function displayLanguageSelection(languagesArray) {

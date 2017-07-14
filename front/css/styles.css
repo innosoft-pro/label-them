@@ -59,6 +59,7 @@
 
 #minimap{
     position: relative;
+    padding: 0;
 }
 
 #minimap-canvas-div {
