@@ -23,10 +23,10 @@ function initPresentationLayer(acceptMode) {
         /*global onScroll*/
         /*eslint no-undef: "error"*/
         onScroll();
-        /*global onResize*/
+        /*global redrawMinimapOnResize*/
         /*eslint no-undef: "error"*/
         redrawMinimapOnResize();
-    }
+    };
     
 
     initSvg();
@@ -73,12 +73,12 @@ function resize() {
 }
 
 function hideToolbar() {
-    var toolbar = document.getElementsByClassName("btn-group-vertical")[0];
+    let toolbar = document.getElementsByClassName("btn-group-vertical")[0];
     toolbar.style.display = 'none';
 }
 
 function hideHistory() {
-    var history = document.getElementById("history-panel");
+    let history = document.getElementById("history-panel");
     history.style.display = 'none';
 }
 
