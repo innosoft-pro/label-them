@@ -11,19 +11,23 @@ by providing images, lists of classes and parameters of objects, and, if you don
 images by yourself, a short description of which types of objects you are interested in, and money to reward 
 Mechanical Turks for performed markup.
 
+## Important Notice
+At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in 
+[Chromium ](http://www.chromium.org/Home) and [Chrome](https://www.google.ru/chrome) web browsers.
+
+Newest version of *LabelThem* source files, compatible with Yandex.Toloka crowdsourcing platform are located in 
+`develop-toloka` branch.
+
+If you are only interested in using the system for getting a markup, you can skip the following text and go
+to the instructions on [how to start working with *LabelThem* system on Yandex.Toloka](
+https://github.com/innosoft-pro/label-them/wiki/Getting-started-YandexToloka).
+
 ## System Prerequisites
 
 In order to get started, you'll need to install [NodeJS runtime](https://nodejs.org/en/),
 [Bower package manager](https://bower.io/#install-bower)
 and [Grunt's command line interface (CLI)](https://gruntjs.com/getting-started) globally.
 You may need to use `sudo` (for OSX, *nix, BSD etc) or run your command shell as Administrator (for Windows) to do this.
-
-## Important Notice
-At the moment *LabelThem* works  only with [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/) in 
-[Chromium Browser](http://www.chromium.org/Home) and [Chrome](https://www.google.ru/chrome) web browsers.
-
-If an image cannot fit the screen in width. Only left part of the image that fits the screen will be displayed 
-and available for markup!
 
 ## Building the system / Generating source files for Yandex.Toloka
 
@@ -43,6 +47,3 @@ The source files that are needed to run the system on Yandex Toloka crowdsourcin
 
 Instructions on **how to start working with *LabelThem* system on Yandex.Toloka** can be found on 
 [the corresponding wiki page](https://github.com/innosoft-pro/label-them/wiki/Getting-started-YandexToloka).
-
-Newest version of *LabelThem* source files, compatible with Yandex.Toloka crowdsourcing platform are located in 
-`develop-toloka` branch.
