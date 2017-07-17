@@ -6,6 +6,11 @@
 *LabelThem* is an online markup tool aimed at building image datasets for computer vision research, and integrated with 
 [Yandex.Toloka crowdsourcing system](https://toloka.yandex.ru/).
 
+With *LabelThem* you can quickly get a markup, with classes and parameters of objects you are interested in, 
+by providing images, lists of classes and parameters of objects, and, if you don't have the resources to label 
+images by yourself, a short description of which types of objects you are interested in, and money to reward 
+Mechanical Turks for performed markup.
+
 ## System Prerequisites
 
 In order to get started, you'll need to install [NodeJS runtime](https://nodejs.org/en/),
