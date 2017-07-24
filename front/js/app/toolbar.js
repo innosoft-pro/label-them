@@ -1,5 +1,4 @@
 let btnSave;
-let btnHand;
 let btnPolygon;
 let btnEdit;
 let btnZoomIn;
@@ -32,9 +31,6 @@ function setOnClick(btn) {
             /*eslint no-undef: "error"*/
             case Tool.save().buttonId:
                 activeTool = Tool.save();
-                break;
-            case Tool.hand().buttonId:
-                activeTool = Tool.hand();
                 break;
             case Tool.polygon().buttonId:
                 activeTool = Tool.polygon();
@@ -76,7 +72,6 @@ function setOnClick(btn) {
 
 function setElementsOnClick() {
     setOnClick(btnSave);
-    setOnClick(btnHand);
     setOnClick(btnPolygon);
     setOnClick(btnEdit);
     setOnClick(btnZoomIn);
@@ -87,7 +82,6 @@ function setElementsOnClick() {
 
 function getElements() {
     btnSave = document.getElementById(Tool.save().buttonId);
-    btnHand = document.getElementById(Tool.hand().buttonId);
     btnPolygon = document.getElementById(Tool.polygon().buttonId);
     btnEdit = document.getElementById("btn_edit");          // TODO: Modify when edit tool implemented
     btnBrightnessHigh = document.getElementById(Tool.brightnessIncrease().buttonId);
@@ -100,9 +94,6 @@ function initToolbar(acceptMode) {
     /*global initSave*/
     /*eslint no-undef: "error"*/
     initSave();
-    /*global initHand*/
-    /*eslint no-undef: "error"*/
-    initHand();
     /*global initPolygon*/
     /*eslint no-undef: "error"*/
     initPolygon();
@@ -123,12 +114,25 @@ function initToolbar(acceptMode) {
     /*global initBrightness*/
     /*eslint no-undef: "error"*/
     initBrightness();
-    if (acceptMode) {
-        changeButtonsSelectionState(btnHand);    // hand tool is selected by default
-    } else {
+
+    if (!acceptMode) {
         changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+        btnPolygon.style.display = "block";
+        document.getElementById("history-panel").style.display = "block"
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        setComponentClickable("class-param form-control", acceptMode);
+        setComponentClickable("bool-param", acceptMode);
+        setComponentClickable("form-control string-param", acceptMode);
+        setComponentClickable("select-param form-control", acceptMode);
+        setComponentClickable("select-param form-control", acceptMode, 1);
+    }, false);
 
     activeTool = Tool.polygon();
     activeTool.onClick(true);
+}
+
+function setComponentClickable(className, isEnabled, index = 0) {
+    document.getElementsByClassName(className)[index].disabled = isEnabled;
 }

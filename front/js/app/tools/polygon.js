@@ -13,6 +13,8 @@ function initPolygon() {
             } else {
                 undoLastPoint();
             }
+        } else if (event.keyCode === 8 || event.keyCode === 46) {
+            svgImgDeleteSelectedPolygon();
         }
     }
 

@@ -37,11 +37,7 @@
                             <img src="https://rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/save_button.png"
                                  width="48"/>
                         </button>
-                        <button id="btn_hand" class="btn btn-default btn-hand">
-                            <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/hand_tool_button.png"
-                                 width="48"/>
-                        </button>
-                        <button id="btn_polygon" class="btn btn-default btn-polygon">
+                        <button id="btn_polygon" class="btn btn-default btn-polygon" style="display: none;">
                             <img src="https://cdn.rawgit.com/innosoft-pro/label-them/develop-toloka/front/img/polygon_tool_button.png"
                                  width="48"/>
                         </button>
@@ -80,7 +76,9 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="canvas-parent">
-                                <div id="img_url" hidden>https://luxamazing.net/wp-content/uploads/2017/04/2017-10best-lead-photo-672628-s-original.jpg</div>
+                                <div id="img_url" hidden>
+                                    https://luxamazing.net/wp-content/uploads/2017/04/2017-10best-lead-photo-672628-s-original.jpg
+                                </div>
                                 <div id="json_params" hidden>
                                     {
                                     "classes":
@@ -169,7 +167,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12" id="history-panel">
+                    <div class="col-md-12" id="history-panel" style="display: none;">
                         <div class="panel panel-default">
                             <div class="panel-heading" id="history-block-title">
                                 <h3 class="panel-title">History</h3>
@@ -177,7 +175,7 @@
                             <!-- Table -->
                             <table class="table history-table" id="history-table">
                                 <tbody class="history-table-body">
-                                    <!-- History rows -->
+                                <!-- History rows -->
                                 </tbody>
                             </table>
                             <div class="panel-footer">

@@ -84,13 +84,6 @@ function svgScale(scaleFactor) {
     }
 }
 
-function svgImgOnClickSelect(event) {
-    // if (selectedPolygon !== null) {
-    //     selectedPolygon.setSelected(false);
-    //     selectedPolygon = null;
-    // }
-}
-
 function undoLastPoint() {
     if (currentPolygon === null) {
         return;
