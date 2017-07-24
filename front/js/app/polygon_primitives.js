@@ -140,6 +140,32 @@ function Handle(x, y, type) {
     this.onMouseUpRef = this.onMouseUp.bind(this);
 }
 
+
+function Label(x, y, text) {
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    this.x = x;
+    this.y = y;
+    this.node.setAttribute('x', x);
+    this.node.setAttribute('y', y);
+    this.node.setAttribute('fill', '#FFFFFF');
+    this.node.textContent = text;
+
+    this.scale = function(scaleFactor) {
+      this.reposition(this.x * scaleFactor, this.y * scaleFactor);
+    }
+
+    this.reposition = function(x, y) {
+      this.x = x;
+      this.y = y;
+      this.node.setAttribute('x', this.x);
+      this.node.setAttribute('y', this.y);
+    }
+
+    this.setText = function(text) {
+      this.node.textContent = text;
+    }
+}
+
 function Path() {
     this.node = document.createElementNS("http://www.w3.org/2000/svg", "path");
 
@@ -269,6 +295,11 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         handle.invalidate.apply(handle);
 
         this.onPolygonModified(this);
+
+        if (this.label) {
+            let bbox = this.node.getBBox();
+            this.label.reposition(bbox.x + bbox.width/2, bbox.y + bbox.height/2);
+        }
     };
 
     this.onHandlePressed = function (handle) {
@@ -316,6 +347,11 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         this.path.closePath = true;
         this.path.invalidate();
 
+        let bbox = this.node.getBBox();
+
+        this.label = new Label(bbox.x + bbox.width/2, bbox.y + bbox.height/2, "");
+        this.node.append(this.label.node);
+
         for (let i in this.handles) {
             this.handles[i].type = "normal";
             this.handles[i].invalidate();
@@ -360,6 +396,10 @@ function Polygon(startX, startY, polygonId, type = "poly") {
                 this.patch.invalidate();
             }
 
+        }
+
+        if (this.label) {
+            this.label.scale(scaleFactor);
         }
     };
 
@@ -416,6 +456,12 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         }
         return minDist < 2;
     };
+
+    this.onClassUpdate = function(newClass) {
+        if (this.label) {
+            this.label.setText(newClass);
+        }
+    }
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);
