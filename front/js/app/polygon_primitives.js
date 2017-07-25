@@ -2,8 +2,9 @@ function Patch() {
     let pointList = [];
 
     this.node = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-
     this.state = "normal";
+
+
 
     function build(arg) {
         let res = [];
@@ -45,6 +46,9 @@ function Patch() {
         this.node.setAttribute("class", this.state);
     };
 
+    this.updateColor = function (color) {
+        this.node.style.fill = color;
+    };
 
     this.points = function () {
         for (let i = 0, l = arguments.length; i < l; i += 2) {
@@ -297,8 +301,8 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         this.onPolygonModified(this);
 
         if (this.label) {
-            let bbox = this.node.getBBox();
-            this.label.reposition(bbox.x + bbox.width/2, bbox.y + bbox.height/2);
+            let cnt = this.centroid();
+            this.label.reposition(cnt[0], cnt[1]);
         }
     };
 
@@ -347,9 +351,12 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         this.path.closePath = true;
         this.path.invalidate();
 
-        let bbox = this.node.getBBox();
+        // let bbox = this.node.getBBox();
 
-        this.label = new Label(bbox.x + bbox.width/2, bbox.y + bbox.height/2, "");
+        let cnt = this.centroid();
+
+        // this.label = new Label(bbox.x + bbox.width/2, bbox.y + bbox.height/2, "");
+        this.label = new Label(cnt[0], cnt[1], "");
         this.node.append(this.label.node);
 
         for (let i in this.handles) {
@@ -357,6 +364,21 @@ function Polygon(startX, startY, polygonId, type = "poly") {
             this.handles[i].invalidate();
         }
     };
+
+    this.centroid = function () {
+        let x = 0.0;
+        let y = 0.0;
+
+        for (let i in this.pointsList) {
+            x = x + this.pointsList[i][0];
+            y = y + this.pointsList[i][1];
+        }
+
+        x = x / this.pointsList.length;
+        y = y / this.pointsList.length;
+
+        return [x, y];
+    }
 
     this.setSelected = function (selected) {
 
@@ -461,6 +483,15 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         if (this.label) {
             this.label.setText(newClass);
         }
+
+        // if (newClass in color_scheme) {
+        //     this.patch.updateColor(color_scheme[newClass]);
+        // } else {
+        //     // Reset the color back to default CSS value
+        //     this.patch.updateColor("");
+        // }
+
+        this.patch.updateColor(colorForClass(newClass));
     }
 
     // Setup event listeners
