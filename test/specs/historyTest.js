@@ -8,6 +8,8 @@ let assert = require("assert");
 let projectFolderName = "label-them";
 describe("webdriver.io page", function () {
     it("should contain a functional history block (case 11)", function () {
+        /*global browser*/
+        /*eslint no-undef: "error"*/
         browser.url("http://localhost:63342/" + projectFolderName + "/front/main_local.html");
         if (browser.desiredCapabilities.platform === "WINDOWS" || browser.desiredCapabilities.platform === "LINUX") {
             browser.windowHandleSize({width: 1920, height: 1080});
