@@ -1,8 +1,10 @@
-let assert = require('assert');
+let assert = require("assert");
 let projectFolderName = "label-them";
-describe('webdriver.io page', function () {
+describe("webdriver.io page", function () {
     it("Should scroll main canvas on minimap click", function () {
-        browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
+        /*global browser*/
+        /*eslint no-undef: "error"*/
+        browser.url("http://localhost:63342/" + projectFolderName + "/front/main_local.html");
         let canvasParent = browser.elements("#canvas-parent");
 
         //1. Click zoom in to scale image so even small image is not able to fit main canvas
@@ -20,6 +22,6 @@ describe('webdriver.io page', function () {
         let newScrollValue = browser.execute("return $(\"#canvas-parent\").scrollLeft()");
 
         //5. Check if scroll value has changed after click on the minimap
-        assert.equal(scrollValue.value != newScrollValue.value, true);
+        assert.equal(scrollValue.value !== newScrollValue.value, true);
     });
 }); 

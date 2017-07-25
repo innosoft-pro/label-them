@@ -1,13 +1,13 @@
-let assert = require('assert');
+let assert = require("assert");
 let projectFolderName = "label-them";
 describe('webdriver.io page', function () {
     it("Should change image brightness from 100 to 90", function () {
-        browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
+        /*global browser*/
+        /*eslint no-undef: "error"*/
+        browser.url("http://localhost:63342/" + projectFolderName + "/front/main_local.html");
         browser.click("#btn_brightness_low");
 
         let result = browser.execute("return defaultBrightness;");
-        console.log("Brightness: " + result.value);
-
         assert.equal(result.value, 90);
     });
 
@@ -16,8 +16,6 @@ describe('webdriver.io page', function () {
         browser.click("#btn_brightness_high");
 
         let result = browser.execute("return defaultBrightness;");
-        console.log("Brightness: " + result.value);
-
         assert.equal(result.value, 110);
     });
 
@@ -28,8 +26,6 @@ describe('webdriver.io page', function () {
         }
 
         let result = browser.execute("return defaultBrightness;");
-        console.log("Brightness: " + result.value);
-
         assert.equal(result.value, 10);
     });
 
@@ -40,7 +36,6 @@ describe('webdriver.io page', function () {
         }
 
         let result = browser.execute("return defaultBrightness;");
-        console.log("Brightness: " + result.value);
         assert.equal(result.value, 500);
     });
 }); 

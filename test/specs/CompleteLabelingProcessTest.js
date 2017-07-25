@@ -1,8 +1,8 @@
-let assert = require('assert');
+let assert = require("assert");
 let projectFolderName = "label-them";
-describe('webdriver.io page', function () {
+describe("webdriver.io page", function () {
     it("Should label image", function () {
-        browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
+        browser.url("http://localhost:63342/" + projectFolderName + "/front/main_local.html");
         if (browser.desiredCapabilities.platform === "WINDOWS" || browser.desiredCapabilities.platform === "LINUX") {
             browser.windowHandleSize({width: 1920, height: 1080});
         }

@@ -7,6 +7,24 @@ let ctx;
 let minimapCanvas;
 let mainCanvasBlock;
 
+function drawFOV(x, y) {
+    let minimapWidth = minimapCanvas.offsetWidth;
+    let minimapHeight = minimapCanvas.offsetHeight;
+    height = minimapHeight * (canvasParent[0].clientHeight / mainCanvasBlock[0].clientHeight);
+    width = minimapWidth * (canvasParent[0].clientWidth / mainCanvasBlock[0].clientWidth);
+    x *= minimapWidth - width;
+    y *= minimapHeight - height;
+    ctx.clearRect(0, 0, minimapWidth, minimapHeight);
+    ctx.strokeRect(x, y, width, height);
+}
+
+function scrollImage(ratioX, ratioY) {
+    let scrollLeftMax = getScrollLeftMax();
+    canvasParent.scrollLeft(scrollLeftMax * ratioX);
+    let scrollTopMax = getScrollTopMax();
+    canvasParent.scrollTop(scrollTopMax * ratioY);
+}
+
 function onMinimapClick(e) {
     let x = (e.pageX - getOffset(minimapCanvas).left);
     let y = (e.pageY - getOffset(minimapCanvas).top);
@@ -23,19 +41,12 @@ function onScroll() {
     drawFOV(ratioX, ratioY);
 }
 
-function scrollImage(ratioX, ratioY) {
-    let scrollLeftMax = getScrollLeftMax();
-    canvasParent.scrollLeft(scrollLeftMax * ratioX);
-    let scrollTopMax = getScrollTopMax();
-    canvasParent.scrollTop(scrollTopMax * ratioY);
-}
-
 function getOffset(elem) {
     elem = elem.getBoundingClientRect();
     return {
         left: elem.left + window.scrollX,
         top: elem.top + window.scrollY
-    }
+    };
 }
 
 function getScrollLeftMax() {
@@ -72,13 +83,13 @@ function initMinimap() {
         mouseUp = false;
         onMinimapClick(e);
         e.preventDefault();
-        e.stopPropagation()
+        e.stopPropagation();
     }, false);
     minimapCanvas.addEventListener("mousemove", function (e) {
-        mouseUp || onMinimapClick(e)
+        mouseUp || onMinimapClick(e);
     }, false);
     minimapCanvas.addEventListener("mouseup", function (e) {
-        mouseUp = true
+        mouseUp = true;
     }, false);
 
     minimapCanvas.onmouseleave = function () {
@@ -99,15 +110,4 @@ function redrawMinimapOnResize() {
     ctx.lineWidth = "3";
     ctx.strokeStyle = "red";
     onScroll();
-}
-
-function drawFOV(x, y) {
-    let minimapWidth = minimapCanvas.offsetWidth;
-    let minimapHeight = minimapCanvas.offsetHeight;
-    height = minimapHeight * (canvasParent[0].clientHeight / mainCanvasBlock[0].clientHeight);
-    width = minimapWidth * (canvasParent[0].clientWidth / mainCanvasBlock[0].clientWidth);
-    x *= minimapWidth - width;
-    y *= minimapHeight - height;
-    ctx.clearRect(0, 0, minimapWidth, minimapHeight);
-    ctx.strokeRect(x, y, width, height);
 }
