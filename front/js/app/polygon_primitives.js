@@ -5,7 +5,6 @@ function Patch() {
     this.state = "normal";
 
 
-
     function build(arg) {
         let res = [];
         for (let i = 0, l = arg.length; i < l; i++) {
@@ -154,19 +153,19 @@ function Label(x, y, text) {
     this.node.setAttribute('fill', '#FFFFFF');
     this.node.textContent = text;
 
-    this.scale = function(scaleFactor) {
-      this.reposition(this.x * scaleFactor, this.y * scaleFactor);
+    this.scale = function (scaleFactor) {
+        this.reposition(this.x * scaleFactor, this.y * scaleFactor);
     }
 
-    this.reposition = function(x, y) {
-      this.x = x;
-      this.y = y;
-      this.node.setAttribute('x', this.x);
-      this.node.setAttribute('y', this.y);
+    this.reposition = function (x, y) {
+        this.x = x;
+        this.y = y;
+        this.node.setAttribute('x', this.x);
+        this.node.setAttribute('y', this.y);
     }
 
-    this.setText = function(text) {
-      this.node.textContent = text;
+    this.setText = function (text) {
+        this.node.textContent = text;
     }
 }
 
@@ -479,7 +478,7 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         return minDist < 2;
     };
 
-    this.onClassUpdate = function(newClass) {
+    this.onClassUpdate = function (newClass) {
         if (this.label) {
             this.label.setText(newClass);
         }

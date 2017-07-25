@@ -27,7 +27,7 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
 
 function extend(ParentClass, constructorFunction, prototypeHash) {
     constructorFunction = constructorFunction || function () {
-        };
+    };
     prototypeHash = prototypeHash || {};
     if (ParentClass) {
         constructorFunction.prototype = Object.create(ParentClass.prototype);

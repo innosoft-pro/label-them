@@ -18,7 +18,7 @@ function initPresentationLayer(acceptMode) {
 
     minimapImage = $("#minimap_img")[0];
     minimapImage.src = img.src;
-    minimapImage.onload = function(){
+    minimapImage.onload = function () {
         //Draw rectangle on the minimap on initialization
         /*global onScroll*/
         /*eslint no-undef: "error"*/
@@ -27,7 +27,7 @@ function initPresentationLayer(acceptMode) {
         /*eslint no-undef: "error"*/
         redrawMinimapOnResize();
     };
-    
+
 
     initSvg();
     changeScrollingPositionInTheHistoryBlock();

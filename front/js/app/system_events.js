@@ -114,7 +114,7 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
-function onZoom(){
+function onZoom() {
     /*global onScroll*/
     /*eslint no-undef: "error"*/
     onScroll();
