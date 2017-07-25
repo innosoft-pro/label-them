@@ -222,6 +222,7 @@ function addPolygonFromObject(object) {
     polygon.close();
     polygon.onPolygonClick = onPolygonClick;
     polygon.onPolygonModified = onPolygonChanged;
+    polygon.onClassUpdate(object["parameters"]["class"]);
     polygons[polygonId] = currentPolygon;
     polygonId = polygonId + 1;
 

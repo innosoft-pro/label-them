@@ -4,6 +4,7 @@ if (!Object.create) {
         if (arguments.length > 1) {
             throw new Error(activeLanguage.objectCreateImplementationOnlyAcceptsTheFirstParameter);
         }
+
         function F() {
         }
 

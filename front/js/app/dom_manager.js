@@ -265,6 +265,7 @@ function initDOM() {
     jsonParams = replaceAll(jsonParams, '\\', '"');
     generateHTMLCodeForClassesAndParameters(document, jsonParams);
     initRowsAdditionAndDeletion();
+    initColorScheme(jsonParams);
 }
 
 function resetDOM() {

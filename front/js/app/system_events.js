@@ -64,12 +64,16 @@ function onObjectClassUpdate(value, calledByHistory = false) {
         dc.getActiveEntity().setParams({"class": value});
     }
 
+    polygons[dc.getActiveEntity().polygonId].onClassUpdate(value);
+
     onSave();
 
     if (calledByHistory === false) {
         addHistoryRecordClass(HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS,
             dc.getActiveEntity().polygonId, value, previousClassValue);
     }
+
+
 }
 
 function onPolygonModified(polygon) {
@@ -110,7 +114,7 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
-function onZoom(){
+function onZoom() {
     /*global onScroll*/
     /*eslint no-undef: "error"*/
     onScroll();
