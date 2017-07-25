@@ -145,8 +145,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
     });
 }
 
-/*
- Reset all values of class selector and parameters to default values
+/**
+ *  Reset all values of class selector and parameters to default values
  */
 function resetClassesAndParametersValues(document) {
     let classParameters = document.getElementsByClassName("class-param");
@@ -190,26 +190,6 @@ function setClassesAndParametersValues(dataEntity) {
 
         }
     }
-
-    // let classParameters = document.getElementsByClassName("class-param");
-    // Array.prototype.forEach.call(classParameters, parameter => {
-    //     parameter.value = "Select Class";
-    // });
-    //
-    // let boolParameters = document.getElementsByClassName("bool-param");
-    // Array.prototype.forEach.call(boolParameters, parameter => {
-    //     parameter.checked = false;
-    // });
-    //
-    // let stringParameters = document.getElementsByClassName("string-param");
-    // Array.prototype.forEach.call(stringParameters, parameter => {
-    //     parameter.value = "";
-    // });
-    //
-    // let selectParameters = document.getElementsByClassName("select-param");
-    // for (let i = 0; i < selectParameters.length; i++) {
-    //     selectParameters.item(i).value = selectDefaultParameters[i];
-    // }
 }
 
 // Message type which correspond to the ones used in bootstrap

@@ -1,3 +1,8 @@
+/**
+ * @typedef {object} MouseEvent
+ * @typedef {object} HTMLElement
+ */
+
 let width;
 let height;
 let mouseUp = true;
@@ -7,6 +12,12 @@ let ctx;
 let minimapCanvas;
 let mainCanvasBlock;
 
+/**
+ * Draw a rect on the minimap representing visible area of the main canvas.
+ * @event drawFOV
+ * @param {number} x - x value of top left point of the rect in percents to the full width of the main canvas.
+ * @param {number} y - y value of top left point of the rect in percents to the full height of the main canvas.
+ */
 function drawFOV(x, y) {
     let minimapWidth = minimapCanvas.offsetWidth;
     let minimapHeight = minimapCanvas.offsetHeight;
@@ -18,6 +29,11 @@ function drawFOV(x, y) {
     ctx.strokeRect(x, y, width, height);
 }
 
+/**
+ * Scroll the main canvas.
+ * @param {number} ratioX - Ratio of a desired horizontal scroll value to a maximum horizontal scroll value.
+ * @param {number} ratioY - Ratio of a desired vertical scroll value to a maximum vertical scroll value.
+ */
 function scrollImage(ratioX, ratioY) {
     let scrollLeftMax = getScrollLeftMax();
     canvasParent.scrollLeft(scrollLeftMax * ratioX);
@@ -25,6 +41,10 @@ function scrollImage(ratioX, ratioY) {
     canvasParent.scrollTop(scrollTopMax * ratioY);
 }
 
+/**
+ * Event on minimap click triggering the main canvas scrolling
+ * @param {MouseEvent} e - Click event
+ */
 function onMinimapClick(e) {
     let x = (e.pageX - getOffset(minimapCanvas).left);
     let y = (e.pageY - getOffset(minimapCanvas).top);
@@ -33,6 +53,11 @@ function onMinimapClick(e) {
     scrollImage(ratioX, ratioY);
 }
 
+/**
+ * Event on the main canvas scrolling triggering minimap redraw
+ * @event onScroll
+ * @fires drawFOV
+ */
 function onScroll() {
     let scrollLeftMax = getScrollLeftMax();
     let scrollTopMax = getScrollTopMax();
@@ -41,6 +66,11 @@ function onScroll() {
     drawFOV(ratioX, ratioY);
 }
 
+/**
+ * Returns the offset of the element
+ * @param {HTMLElement} elem - Element which offset is returned
+ * @return {offset} offset - Offset of the elem
+ */
 function getOffset(elem) {
     elem = elem.getBoundingClientRect();
     return {
@@ -49,6 +79,10 @@ function getOffset(elem) {
     };
 }
 
+/**
+ * Returns the maximum value of scrollLeft() of the main canvas
+ * @return {number} scrollMax - a maximum value of mainCanvas.scrollLeft()
+ */
 function getScrollLeftMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
     let tempScroll = canvasParent.scrollLeft();
@@ -58,6 +92,10 @@ function getScrollLeftMax() {
     return scrollMax;
 }
 
+/**
+ * Returns the maximum value of scrollTop() of the main canvas
+ * @return {number} scrollMax - a maximum value of mainCanvas.scrollTop()
+ */
 function getScrollTopMax() {
     //scrollMax() is available only on gecko. Setting unreasonably high value returns maximum scroll value
     let tempScroll = canvasParent.scrollTop();
@@ -67,6 +105,9 @@ function getScrollTopMax() {
     return scrollMax;
 }
 
+/**
+ * Initialize the minimap. Assign all the required values.
+ */
 function initMinimap() {
     mainCanvasBlock = $("#main-canvas");
     canvasParent = $("#canvas-parent");
@@ -103,6 +144,10 @@ function initMinimap() {
     });
 }
 
+/**
+ * Redraw a rect on the minimap on window resize based on new values of the scroll
+ * @fires onScroll
+ */
 function redrawMinimapOnResize() {
     minimapCanvas.width = minimap.width;
     minimapCanvas.height = minimap.height;

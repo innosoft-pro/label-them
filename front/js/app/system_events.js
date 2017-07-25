@@ -6,10 +6,19 @@
 /*eslint no-undef: "error"*/
 var dc = new DataCollector();
 
+/**
+ * Event fired on save of labeling data
+ * @event onSave
+ */
 function onSave() {
     dc.getJSON();
 }
 
+/**
+ * Event fired on close of polygon
+ * @event onPolygonClosed
+ * @fires onSave
+ */
 function onPolygonClosed(data, calledByHistory = false) {
     /*global DataEntity*/
     /*eslint no-undef: "error"*/
@@ -40,6 +49,11 @@ function onPolygonDeleted(data, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fired on update of object's boolean parameter
+ * @event onBoolParamUpdate
+ * @fires onSave
+ */
 function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (isChecked === null) {
@@ -56,6 +70,11 @@ function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fired on update of object's class
+ * @event onObjectClassUpdate
+ * @fires onSave
+ */
 function onObjectClassUpdate(value, calledByHistory = false) {
     let previousClassValue = dc.getActiveEntity().getParameterByName("class");
     if (value === null) {
@@ -82,6 +101,11 @@ function onPolygonModified(polygon) {
     modifyPointsOfPolygonInHistoryRecords(polygon);
 }
 
+/**
+ * Event fired on update of object's select parameter
+ * @event onSelectParamUpdate
+ * @fires onSave
+ */
 function onSelectParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (value === null) {
@@ -98,6 +122,11 @@ function onSelectParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fired on update of object's string parameter
+ * @event onStringParamUpdate
+ * @fires onSave
+ */
 function onStringParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (value === null) {
@@ -114,12 +143,20 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fired on zoom in or zoom out of the main canvas
+ * @event onZoom
+ * @fires onScroll
+ */
 function onZoom() {
     /*global onScroll*/
     /*eslint no-undef: "error"*/
     onScroll();
 }
 
+/**
+ * Reset current data collector to gather data of a new polygon
+ */
 function resetDataCollector() {
     dc = new DataCollector();
 }
