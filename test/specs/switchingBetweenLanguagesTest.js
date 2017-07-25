@@ -2,7 +2,7 @@
  * Created by alnedorezov on 7/9/17.
  */
 let assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe("webdriver.io page", function () {
     it("should switch between languages (case 12)", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');

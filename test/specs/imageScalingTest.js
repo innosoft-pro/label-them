@@ -2,7 +2,7 @@
  * Created by alnedorezov on 7/11/17.
  */
 let assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe("webdriver.io page", function () {
     it("should be able to scale images (case 10)", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');

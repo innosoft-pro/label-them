@@ -1,6 +1,6 @@
 var assert = require('assert');
 browser.leftClick("#canvas-parent", 100, 100);
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe('webdriver.io page', function () {
     it("Undoing points addition during objects markup", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');

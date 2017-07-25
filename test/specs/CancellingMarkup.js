@@ -1,5 +1,5 @@
 let assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe('webdriver.io page', function () {
     it("Should cancel adding a new polygon on right mouse click", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');

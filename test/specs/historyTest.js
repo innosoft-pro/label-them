@@ -5,7 +5,7 @@
 // description of this case steps
 
 let assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe("webdriver.io page", function () {
     it("should contain a functional history block (case 11)", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');

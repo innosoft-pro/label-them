@@ -1,5 +1,5 @@
 let assert = require('assert');
-let projectFolderName = "git";
+let projectFolderName = "label-them";
 describe('webdriver.io page', function () {
     it("Should change image brightness from 100 to 90", function () {
         browser.url('http://localhost:63342/' + projectFolderName + '/front/main_local.html');
