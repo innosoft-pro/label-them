@@ -129,8 +129,7 @@ describe("webdriver.io page", function () {
         checkedHistoryRowElement = browser.execute("return document.getElementById(\"historyRow4\").innerText;").value;
         assert.ok(checkedHistoryRowElement.includes("Polygon was added and assigned an id 1"));
 
-        // Step 12: Select “Hand” tool
-        browser.click("#btn_hand");
+        // Step 12: - // Removed in the releases after 1.4
 
         // Step 13: Left click on the image on (105, 120) point
         browser.leftClick("#canvas-parent", 105, 120);
@@ -308,7 +307,7 @@ describe("webdriver.io page", function () {
         checkedValue = browser.execute("return $(\"#delete-row\").hasClass(\"disabled\");").value;
         assert.equal(checkedValue, false);
 
-        // Step 49: Left click on the image on (305, 320) point // “Hand” tool is still selected at this point
+        // Step 49: Left click on the image on (305, 320) point
         browser.leftClick("#canvas-parent", 305, 320);
 
         // Step 50: Select object class “class 1”

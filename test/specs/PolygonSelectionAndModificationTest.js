@@ -35,7 +35,7 @@ describe('webdriver.io page', function () {
         // checkBox.click();
 
         // Step 7
-        browser.click("#btn_hand");
+        // - // Removed in the releases after 1.4
 
         // Step 8
         browser.leftClick("#canvas-parent", 120, 120);
