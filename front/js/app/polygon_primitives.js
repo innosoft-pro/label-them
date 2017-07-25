@@ -2,8 +2,9 @@ function Patch() {
     let pointList = [];
 
     this.node = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
-
     this.state = "normal";
+
+
 
     function build(arg) {
         let res = [];
@@ -45,6 +46,9 @@ function Patch() {
         this.node.setAttribute("class", this.state);
     };
 
+    this.updateColor = function (color) {
+        this.node.style.fill = color;
+    };
 
     this.points = function () {
         for (let i = 0, l = arguments.length; i < l; i += 2) {
@@ -138,6 +142,32 @@ function Handle(x, y, type) {
     // Ref Magic
     this.onMouseDownRef = this.onMouseDown.bind(this);
     this.onMouseUpRef = this.onMouseUp.bind(this);
+}
+
+
+function Label(x, y, text) {
+    this.node = document.createElementNS("http://www.w3.org/2000/svg", "text");
+    this.x = x;
+    this.y = y;
+    this.node.setAttribute('x', x);
+    this.node.setAttribute('y', y);
+    this.node.setAttribute('fill', '#FFFFFF');
+    this.node.textContent = text;
+
+    this.scale = function(scaleFactor) {
+      this.reposition(this.x * scaleFactor, this.y * scaleFactor);
+    }
+
+    this.reposition = function(x, y) {
+      this.x = x;
+      this.y = y;
+      this.node.setAttribute('x', this.x);
+      this.node.setAttribute('y', this.y);
+    }
+
+    this.setText = function(text) {
+      this.node.textContent = text;
+    }
 }
 
 function Path() {
@@ -269,6 +299,11 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         handle.invalidate.apply(handle);
 
         this.onPolygonModified(this);
+
+        if (this.label) {
+            let cnt = this.centroid();
+            this.label.reposition(cnt[0], cnt[1]);
+        }
     };
 
     this.onHandlePressed = function (handle) {
@@ -316,11 +351,34 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         this.path.closePath = true;
         this.path.invalidate();
 
+        // let bbox = this.node.getBBox();
+
+        let cnt = this.centroid();
+
+        // this.label = new Label(bbox.x + bbox.width/2, bbox.y + bbox.height/2, "");
+        this.label = new Label(cnt[0], cnt[1], "");
+        this.node.append(this.label.node);
+
         for (let i in this.handles) {
             this.handles[i].type = "normal";
             this.handles[i].invalidate();
         }
     };
+
+    this.centroid = function () {
+        let x = 0.0;
+        let y = 0.0;
+
+        for (let i in this.pointsList) {
+            x = x + this.pointsList[i][0];
+            y = y + this.pointsList[i][1];
+        }
+
+        x = x / this.pointsList.length;
+        y = y / this.pointsList.length;
+
+        return [x, y];
+    }
 
     this.setSelected = function (selected) {
 
@@ -360,6 +418,10 @@ function Polygon(startX, startY, polygonId, type = "poly") {
                 this.patch.invalidate();
             }
 
+        }
+
+        if (this.label) {
+            this.label.scale(scaleFactor);
         }
     };
 
@@ -416,6 +478,21 @@ function Polygon(startX, startY, polygonId, type = "poly") {
         }
         return minDist < 2;
     };
+
+    this.onClassUpdate = function(newClass) {
+        if (this.label) {
+            this.label.setText(newClass);
+        }
+
+        // if (newClass in color_scheme) {
+        //     this.patch.updateColor(color_scheme[newClass]);
+        // } else {
+        //     // Reset the color back to default CSS value
+        //     this.patch.updateColor("");
+        // }
+
+        this.patch.updateColor(colorForClass(newClass));
+    }
 
     // Setup event listeners
     this.patch.node.addEventListener("click", this.onclick.bind(this), true);
