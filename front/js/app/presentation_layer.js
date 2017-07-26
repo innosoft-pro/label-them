@@ -42,6 +42,7 @@ function initPresentationLayer(acceptMode) {
 
             let de = new DataEntity(polygon.polygonId);
             de.parameters = polygonObject["parameters"];
+            polygons[polygon.polygonId] = polygon;
             dc.addEntity(de, polygon.polygonId);
         }
     }
