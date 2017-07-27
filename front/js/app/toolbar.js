@@ -8,10 +8,19 @@ let btnBrightnessHigh;
 let btnBrightnessLow;
 let activeTool;
 
+/**
+ * Method checks button active or not.
+ * @param {Object} btn - clicked button
+ * @return {boolean} true if button active else false
+ * */
 function isButtonSelected(btn) {
     return btn.style.background === 'rgb(27, 109, 133)';
 }
 
+/**
+ * Method changes button state [selected or unselected].
+ * @param {Object} btn - clicked button
+ * */
 function changeButtonsSelectionState(btn) {
     let isEnabled = isButtonSelected(btn);
     if (isEnabled) {
@@ -74,6 +83,9 @@ function setOnClick(btn) {
     };
 }
 
+/**
+ * Method sets buttons on click listeners.
+ * */
 function setElementsOnClick() {
     setOnClick(btnSave);
     setOnClick(btnHand);
@@ -85,6 +97,9 @@ function setElementsOnClick() {
     setOnClick(btnBrightnessLow);
 }
 
+/**
+ * Method finds left toolbar buttons.
+ * */
 function getElements() {
     btnSave = document.getElementById(Tool.save().buttonId);
     btnHand = document.getElementById(Tool.hand().buttonId);
@@ -96,6 +111,10 @@ function getElements() {
     btnZoomOut = document.getElementById(Tool.zoomOut().buttonId);
 }
 
+/**
+ * Method initializes left toolbar components buttons functionality.
+ * @param {boolean} acceptMode - true when method called accept mode
+ * */
 function initToolbar(acceptMode) {
     /*global initSave*/
     /*eslint no-undef: "error"*/

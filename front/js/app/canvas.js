@@ -1,3 +1,11 @@
+/**
+ * Created by Ayk Badalyan on 03.02.2017.
+ */
+
+/**
+ * This method draws image on canvas.
+ * @param {Image} img - Image object
+ * */
 function drawImg(img) {
     let canvas = document.getElementById("main-canvas");
     let ctx = canvas.getContext("2d");
@@ -6,11 +14,12 @@ function drawImg(img) {
         0, 0, canvas.width, canvas.height); // destination rectangle
 }
 
-/*
- * handles resizing of the canvas for 1 to 1 mapping between image height and canvas height
+/**
+ * Handles resizing of the canvas for 1 to 1 mapping between image height and canvas height.
  * accepts Image() as input
  * returns "Not the full image will be shown" string if canvas.width < img.width
- **/
+ * @param {Image} img - Image object
+ * */
 function resizeCanvas(img) {
     let output = null;
 

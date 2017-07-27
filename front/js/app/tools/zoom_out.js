@@ -1,5 +1,5 @@
 /**
- * Created by alnedorezov on 5/26/17.
+ * Created by Ayk Badalyan on 04.06.2017.
  */
 function initZoomOut() {
 

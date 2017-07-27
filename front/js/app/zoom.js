@@ -1,3 +1,7 @@
+/**
+ * Created by Ayk Badalyan on 04.06.2017.
+ */
+
 let canvas;
 let svg;
 let ratio = 2;
@@ -5,6 +9,9 @@ let ratio = 2;
 let zoomCount = 0;
 let maxZoomCount = 0;
 
+/**
+ * Methods initializes canvas and svg object and define max zoom size.
+ * */
 function initZoom() {
     canvas = document.getElementById("main-canvas");
     svg = document.getElementById("svg_img");
@@ -12,6 +19,9 @@ function initZoom() {
     maxZoomCount = Math.floor(Math.sqrt(16384 / size)) - 1;
 }
 
+/**
+ * The methods magnifies the image.
+ * */
 function zoomPlus() {
     canvas.width = canvas.width * ratio;
     canvas.height = canvas.height * ratio;
@@ -25,6 +35,9 @@ function zoomPlus() {
     onZoom();
 }
 
+/**
+ * The method reduces the image.
+ * */
 function zoomMinus() {
     canvas.width = canvas.width / ratio;
     canvas.height = canvas.height / ratio;

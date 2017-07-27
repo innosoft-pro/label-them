@@ -1,3 +1,7 @@
+/**
+ * Created by Ayk Badalyan on 13.04.2017.
+ */
+
 var selectDefaultParameters = [];
 
 // Generate HTML code for classes and parameters described in json/classesandparameters.json

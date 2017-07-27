@@ -6,10 +6,19 @@
 /*eslint no-undef: "error"*/
 var dc = new DataCollector();
 
+/**
+ * Event fires on save of labeling data.
+ * @event onSave
+ */
 function onSave() {
     dc.getJSON();
 }
 
+/**
+ * Event fires on close of polygon.
+ * @event onPolygonClosed
+ * @fires onSave
+ */
 function onPolygonClosed(data, calledByHistory = false) {
     /*global DataEntity*/
     /*eslint no-undef: "error"*/
@@ -40,6 +49,11 @@ function onPolygonDeleted(data, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fires on update of object's boolean parameter.
+ * @event onBoolParamUpdate
+ * @fires onSave
+ */
 function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (isChecked === null) {
@@ -56,6 +70,11 @@ function onBoolParamUpdate(name, isChecked, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fires on update of object's class.
+ * @event onObjectClassUpdate
+ * @fires onSave
+ */
 function onObjectClassUpdate(value, calledByHistory = false) {
     let previousClassValue = dc.getActiveEntity().getParameterByName("class");
     if (value === null) {
@@ -64,12 +83,16 @@ function onObjectClassUpdate(value, calledByHistory = false) {
         dc.getActiveEntity().setParams({"class": value});
     }
 
+    polygons[dc.getActiveEntity().polygonId].onClassUpdate(value);
+
     onSave();
 
     if (calledByHistory === false) {
         addHistoryRecordClass(HistoryRecordTypeEnum.MODIFY_OBJECTS_CLASS,
             dc.getActiveEntity().polygonId, value, previousClassValue);
     }
+
+
 }
 
 function onPolygonModified(polygon) {
@@ -78,6 +101,11 @@ function onPolygonModified(polygon) {
     modifyPointsOfPolygonInHistoryRecords(polygon);
 }
 
+/**
+ * Event fires on update of object's select parameter.
+ * @event onSelectParamUpdate
+ * @fires onSave
+ */
 function onSelectParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (value === null) {
@@ -94,6 +122,11 @@ function onSelectParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
+/**
+ * Event fires on update of object's string parameter.
+ * @event onStringParamUpdate
+ * @fires onSave
+ */
 function onStringParamUpdate(name, value, calledByHistory = false) {
     let previousParameterValue = dc.getActiveEntity().getParameterByName(name);
     if (value === null) {
@@ -110,12 +143,20 @@ function onStringParamUpdate(name, value, calledByHistory = false) {
     }
 }
 
-function onZoom(){
+/**
+ * Event fires on zoom in or zoom out of the main canvas.
+ * @event onZoom
+ * @fires onScroll
+ */
+function onZoom() {
     /*global onScroll*/
     /*eslint no-undef: "error"*/
     onScroll();
 }
 
+/**
+ * Resets current data collector to gather data of a new polygon.
+ */
 function resetDataCollector() {
     dc = new DataCollector();
 }

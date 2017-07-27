@@ -11,6 +11,9 @@ let redoPoints = [];
 
 var currentScale = 1;
 
+/**
+ * Method finds SVG object from DOM and init svgImg global variable.
+ * */
 function initSvg() {
     svgImg = document.getElementById("svg_img");
     /*global initCoordinates*/
@@ -59,6 +62,9 @@ function svgImgOnClick(event) {
     }
 }
 
+/**
+ * Method deletes selected polygon is from canvas.
+ * */
 function svgImgDeleteSelectedPolygon() {
     if (selectedPolygon !== null) {
         if (selectedPolygon.polygonId in polygons) {
@@ -127,7 +133,7 @@ function closePolygon() {
     polygons[polygonId] = currentPolygon;
     polygonId = polygonId + 1;
 
-    // Assigning polygons points to the dataEntity (saving polygons points)
+    // Assigning polygons points to the dataEntity (saving polygons points).
     onPolygonClosed(currentPolygon);
 
     if (selectedPolygon !== null) {
@@ -229,6 +235,7 @@ function addPolygonFromObject(object) {
     polygon.close();
     polygon.onPolygonClick = onPolygonClick;
     polygon.onPolygonModified = onPolygonChanged;
+    polygon.onClassUpdate(object["parameters"]["class"]);
     polygons[polygonId] = currentPolygon;
     polygonId = polygonId + 1;
 
