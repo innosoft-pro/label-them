@@ -348,6 +348,27 @@ function enableOrDisableAnElementById(buttonId, toEnable = true) {
     }
 }
 
+/**
+ * Makes visible or hides an element (e.g. a button) by removing or adding a hidden class.
+ * Does nothing if buttonId is not a string.
+ * @param buttonId - a string - Id of the button to enable or disable, without the number (#) sign
+ * @param toMakeVisible - a boolean variable, when true - removes "hidden" class, if specified.
+ *                   Otherwise adds "hidden" class. (Is true by default)
+ *
+ * See https://www.w3schools.com/bootstrap/bootstrap_buttons.asp & http://api.jquery.com/removeClass/ for reference.
+ */
+function makeVisibleOrHideAnElementById(buttonId, toMakeVisible = true) {
+    if (!(typeof buttonId === "string" || buttonId instanceof String)) {
+        return;
+    }
+
+    if (toMakeVisible) {
+        $("#" + buttonId).removeClass("hidden");
+    } else {
+        $("#" + buttonId).addClass("hidden");
+    }
+}
+
 function translateBlocksTitles() {
     let beginH3tag = "<h3 class=\"panel-title\">";
     let endH3tag = "</h3>";
