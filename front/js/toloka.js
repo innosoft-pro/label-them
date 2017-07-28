@@ -3,9 +3,9 @@ exports.Task = extend(TolokaHandlebarsTask, function (options) {
 }, {
     onRender: function () {
         $(document).ready(function () {
-            var acceptMode = document.referrer.includes("status=SUBMITTED");
+            let acceptMode = document.referrer.includes("status=SUBMITTED");
 
-            initDOM();
+            initDOM(acceptMode);
             initMultiLanguageSupport();
             initPresentationLayer(acceptMode);
             initToolbar(acceptMode);

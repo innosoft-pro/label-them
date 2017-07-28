@@ -2,7 +2,7 @@ var selectDefaultParameters = [];
 
 // Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
-function generateHTMLCodeForClassesAndParameters(dom, phrase) {
+function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) {
 
     // alert(phrase);
     let jsonResponse = JSON.parse(phrase);
@@ -108,41 +108,43 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase) {
 
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
-    /*global onObjectClassUpdate*/
-    /*eslint no-undef: "error"*/
-    let classParams = document.getElementsByClassName("class-param");
-    Array.prototype.forEach.call(classParams, param => {
-        param.addEventListener("change", function () {
-            onObjectClassUpdate(param.value);
-        }, false);
-    });
+    if(!acceptMode) {
+        /*global onObjectClassUpdate*/
+        /*eslint no-undef: "error"*/
+        let classParams = document.getElementsByClassName("class-param");
+        Array.prototype.forEach.call(classParams, param => {
+            param.addEventListener("change", function () {
+                onObjectClassUpdate(param.value);
+            }, false);
+        });
 
-    /*global onBoolParamUpdate*/
-    /*eslint no-undef: "error"*/
-    let boolParams = document.getElementsByClassName("bool-param");
-    Array.prototype.forEach.call(boolParams, param => {
-        param.addEventListener("click", function () {
-            onBoolParamUpdate(param.name, param.checked);
-        }, false);
-    });
+        /*global onBoolParamUpdate*/
+        /*eslint no-undef: "error"*/
+        let boolParams = document.getElementsByClassName("bool-param");
+        Array.prototype.forEach.call(boolParams, param => {
+            param.addEventListener("click", function () {
+                onBoolParamUpdate(param.name, param.checked);
+            }, false);
+        });
 
-    /*global onStringParamUpdate*/
-    /*eslint no-undef: "error"*/
-    let stringParams = document.getElementsByClassName("string-param");
-    Array.prototype.forEach.call(stringParams, param => {
-        param.addEventListener("change", function () {
-            onStringParamUpdate(param.placeholder, param.value);
-        }, false);
-    });
+        /*global onStringParamUpdate*/
+        /*eslint no-undef: "error"*/
+        let stringParams = document.getElementsByClassName("string-param");
+        Array.prototype.forEach.call(stringParams, param => {
+            param.addEventListener("change", function () {
+                onStringParamUpdate(param.placeholder, param.value);
+            }, false);
+        });
 
-    /*global onSelectParamUpdate*/
-    /*eslint no-undef: "error"*/
-    let selectParams = document.getElementsByClassName("select-param");
-    Array.prototype.forEach.call(selectParams, param => {
-        param.addEventListener("change", function () {
-            onSelectParamUpdate(param.name, param.value);
-        }, false);
-    });
+        /*global onSelectParamUpdate*/
+        /*eslint no-undef: "error"*/
+        let selectParams = document.getElementsByClassName("select-param");
+        Array.prototype.forEach.call(selectParams, param => {
+            param.addEventListener("change", function () {
+                onSelectParamUpdate(param.name, param.value);
+            }, false);
+        });
+    }
 }
 
 /**
@@ -235,7 +237,7 @@ function replaceAll(str, find, replace) {
     return str.replace(new RegExp(escapeRegExp(find), 'g'), replace);
 }
 
-function initDOM() {
+function initDOM(acceptMode) {
     let jsonParams = document.getElementById("json_params").innerText;
     // Toloka strips all strings of double quotes for reasons unknown so in order
     // to get JSON.parse to work we need to replace all occurence of \ with "
@@ -243,7 +245,7 @@ function initDOM() {
     // but until then this does the job
 
     jsonParams = replaceAll(jsonParams, '\\', '"');
-    generateHTMLCodeForClassesAndParameters(document, jsonParams);
+    generateHTMLCodeForClassesAndParameters(document, jsonParams, acceptMode);
     initRowsAdditionAndDeletion();
     initColorScheme(jsonParams);
 }

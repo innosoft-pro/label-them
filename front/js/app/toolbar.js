@@ -124,19 +124,22 @@ function initToolbar(acceptMode) {
     /*eslint no-undef: "error"*/
     initBrightness();
     if (acceptMode) {
+        console.log("accept mode");
         makeVisibleOrHideAnElementById(btnHand.id, true); // make a hand tool visible
         makeVisibleOrHideAnElementById(btnPolygon.id, false); // make a polygon tool hidden
         enableOrDisableAnElementById(btnHand.id, true); // make a hand tool enabled
         enableOrDisableAnElementById(btnPolygon.id, false); // make a polygon tool disabled
         changeButtonsSelectionState(btnHand);    // hand tool is selected by default
+        activeTool = Tool.hand();
     } else {
+        console.log("markup mode");
         makeVisibleOrHideAnElementById(btnPolygon.id, true); // make a polygon tool visible
         makeVisibleOrHideAnElementById(btnHand.id, false); // make a hand tool hidden
         enableOrDisableAnElementById(btnPolygon.id, true); // make a polygon tool enabled
         enableOrDisableAnElementById(btnHand.id, false); // make a hand tool disabled
         changeButtonsSelectionState(btnPolygon); // polygon tool is selected by default
+        activeTool = Tool.polygon();
     }
 
-    activeTool = Tool.polygon();
     activeTool.onClick(true);
 }
