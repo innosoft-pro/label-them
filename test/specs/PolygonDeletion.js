@@ -52,8 +52,6 @@ describe("webdriver.io page", function () {
         checkBox = $(".bool-param");
         checkBox.click();
 
-        browser.leftClick(".btn-hand");
-
         browser.leftClick("#canvas-parent", 55, 55);
         // browser.pause(2000);
         browser.keys(['Backspace', 'NULL']);
