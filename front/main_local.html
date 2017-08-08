@@ -80,58 +80,37 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <div id="canvas-parent">
-                                <div id="img_url" hidden>https://c1.staticflickr.com/8/7028/6486778721_a9a7974ee2_b.jpg</div>
+                                <div id="img_url" hidden>http://www.inright.ru/media/55_1.jpg</div>
                                 <div id="json_params" hidden>
                                     {
-                                    "classes":
-                                    [
-                                    "class 0",
-                                    "class 1",
-                                    "class 2",
-                                    "class N"
+                                    "classes": [
+                                    "Motocycle",
+                                    "Hatchback",
+                                    "Sedan",
+                                    "Limousine",
+                                    "Convertible",
+                                    "Van",
+                                    "Pick-up truck",
+                                    "Truck",
+                                    "Bus"
                                     ],
-
-                                    "colors":
-                                    {
-                                      "class 0":"#468966",
-                                      "class 1":"#FFF0A5",
-                                      "class 2":"#FFB03B",
-                                      "class N":"#B64926"
-                                    },
-
-                                    "parameters":
-                                    [
+                                    "parameters": [
                                     {
                                     "type": "boolean",
                                     "name": "is occluded"
                                     },
-
+                                    {
+                                    "type": "select",
+                                    "name": "lights",
+                                    "options": [
+                                    "on",
+                                    "off"
+                                    ]
+                                    },
                                     {
                                     "type": "string",
-                                    "name": "phone number",
-                                    "prefix": "+7"
-                                    },
-
-                                    {
-                                    "type": "select",
-                                    "name": "select an option",
-                                    "options":
-                                    [
-                                    "option 1 name",
-                                    "option 2 name",
-                                    "option N name"
-                                    ]
-                                    },
-
-                                    {
-                                    "type": "select",
-                                    "name": "select an option of another kind",
-                                    "options":
-                                    [
-                                    "option B-1 name",
-                                    "option B-2 name",
-                                    "option B-N name"
-                                    ]
+                                    "name": "comment",
+                                    "prefix": "this car is "
                                     }
                                     ]
                                     }

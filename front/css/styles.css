@@ -44,6 +44,11 @@
     margin-top: 14px;
 }
 
+/* Additional margin to add some space between drop down menus and input groups */
+.input-group {
+    margin-top: 14px;
+}
+
 #canvas-parent {
     position: static;
     width: 100%;
