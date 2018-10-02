@@ -36,7 +36,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) 
     parameters.push("</div>");
     classes = classes.join("");
 
-    if (jsonResponse.parameters !== null) {
+    if (jsonResponse.parameters != null) {
         let dropdownMenusCount = 0;
         let inputGroupsCount = 0;
 
@@ -98,8 +98,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) 
             }
         });
         parameters.push("</form>");
-        parameters = parameters.join("");
     }
+    parameters = parameters.join("");
 
     html.push(classes);
     html.push(parameters);
