@@ -2,7 +2,7 @@ var selectDefaultParameters = [];
 
 // Generate HTML code for classes and parameters described in json/classesandparameters.json
 // Adds this HTML code to div with id="classes-and-parameters" in main.html
-function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) {
+function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode = false) {
 
     // alert(phrase);
     let jsonResponse = JSON.parse(phrase);
@@ -36,7 +36,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) 
     parameters.push("</div>");
     classes = classes.join("");
 
-    if (jsonResponse.parameters !== null) {
+    if (jsonResponse.parameters !== undefined && jsonResponse.parameters !== null) {
         let dropdownMenusCount = 0;
         let inputGroupsCount = 0;
 
@@ -98,8 +98,8 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) 
             }
         });
         parameters.push("</form>");
-        parameters = parameters.join("");
     }
+    parameters = parameters.join("");
 
     html.push(classes);
     html.push(parameters);
@@ -108,7 +108,7 @@ function generateHTMLCodeForClassesAndParameters(dom, phrase, acceptMode=false) 
 
     dom.getElementById("classes-and-parameters").innerHTML += html;
 
-    if(!acceptMode) {
+    if (!acceptMode) {
         /*global onObjectClassUpdate*/
         /*eslint no-undef: "error"*/
         let classParams = document.getElementsByClassName("class-param");
