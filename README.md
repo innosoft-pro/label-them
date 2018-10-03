@@ -36,8 +36,9 @@ Yandex Toloka crowdsourcing platform you need to open a directory, which contain
 in a terminal (command shell on Windows), and execute the following commands:
 1) `bower update` // to download libraries used by the system
 2) `npm install grunt-contrib-cssmin --save-dev` // to install css minification plugin
-3) `npm update` // to install all the pre-defined dependencies (plugins) by going through the package.json file
-4) `grunt` // to generate source files needed to run the system on Yandex Toloka crowdsourcing platform
+3) `npm install grunt-contrib-concat --save-dev` // to install contatenation plugin
+4) `npm update` // to install all the pre-defined dependencies (plugins) by going through the package.json file
+5) `grunt` // to generate source files needed to run the system on Yandex Toloka crowdsourcing platform
 (to build systems minified and concatenated file)
 
 The source files that are needed to run the system on Yandex Toloka crowdsourcing platform are:
