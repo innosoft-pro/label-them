@@ -2,6 +2,7 @@
   "name": "label-them",
   "homepage": "https://github.com/innosoft-pro/label-them",
   "authors": [
+    "Aleksandr Nedorezov <Al73rus@gmail.com>",
     "aykbadalyan <ayk.badalyan@gmail.com>"
   ],
   "description": "Image-labelling web-application",
