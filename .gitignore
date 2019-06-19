@@ -24,3 +24,6 @@ dist/
 #Webdriver tests error screenshots & configuration file
 errorShots/
 /wdio.conf.js
+
+# gecko driver
+geckodriver
